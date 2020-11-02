@@ -6,18 +6,18 @@ public class Event {
     // Time is the time the event is scheduled for in the form [yyyy, mm, dd, hh, mm]
     private List<Integer> time;
 
-    // The username of the speaker at the event
-    private final String speakerUsername;
+    // The speaker at the event
+    private final Speaker speaker;
 
     // List of people attending the event
-    private List<String> attending;
+    private List<User> attending;
 
     // Max number of people allowed at the event
     private final int capacity;
 
-    public Event(List<Integer> time, String speakerUsername, int capacity) {
+    public Event(List<Integer> time, Speaker speaker, int capacity) {
         this.time = time;
-        this.speakerUsername = speakerUsername;
+        this.speaker = speaker;
         this.attending = new ArrayList<>();
         this.capacity = capacity;
     }
@@ -32,19 +32,19 @@ public class Event {
         this.time = time;
     }
 
-    // Returns the username of the speaker
-    public String getSpeakerUsername() {
-        return speakerUsername;
+    // Returns the speaker
+    public Speaker getSpeaker() {
+        return speaker;
     }
 
     // Return a list of people attending the event
-    public List<String> getAttending() {
+    public List<User> getAttending() {
         return attending;
     }
 
     // Adds a new user to the list of people attending the event
     public void addAttending(User newAttending) {
-        attending.add(User.getUsername());
+        attending.add(newAttending);
     }
 
     //returns the capacity of the event

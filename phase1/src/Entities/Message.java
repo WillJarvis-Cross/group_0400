@@ -6,28 +6,28 @@ public class Message {
     private final String content;
 
     // The user who sent the message
-    private final String senderUsername;
+    private final User sender;
 
     // The user receiving the message
-    private final String receiverUsername;
+    private final User receiver;
 
-    public Message(String content, String senderUsername, String receiverUsername){
+    public Message(String content, User sender, User receiver){
         this.content = content;
-        this.senderUsername = senderUsername;
-        this.receiverUsername = receiverUsername;
+        this.sender = sender;
+        this.receiver = receiver;
     }
 
     // Return the content of the message
     public String getContent(){
         return content;
     }
-    //return the username of the User who sent the message
-    public String getSender(){
-        return senderUsername;
+    //return the User who sent the message
+    public User getSender(){
+        return sender;
     }
-    // Return the username of the User who received the message
-    public String getReceiver(){
-        return receiverUsername;
+    // Return the User who received the message
+    public User getReceiver(){
+        return receiver;
     }
 }
 
