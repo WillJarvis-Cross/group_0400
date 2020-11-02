@@ -1,3 +1,4 @@
+package Entities;
 import java.lang.String;
 
 public class Message {
