@@ -2,9 +2,14 @@ package Entities;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class Event {
     // Time is the time the event is scheduled for in the form [yyyy, mm, dd, hh, mm]
-    private List<Integer> time;
+    private LocalDateTime time;
+
+    // The duration of the event (in hours)
+    private int duration;
 
     // The speaker at the event
     private final Speaker speaker;
@@ -18,21 +23,25 @@ public class Event {
     // The name of the event
     private String eventName;
 
-    public Event(List<Integer> time, Speaker speaker, int capacity, String eventName) {
+    private final DateTimeFormatter formatter;
+
+    public Event(LocalDateTime time, int duration, Speaker speaker, int capacity, String eventName) {
         this.time = time;
+        this.duration = duration;
         this.speaker = speaker;
         this.attending = new ArrayList<>();
         this.capacity = capacity;
         this.eventName = eventName;
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     }
 
     // Returns the time of the event in the form [yyyy, mm, dd, hh, mm]
-    public List<Integer> getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
     // Changes the time of the event
-    public void setTime(List<Integer> time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
@@ -58,4 +67,11 @@ public class Event {
 
     // Returns the name of the event
     public String getEventName(){ return eventName;}
+
+    public int getDuration(){ return duration;}
+
+    public String toString(){
+        return "Event: "+ eventName+ "\nSpeaker: "+ speaker.getUsername()+ "\nDate: "+
+                time.format(formatter)+ "\nDuration: "+ duration+ " hour";
+    }
 }
