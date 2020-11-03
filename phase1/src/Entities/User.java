@@ -10,6 +10,8 @@ public abstract class User{
     // Holds a list of the user's friends whom the user can message
     private List<User> friendList;
 
+
+
     // The user's username and password which is used to log in
     private String password, username;
 

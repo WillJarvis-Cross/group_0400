@@ -15,11 +15,15 @@ public class Event {
     // Max number of people allowed at the event
     private final int capacity;
 
-    public Event(List<Integer> time, Speaker speaker, int capacity) {
+    // The name of the event
+    private String eventName;
+
+    public Event(List<Integer> time, Speaker speaker, int capacity, String eventName) {
         this.time = time;
         this.speaker = speaker;
         this.attending = new ArrayList<>();
         this.capacity = capacity;
+        this.eventName = eventName;
     }
 
     // Returns the time of the event in the form [yyyy, mm, dd, hh, mm]
@@ -51,4 +55,7 @@ public class Event {
     public int getCapacity(){
         return capacity;
     }
+
+    // Returns the name of the event
+    public String getEventName(){ return eventName;}
 }
