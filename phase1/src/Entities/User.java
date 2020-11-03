@@ -49,4 +49,7 @@ public abstract class User{
     // Changes the user's username
     public void setUsername(String newUsername){ username = newUsername;}
 
+    // Returns whether this user is an organizer or not
+    abstract boolean isOrganizer();
+
 }
