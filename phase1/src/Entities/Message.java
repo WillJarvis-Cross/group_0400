@@ -6,12 +6,12 @@ public class Message {
     private final String content;
 
     // The user who sent the message
-    private final User sender;
+    private final String sender;
 
     // The user receiving the message
-    private final User receiver;
+    private final String receiver;
 
-    public Message(String content, User sender, User receiver){
+    public Message(String content, String sender, String receiver){
         this.content = content;
         this.sender = sender;
         this.receiver = receiver;
@@ -22,11 +22,11 @@ public class Message {
         return content;
     }
     //return the User who sent the message
-    public User getSender(){
+    public String getSender(){
         return sender;
     }
     // Return the User who received the message
-    public User getReceiver(){
+    public String getReceiver(){
         return receiver;
     }
 }

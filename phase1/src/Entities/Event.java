@@ -12,10 +12,10 @@ public class Event {
     private int duration;
 
     // The speaker at the event
-    private final Speaker speaker;
+    private final String speaker;
 
     // List of people attending the event
-    private List<User> attending;
+    private List<String> attending;
 
     // Max number of people allowed at the event
     private final int capacity;
@@ -23,9 +23,10 @@ public class Event {
     // The name of the event
     private String eventName;
 
+    // The format that the time of the event is printed
     private final DateTimeFormatter formatter;
 
-    public Event(LocalDateTime time, int duration, Speaker speaker, int capacity, String eventName) {
+    public Event(LocalDateTime time, int duration, String speaker, int capacity, String eventName) {
         this.time = time;
         this.duration = duration;
         this.speaker = speaker;
@@ -46,17 +47,17 @@ public class Event {
     }
 
     // Returns the speaker
-    public Speaker getSpeaker() {
+    public String getSpeaker() {
         return speaker;
     }
 
     // Return a list of people attending the event
-    public List<User> getAttending() {
+    public List<String> getAttending() {
         return attending;
     }
 
     // Adds a new user to the list of people attending the event
-    public void addAttending(User newAttending) {
+    public void addAttending(String newAttending) {
         attending.add(newAttending);
     }
 
@@ -71,7 +72,7 @@ public class Event {
     public int getDuration(){ return duration;}
 
     public String toString(){
-        return "Event: "+ eventName+ "\nSpeaker: "+ speaker.getUsername()+ "\nDate: "+
+        return "Event: "+ eventName+ "\nSpeaker: "+ speaker+ "\nDate: "+
                 time.format(formatter)+ "\nDuration: "+ duration+ " hour";
     }
 }
