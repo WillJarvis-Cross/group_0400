@@ -6,35 +6,41 @@ import java.util.List;
 
 public class UserManager {
     EventManager events;
-    Hashtable<String, Attendee> attendees;
-    Hashtable<String, Organizer> organizers;
-    Hashtable<String, Speaker> speakers;
+    Hashtable<String, Attendee> allAttendees;
+    Hashtable<String, Organizer> allOrganizers;
+    Hashtable<String, Speaker> allSpeakers;
     public UserManager(EventManager events){
         this.events = events;
-        attendees = new Hashtable<>();
-        organizers = new Hashtable<>();
-        speakers = new Hashtable<>();
+        allAttendees = new Hashtable<>();
+        allOrganizers = new Hashtable<>();
+        allSpeakers = new Hashtable<>();
     }
 
-    public Hashtable<String, Attendee> getAttendees(){ return attendees;}
+    public Hashtable<String, Attendee> getAllAttendees(){ return allAttendees;}
+
+    public Attendee getAttendee(String name){ return allAttendees.get(name);}
 
     public void addAttendee(Attendee person){
         String name = person.getUsername();
-        attendees.put(name, person);
+        allAttendees.put(name, person);
     }
 
-    public Hashtable<String, Organizer> getOrganizers(){ return organizers;}
+    public Hashtable<String, Organizer> getOrganizers(){ return allOrganizers;}
+
+    public Organizer getOrganizer(String name){ return allOrganizers.get(name);}
 
     public void addOrganizer(Organizer person){
         String name = person.getUsername();
-        organizers.put(name, person);
+        allOrganizers.put(name, person);
     }
 
-    public Hashtable<String, Speaker> getSpeakers(){ return speakers;}
+    public Hashtable<String, Speaker> getSpeakers(){ return allSpeakers;}
+
+    public Speaker getSpeaker(String name){ return allSpeakers.get(name);}
 
     public void addSpeaker(Speaker person){
         String name = person.getUsername();
-        speakers.put(name, person);
+        allSpeakers.put(name, person);
     }
 
     // Helper method for signUp()
@@ -58,8 +64,11 @@ public class UserManager {
     }
 
     public boolean signUp(User person, Event eventName){
+        if (!events.isFull(eventName)) {
+            return false;
+        }
         LocalDateTime eventTime = eventName.getTime();
-        List<Event> userEvents = events.getUserEvents(person);
+        List<Event> userEvents = events.getUserEvents(person); //*** WAITING FOR EVENTMANAGER ***
         LocalDateTime timePlusDuration = eventTime.plusHours(eventName.getDuration());
         int numEvents = person.getEvents().size();
 
@@ -96,12 +105,17 @@ public class UserManager {
             }
         }
         person.addEvent(eventName.getEventName(), pos);
+        events.addUserToEvent(person, eventName); //*** WAITING FOR EVENTMANAGER***
         return true;
     }
 
     public void cancelEvent(User person, Event canceledEvent){
         String eventName = canceledEvent.getEventName();
         person.removeEvent(eventName);
+    }
+
+    public void changePassword(User person, String pass){
+        person.setPassword(pass);
     }
 }
 
