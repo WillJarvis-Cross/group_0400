@@ -63,7 +63,7 @@ public abstract class User{
     }
 
     // Remove event from the events list
-    public void removeEvent(Event removedEvent){ events.remove(removedEvent);}
+    public void removeEvent(String removedEvent){ events.remove(removedEvent);}
 
 
     // Returns whether this user is an organizer or not
