@@ -9,39 +9,46 @@ public class UserManager {
     Hashtable<String, Attendee> allAttendees;
     Hashtable<String, Organizer> allOrganizers;
     Hashtable<String, Speaker> allSpeakers;
+    Hashtable<String, User> allUsers;
     public UserManager(EventManager events){
         this.events = events;
         allAttendees = new Hashtable<>();
         allOrganizers = new Hashtable<>();
         allSpeakers = new Hashtable<>();
+        allUsers = new Hashtable<>();
     }
 
     public Hashtable<String, Attendee> getAllAttendees(){ return allAttendees;}
 
     public Attendee getAttendee(String name){ return allAttendees.get(name);}
 
-    public void addAttendee(Attendee person){
-        String name = person.getUsername();
-        allAttendees.put(name, person);
+    public void addAttendee(String name, String pass){
+        Attendee newAttendee = new Attendee(name, pass);
+        allAttendees.put(name, newAttendee);
+        allUsers.put(name, newAttendee);
     }
 
     public Hashtable<String, Organizer> getOrganizers(){ return allOrganizers;}
 
     public Organizer getOrganizer(String name){ return allOrganizers.get(name);}
 
-    public void addOrganizer(Organizer person){
-        String name = person.getUsername();
-        allOrganizers.put(name, person);
+    public void addOrganizer(String name, String pass){
+        Organizer newOrganizer = new Organizer(name, pass);
+        allOrganizers.put(name, newOrganizer);
+        allUsers.put(name, newOrganizer);
     }
 
     public Hashtable<String, Speaker> getSpeakers(){ return allSpeakers;}
 
     public Speaker getSpeaker(String name){ return allSpeakers.get(name);}
 
-    public void addSpeaker(Speaker person){
-        String name = person.getUsername();
-        allSpeakers.put(name, person);
+    public void addSpeaker(String name, String pass){
+        Speaker newSpeaker = new Speaker(name, pass);
+        allSpeakers.put(name, newSpeaker);
+        allUsers.put(name, newASpeaker);
     }
+
+    public User getUser(String name){ return allUsers.get(name);}
 
     // Helper method for signUp()
     // This is used to find what position the event should be added at in the list of the users events
@@ -109,9 +116,21 @@ public class UserManager {
         return true;
     }
 
-    public void cancelEvent(User person, Event canceledEvent){
-        String eventName = canceledEvent.getEventName();
-        person.removeEvent(eventName);
+    public void cancelMyEvent(User person, String canceledEvent){ // EventManager should have a method which calls this
+        // which removes this users name from list of events
+        person.removeEvent(canceledEvent);
+    }
+
+    public void cancelWholeEvent(List<String> attending, String canceledEvent, String speakerName){
+        // EventManager should call this
+        for (String name : attending){
+            cancelMyEvent(getUser(name), canceledEvent);
+        }
+    }
+
+    public boolean login(String name, String pass){
+        User thisUser = getUser(name);
+        return pass.equals(thisUser.getPassword());
     }
 
     public void changePassword(User person, String pass){
