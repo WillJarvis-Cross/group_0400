@@ -23,16 +23,20 @@ public class Event {
     // The name of the event
     private String eventName;
 
+    // The room the event is in
+    private String roomNumber;
+
     // The format that the time of the event is printed
     private final DateTimeFormatter formatter;
 
-    public Event(LocalDateTime time, int duration, String speaker, int capacity, String eventName) {
+    public Event(LocalDateTime time, int duration, String speaker, int capacity, String eventName, String roomNumber) {
         this.time = time;
         this.duration = duration;
         this.speaker = speaker;
         this.attending = new ArrayList<>();
         this.capacity = capacity;
         this.eventName = eventName;
+        this.roomNumber = roomNumber;
         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     }
 
