@@ -75,6 +75,8 @@ public class Event {
 
     public int getDuration(){ return duration;}
 
+    public String getRoomNum(){ return roomNumber;}
+
     public String toString(){
         return "Event: "+ eventName+ "\nSpeaker: "+ speaker+ "\nDate: "+
                 time.format(formatter)+ "\nDuration: "+ duration+ " hour";
