@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
 public class Speaker extends User{
-    private List<Message> messageInbox;
+    private List<Integer> messageInbox;
     private List<User> friendList;
 
     public Speaker(String passwordInput, String nameInput){

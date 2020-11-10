@@ -4,7 +4,7 @@ import java.util.List;
 import java.lang.String;
 
 public class Organizer extends User{
-    private List<Message> messageInbox;
+    private List<Integer> messageInbox;
     private List<User> friendList;
 
     public Organizer(String passwordInput, String nameInput){

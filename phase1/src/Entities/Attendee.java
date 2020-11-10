@@ -5,7 +5,7 @@ import java.lang.String;
 
 public class Attendee extends User{
     // List of the messages sent to the attendee
-    private List<Message> messageInbox;
+    private List<Integer> messageInbox;
 
     // List of friends of the attendee
     private List<User> friendList;
