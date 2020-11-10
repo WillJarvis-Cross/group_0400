@@ -18,7 +18,7 @@ public class UserManager {
         allUsers = new Hashtable<>();
     }
 
-    public Hashtable<String, Attendee> getAllAttendees(){ return allAttendees;}
+    public Hashtable<String, Attendee> getAttendees(){ return allAttendees;}
 
     public Attendee getAttendee(String name){ return allAttendees.get(name);}
 
