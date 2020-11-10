@@ -45,7 +45,7 @@ public class UserManager {
     public void addSpeaker(String name, String pass){
         Speaker newSpeaker = new Speaker(name, pass);
         allSpeakers.put(name, newSpeaker);
-        allUsers.put(name, newASpeaker);
+        allUsers.put(name, newSpeaker);
     }
 
     public User getUser(String name){ return allUsers.get(name);}
