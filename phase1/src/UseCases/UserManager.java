@@ -51,6 +51,8 @@ public class UserManager {
 
     public User getUser(String name){ return allUsers.get(name);}
 
+    public Hashtable<String, User> getUsers(){ return allUsers;}
+
     // Helper method for signUp()
     // This is used to find what position the event should be added at in the list of the users events
     // They are ordered in chronological order based on time. I am using binary search here
