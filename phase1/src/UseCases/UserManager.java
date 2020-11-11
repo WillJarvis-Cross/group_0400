@@ -53,6 +53,7 @@ public class UserManager {
 
     public Hashtable<String, User> getUsers(){ return allUsers;}
 
+
     // Helper method for signUp()
     // This is used to find what position the event should be added at in the list of the users events
     // They are ordered in chronological order based on time. I am using binary search here
@@ -73,17 +74,19 @@ public class UserManager {
         }
     }
 
-    public boolean signUp(User person, Event eventName){
-        if (!events.isFull(eventName)) {
+    public boolean signUp(String name, String eventName){
+        if (!events.isAtCapacity(eventName)) {
             return false;
         }
-        LocalDateTime eventTime = eventName.getTime();
-        List<Event> userEvents = events.getUserEvents(person); //*** WAITING FOR EVENTMANAGER ***
-        LocalDateTime timePlusDuration = eventTime.plusHours(eventName.getDuration());
+        Event thisEvent = events.getEvent(eventName);
+        LocalDateTime eventTime = thisEvent.getTime();
+        List<Event> userEvents = events.getEventsByUsername(name); //*** WAITING FOR EVENTMANAGER ***
+        LocalDateTime timePlusDuration = eventTime.plusHours(thisEvent.getDuration());
+        User person = getUser(name);
         int numEvents = person.getEvents().size();
 
         if (numEvents == 0){
-            person.addEvent(eventName.getEventName(), 0);
+            person.addEvent(eventName, 0);
         }
 
         int pos = findPosOfEvent(0, numEvents, eventTime, userEvents);
@@ -114,20 +117,26 @@ public class UserManager {
                 return false;
             }
         }
-        person.addEvent(eventName.getEventName(), pos);
-        events.addUserToEvent(person, eventName); //*** WAITING FOR EVENTMANAGER***
+        person.addEvent(eventName, pos);
+        events.addPersonToEvent(name, eventName); //*** WAITING FOR EVENTMANAGER***
         return true;
     }
 
-    public void cancelMyEvent(User person, String canceledEvent){ // EventManager should have a method which calls this
+    public void cancelMyEvent(String person, String canceledEvent){ // EventManager should have a method which calls this
         // which removes this users name from list of events
-        person.removeEvent(canceledEvent);
+        User thisPerson = getUser(person);
+        if (thisPerson.getEvents().contains(canceledEvent)){
+            thisPerson.removeEvent(canceledEvent);
+        }
     }
 
     public void cancelWholeEvent(List<String> attending, String canceledEvent, String speakerName){
         // EventManager should call this
-        for (String name : attending){
-            cancelMyEvent(getUser(name), canceledEvent);
+        if (events.removeEvent(canceledEvent)) {
+            for (String name : attending) {
+                cancelMyEvent(name, canceledEvent);
+            }
+            cancelMyEvent(speakerName, canceledEvent);
         }
     }
 

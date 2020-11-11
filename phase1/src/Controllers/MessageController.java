@@ -16,7 +16,7 @@ public class MessageController {
     }
 
     public StringBuilder printMyMessages(String name){
-        StringBuilder output = new StringBuilder("My Messages:")
+        StringBuilder output = new StringBuilder("My Messages:");
         List<Integer> messagesIds = userManager.getUser(name).getMessageInbox();
         ArrayList<Message> messages = messageManager.getMyMessages(messagesIds);
         // I do this loop counting backwards so it prints the messages based on which was most recent

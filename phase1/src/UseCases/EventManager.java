@@ -114,12 +114,9 @@ public class EventManager {
     //we are assuming all events start on the hour
     private boolean withinHours(Event e){
         int hour = e.getTime().getHour();
-        if ((hour>7) && (hour+e.getDuration()<18)){
-            return true;
-        } else {
-            return false;
-        }
+        return (hour > 7) && (hour + e.getDuration() < 18);
     }
+
 }
 
 
