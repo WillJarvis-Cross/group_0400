@@ -4,13 +4,20 @@ import Entities.*;
 import java.time.LocalDateTime;
 import java.util.Hashtable;
 import java.util.List;
-
+/** Represents the use case for Room objects
+ * @author group 400
+ */
 public class UserManager {
     EventManager events;
     Hashtable<String, Attendee> allAttendees;
     Hashtable<String, Organizer> allOrganizers;
     Hashtable<String, Speaker> allSpeakers;
     Hashtable<String, User> allUsers;
+
+    /**
+     * Instantiates a UserManager with no users of any kind registered
+     * @param events
+     */
     public UserManager(EventManager events){
         this.events = events;
         allAttendees = new Hashtable<>();
@@ -19,38 +26,89 @@ public class UserManager {
         allUsers = new Hashtable<>();
     }
 
+    /**
+     * Returns a Hashtable of all Attendees
+     * @return allAttendees
+     */
     public Hashtable<String, Attendee> getAttendees(){ return allAttendees;}
 
+    /**
+     * Returns an Attendee with the given username
+     * @param name
+     * @return Attendee
+     */
     public Attendee getAttendee(String name){ return allAttendees.get(name);}
 
+    /**
+     * Creates a new Attendee with the given username and password
+     * @param name
+     * @param pass
+     */
     public void addAttendee(String name, String pass){
         Attendee newAttendee = new Attendee(name, pass);
         allAttendees.put(name, newAttendee);
         allUsers.put(name, newAttendee);
     }
 
+    /**
+     * Returns a Hashtable of all Oranizers
+     * @return allOrganizers
+     */
     public Hashtable<String, Organizer> getOrganizers(){ return allOrganizers;}
 
+    /**
+     * Returns an Organizer with the given username
+     * @param name
+     * @return Organizer
+     */
     public Organizer getOrganizer(String name){ return allOrganizers.get(name);}
 
+    /**
+     * Creates a new Organizer with the given username and password
+     * @param name
+     * @param pass
+     */
     public void addOrganizer(String name, String pass){
         Organizer newOrganizer = new Organizer(name, pass);
         allOrganizers.put(name, newOrganizer);
         allUsers.put(name, newOrganizer);
     }
 
+    /**
+     * Returns a Hashtable of all Speakers
+     * @return allOrganizers
+     */
     public Hashtable<String, Speaker> getSpeakers(){ return allSpeakers;}
 
+    /**
+     * Returns a Speaker with the given name
+     * @param name
+     * @return Speaker
+     */
     public Speaker getSpeaker(String name){ return allSpeakers.get(name);}
 
+    /**
+     * Creates a new Speaker with the given usename and password
+     * @param name
+     * @param pass
+     */
     public void addSpeaker(String name, String pass){
         Speaker newSpeaker = new Speaker(name, pass);
         allSpeakers.put(name, newSpeaker);
         allUsers.put(name, newSpeaker);
     }
 
+    /**
+     * Returns a User with the given username
+     * @param name
+     * @return User
+     */
     public User getUser(String name){ return allUsers.get(name);}
 
+    /**
+     * Returns a Hashtable of all Users
+     * @return allUsers
+     */
     public Hashtable<String, User> getUsers(){ return allUsers;}
 
 
@@ -74,6 +132,12 @@ public class UserManager {
         }
     }
 
+    /**
+     * Adds a user with the given username to the event with the given name if possible
+     * @param name
+     * @param eventName
+     * @return true if the user was added to an event and false otherwise
+     */
     public boolean signUp(String name, String eventName){
         if (!events.isAtCapacity(eventName)) {
             return false;
@@ -118,10 +182,15 @@ public class UserManager {
             }
         }
         person.addEvent(eventName, pos);
-        events.addPersonToEvent(name, eventName);
+        events.addPersonToEvent(name, eventName); //*** WAITING FOR EVENTMANAGER***
         return true;
     }
 
+    /**
+     * Cancels the person's spot in the event with the given name
+     * @param person
+     * @param canceledEvent
+     */
     public void cancelMyEvent(String person, String canceledEvent){ // EventManager should have a method which calls this
         // which removes this users name from list of events
         User thisPerson = getUser(person);
@@ -130,6 +199,13 @@ public class UserManager {
         }
     }
 
+    /**
+     * If the given event was cancelled successfully, it will remove all attendees and the
+     * speaker from their respective lists of events
+     * @param attending
+     * @param canceledEvent
+     * @param speakerName
+     */
     public void cancelWholeEvent(List<String> attending, String canceledEvent, String speakerName){
         // EventManager should call this
         if (events.removeEvent(canceledEvent)) {
@@ -140,20 +216,25 @@ public class UserManager {
         }
     }
 
+    /**
+     * Allows the user with the given username to log in to their account if they
+     * enter the correct password for their account
+     * @param name
+     * @param pass
+     * @return true if the password was correct, false otherwise
+     */
     public boolean login(String name, String pass){
-        if (allUsers.containsKey(name)){
-            User thisUser = getUser(name);
-            return pass.equals(thisUser.getPassword());
-        }
-        return false;
+        User thisUser = getUser(name);
+        return pass.equals(thisUser.getPassword());
     }
 
-    public boolean changePassword(String person, String pass){
-        if (allUsers.containsKey(person)){
-            allUsers.get(person).setPassword(pass);
-            return true;
-        }
-        return false;
+    /**
+     * Changes the person's password
+     * @param person
+     * @param pass
+     */
+    public void changePassword(User person, String pass){
+        person.setPassword(pass);
     }
 }
 

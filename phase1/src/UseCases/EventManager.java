@@ -4,26 +4,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
 import java.util.Set;
 
+/** Represents the use case for Event objects
+ * @author group 400
+ */
 public class EventManager {
 
-    private Hashtable<String, Event> events;
 
+    private Hashtable<String, Event> events;
+    /**
+     * Create an instance of eventManager with no scheduled events
+     */
     public EventManager(){
         this.events = new Hashtable<String, Event>();
     }
 
+    /**
+     * Create an instance of eventManager with the events listed in the parameter
+     * @param events
+     */
     public EventManager(ArrayList<Event> events){
         for (Event event: events){
             this.events.put(event.getEventName(), event);
         }
     }
 
-    //returns true or false if the event is or is not at capacity, respectively.
-    //If the event of the given name is not found, it will return true
+    /**
+     * Checks if the event with the given name is at capacity
+     * @param eventName
+     * @return true if the event with the give eventName is at capacity, and false otherwise
+     */
     public boolean isAtCapacity(String eventName){
         Event event = this.events.get(eventName);
         if (event.getCapacity() == event.getAttending().size()){
@@ -33,9 +45,13 @@ public class EventManager {
         }
     }
 
-    //returns true if e overlaps with another event taking place in the same room or the speaker of e is already giving
-    // a talk when e is taking place, returns false otherwise
-    //all talks are one hour long and begin at the hour for phase 1
+    /**
+     * Checks if any other events with overlapping times have the same speaker or take place
+     * in the same room
+     * @param e
+     * @return true if no event other than e taking place at the same time
+     *         takes place at the same room or has the same speaker, and false otherwise
+     */
     public boolean doesOverlap(Event e){
         Set<String> keys = this.events.keySet();
         for (String key: keys){
@@ -49,11 +65,20 @@ public class EventManager {
         return false;
     }
 
-    //returns an event with the given eventName
+
+    /**
+     * This method returns an Event object with the given eventName
+     * @param eventName
+     * @return Event
+     */
     public Event getEvent(String eventName){
         return this.events.get(eventName);
     }
 
+    /**
+     * Returns a list of all scheduled events
+     * @return An ArrayList of events
+     */
     //returns an arraylist of all scheduled events
     public ArrayList<Event> getEvents(){
         ArrayList<Event> eventList = new ArrayList<Event>();
@@ -64,7 +89,12 @@ public class EventManager {
         return eventList;
     }
 
-    //returns an arrayList of all events scheduled by a user with the given userName
+    /**
+     * Returns a list of all scheduled events the user with the given useName
+     * is registered in
+     * @param userName
+     * @return An ArrayList of events
+     */
     public ArrayList<Event> getEventsByUsername(String userName){
         ArrayList<Event> eventList = getEvents();
         for (Event event: eventList){
@@ -75,8 +105,13 @@ public class EventManager {
         return eventList;
     }
 
-    //adds userName to the list of attendees of an event with eventName and returns true if such a name exists, returns
-    //false otherwise
+    /**
+     * Adds the person with the given username if
+     *
+     * @param userName The username of the user
+     * @param eventName The name of the event to add the user to
+     * @return true if successful, returns false
+     */
     public boolean addPersonToEvent(String eventName, String userName){
 
         if (!this.events.containsKey(eventName)){
@@ -87,9 +122,18 @@ public class EventManager {
         }
     }
 
-    //schedules an event with the given properties given that it does not overlap with another talk given in the same
-    //room or by the same speaker, and takes place entirely between 9am and 5pm
-    //returns true if event was added, return false otherwise
+    /**
+     * Creates and stores an Event with the given parameters if it takes place
+     * entirely between 9am and 5pm, and no other event taking place at the
+     * same time has the same speaker or takes place at the same room.
+     * @param time
+     * @param duration
+     * @param speaker
+     * @param capacity
+     * @param eName
+     * @param room
+     * @return true if the Event is created successfully, false otherwise
+     */
     public boolean scheduleEvent(LocalDateTime time, int duration, String speaker, int capacity, String eName, String room){
         Event e = new Event(time, duration, speaker, capacity, eName, room);
         if ((!doesOverlap(e))&&(withinHours(e))){
@@ -99,7 +143,11 @@ public class EventManager {
         return false;
     }
 
-    //removes an event with the givin eventName and returns true if it exists, returns false otherwise
+    /**
+     * Removes the event with the given name from Events if it exists
+     * @param eventName
+     * @return true if the event exists and is removed, returns false otherwise
+     */
     public boolean removeEvent(String eventName){
         if( this.events.containsKey(eventName) ){
             this.events.remove(eventName);
@@ -109,6 +157,11 @@ public class EventManager {
         }
     }
 
+    /**
+     * Changes the speaker of an event with the given name
+     * @param eventName
+     * @param speakerName
+     */
     public void setSpeaker(String eventName, String speakerName){
         events.get(eventName).setSpeaker(speakerName);
     }
