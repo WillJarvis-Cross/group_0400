@@ -4,28 +4,36 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
 
+/** This is an entity for a Room which contains the name of the room, the room's capacity, and the events that are
+ * in the room
+ * @author group 0400
+ */
 public class Room {
 
-    // The room number of the room
-    private String roomNumber;
+    private String roomNumber; // The room number of the room
 
     // The Events that is in the room and what time the events are happening
-    Hashtable<String, LocalDateTime> events;
+    private Hashtable<String, LocalDateTime> events;
+    private int capacity; // The number of attendees allowed in the room
+    private final DateTimeFormatter formatter; // The format that the time of the event is printed
 
-    // The number of attendees allowed in the room
-    private int capacity;
-
-    // The format that the time of the event is printed
-    private final DateTimeFormatter formatter;
-
-    public Room(String roomNumber, int capactiy) {
+    /**
+     * Constructs a room given its name and its capacity. It also initializes a hashtable of events in the room
+     * @param roomNumber The name of the room
+     * @param capactiy The maximum amount of attendees allowed in the room
+     */
+    public Room(String roomNumber, int capacity) {
         this.roomNumber = roomNumber;
-        this.capacity = capactiy;
+        this.capacity = capacity;
         this.events = new Hashtable<>();
         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     }
 
-    // Checks if the time slot for the room is taken
+    /**
+     * Checks if an inputted time coincides with the time of an event in this room
+     * @param time The time we are checking to make sure it doesn't interfere with any events
+     * @return true or false: true is for when the time is taken
+     */
     public boolean isTimeTaken(LocalDateTime time) {
         boolean timeTaken = false;
         for (String event : events.keySet())
@@ -39,14 +47,32 @@ public class Room {
         return timeTaken;
     }
 
-    // Adds an event to the room, this should be done after we check the event is valid
+    /**
+     * Adds an event to the hashtable of events
+     * @param eventName The new event being added to the hashtable
+     * @param time The time of this new event
+     */
     public void addEvent(String eventName, LocalDateTime time) {
         events.put(eventName, time);
     }
 
-
-    // Removes an event from the room
+    /**
+     * Removes the inputted event from the hashtable of events
+     * @param eventName The event being removed from the hashtable of events
+     */
     public void removeEvent(String eventName) {
         events.remove(eventName);
     }
+
+    /**
+     * Returns the name of this room
+     * @return the name of this room
+     */
+    public String getRoomNumber(){ return roomNumber;}
+
+    /**
+     * Returns the capacity of this room
+     * @return the capacity of this room
+     */
+    public int getCapacity(){ return capacity;}
 }

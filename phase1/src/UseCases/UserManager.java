@@ -118,7 +118,7 @@ public class UserManager {
             }
         }
         person.addEvent(eventName, pos);
-        events.addPersonToEvent(name, eventName); //*** WAITING FOR EVENTMANAGER***
+        events.addPersonToEvent(name, eventName);
         return true;
     }
 
@@ -141,12 +141,19 @@ public class UserManager {
     }
 
     public boolean login(String name, String pass){
-        User thisUser = getUser(name);
-        return pass.equals(thisUser.getPassword());
+        if (allUsers.containsKey(name)){
+            User thisUser = getUser(name);
+            return pass.equals(thisUser.getPassword());
+        }
+        return false;
     }
 
-    public void changePassword(User person, String pass){
-        person.setPassword(pass);
+    public boolean changePassword(String person, String pass){
+        if (allUsers.containsKey(person)){
+            allUsers.get(person).setPassword(pass);
+            return true;
+        }
+        return false;
     }
 }
 

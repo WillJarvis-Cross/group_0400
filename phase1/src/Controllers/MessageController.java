@@ -8,7 +8,7 @@ import Presenter.Presenter;
 import java.util.ArrayList;
 import java.util.List;
 /** Represents the controller for Message
- * @auther group 400
+ * @author group 400
  */
 public class MessageController {
     MessageManager messageManager;

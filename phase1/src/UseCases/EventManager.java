@@ -82,7 +82,7 @@ public class EventManager {
         if (!this.events.containsKey(eventName)){
             return false;
         } else {
-            this.events.get(eventName).getAttending().add(userName);
+            this.events.get(eventName).addAttending(userName);
             return true;
         }
     }

@@ -7,7 +7,7 @@ import java.util.Hashtable;
 public class RoomManager {
 
     // The room numbers with the corresponding room
-    Hashtable<String, Room> allRooms;
+    public Hashtable<String, Room> allRooms;
 
     public RoomManager() {
         allRooms = new Hashtable<>();
