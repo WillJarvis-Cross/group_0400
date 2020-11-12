@@ -3,22 +3,39 @@ import Entities.*;
 import java.util.ArrayList;
 import java.lang.String;
 import java.util.List;
-
+/** Represents the use case for Message objects
+ * @author group 400
+ */
 
 public class MessageManager{
     private static ArrayList<Message> messageList = new ArrayList<Message>();
 
+    /**
+     * Creates a Message with the given sender, receiver and content
+     * @param sender
+     * @param receiver
+     * @param content
+     */
     public static void sendMessage(User sender, User receiver, String content){
         Message message = new Message(content, sender.getUsername(), receiver.getUsername());
         messageList.add(message);
         receiver.addMessage(message.getMessageId());
 
     }
-
+    /**
+     * Returns a message object with the given id
+     * @param id
+     * @return Message
+     */
     public static Message getMessage(int id){
         return messageList.get(id);
     }
 
+    /**
+     * Returns a list containing the Messages with the IDs stored in messages
+     * @param messages
+     * @return an ArrayList of Messages
+     */
     public static ArrayList<Message> getMyMessages(List<Integer> messages){
         ArrayList<Message> newList = new ArrayList<>();
         for (int i: messages){

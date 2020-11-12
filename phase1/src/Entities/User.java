@@ -4,71 +4,93 @@ import java.util.List;
 import java.lang.String;
 import java.time.LocalDateTime;
 
+/** This is an entity for a User who is an organizer
+ * @author group 0400
+ */
 public abstract class User{
-    // List of messages sent to this user
-    private List<Integer> messageInbox;
 
-    // Holds a list of the user's friends whom the user can message
-    private List<String> friendList;
+    private List<Integer> messageInbox;  // List of messages sent to this user
+    private List<String> events;  // List of events the attendee is signed up for
+    private String password, username;  // The user's username and password which is used to log in
 
-    // List of events the attendee is signed up for
-    private List<String> events;
-
-    // The user's username and password which is used to log in
-    private String password, username;
-
-
+    /**
+     * Constructs a User of types Attendee, Organizer, and Speaker. It instantiates the User's username and password,
+     * as well as the messageInbox ArrayList and the events ArrayList.
+     * @param passwordInput  The User's password
+     * @param nameInput  The User's username
+     */
     public User(String passwordInput, String nameInput){
         this.username = nameInput;
         this.password = passwordInput;
-        this.friendList = new ArrayList();
-        this.messageInbox = new ArrayList();
-        this.events = new ArrayList();
+        this.messageInbox = new ArrayList<>();
+        this.events = new ArrayList<>();
     }
 
-    // Returns the user's list of messages
+    /**
+     * Returns the list of message IDs which correspond to this User's received messages
+     * @return  The list of message IDs which correspond to this User's received messages
+     */
     public List<Integer> getMessageInbox() {
         return messageInbox;
     }
 
-    // Adding a new message to the user's list of messages
+    /**
+     * Adds a given message ID to messageInbox
+     * @param newMessage  The ID of the message that this User has received
+     */
     public void addMessage(int newMessage){ messageInbox.add(newMessage);}
 
-    // Returns the list of the user's friends
-    public List<String> getFriendList() {
-        return friendList;
-    }
-
-    // Adds a User to the list of friends
-    public void addFriend(String friend){ friendList.add(friend);}
-
-    //Returns the user's password
+    /**
+     * Returns this User's password
+     * @return this User's password
+     */
     public String getPassword(){ return password;}
 
-    // Changes the user's password
+    /**
+     * Changes this User's old password to a password given by the input (newPassword)
+     * @param newPassword This User's new password
+     */
     public void setPassword(String newPassword){ password = newPassword;}
 
-    // Returns the user's username
+    /**
+     * Returns this User's username
+     * @return this User's username
+     */
     public String getUsername(){ return username;}
 
-    // Changes the user's username
-    public void setUsername(String newUsername){ username = newUsername;}
-
-    // Returns a list of the events the user is signed up for
+    /**
+     * Returns a list of this User's events by the names of the events
+     * @return a list of this User's events by the names of the events
+     */
     public List<String> getEvents(){ return events;}
 
-    // Adds the event to the list of the user's event in chronological order
+    /**
+     * Adds a given event name to events in the position inputted by the user
+     * @param newEvent  The new Event which is added to events
+     * @param pos  The position at which the event is being added
+     */
     public void addEvent(String newEvent, int pos){
         events.add(pos, newEvent);
     }
 
-    // Remove event from the events list
-    public void removeEvent(String removedEvent){ events.remove(removedEvent);}
+    /**
+     * Removes the inputted event name from events
+     * @param removedEvent  The event getting removed
+     */
+    public void removeEvent(String removedEvent){
+        events.remove(removedEvent);
+    }
 
-
-    // Returns whether this user is an organizer or not
+    /**
+     * Returns True or false depending on whether or not this user is an organizer or not
+     * @return True or false depending on whether or not this user is an organizer or not
+     */
     abstract boolean isOrganizer();
 
+    /**
+     * Returns True or false depending on whether or not this user is a speaker or not
+     * @return True or false depending on whether or not this user is a speaker or not
+     */
     abstract boolean isSpeaker();
 
 }

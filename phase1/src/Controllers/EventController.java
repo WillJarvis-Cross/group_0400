@@ -42,12 +42,7 @@ public class EventController {
      * @return True if event is created, false if  event cannot be create with the invalid input
      */
     public boolean makeEventRequest(LocalDateTime time, int duration, String speaker, int capacity, String eventName, String roomNumber){
-        if (eManager.scheduleEvent(time,duration, speaker, capacity, eventName, roomNumber)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return eManager.scheduleEvent(time, duration, speaker, capacity, eventName, roomNumber);
     }
 
     /**

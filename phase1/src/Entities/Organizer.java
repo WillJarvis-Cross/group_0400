@@ -1,21 +1,33 @@
 package Entities;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.lang.String;
 
+/** This is an entity for a User who is an organizer
+ * @author group 0400
+ */
 public class Organizer extends User{
-    private List<Integer> messageInbox;
-    private List<User> friendList;
 
+    /**
+     * Constructs a new Organizer with the username nameInput and password passwordInput.
+     * Calls the constructor of the superclass (User)
+     * @param passwordInput   The organizer's password
+     * @param nameInput   The organizer's username
+     */
     public Organizer(String passwordInput, String nameInput){
         super(passwordInput, nameInput);
-        this.friendList = new ArrayList();
-        this.messageInbox = new ArrayList();
     }
 
+    /**
+     * Returns whether or not the Organizer is an organizer or not
+     * @return true
+     */
     @Override
     boolean isOrganizer() { return true;}
 
+    /**
+     * Returns whether or not the Organizer is a speaker or not
+     * @return false
+     */
     @Override
     boolean isSpeaker() { return false;}
 }
