@@ -36,13 +36,9 @@ public class EventManager {
      * @param eventName
      * @return true if the event with the give eventName is at capacity, and false otherwise
      */
-    public boolean isAtCapacity(String eventName){
+    public boolean isAtCapacity(String eventName, int capacity){
         Event event = this.events.get(eventName);
-        if (event.getCapacity() == event.getAttending().size()){
-            return true;
-        } else {
-            return false;
-        }
+        return capacity <= event.getAttending().size();
     }
 
     /**
@@ -81,7 +77,7 @@ public class EventManager {
      */
     //returns an arraylist of all scheduled events
     public ArrayList<Event> getEvents(){
-        ArrayList<Event> eventList = new ArrayList<Event>();
+        ArrayList<Event> eventList = new ArrayList<>();
         Set<String> keys = this.events.keySet();
         for (String key: keys) {
             eventList.add(getEvent(key));
@@ -112,14 +108,12 @@ public class EventManager {
      * @param eventName The name of the event to add the user to
      * @return true if successful, returns false
      */
-    public boolean addPersonToEvent(String eventName, String userName){
+    public void addPersonToEvent(String eventName, String userName){
+        this.events.get(eventName).addAttending(userName);
+    }
 
-        if (!this.events.containsKey(eventName)){
-            return false;
-        } else {
-            this.events.get(eventName).addAttending(userName);
-            return true;
-        }
+    public boolean canAddPerson(String eventName){
+        return this.events.containsKey(eventName);
     }
 
     /**
@@ -129,18 +123,18 @@ public class EventManager {
      * @param time
      * @param duration
      * @param speaker
-     * @param capacity
      * @param eName
      * @param room
      * @return true if the Event is created successfully, false otherwise
      */
-    public boolean scheduleEvent(LocalDateTime time, int duration, String speaker, int capacity, String eName, String room){
-        Event e = new Event(time, duration, speaker, capacity, eName, room);
-        if ((!doesOverlap(e))&&(withinHours(e))){
-            this.events.put(eName, e);
-            return true;
-        }
-        return false;
+    public void scheduleEvent(LocalDateTime time, int duration, String speaker, String eName, String room){
+        Event e = new Event(time, duration, speaker, eName, room);
+        this.events.put(eName, e);
+    }
+
+    public boolean canScheduleEvent(LocalDateTime time, int duration, String speaker, String eName, String room){
+        Event e = new Event(time, duration, speaker, eName, room);
+        return (!doesOverlap(e)) && (withinHours(e));
     }
 
     /**
@@ -148,13 +142,12 @@ public class EventManager {
      * @param eventName
      * @return true if the event exists and is removed, returns false otherwise
      */
-    public boolean removeEvent(String eventName){
-        if( this.events.containsKey(eventName) ){
-            this.events.remove(eventName);
-            return true;
-        } else {
-            return false;
-        }
+    public void removeEvent(String eventName){
+        this.events.remove(eventName);
+    }
+
+    public boolean canRemoveEvent(String eventName){
+        return events.containsKey(eventName);
     }
 
     /**

@@ -15,7 +15,6 @@ public class Event {
     private int duration; // The duration of the event (in hours)
     private String speaker; // The speaker at the event
     private List<String> attending; // List of people attending the event
-    private final int capacity; // Max number of people allowed at the event
     private String eventName; // The name of the event
     private String roomNumber; // The room the event is in
     private final DateTimeFormatter formatter; // The format that the time of the event is printed
@@ -25,16 +24,14 @@ public class Event {
      * @param time The time the event occurs at
      * @param duration How long the event is in hours
      * @param speaker The speaker speaking at the event
-     * @param capacity How many attendees are allowed at the event
      * @param eventName The name of the event
      * @param roomNumber The room the event is in
      */
-    public Event(LocalDateTime time, int duration, String speaker, int capacity, String eventName, String roomNumber) {
+    public Event(LocalDateTime time, int duration, String speaker, String eventName, String roomNumber) {
         this.time = time;
         this.duration = duration;
         this.speaker = speaker;
         this.attending = new ArrayList<>();
-        this.capacity = capacity;
         this.eventName = eventName;
         this.roomNumber = roomNumber;
         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -80,14 +77,6 @@ public class Event {
      */
     public void addAttending(String newAttending) {
         attending.add(newAttending);
-    }
-
-    /**
-     * Returns the capacity of the event
-     * @return the capacity of the event
-     */
-    public int getCapacity(){
-        return capacity;
     }
 
     /**

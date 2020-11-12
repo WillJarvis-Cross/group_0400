@@ -19,6 +19,13 @@ public class RoomManager {
         allRooms = new Hashtable<>();
     }
 
+    public Room getRoom(String roomName){
+        if (allRooms.containsKey(roomName)){
+            return allRooms.get(roomName);
+        }
+        return null;
+    }
+
     /**
      * Creates a room with the given room number and capacity
      * @param roomNumber

@@ -8,7 +8,7 @@ import java.util.List;
  * @author group 400
  */
 public class UserManager {
-    EventManager events;
+
     Hashtable<String, Attendee> allAttendees;
     Hashtable<String, Organizer> allOrganizers;
     Hashtable<String, Speaker> allSpeakers;
@@ -18,8 +18,8 @@ public class UserManager {
      * Instantiates a UserManager with no users of any kind registered
      * @param events
      */
-    public UserManager(EventManager events){
-        this.events = events;
+
+    public UserManager(){
         allAttendees = new Hashtable<>();
         allOrganizers = new Hashtable<>();
         allSpeakers = new Hashtable<>();
@@ -138,22 +138,34 @@ public class UserManager {
      * @param eventName
      * @return true if the user was added to an event and false otherwise
      */
-    public boolean signUp(String name, String eventName){
-        if (!events.isAtCapacity(eventName)) {
-            return false;
-        }
-        Event thisEvent = events.getEvent(eventName);
-        LocalDateTime eventTime = thisEvent.getTime();
-        List<Event> userEvents = events.getEventsByUsername(name); //*** WAITING FOR EVENTMANAGER ***
-        LocalDateTime timePlusDuration = eventTime.plusHours(thisEvent.getDuration());
+    public void signUp(String name, Event event, List<Event> myEvents){
+        String eventName = event.getEventName();
+
+        LocalDateTime eventTime = event.getTime();
+
         User person = getUser(name);
-        int numEvents = person.getEvents().size();
+        int numEvents = myEvents.size();
+
+        int pos = findPosOfEvent(0, numEvents, eventTime, myEvents);
+
+        person.addEvent(eventName, pos);
+    }
+
+    public boolean canSignUp(String name, Event event, List<Event> myEvents){
+        String eventName = event.getEventName();
+
+        LocalDateTime eventTime = event.getTime();
+
+        LocalDateTime timePlusDuration = eventTime.plusHours(event.getDuration());
+        User person = getUser(name);
+        int numEvents = myEvents.size();
 
         if (numEvents == 0){
             person.addEvent(eventName, 0);
+            return true;
         }
 
-        int pos = findPosOfEvent(0, numEvents, eventTime, userEvents);
+        int pos = findPosOfEvent(0, numEvents, eventTime, myEvents);
 
         if (pos == -1){
             return false;
@@ -161,28 +173,26 @@ public class UserManager {
 
 
         if (pos == 0){
-            Event afterEvent = userEvents.get(pos);
+            Event afterEvent = myEvents.get(pos);
             if (afterEvent.getTime().compareTo(timePlusDuration) < 0){
                 return false;
             }
         }
         else if (pos == numEvents){
-            Event behindEvent = userEvents.get(pos - 1);
+            Event behindEvent = myEvents.get(pos - 1);
             LocalDateTime behindEventTime = behindEvent.getTime().plusHours(behindEvent.getDuration());
             if (behindEventTime.compareTo(eventTime) > 0){
                 return false;
             }
         }
         else {
-            Event behindEvent = userEvents.get(pos - 1);
-            Event afterEvent = userEvents.get(pos);
+            Event behindEvent = myEvents.get(pos - 1);
+            Event afterEvent = myEvents.get(pos);
             LocalDateTime behindEventTime = behindEvent.getTime().plusHours(behindEvent.getDuration());
             if (afterEvent.getTime().compareTo(timePlusDuration) < 0 || behindEventTime.compareTo(eventTime) > 0){
                 return false;
             }
         }
-        person.addEvent(eventName, pos);
-        events.addPersonToEvent(name, eventName); //*** WAITING FOR EVENTMANAGER***
         return true;
     }
 
@@ -191,13 +201,14 @@ public class UserManager {
      * @param person
      * @param canceledEvent
      */
-    public void cancelMyEvent(String person, String canceledEvent){ // EventManager should have a method which calls this
-        // which removes this users name from list of events
+    public void cancelMyEvent(String person, String canceledEvent){
         User thisPerson = getUser(person);
         if (thisPerson.getEvents().contains(canceledEvent)){
             thisPerson.removeEvent(canceledEvent);
         }
     }
+
+
 
     /**
      * If the given event was cancelled successfully, it will remove all attendees and the
@@ -207,13 +218,10 @@ public class UserManager {
      * @param speakerName
      */
     public void cancelWholeEvent(List<String> attending, String canceledEvent, String speakerName){
-        // EventManager should call this
-        if (events.removeEvent(canceledEvent)) {
-            for (String name : attending) {
-                cancelMyEvent(name, canceledEvent);
-            }
-            cancelMyEvent(speakerName, canceledEvent);
+        for (String name : attending) {
+            cancelMyEvent(name, canceledEvent);
         }
+        cancelMyEvent(speakerName, canceledEvent);
     }
 
     /**
