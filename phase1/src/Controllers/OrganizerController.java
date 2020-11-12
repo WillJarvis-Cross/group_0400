@@ -4,15 +4,23 @@ import UseCases.*;
 import java.time.LocalDateTime;
 import Entities.Event;
 import java.util.Set;
-
+/** Represents the controller for organiser manager object
+ * @auther group 400
+ */
 public class OrganizerController{
+    // are these public or private?
     EventManager events;
     UserManager usermanager;
     String name;
 
 
-
-
+    /**
+     * Creates and initialize an organzier controllor object
+     * @param name
+     * @param password
+     * @param usermanager
+     * @param events
+     */
     public OrganizerController(String name, String password, UserManager usermanager, EventManager events){
         this.events = events;
         this.usermanager = usermanager;
@@ -21,6 +29,19 @@ public class OrganizerController{
         }
     }
 
+    /**
+     * add event to organizer
+     * <p>
+     * first check if there is a username before allowing event to be created
+     * to create event scheduleEvent is called
+     * <p>
+     * @param time
+     * @param duration
+     * @param speaker
+     * @param capacity
+     * @param eventName
+     * @param roomNumber
+     */
     public void addEvent(LocalDateTime time, int duration, String speaker,
                          int capacity, String eventName, String roomNumber){
         if(name == null){
@@ -28,9 +49,18 @@ public class OrganizerController{
         }
         else{
             events.scheduleEvent(time, duration, speaker, capacity, eventName, roomNumber);
+            //feel like it should have a check if the information enter is correct or not
+            // scheduleEvent will return a bool depend on if the information is correct or not
+            //also System output
         }
     }
 
+    /**
+     * create user as a speaker by giving username and password
+     *
+     * @param passwordInput
+     * @param nameInput
+     */
     public void addSpeaker(String passwordInput, String nameInput){
         if(name == null){
             System.out.println("Please log in.");
@@ -40,6 +70,16 @@ public class OrganizerController{
         }
     }
 
+    /**
+     * assign speaker to events
+     * <p>
+     * first check if the user is logged in
+     * second see if the event have a speaker
+     * <p>
+     * @param time
+     * @param speaker
+     * @param roomNumber
+     */
     public void scheduleSpeaker(LocalDateTime time, String speaker, String roomNumber){
         if(name == null){
             System.out.println("Please log in.");
@@ -58,6 +98,16 @@ public class OrganizerController{
         }
     }
 
+    /**
+     * send message to a single attendee
+     * <p>
+     *     first check for if user is logged in
+     *     next call message manager to send message
+     * </p>
+     *
+     * @param attendeeName
+     * @param content
+     */
     public void messageAttendee(String attendeeName, String content){
         if(name == null){
             System.out.println("Please log in.");
@@ -67,7 +117,15 @@ public class OrganizerController{
         }
     }
 
+    /**
+     * sending all message to attendee
+     *
+     * @param content
+     */
     public void messageAllAttendees(String content){
+        //Question shouldn't only send message to all attendee of the
+        // event that the organizer host and not all attendee
+        // For instance there can by more than 2 host are we sending all attendee a message??
         if(name == null){
             System.out.println("Please log in.");
         }
@@ -80,6 +138,12 @@ public class OrganizerController{
         }
     }
 
+    /**
+     * direct message to the speaker
+     *
+     * @param speakerName
+     * @param content
+     */
     public void messageSpeaker(String speakerName, String content){
             if(name == null){
                 System.out.println("Please log in.");
@@ -90,6 +154,11 @@ public class OrganizerController{
             }
     }
 
+    /**
+     * sending a message to speaker from organizer
+     *
+     * @param content
+     */
     public void messageAllSpeakers(String content){
         if(name == null){
             System.out.println("Please log in.");
@@ -103,6 +172,11 @@ public class OrganizerController{
         }
     }
 
+    /**
+     * signup for event
+     *
+     * @param eventName
+     */
     public void signUp(String eventName){
 
         usermanager.signUp(name,eventName);

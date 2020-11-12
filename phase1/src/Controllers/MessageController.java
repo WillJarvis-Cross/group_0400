@@ -7,15 +7,31 @@ import Presenter.Presenter;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/** Represents the controller for Message
+ * @auther group 400
+ */
 public class MessageController {
     MessageManager messageManager;
     UserManager userManager;
+
+    /**
+     * initialize object for message controller
+     * userManager is assigned
+     *
+     * @param userManager
+     */
     public MessageController(UserManager userManager){
         messageManager = new MessageManager();
         this.userManager = userManager;
     }
 
+
+    /**
+     * Present all message send to user
+     * Uses Presenter class to output the message to user
+     *
+     * @param name
+     */
     public void printMyMessages(String name){
         StringBuilder output = new StringBuilder("My Messages:");
         List<Integer> messagesIds = userManager.getUser(name).getMessageInbox();
@@ -29,6 +45,19 @@ public class MessageController {
         }
         Presenter.printReceivedMessages(output);
     }
+
+    /**
+     * Send message to User using message manager
+     * <p>
+     *     message is receive as content
+     *     sender calls userManger to send message to sender
+     * </p>
+     *
+     * @param sender
+     * @param receiver
+     * @param content
+     * @return
+     */
     public boolean sendMessage(String sender, String receiver, String content){
         if (userManager.getUsers().containsKey(receiver)){
             messageManager.sendMessage(userManager.getUser(sender), userManager.getUser(receiver), content);
