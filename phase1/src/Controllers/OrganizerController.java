@@ -3,8 +3,6 @@ import UseCases.*;
 
 import java.time.LocalDateTime;
 import Entities.Event;
-import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Set;
 
 public class OrganizerController{
