@@ -12,7 +12,7 @@ public class Event {
     private int duration;
 
     // The speaker at the event
-    private final String speaker;
+    private String speaker;
 
     // List of people attending the event
     private List<String> attending;
@@ -76,6 +76,8 @@ public class Event {
     public int getDuration(){ return duration;}
 
     public String getRoomNum(){ return roomNumber;}
+
+    public void setSpeaker(String speaker){ this.speaker = speaker;}
 
     public String toString(){
         return "Event: "+ eventName+ "\nSpeaker: "+ speaker+ "\nDate: "+

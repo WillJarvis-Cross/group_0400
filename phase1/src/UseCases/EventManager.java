@@ -109,6 +109,9 @@ public class EventManager {
         }
     }
 
+    public void setSpeaker(String eventName, String speakerName){
+        events.get(eventName).setSpeaker(speakerName);
+    }
 
     //returns true if the event occurs entirely within conference hours
     //we are assuming all events start on the hour
