@@ -3,7 +3,6 @@ package Controllers;
 import Entities.Message;
 import UseCases.MessageManager;
 import UseCases.UserManager;
-import Presenter.Presenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ public class MessageController {
         this.userManager = userManager;
     }
 
-    public void printMyMessages(String name){
+    public StringBuilder printMyMessages(String name){
         StringBuilder output = new StringBuilder("My Messages:");
         List<Integer> messagesIds = userManager.getUser(name).getMessageInbox();
         ArrayList<Message> messages = messageManager.getMyMessages(messagesIds);
@@ -27,7 +26,7 @@ public class MessageController {
             output.append(messages.get(i).getContent());
             output.append("\n");
         }
-        Presenter.printReceivedMessages(output);
+        return output;
     }
     public boolean sendMessage(String sender, String receiver, String content){
         if (userManager.getUsers().containsKey(receiver)){
