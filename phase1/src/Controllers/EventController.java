@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /** Represents the controller for EventManager
- * @auther group 400
+ * @author group 400
  */
 public class EventController {
 
@@ -98,7 +98,7 @@ public class EventController {
         if (!eManager.canRemoveEvent(name)){
             return false;
         }
-        Event thisEvent = eManager.getEvent(name)
+        Event thisEvent = eManager.getEvent(name);
         userManager.cancelWholeEvent(thisEvent.getAttending(), name, eManager.getEvent(name).getSpeaker());
         eManager.removeEvent(name);
         roomManager.removeEvent(thisEvent.getRoomNum(), name);
