@@ -37,8 +37,6 @@ public class Event {
         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     }
 
-    // Returns the time of the event in the form [yyyy, mm, dd, hh, mm]
-
     /**
      * Returns the time of the event in the form [yyyy, mm, dd, hh, mm]
      * @return the time of the event in the form [yyyy, mm, dd, hh, mm]

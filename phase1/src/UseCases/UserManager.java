@@ -8,15 +8,20 @@ import java.util.List;
  * @author group 400
  */
 public class UserManager {
-
+    // hashtable where the key is the name of the attendee and the value is the attendee
     Hashtable<String, Attendee> allAttendees;
+
+    // hashtable where the key is the name of the organizer and the value is the organizer
     Hashtable<String, Organizer> allOrganizers;
+
+    // hashtable where the key is the name of the speaker and the value is the speaker
     Hashtable<String, Speaker> allSpeakers;
+
+    // hashtable where the key is the name of the user and the value is the user
     Hashtable<String, User> allUsers;
 
     /**
      * Instantiates a UserManager with no users of any kind registered
-     * @param events
      */
 
     public UserManager(){
@@ -34,15 +39,15 @@ public class UserManager {
 
     /**
      * Returns an Attendee with the given username
-     * @param name
-     * @return Attendee
+     * @param name The name of the attendee
+     * @return Attendee object corresponding to name
      */
     public Attendee getAttendee(String name){ return allAttendees.get(name);}
 
     /**
      * Creates a new Attendee with the given username and password
-     * @param name
-     * @param pass
+     * @param name The name of the new Attendee
+     * @param pass The password of the attendee
      */
     public void addAttendee(String name, String pass){
         Attendee newAttendee = new Attendee(name, pass);
@@ -51,22 +56,22 @@ public class UserManager {
     }
 
     /**
-     * Returns a Hashtable of all Oranizers
+     * Returns a Hashtable of all Organizers
      * @return allOrganizers
      */
     public Hashtable<String, Organizer> getOrganizers(){ return allOrganizers;}
 
     /**
      * Returns an Organizer with the given username
-     * @param name
-     * @return Organizer
+     * @param name The name of the organizer
+     * @return Organizer corresponding to name
      */
     public Organizer getOrganizer(String name){ return allOrganizers.get(name);}
 
     /**
      * Creates a new Organizer with the given username and password
-     * @param name
-     * @param pass
+     * @param name The name of the new organizer
+     * @param pass The password of the new organizer
      */
     public void addOrganizer(String name, String pass){
         Organizer newOrganizer = new Organizer(name, pass);
@@ -82,15 +87,15 @@ public class UserManager {
 
     /**
      * Returns a Speaker with the given name
-     * @param name
-     * @return Speaker
+     * @param name The name of the speaker
+     * @return Speaker corresponding to name
      */
     public Speaker getSpeaker(String name){ return allSpeakers.get(name);}
 
     /**
      * Creates a new Speaker with the given usename and password
-     * @param name
-     * @param pass
+     * @param name The name of the new speaker
+     * @param pass The password of the new speaker
      */
     public void addSpeaker(String name, String pass){
         Speaker newSpeaker = new Speaker(name, pass);
@@ -99,9 +104,18 @@ public class UserManager {
     }
 
     /**
-     * Returns a User with the given username
+     * Returns true if name is not already in the list of users. Return false otherwise.
      * @param name
-     * @return User
+     * @return
+     */
+    public boolean canAddPerson(String name){
+        return !allUsers.containsKey(name);
+    }
+
+    /**
+     * Returns a User with the given username
+     * @param name The name of the user
+     * @return User Corresponding to name
      */
     public User getUser(String name){ return allUsers.get(name);}
 
@@ -133,10 +147,10 @@ public class UserManager {
     }
 
     /**
-     * Adds a user with the given username to the event with the given name if possible
-     * @param name
-     * @param eventName
-     * @return true if the user was added to an event and false otherwise
+     * Adds the inputted event to the list of the user's event
+     * @param name The name of the user
+     * @param event The event being signed up for
+     * @param myEvents The list of the user's events
      */
     public void signUp(String name, Event event, List<Event> myEvents){
         String eventName = event.getEventName();
@@ -145,12 +159,19 @@ public class UserManager {
 
         User person = getUser(name);
         int numEvents = myEvents.size();
-
+        // pos is the position the event is being added in th e user's list of events
         int pos = findPosOfEvent(0, numEvents, eventTime, myEvents);
 
         person.addEvent(eventName, pos);
     }
 
+    /**
+     * Returns true if the user is available to sign up for the inputted event
+     * @param name The name of the user
+     * @param event The event being signed up for
+     * @param myEvents The user's list of events
+     * @return True if the user is available to sign up for the event. Return false otherwise.
+     */
     public boolean canSignUp(String name, Event event, List<Event> myEvents){
         String eventName = event.getEventName();
 
@@ -198,8 +219,8 @@ public class UserManager {
 
     /**
      * Cancels the person's spot in the event with the given name
-     * @param person
-     * @param canceledEvent
+     * @param person The name of the person
+     * @param canceledEvent The name of the event person is canceling
      */
     public void cancelMyEvent(String person, String canceledEvent){
         User thisPerson = getUser(person);
@@ -213,9 +234,9 @@ public class UserManager {
     /**
      * If the given event was cancelled successfully, it will remove all attendees and the
      * speaker from their respective lists of events
-     * @param attending
-     * @param canceledEvent
-     * @param speakerName
+     * @param attending The list of the names of the attendees attending the event
+     * @param canceledEvent The event getting canceled
+     * @param speakerName The name of the speaker of the event
      */
     public void cancelWholeEvent(List<String> attending, String canceledEvent, String speakerName){
         for (String name : attending) {
@@ -227,8 +248,8 @@ public class UserManager {
     /**
      * Allows the user with the given username to log in to their account if they
      * enter the correct password for their account
-     * @param name
-     * @param pass
+     * @param name The username
+     * @param pass The password
      * @return true if the password was correct, false otherwise
      */
     public boolean login(String name, String pass){
@@ -238,11 +259,11 @@ public class UserManager {
 
     /**
      * Changes the person's password
-     * @param person
-     * @param pass
+     * @param person The name of the user
+     * @param pass The user's password
      */
-    public void changePassword(User person, String pass){
-        person.setPassword(pass);
+    public void changePassword(String person, String pass){
+        allUsers.get(person).setPassword(pass);
     }
 }
 

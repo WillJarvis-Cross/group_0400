@@ -1,7 +1,5 @@
 package Controllers;
-/** Represents the controller for EventManager
- * @auther group 400
- */
+
 import Entities.Room;
 import UseCases.EventManager;
 import Entities.Event;
@@ -15,14 +13,17 @@ import java.lang.String;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/** Represents the controller for EventManager
+ * @auther group 400
+ */
 public class EventController {
 
     private EventManager eManager;
     private UserManager userManager;
-    public RoomManager roomManager;
+    private RoomManager roomManager;
 
     /**
-     * initialize a clean EventController with new EventManager
+     * initialize a clean EventController with new EventManager, UserManager, and RoomManager
      */
     public EventController(){
         eManager = new EventManager();
@@ -32,7 +33,7 @@ public class EventController {
 
     /**
      * initialize a EventController with a already defined manager
-     * @param manager
+     * @param manager The already defined EventManager
      */
     public EventController(EventManager manager){
         eManager = manager;
@@ -40,16 +41,16 @@ public class EventController {
 
     /**
      * create a event when a create event request is made
-     * calls eventManger to check if event can be created with the information
-     * @param time
-     * @param duration
-     * @param speaker
-     * @param eventName
-     * @param roomNumber
+     * calls eventManager, userManager, and roomManager to check if event can be created with the information
+     * @param time The time of the event
+     * @param duration The duration of the event in hours
+     * @param speaker The speaker of the event
+     * @param eventName The name of the event
+     * @param roomNumber The room the event is in
      * @return True if event is created, false if  event cannot be create with the invalid input
      */
     public boolean makeEventRequest(LocalDateTime time, int duration, String speaker, String eventName, String roomNumber){
-        if (roomManager.isRoomtaken(roomNumber, time)){
+        if (roomManager.isRoomTaken(roomNumber, time)){
             return false;
         }
         if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber)){
@@ -60,15 +61,16 @@ public class EventController {
         }
         eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber);
         userManager.signUp(speaker, eManager.getEvent(eventName), eManager.getEventsByUsername(speaker));
+        roomManager.addEvent(roomNumber, eventName, time);
         return true;
     }
 
     /**
      * add attendee to event
-     * First check if event still have space
+     * First check if the event still has space and that the user can attend the event
      *
-     * @param eventName
-     * @param username
+     * @param eventName The name of the event
+     * @param username The name of the user
      * @return True if attendee is added and false if not added
      */
     public boolean addAttendee(String eventName, String username){
@@ -89,16 +91,17 @@ public class EventController {
 
     /**
      * remove Event from event list
-     * @param name
+     * @param name The name of the event
      * @return true if event is deleted false if the event does not exist
      */
     public boolean removeEvent(String name){
         if (!eManager.canRemoveEvent(name)){
             return false;
         }
-        List<String> attending = eManager.getEvent(name).getAttending();
-        userManager.cancelWholeEvent(attending, name, eManager.getEvent(name).getSpeaker());
+        Event thisEvent = eManager.getEvent(name)
+        userManager.cancelWholeEvent(thisEvent.getAttending(), name, eManager.getEvent(name).getSpeaker());
         eManager.removeEvent(name);
+        roomManager.removeEvent(thisEvent.getRoomNum(), name);
         return true;
     }
 
