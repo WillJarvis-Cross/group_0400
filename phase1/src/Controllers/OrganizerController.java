@@ -5,21 +5,21 @@ import java.time.LocalDateTime;
 import Entities.Event;
 import java.util.Set;
 /** Represents the controller for organiser manager object
- * @auther group 400
+ * @author group 400
  */
 public class OrganizerController{
-    // are these public or private?
-    EventManager events;
-    UserManager usermanager;
-    String name;
+
+    private EventManager events;
+    private UserManager usermanager;
+    private String name;
 
 
     /**
-     * Creates and initialize an organzier controllor object
-     * @param name
-     * @param password
-     * @param usermanager
-     * @param events
+     * Creates and initialize an organizer controller object
+     * @param name name of Organizer
+     * @param password password of Organizer
+     * @param usermanager UserManager of the program
+     * @param events EventManager fo the program
      */
     public OrganizerController(String name, String password, UserManager usermanager, EventManager events){
         this.events = events;
@@ -35,20 +35,19 @@ public class OrganizerController{
      * first check if there is a username before allowing event to be created
      * to create event scheduleEvent is called
      * <p>
-     * @param time
-     * @param duration
-     * @param speaker
-     * @param capacity
-     * @param eventName
-     * @param roomNumber
+     * @param time time of event
+     * @param duration duration of event in hours
+     * @param speaker name of speaker
+     * @param eventName name of event
+     * @param roomNumber room of event
      */
     public void addEvent(LocalDateTime time, int duration, String speaker,
-                         int capacity, String eventName, String roomNumber){
+                          String eventName, String roomNumber){
         if(name == null){
             System.out.println("Please log in.");
         }
         else{
-            events.scheduleEvent(time, duration, speaker, capacity, eventName, roomNumber);
+            events.scheduleEvent(time, duration, speaker, eventName, roomNumber);
             //feel like it should have a check if the information enter is correct or not
             // scheduleEvent will return a bool depend on if the information is correct or not
             //also System output
@@ -58,8 +57,8 @@ public class OrganizerController{
     /**
      * create user as a speaker by giving username and password
      *
-     * @param passwordInput
-     * @param nameInput
+     * @param passwordInput password of the new speaker
+     * @param nameInput username of the new speaker
      */
     public void addSpeaker(String passwordInput, String nameInput){
         if(name == null){
@@ -76,9 +75,9 @@ public class OrganizerController{
      * first check if the user is logged in
      * second see if the event have a speaker
      * <p>
-     * @param time
-     * @param speaker
-     * @param roomNumber
+     * @param time time speaker is scheduled to
+     * @param speaker name of speaker
+     * @param roomNumber room speaker is scheduled to
      */
     public void scheduleSpeaker(LocalDateTime time, String speaker, String roomNumber){
         if(name == null){
@@ -105,8 +104,8 @@ public class OrganizerController{
      *     next call message manager to send message
      * </p>
      *
-     * @param attendeeName
-     * @param content
+     * @param attendeeName name of receiver
+     * @param content content of message
      */
     public void messageAttendee(String attendeeName, String content){
         if(name == null){
@@ -118,9 +117,9 @@ public class OrganizerController{
     }
 
     /**
-     * sending all message to attendee
+     * sending message to all attendees
      *
-     * @param content
+     * @param content content of message
      */
     public void messageAllAttendees(String content){
         //Question shouldn't only send message to all attendee of the
@@ -141,8 +140,8 @@ public class OrganizerController{
     /**
      * direct message to the speaker
      *
-     * @param speakerName
-     * @param content
+     * @param speakerName name of receiver
+     * @param content content of message
      */
     public void messageSpeaker(String speakerName, String content){
             if(name == null){
@@ -157,7 +156,7 @@ public class OrganizerController{
     /**
      * sending a message to speaker from organizer
      *
-     * @param content
+     * @param content content of message
      */
     public void messageAllSpeakers(String content){
         if(name == null){
@@ -175,11 +174,11 @@ public class OrganizerController{
     /**
      * signup for event
      *
-     * @param eventName
+     * @param eventName name of event
      */
     public void signUp(String eventName){
 
-        usermanager.signUp(name,eventName);
+        usermanager.signUp(name,events.getEvent(eventName),events.getEventsByUsername(name));
 
     }
 
