@@ -8,7 +8,7 @@ import java.util.Set;
 /** Represents the controller for organiser manager object
  * @author group 400
  */
-public class OrganizerController{
+public class OrganizerController implements UserController{
 
     //private EventManager events;
     private final UserManager usermanager;

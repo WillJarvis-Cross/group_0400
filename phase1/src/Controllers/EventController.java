@@ -53,26 +53,39 @@ public class EventController {
      * @param roomNumber The room the event is in
      * @return True if event is created, false if  event cannot be create with the invalid input
      */
-    public boolean makeEventRequest(LocalDateTime time, int duration, String speaker, String eventName, String roomNumber){
+    public void makeEventRequest(){
         String eventName = presenter.printNameOfEvent();
         if (eventName.equals("0")){
             userController.mainMenu();
         }
         LocalDateTime time = presenter.printTimeOfEvent();
         int duration = presenter.printDurationOfEvent();
+        String speaker = presenter.printSpeakerOfEvent();
+        String roomNumber = presenter.printRoomNumber();
+        int counter = 0;
+        if (!userManager.getSpeakers().containsKey(speaker) || roomManager.getRoom(roomNumber) == null){
+            counter ++;
+        }
         if (roomManager.isRoomTaken(roomNumber, time)){
-            return false;
+            counter ++;
         }
         if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber) || duration == 0){
-            return false;
+            counter ++;
         }
         if (!userManager.canSignUp(speaker, eManager.getEvent(eventName), eManager.getEventsByUsername(speaker))){
-            return false;
+            counter ++;
         }
-        eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber);
-        userManager.signUp(speaker, eManager.getEvent(eventName), eManager.getEventsByUsername(speaker));
-        roomManager.addEvent(roomNumber, eventName, time);
-        return true;
+        if (counter == 0){
+            eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber);
+            userManager.signUp(speaker, eManager.getEvent(eventName), eManager.getEventsByUsername(speaker));
+            roomManager.addEvent(roomNumber, eventName, time);
+            presenter.printEventCreated();
+            userController.mainMenu();
+        }
+        else{
+            presenter.printInvalidOption();
+            makeEventRequest();
+        }
     }
 
     /**

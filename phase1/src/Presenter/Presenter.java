@@ -135,7 +135,7 @@ public class Presenter {
      *
      */
     public void printInvalidOption() {
-        System.out.println("The option you selected was invalid");
+        System.out.println("The option you selected was invalid, please try again");
     }
 
     /**
@@ -289,6 +289,20 @@ public class Presenter {
     public int printDurationOfEvent(){
         System.out.println("Enter the duration of the event in hours");
         return Integer.parseInt(sc.nextLine());
+    }
+
+    public String printSpeakerOfEvent(){
+        System.out.println("Who do you want to be the speaker of the event?");
+        return sc.nextLine();
+    }
+
+    public String printRoomNumber(){
+        System.out.println("What room will the event be in");
+        return sc.nextLine();
+    }
+
+    public void printEventCreated(){
+        System.out.println("Event created successfully");
     }
 
 }
