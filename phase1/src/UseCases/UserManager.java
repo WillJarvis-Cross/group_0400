@@ -55,6 +55,10 @@ public class UserManager {
         allAttendees.put(name, newAttendee);
         allUsers.put(name, newAttendee);
     }
+    public void addAttendee(Attendee newAttendee){
+        allAttendees.put(newAttendee.getUsername(), newAttendee);
+        allUsers.put(newAttendee.getUsername(), newAttendee);
+    }
 
     /**
      * Returns a Hashtable of all Organizers
@@ -79,6 +83,10 @@ public class UserManager {
         allOrganizers.put(name, newOrganizer);
         allUsers.put(name, newOrganizer);
     }
+    public void addOrganizer(Organizer newOrganizer){
+        allOrganizers.put(newOrganizer.getUsername(), newOrganizer);
+        allUsers.put(newOrganizer.getUsername(), newOrganizer);
+    }
 
     /**
      * Returns a Hashtable of all Speakers
@@ -102,6 +110,10 @@ public class UserManager {
         Speaker newSpeaker = new Speaker(name, pass);
         allSpeakers.put(name, newSpeaker);
         allUsers.put(name, newSpeaker);
+    }
+    public void addSpeaker(Speaker newSpeaker){
+        allSpeakers.put(newSpeaker.getUsername(), newSpeaker);
+        allUsers.put(newSpeaker.getUsername(), newSpeaker);
     }
 
     /**
