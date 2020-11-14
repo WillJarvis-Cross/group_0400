@@ -29,5 +29,5 @@ public class Attendee extends User{
      * @return false
      */
     @Override
-    boolean isSpeaker() { return false;}
+    public boolean isSpeaker() { return false;}
 }

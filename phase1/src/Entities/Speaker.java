@@ -22,12 +22,12 @@ public class Speaker extends User{
      * @return false
      */
     @Override
-    boolean isOrganizer() { return false;}
+    public boolean isOrganizer() { return false;}
 
     /**
      * Returns whether or not the Speaker is a speaker or not
      * @return true
      */
     @Override
-    boolean isSpeaker() { return true;}
+    public boolean isSpeaker() { return true;}
 }

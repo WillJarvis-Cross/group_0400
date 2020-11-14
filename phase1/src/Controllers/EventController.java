@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.lang.String;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /** Represents the controller for EventManager
  * @author group 400
@@ -119,9 +118,5 @@ public class EventController {
         }
         return outString;
     }
-
-
-
-
 
 }

@@ -85,12 +85,12 @@ public abstract class User{
      * Returns True or false depending on whether or not this user is an organizer or not
      * @return True or false depending on whether or not this user is an organizer or not
      */
-    abstract boolean isOrganizer();
+    public abstract boolean isOrganizer();
 
     /**
      * Returns True or false depending on whether or not this user is a speaker or not
      * @return True or false depending on whether or not this user is a speaker or not
      */
-    abstract boolean isSpeaker();
+    public abstract boolean isSpeaker();
 
 }

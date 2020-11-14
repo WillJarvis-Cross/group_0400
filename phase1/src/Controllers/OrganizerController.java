@@ -1,4 +1,5 @@
 package Controllers;
+import Presenter.Presenter;
 import UseCases.*;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,57 @@ public class OrganizerController{
         }
     }
 
+    public void makeNewAccount(){
+        String username = Presenter.printUsername();
+        String password = Presenter.printPassword();
+        usermanager.addOrganizer(username, password);
+        mainMenu();
+    }
+
+    public void loginExistingAccount(){
+        while (true){
+            String username = Presenter.printUsername();
+            String password = Presenter.printPassword();
+            if (usermanager.login(username, password)){
+                this.name = username;
+                break;
+            }
+            else{
+                Presenter.printInvalidInput();
+            }
+        }
+        mainMenu();
+
+    }
+
+    public static void mainMenu(){
+        while (true){
+            String input = Presenter.printOrganizer();
+            if (input.equals("1")){
+                MessageController.sendMessage(name);
+            }
+            else if (input.equals("2")){
+                EventController.makeEventRequest();
+            }
+            else if (input.equals("3")){
+
+            }
+            else if (input.equals("4")){
+
+            }
+            else if (input.equals("5")){
+
+            }
+            else if (input.equals("6")){
+
+            }
+            else{
+                Presenter.printInvalidInput();
+            }
+        }
+
+    }
+
     /**
      * add event to organizer
      * <p>
@@ -41,7 +93,7 @@ public class OrganizerController{
      * @param eventName name of event
      * @param roomNumber room of event
      */
-    public void addEvent(LocalDateTime time, int duration, String speaker,
+    /*public void addEvent(LocalDateTime time, int duration, String speaker,
                           String eventName, String roomNumber){
         if(name == null){
             System.out.println("Please log in.");
@@ -52,7 +104,8 @@ public class OrganizerController{
             // scheduleEvent will return a bool depend on if the information is correct or not
             //also System output
         }
-    }
+    }*/
+
 
     /**
      * create user as a speaker by giving username and password
@@ -107,14 +160,15 @@ public class OrganizerController{
      * @param attendeeName name of receiver
      * @param content content of message
      */
-    public void messageAttendee(String attendeeName, String content){
+    /*public void messageSomeone(){
         if(name == null){
             System.out.println("Please log in.");
         }
         else {
-            MessageManager.sendMessage(usermanager.getOrganizer(name), usermanager.getAttendee(attendeeName), content);
+            MessageManager.sendMessage(usermanager.getOrganizer(name), usermanager.getAttendee(thisName), content);
         }
-    }
+
+    }*/
 
     /**
      * sending message to all attendees
@@ -143,7 +197,7 @@ public class OrganizerController{
      * @param speakerName name of receiver
      * @param content content of message
      */
-    public void messageSpeaker(String speakerName, String content){
+    /*public void messageSpeaker(String speakerName, String content){
             if(name == null){
                 System.out.println("Please log in.");
             }
@@ -151,7 +205,7 @@ public class OrganizerController{
                 MessageManager.sendMessage(usermanager.getOrganizer(name),
                         usermanager.getSpeaker(speakerName), content);
             }
-    }
+    }*/
 
     /**
      * sending a message to speaker from organizer

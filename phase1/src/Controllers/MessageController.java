@@ -35,15 +35,30 @@ public class MessageController {
     public void printMyMessages(String name){
         StringBuilder output = new StringBuilder("My Messages:");
         List<Integer> messagesIds = userManager.getUser(name).getMessageInbox();
-        ArrayList<Message> messages = messageManager.getMyMessages(messagesIds);
-        // I do this loop counting backwards so it prints the messages based on which was most recent
-        for (int i = messages.size() - 1; i >= 0; i--){
-            output.append(messages.get(i).getSender());
-            output.append(": ");
-            output.append(messages.get(i).getContent());
-            output.append("\n");
+        if (messagesIds.size() == 0){
+            Presenter.printReceivedMessages(output);
+            String input = Presenter.printNoMessages();
         }
-        Presenter.printReceivedMessages(output);
+        else{
+            ArrayList<Message> messages = messageManager.getMyMessages(messagesIds);
+            // I do this loop counting backwards so it prints the messages based on which was most recent
+            for (int i = messages.size() - 1; i >= 0; i--){
+                output.append(messages.get(i).getSender());
+                output.append(": ");
+                output.append(messages.get(i).getContent());
+                output.append("\n");
+            }
+            String input = Presenter.printReceivedMessages(output);
+        }
+        if (userManager.getUser(name).isOrganizer()){
+            OrganizerController.mainMenu();
+        }
+        else if (userManager.getUser(name).isSpeaker()){
+            SpeakerController.mainMenu();
+        }
+        else{
+            AttendeeManager.mainMenu();
+        }
     }
 
     /**
@@ -58,12 +73,36 @@ public class MessageController {
      * @param content
      * @return
      */
-    public boolean sendMessage(String sender, String receiver, String content){
-        if (userManager.getUsers().containsKey(receiver)){
-            messageManager.sendMessage(userManager.getUser(sender), userManager.getUser(receiver), content);
-            return true;
+    public static boolean sendMessage(String sender){
+        String receiver;
+        while (true){
+            receiver = Presenter.printWhoToSendTo();
+            if (userManager.getUsers().containsKey(receiver)){
+                break;
+            }
+            else if (receiver.equals("0")){
+                whichMainMenu(sender);
+            }
+            else{
+                Presenter.printInvalidInput();
+            }
         }
-        return false;
+        String content = Presenter.printMessage();
+        MessageManager.sendMessage(userManager.getUser(sender), userManager.getUser(receiver), content);
+        Presenter.printMessageSent();
+        whichMainMenu(sender);
+    }
+
+    public static void whichMainMenu(String name){
+        if (UserManager.getUser(name).isOrganizer()){
+            OrganizerController.mainMenu();
+        }
+        else if (UserManager.getUser(name).isSpeaker()){
+            SpeakerController.mainMenu();
+        }
+        else{
+            AttendeeController.mainMenu();
+        }
     }
 
 }
