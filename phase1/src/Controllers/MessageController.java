@@ -7,6 +7,8 @@ import Presenter.Presenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 /** Represents the controller for Message
  * @author group 400
  */
@@ -55,15 +57,7 @@ public class MessageController {
             String input = presenter.printReceivedMessages(output);
         }
         userController.mainMenu();
-        /*if (userManager.getUser(name).isOrganizer()){
-            organizerController.mainMenu();
-        }
-        else if (userManager.getUser(name).isSpeaker()){
-            SpeakerController.mainMenu();
-        }
-        else{
-            AttendeeManager.mainMenu();
-        }*/
+
     }
 
     /**
@@ -98,16 +92,25 @@ public class MessageController {
         userController.mainMenu();
     }
 
-    /*public void whichMainMenu(String name){
-        if (userManager.getUser(name).isOrganizer()){
-            organizerController.mainMenu();
+    public void messageAllSpeakers(String name){
+        String content = presenter.printMessage();
+        Set<String> keys = userManager.getSpeakers().keySet();
+        for (String key : keys) {
+            messageManager.sendMessage(userManager.getOrganizer(name),
+                    userManager.getSpeaker(key), content);
         }
-        else if (UserManager.getUser(name).isSpeaker()){
-            speakerController.mainMenu();
-        }
-        else{
-            attendeeController.mainMenu();
-        }
-    }*/
+        presenter.printMessageSent();
+        userController.mainMenu();
+    }
 
+    public void messageAllAttendees(String name){
+        String content = presenter.printMessage();
+        Set<String> keys = userManager.getAttendees().keySet();
+        for (String key : keys) {
+            messageManager.sendMessage(userManager.getOrganizer(name),
+                    userManager.getAttendee(key), content);
+        }
+        presenter.printMessageSent();
+        userController.mainMenu();
+    }
 }

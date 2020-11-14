@@ -74,19 +74,33 @@ public class OrganizerController implements UserController{
                 break;
             }
             else if (input.equals("3")){
-
+                messageController.printMyMessages(name);
+                break;
             }
             else if (input.equals("4")){
-
+                messageController.messageAllSpeakers(name);
+                break;
             }
             else if (input.equals("5")){
-
+                messageController.messageAllAttendees(name);
+                break;
             }
             else if (input.equals("6")){
 
             }
+            else if (input.equals("7")){
+                String speaker = presenter.printNameSpeaker();
+                String pass = presenter.getPassSpeaker();
+                usermanager.addSpeaker(speaker, pass);
+            }
+            else if (input.equals("8")){
+
+            }
+            else if (input.equals("9")){
+
+            }
             else{
-                Presenter.printInvalidInput();
+                presenter.printInvalidInput();
             }
         }
 
@@ -124,14 +138,14 @@ public class OrganizerController implements UserController{
      * @param passwordInput password of the new speaker
      * @param nameInput username of the new speaker
      */
-    public void addSpeaker(String passwordInput, String nameInput){
+    /*public void addSpeaker(String passwordInput, String nameInput){
         if(name == null){
             System.out.println("Please log in.");
         }
         else{
             usermanager.addSpeaker(nameInput, passwordInput);
         }
-    }
+    }*/
 
     /**
      * assign speaker to events
@@ -186,7 +200,7 @@ public class OrganizerController implements UserController{
      *
      * @param content content of message
      */
-    public void messageAllAttendees(String content){
+    /*public void messageAllAttendees(String content){
         //Question shouldn't only send message to all attendee of the
         // event that the organizer host and not all attendee
         // For instance there can by more than 2 host are we sending all attendee a message??
@@ -200,7 +214,7 @@ public class OrganizerController implements UserController{
                         usermanager.getAttendee(key), content);
             }
         }
-    }
+    }*/
 
     /**
      * direct message to the speaker
@@ -223,7 +237,7 @@ public class OrganizerController implements UserController{
      *
      * @param content content of message
      */
-    public void messageAllSpeakers(String content){
+    /*public void messageAllSpeakers(String content){
         if(name == null){
             System.out.println("Please log in.");
         }
@@ -234,7 +248,7 @@ public class OrganizerController implements UserController{
                         usermanager.getSpeaker(key), content);
             }
         }
-    }
+    }*/
 
     /**
      * signup for event

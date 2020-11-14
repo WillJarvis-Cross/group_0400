@@ -90,8 +90,11 @@ public class Presenter {
         System.out.println("2: Create an event");
         System.out.println("3: See list of received messages");
         System.out.println("4: Send a message to all speakers");
-        System.out.println("5: Send a message to all Attendess");
-        System.out.println("6: Logout");
+        System.out.println("5: Send a message to all Attendees");
+        System.out.println("6: Create a new room");
+        System.out.println("7: Create a new speaker");
+        System.out.println("8: Sign up for event");
+        System.out.println("9: Logout");
         String input = sc.nextLine();
         return input;
     }
@@ -303,6 +306,16 @@ public class Presenter {
 
     public void printEventCreated(){
         System.out.println("Event created successfully");
+    }
+
+    public String printNameSpeaker(){
+        System.out.println("Enter the name of the speaker");
+        return sc.nextLine();
+    }
+
+    public String getPassSpeaker(){
+        System.out.println("Enter the speaker's password");
+        return sc.nextLine();
     }
 
 }
