@@ -69,14 +69,7 @@ public class ReadAndWrite {
 
         // complete this method after adding necessary methods to usermanager
 
-        public void helperAddToHashtable(ArrayList information, UserManager manager){
-            for (int i = 0; i < information.size(); i++) {
-                // add to its defined hashtable
 
-
-
-            }
-        }
 
         public void serializeInfo(ArrayList organizerList,ArrayList speakerList, ArrayList attendeeList, ArrayList
                 messagesList,ArrayList roomList, ArrayList eventList,  String organizerFile, String attendeeFile,
@@ -99,10 +92,10 @@ public class ReadAndWrite {
             ArrayList attendeeInfo = helperDeseriialize(attendeeFile);
             ArrayList organizerInfo = helperDeseriialize(organizerFile);
             ArrayList speakerInfo = helperDeseriialize(speakerFile);
+            for (int i = 0; i < attendeeInfo.size(); i++) {
+                // add messages directly to array from the manager
 
-
-
-
+            }
 
 
         }
@@ -125,9 +118,9 @@ public class ReadAndWrite {
         }
 
 
-        /**possibly implement an interface for manager classes? allows us to use a common 'add' method common to all manager
-         so we could simplify deserialize to just one method!
-         **/
+        //possibly implement an interface for manager classes? allows us to use a common 'add' method common to all manager
+        //so we could simplify deserialize to just one method!
+
 
 
     }
