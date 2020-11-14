@@ -1,6 +1,7 @@
 package Controllers;
 
 import Entities.Room;
+import Presenter.Presenter;
 import UseCases.EventManager;
 import Entities.Event;
 import UseCases.RoomManager;
@@ -20,14 +21,18 @@ public class EventController {
     private EventManager eManager;
     private UserManager userManager;
     private RoomManager roomManager;
+    private UserController userController;
+    private Presenter presenter;
 
     /**
      * initialize a clean EventController with new EventManager, UserManager, and RoomManager
      */
-    public EventController(){
+    public EventController(UserController userController, Presenter presenter){
         eManager = new EventManager();
         userManager = new UserManager();
         roomManager = new RoomManager();
+        this.userController = userController;
+        this.presenter = presenter;
     }
 
     /**
@@ -49,10 +54,16 @@ public class EventController {
      * @return True if event is created, false if  event cannot be create with the invalid input
      */
     public boolean makeEventRequest(LocalDateTime time, int duration, String speaker, String eventName, String roomNumber){
+        String eventName = presenter.printNameOfEvent();
+        if (eventName.equals("0")){
+            userController.mainMenu();
+        }
+        LocalDateTime time = presenter.printTimeOfEvent();
+        int duration = presenter.printDurationOfEvent();
         if (roomManager.isRoomTaken(roomNumber, time)){
             return false;
         }
-        if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber)){
+        if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber) || duration == 0){
             return false;
         }
         if (!userManager.canSignUp(speaker, eManager.getEvent(eventName), eManager.getEventsByUsername(speaker))){

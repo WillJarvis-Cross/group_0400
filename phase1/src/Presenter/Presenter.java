@@ -1,5 +1,8 @@
 package Presenter;
 
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,8 +11,8 @@ import java.util.Scanner;
  */
 public class Presenter {
 
-    private static Scanner sc;
-    Scanner sc = new Scanner(System.in);
+    //private Scanner sc;
+    private Scanner sc = new Scanner(System.in);
 
     /**
      * Prints the first text that the user will see
@@ -20,14 +23,14 @@ public class Presenter {
         System.out.println("Select a an option by entering the corresponding numbers");
         System.out.println("1: Login");
         System.out.println("2: Create an account");
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 
     public String printAttendeeOrOrganizer(){
-        System.out.println("Are you an attendee or a speaker?");
+        System.out.println("Are you an attendee, organizer, or a speaker?");
         System.out.println("1: Attendee");
         System.out.println("2: Organizer");
+        System.out.println("3: Speaker");
         return sc.nextLine();
     }
 
@@ -36,7 +39,7 @@ public class Presenter {
      *
      * @return User input
      */
-    public static String printUsername() {
+    public String printUsername() {
         System.out.println("Please enter your username");
         String input = sc.nextLine();
         return input;
@@ -47,7 +50,7 @@ public class Presenter {
      *
      * @return User input
      */
-    public static String printPassword() {
+    public String printPassword() {
         System.out.println("Please enter your password");
         String input = sc.nextLine();
         return input;
@@ -57,7 +60,7 @@ public class Presenter {
      * Prints an error statement if the username or password the user inputs is not valid
      *
      */
-    public static void printInvalidInput() {
+    public void printInvalidInput() {
         System.out.println("The username or password is incorrect, please try again");
     }
 
@@ -81,7 +84,7 @@ public class Presenter {
      *
      * @return User input
      */
-    public static String printOrganizer() {
+    public String printOrganizer() {
         System.out.println("Select a an option by entering the corresponding numbers");
         System.out.println("1: Send one message");
         System.out.println("2: Create an event");
@@ -165,7 +168,7 @@ public class Presenter {
      *
      * @return User input
      */
-    public static String printWhoToSendTo() {
+    public String printWhoToSendTo() {
         System.out.println("Enter the name of who you want to send your message to or enter 0 " +
                 "to get back to the main menu");
         String input = sc.nextLine();
@@ -204,7 +207,7 @@ public class Presenter {
      *
      * @return User input
      */
-    public static String printMessage() {
+    public String printMessage() {
         System.out.println("Enter the message you want to send");
         String input = sc.nextLine();
         return input;
@@ -216,28 +219,76 @@ public class Presenter {
      * @param messages
      * @return User input
      */
-    public static String printReceivedMessages(StringBuilder messages) {
+    public String printReceivedMessages(StringBuilder messages) {
         System.out.println(messages);
         System.out.println("Enter any key to go back to the main menu");
         return sc.nextLine();
     }
 
-    public static void printNoMessages(){
+    public String printNoMessages(){
         System.out.println("You have no messages");
+        return sc.nextLine();
     }
 
-    public static void printMessageSent(){
+    public void printMessageSent(){
         System.out.println("Message Sent!");
     }
 
-    public static String printNameOfEvent(){
+    public String printNameOfEvent(){
         System.out.println("Enter the name of the new event or enter 0 to go back to the main menu");
         return sc.nextLine();
     }
 
-    public static String printTimeOfEvent(){
-        System.out.println("Enter the time of the new event");
-        return sc.nextLine();
+    public LocalDateTime printTimeOfEvent(){
+        System.out.println("Enter the time of the new event in the form yyyy/mm/dd/hh (in military time) or enter 0 " +
+                "to go back to the main menu");
+        String thisTime = sc.nextLine();
+        if (thisTime.equals("0")){
+            return null;
+        }
+        List<String> time = Arrays.asList(thisTime.split("/"));
+        if (time.size() == 4){
+            int year = Integer.parseInt(time.get(0));
+
+            int monthInt;
+            int dayInt;
+            int hourInt;
+
+            String monthString = time.get(1);
+            if (monthString.startsWith("0")){
+                monthInt = Integer.parseInt(String.valueOf(monthString.charAt(1)));
+            }
+            else{
+                monthInt = Integer.parseInt(monthString);
+            }
+
+            String dayString = time.get(2);
+            if (monthString.startsWith("0")){
+                dayInt = Integer.parseInt(String.valueOf(dayString.charAt(1)));
+            }
+            else{
+                dayInt = Integer.parseInt(dayString);
+            }
+
+            String hourString = time.get(3);
+            if (hourString.startsWith("0")){
+                hourInt = Integer.parseInt(String.valueOf(hourString.charAt(1)));
+            }
+            else{
+                hourInt = Integer.parseInt(hourString);
+            }
+
+            if (monthInt < 13 && dayInt < 32 && hourInt < 18 && hourInt > 8){
+                return LocalDateTime.of(year, monthInt, dayInt, hourInt, 0);
+            }
+        }
+        System.out.println("Invalid input, please try again");
+        return printTimeOfEvent();
+    }
+
+    public int printDurationOfEvent(){
+        System.out.println("Enter the duration of the event in hours");
+        return Integer.parseInt(sc.nextLine());
     }
 
 }

@@ -10,9 +10,12 @@ import java.util.Set;
  */
 public class OrganizerController{
 
-    private EventManager events;
-    private UserManager usermanager;
-    private String name;
+    //private EventManager events;
+    private final UserManager usermanager;
+    private final Presenter presenter;
+    private final EventController eventController;
+    private final MessageController messageController;
+    private final String name;
 
 
     /**
@@ -22,45 +25,53 @@ public class OrganizerController{
      * @param usermanager UserManager of the program
      * @param events EventManager fo the program
      */
-    public OrganizerController(String name, String password, UserManager usermanager, EventManager events){
-        this.events = events;
-        this.usermanager = usermanager;
-        if(usermanager.login(name, password) && usermanager.getOrganizers().contains(usermanager.getUser(name))){
-            this.name = name;
-        }
+    public OrganizerController(String name){
+        presenter = new Presenter();
+        eventController = new EventController();
+        messageController = new MessageController();
+        usermanager = new UserManager();
+        this.name = name;
+        makeNewAccount();
+        //if(usermanager.login(name, password) && usermanager.getOrganizers().contains(usermanager.getUser(name))){
+          //  OrganizerController.name = name;
+        //}
     }
 
     public void makeNewAccount(){
-        String username = Presenter.printUsername();
-        String password = Presenter.printPassword();
-        usermanager.addOrganizer(username, password);
-        mainMenu();
+        String input = presenter.printLogin();
+        if (input.equals("2")){
+            String password = presenter.printPassword();
+            usermanager.addOrganizer(name, password);
+            mainMenu();
+        }
+        else{
+            loginExistingAccount();
+        }
     }
 
     public void loginExistingAccount(){
         while (true){
-            String username = Presenter.printUsername();
-            String password = Presenter.printPassword();
-            if (usermanager.login(username, password)){
-                this.name = username;
+            String password = presenter.printPassword();
+            if (usermanager.login(name, password)){
                 break;
             }
             else{
-                Presenter.printInvalidInput();
+                presenter.printInvalidInput();
             }
         }
         mainMenu();
-
     }
 
-    public static void mainMenu(){
+    public void mainMenu(){
         while (true){
-            String input = Presenter.printOrganizer();
+            String input = presenter.printOrganizer();
             if (input.equals("1")){
-                MessageController.sendMessage(name);
+                messageController.sendMessage(name);
+                break;
             }
             else if (input.equals("2")){
-                EventController.makeEventRequest();
+                eventController.makeEventRequest();
+                break;
             }
             else if (input.equals("3")){
 

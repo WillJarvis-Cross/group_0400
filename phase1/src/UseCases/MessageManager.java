@@ -16,7 +16,7 @@ public class MessageManager{
      * @param receiver
      * @param content
      */
-    public static void sendMessage(User sender, User receiver, String content){
+    public void sendMessage(User sender, User receiver, String content){
         Message message = new Message(content, sender.getUsername(), receiver.getUsername());
         messageList.add(message);
         receiver.addMessage(message.getMessageId());
@@ -27,7 +27,7 @@ public class MessageManager{
      * @param id
      * @return Message
      */
-    public static Message getMessage(int id){
+    public Message getMessage(int id){
         return messageList.get(id);
     }
 
@@ -36,7 +36,7 @@ public class MessageManager{
      * @param messages
      * @return an ArrayList of Messages
      */
-    public static ArrayList<Message> getMyMessages(List<Integer> messages){
+    public ArrayList<Message> getMyMessages(List<Integer> messages){
         ArrayList<Message> newList = new ArrayList<>();
         for (int i: messages){
             if (i < messageList.size()){

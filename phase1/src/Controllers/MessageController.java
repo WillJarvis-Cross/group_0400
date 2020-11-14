@@ -13,6 +13,8 @@ import java.util.List;
 public class MessageController {
     MessageManager messageManager;
     UserManager userManager;
+    UserController userController;
+    Presenter presenter;
 
     /**
      * initialize object for message controller
@@ -20,9 +22,11 @@ public class MessageController {
      *
      * @param userManager
      */
-    public MessageController(UserManager userManager){
+    public MessageController(UserManager userManager, UserController userController, Presenter presenter){
         messageManager = new MessageManager();
         this.userManager = userManager;
+        this.userController = userController;
+        this.presenter = presenter;
     }
 
 
@@ -36,8 +40,8 @@ public class MessageController {
         StringBuilder output = new StringBuilder("My Messages:");
         List<Integer> messagesIds = userManager.getUser(name).getMessageInbox();
         if (messagesIds.size() == 0){
-            Presenter.printReceivedMessages(output);
-            String input = Presenter.printNoMessages();
+            presenter.printReceivedMessages(output);
+            String input = presenter.printNoMessages();
         }
         else{
             ArrayList<Message> messages = messageManager.getMyMessages(messagesIds);
@@ -48,17 +52,18 @@ public class MessageController {
                 output.append(messages.get(i).getContent());
                 output.append("\n");
             }
-            String input = Presenter.printReceivedMessages(output);
+            String input = presenter.printReceivedMessages(output);
         }
-        if (userManager.getUser(name).isOrganizer()){
-            OrganizerController.mainMenu();
+        userController.mainMenu();
+        /*if (userManager.getUser(name).isOrganizer()){
+            organizerController.mainMenu();
         }
         else if (userManager.getUser(name).isSpeaker()){
             SpeakerController.mainMenu();
         }
         else{
             AttendeeManager.mainMenu();
-        }
+        }*/
     }
 
     /**
@@ -73,7 +78,7 @@ public class MessageController {
      * @param content
      * @return
      */
-    public static boolean sendMessage(String sender){
+    public void sendMessage(String sender){
         String receiver;
         while (true){
             receiver = Presenter.printWhoToSendTo();
@@ -81,28 +86,28 @@ public class MessageController {
                 break;
             }
             else if (receiver.equals("0")){
-                whichMainMenu(sender);
+                userController.mainMenu();
             }
             else{
-                Presenter.printInvalidInput();
+                presenter.printInvalidInput();
             }
         }
-        String content = Presenter.printMessage();
-        MessageManager.sendMessage(userManager.getUser(sender), userManager.getUser(receiver), content);
-        Presenter.printMessageSent();
-        whichMainMenu(sender);
+        String content = presenter.printMessage();
+        messageManager.sendMessage(userManager.getUser(sender), userManager.getUser(receiver), content);
+        presenter.printMessageSent();
+        userController.mainMenu();
     }
 
-    public static void whichMainMenu(String name){
-        if (UserManager.getUser(name).isOrganizer()){
-            OrganizerController.mainMenu();
+    /*public void whichMainMenu(String name){
+        if (userManager.getUser(name).isOrganizer()){
+            organizerController.mainMenu();
         }
         else if (UserManager.getUser(name).isSpeaker()){
-            SpeakerController.mainMenu();
+            speakerController.mainMenu();
         }
         else{
-            AttendeeController.mainMenu();
+            attendeeController.mainMenu();
         }
-    }
+    }*/
 
 }
