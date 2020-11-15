@@ -8,13 +8,13 @@ import java.util.List;
  */
 
 public class MessageManager{
-    private static ArrayList<Message> messageList = new ArrayList<Message>();
+    private ArrayList<Message> messageList = new ArrayList<>();
 
     /**
      * Creates a Message with the given sender, receiver and content
-     * @param sender
-     * @param receiver
-     * @param content
+     * @param sender Sender of the message
+     * @param receiver Receiver of the message
+     * @param content Content of the message
      */
     public void sendMessage(User sender, User receiver, String content){
         Message message = new Message(content, sender.getUsername(), receiver.getUsername());
@@ -24,8 +24,8 @@ public class MessageManager{
     }
     /**
      * Returns a message object with the given id
-     * @param id
-     * @return Message
+     * @param id id of the message
+     * @return Message with the ID 'id'
      */
     public Message getMessage(int id){
         return messageList.get(id);
@@ -33,7 +33,7 @@ public class MessageManager{
 
     /**
      * Returns a list containing the Messages with the IDs stored in messages
-     * @param messages
+     * @param messages an ArrayList of message IDs
      * @return an ArrayList of Messages
      */
     public ArrayList<Message> getMyMessages(List<Integer> messages){
