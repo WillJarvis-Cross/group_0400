@@ -7,7 +7,7 @@ import java.util.Set;
 /** Represents the controller for organiser manager object
  * @author group 400
  */
-public class SpeakerController{
+public class SpeakerController implements UserController{
 
     private EventManager events;
     private UserManager usermanager;
@@ -76,4 +76,34 @@ public class SpeakerController{
         }
     }
 
+    /**
+     * Uses the presenter to show the main menu for the speaker and perform certain
+     * actions based on the input
+     */
+    public void mainMenu(){
+        while (true){
+            String input = presenter.printSpeaker();
+            if (input.equals("1")){
+                messageController.sendMessage(name);
+                break;
+            }
+            else if (input.equals("2")){
+                messageController.printMyMessages(name);
+                break;
+            }
+            else if (input.equals("3")){
+                presenter.printSpeakerEvents(getMyEvents(usermanager.get));
+            }
+            else if (input.equals("4")){
+                messageController.messageAllAttendees(name);
+                break;
+            }
+            else if (input.equals("5")){
+                //TODO sign out
+            }
+            else{
+                presenter.printInvalidInput();
+            }
+        }
+    }
 }

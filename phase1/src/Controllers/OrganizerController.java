@@ -74,6 +74,10 @@ public class OrganizerController implements UserController{
         mainMenu();
     }
 
+    /**
+     * Uses the presenter to show the main menu for the organizer and perform certain
+     * actions based on the input
+     */
     public void mainMenu(){
         while (true){
             String input = presenter.printOrganizer();

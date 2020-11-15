@@ -7,7 +7,7 @@ import java.util.Set;
 /** Represents the controller for Attendee object
  * @author group 400
  */
-public class AttendeeController {
+public class AttendeeController implements UserController{
 
     private EventManager events;
     private UserManager usermanager;
@@ -50,7 +50,6 @@ public class AttendeeController {
             );
         }
     }
-
     /**
      * Retuns a list of events the user is attedning
      * @return list of events
@@ -72,11 +71,66 @@ public class AttendeeController {
         return false;
     }
 
+
+    /**
+     * signup for event
+     */
+    public void signUp(){
+        String eventName = presenter.getEventName();
+        if (eventName.equals("0")){
+            mainMenu();
+        }
+        else{
+            if (usermanager.canSignUp(name, eventManager.getEvent(eventName), eventManager.getEventsByUsername(name))){
+                usermanager.signUp(name,eventManager.getEvent(eventName),eventManager.getEventsByUsername(name));
+                mainMenu();
+            }
+            else{
+                presenter.printInvalidOption();
+                signUp();
+            }
+        }
+
+    }
+
     /**
      * Removes the attendee from an event with the passed event name.
      *
      * @param eventName name of the event to remove from
      */
     public void cancelEvent (String eventName) { this.usermanager.cancelMyEvent(eventName); }
+
+    /**
+     * Uses the presenter to show the main menu for the attendee and perform certain
+     * actions based on the input
+     */
+    public void mainMenu(){
+        while (true){
+            String input = presenter.printAttendee();
+            if (input.equals("1")){
+                signUp();
+                break;
+            }
+            else if (input.equals("2")){
+                messageController.sendMessage(name);
+                break;
+            }
+            else if (input.equals("3")){
+                messageController.printMyMessages(name);
+                break;
+            }
+            else if (input.equals("4")){
+                presenter.printAttendeeEvents(getMyEvents());
+                break;
+            }
+            else if (input.equals("5")){
+                //TODO sign out
+            }
+            else{
+                presenter.printInvalidInput();
+            }
+        }
+
+    }
 }
 
