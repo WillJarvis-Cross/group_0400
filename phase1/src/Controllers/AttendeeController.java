@@ -4,6 +4,7 @@ import UseCases.*;
 import java.time.LocalDateTime;
 import Entities.Event;
 import java.util.Set;
+import java.util.ArrayList;
 /** Represents the controller for Attendee object
  * @author group 400
  */
@@ -11,6 +12,7 @@ public class AttendeeController implements UserController{
 
     private EventManager events;
     private UserManager usermanager;
+    private MessageManager mManager;
     private String name;
 
     /**
@@ -20,9 +22,10 @@ public class AttendeeController implements UserController{
      * @param usermanager UserManager of the program
      * @param events EventManager of the program
      */
-    public AttendeeController(String name, String password, UserManager usermanager, EventManager events) {
+    public AttendeeController(String name, String password, UserManager usermanager, EventManager events,MessageManager messageManager) {
         this.events = events;
         this.usermanager = usermanager;
+        this.mManager = messageManager;
         if (usermanager.login(name, password)) {
             this.name = name;
         }
@@ -43,7 +46,7 @@ public class AttendeeController implements UserController{
             System.out.println("Please log in.");
         }
         else {
-            MessageManager.sendMessage(
+            this.mManager.sendMessage(
                     usermanager.getAttendee(this.name),
                     isAttendee ? usermanager.getAttendee(recieverName) : usermanager.getSpeaker(recieverName),
                     content

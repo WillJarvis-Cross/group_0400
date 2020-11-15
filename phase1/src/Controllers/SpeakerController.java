@@ -1,9 +1,12 @@
 package Controllers;
 import UseCases.*;
+import Presenter.*;
 
 import java.time.LocalDateTime;
 import Entities.Event;
 import java.util.Set;
+import java.util.ArrayList;
+
 /** Represents the controller for organiser manager object
  * @author group 400
  */
@@ -11,6 +14,7 @@ public class SpeakerController implements UserController{
 
     private EventManager events;
     private UserManager usermanager;
+    private MessageManager mManager;
     private String name;
 
 
@@ -21,10 +25,11 @@ public class SpeakerController implements UserController{
      * @param usermanager UserManager of the program
      * @param events EventManager fo the program
      */
-    public SpeakerController(String name, String password, UserManager usermanager, EventManager events){
+    public SpeakerController(String name, String password, UserManager usermanager, EventManager events, MessageManager messageManager){
         this.events = events;
         this.usermanager = usermanager;
-        if(usermanager.login(name, password) && usermanager.getSpeaker(name)){
+        this.mManager = messageManager;
+        if(usermanager.login(name, password)){
             this.name = name;
         }
     }
@@ -51,7 +56,7 @@ public class SpeakerController implements UserController{
             System.out.println("Please log in.");
         }
         else {
-            MessageManager.sendMessage(usermanager.getOrganizer(name), usermanager.getAttendee(attendeeName), content);
+            this.mManager.sendMessage(usermanager.getOrganizer(name), usermanager.getAttendee(attendeeName), content);
         }
     }
 
@@ -70,7 +75,7 @@ public class SpeakerController implements UserController{
         else {
             Set<String> keys = usermanager.getAttendees().keySet();
             for (String key : keys) {
-                MessageManager.sendMessage(usermanager.getOrganizer(name),
+                this.mManager.sendMessage(usermanager.getOrganizer(name),
                         usermanager.getAttendee(key), content);
             }
         }
@@ -84,18 +89,18 @@ public class SpeakerController implements UserController{
         while (true){
             String input = presenter.printSpeaker();
             if (input.equals("1")){
-                messageController.sendMessage(name);
+                this.mManager.sendMessage(name);
                 break;
             }
             else if (input.equals("2")){
-                messageController.printMyMessages(name);
+                this.mManager.printMyMessages(name);
                 break;
             }
             else if (input.equals("3")){
                 presenter.printSpeakerEvents(getMyEvents(usermanager.get));
             }
             else if (input.equals("4")){
-                messageController.messageAllAttendees(name);
+                this.mManager.messageAllAttendees(name);
                 break;
             }
             else if (input.equals("5")){
