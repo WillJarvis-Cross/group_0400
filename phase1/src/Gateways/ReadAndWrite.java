@@ -29,7 +29,7 @@ public class ReadAndWrite {
             }
 
         }
-        private Hashtable<String, User> helperDeseriialize(String filename){
+        private Hashtable<String, User> helperDeserialize(String filename){
 
             Hashtable<String, User> object = null;
 
@@ -74,7 +74,7 @@ public class ReadAndWrite {
         }
 
         public void load(UserManager users){
-            Hashtable<String,User> loadedTable = this.helperDeseriialize("saveFile");
+            Hashtable<String,User> loadedTable = this.helperDeserialize("saveFile");
             if (loadedTable != null) {
 
                 Set<String> keys = loadedTable.keySet();
