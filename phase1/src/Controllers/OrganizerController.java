@@ -4,7 +4,6 @@ import UseCases.*;
 
 import java.time.LocalDateTime;
 import Entities.Event;
-import java.util.Set;
 /** Represents the controller for organiser manager object
  * @author group 400
  */
@@ -22,9 +21,7 @@ public class OrganizerController implements UserController{
     /**
      * Creates and initialize an organizer controller object
      * @param name name of Organizer
-     * @param password password of Organizer
-     * @param usermanager UserManager of the program
-     * @param events EventManager fo the program
+
      */
     public OrganizerController(String name){
         presenter = new Presenter();
@@ -151,8 +148,7 @@ public class OrganizerController implements UserController{
     /**
      * create user as a speaker by giving username and password
      *
-     * @param passwordInput password of the new speaker
-     * @param nameInput username of the new speaker
+
      */
     /*public void addSpeaker(String passwordInput, String nameInput){
         if(name == null){
@@ -191,13 +187,13 @@ public class OrganizerController implements UserController{
         }
         else{
             Event e = null;
-            for(Event event: events.getEvents()) {
+            for(Event event: eventManager.getEvents()) {
                 if (event.getTime().equals(time) && event.getRoomNum().equals(roomNumber)) {
                     e = event;
                 }
             }
             if(e != null){
-                events.setSpeaker(e.getEventName(), speaker);
+                eventManager.setSpeaker(e.getEventName(), speaker);
             }
             else{ System.out.println("No event exists at that time and place. Use addEvent"); }
         }
@@ -279,9 +275,8 @@ public class OrganizerController implements UserController{
     }*/
 
     /**
-     * signup for event
+     * signup for event selected in presenter
      *
-     * @param eventName name of event
      */
     public void signUp(){
         String eventName = presenter.getEventName();
