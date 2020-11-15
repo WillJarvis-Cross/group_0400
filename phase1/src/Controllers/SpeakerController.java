@@ -10,12 +10,12 @@ import java.util.ArrayList;
 /** Represents the controller for organiser manager object
  * @author group 400
  */
-public class SpeakerController implements UserController{
+public class SpeakerController extends UserController{
 
-    private EventManager events;
+    /*private EventManager events;
     private UserManager usermanager;
     private MessageManager mManager;
-    private String name;
+    private String name;*/
 
 
     /**
@@ -25,13 +25,14 @@ public class SpeakerController implements UserController{
      * @param usermanager UserManager of the program
      * @param events EventManager fo the program
      */
-    public SpeakerController(String name, String password, UserManager usermanager, EventManager events, MessageManager messageManager){
-        this.events = events;
-        this.usermanager = usermanager;
+    public SpeakerController(String name){
+        super(name);
+        /*this.events = new EventManager();
+        this.usermanager = new UserManager();
         this.mManager = messageManager;
         if(usermanager.login(name, password)){
             this.name = name;
-        }
+        }*/
     }
 
     /**

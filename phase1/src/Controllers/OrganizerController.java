@@ -1,21 +1,19 @@
 package Controllers;
-import Presenter.Presenter;
-import UseCases.*;
 
 import java.time.LocalDateTime;
 import Entities.Event;
 /** Represents the controller for organiser manager object
  * @author group 400
  */
-public class OrganizerController implements UserController{
+public class OrganizerController extends UserController{
 
-    private final UserManager usermanager;
+    /*private final UserManager usermanager;
     private final Presenter presenter;
     private final EventController eventController;
     private final MessageController messageController;
     private final EventManager eventManager;
     private final String name;
-
+*/
 
     /**
      * Creates and initialize an organizer controller object
@@ -23,28 +21,29 @@ public class OrganizerController implements UserController{
 
      */
     public OrganizerController(String name){
-        presenter = new Presenter();
+        super(name);
+        /*presenter = new Presenter();
         usermanager = new UserManager();
         eventController = new EventController(this, presenter);
         eventManager = eventController.geteManager();
         messageController = new MessageController(usermanager, this, presenter);
         this.name = name;
-        makeNewAccount();
+        makeNewAccount();*/
         //if(usermanager.login(name, password) && usermanager.getOrganizers().contains(usermanager.getUser(name))){
           //  OrganizerController.name = name;
         //}
     }
 
     public void makeNewAccount(){
-        String input = presenter.printLogin();
+        String input = getPresenter().printLogin();
         if (input.equals("2")){
-            if (usermanager.canAddPerson(name)){
-                String password = presenter.printPassword();
-                usermanager.addOrganizer(name, password);
+            if (getUsermanager().canAddPerson(getMyName())){
+                String password = getPresenter().printPassword();
+                getUsermanager().addOrganizer(getMyName(), password);
                 mainMenu();
             }
             else{
-                presenter.printInvalidUsername();
+                getPresenter().printInvalidUsername();
                 makeNewAccount();
             }
         }
@@ -52,12 +51,12 @@ public class OrganizerController implements UserController{
             loginExistingAccount();
         }
         else{
-            presenter.printInvalidOption();
+            getPresenter().printInvalidOption();
             makeNewAccount();
         }
     }
 
-    public void loginExistingAccount(){
+    /*public void loginExistingAccount(){
         while (true){
             String password = presenter.printPassword();
             if (usermanager.login(name, password)){
@@ -68,7 +67,7 @@ public class OrganizerController implements UserController{
             }
         }
         mainMenu();
-    }
+    }*/
 
     /**
      * Uses the presenter to show the main menu for the organizer and perform certain
@@ -76,25 +75,25 @@ public class OrganizerController implements UserController{
      */
     public void mainMenu(){
         while (true){
-            String input = presenter.printOrganizer();
+            String input = getPresenter().printOrganizer();
             if (input.equals("1")){
-                messageController.sendMessage(name);
+                getMessageController().sendMessage(getMyName());
                 break;
             }
             else if (input.equals("2")){
-                eventController.makeEventRequest();
+                getEventController().makeEventRequest();
                 break;
             }
             else if (input.equals("3")){
-                messageController.printMyMessages(name);
+                getMessageController().printMyMessages(getMyName());
                 break;
             }
             else if (input.equals("4")){
-                messageController.messageAllSpeakers(name);
+                getMessageController().messageAllSpeakers(getMyName());
                 break;
             }
             else if (input.equals("5")){
-                messageController.messageAllAttendees(name);
+                getMessageController().messageAllAttendees(getMyName());
                 break;
             }
             else if (input.equals("6")){
@@ -112,7 +111,7 @@ public class OrganizerController implements UserController{
                 //TODO sign out
             }
             else{
-                presenter.printInvalidInput();
+                getPresenter().printInvalidInput();
             }
         }
 
@@ -159,13 +158,13 @@ public class OrganizerController implements UserController{
     }*/
 
     public void createSpeaker(){
-        String speaker = presenter.printNameSpeaker();
-        String pass = presenter.getPassSpeaker();
-        if (usermanager.canAddPerson(speaker)){
-            usermanager.addSpeaker(speaker, pass);
+        String speaker = getPresenter().printNameSpeaker();
+        String pass = getPresenter().getPassSpeaker();
+        if (getUsermanager().canAddPerson(speaker)){
+            getUsermanager().addSpeaker(speaker, pass);
         }
         else{
-            presenter.printInvalidUsername();
+            getPresenter().printInvalidUsername();
             createSpeaker();
         }
     }
@@ -181,18 +180,18 @@ public class OrganizerController implements UserController{
      * @param roomNumber room speaker is scheduled to
      */
     public void scheduleSpeaker(LocalDateTime time, String speaker, String roomNumber){
-        if(name == null){
+        if(getMyName() == null){
             System.out.println("Please log in.");
         }
         else{
             Event e = null;
-            for(Event event: eventManager.getEvents()) {
+            for(Event event: getEventManager().getEvents()) {
                 if (event.getTime().equals(time) && event.getRoomNum().equals(roomNumber)) {
                     e = event;
                 }
             }
             if(e != null){
-                eventManager.setSpeaker(e.getEventName(), speaker);
+                getEventManager().setSpeaker(e.getEventName(), speaker);
             }
             else{ System.out.println("No event exists at that time and place. Use addEvent"); }
         }
@@ -277,21 +276,21 @@ public class OrganizerController implements UserController{
      * signup for event selected in presenter
      *
      */
-    public void signUp(){
-        String eventName = presenter.getEventName();
+    /*public void signUp(){
+        String eventName = getPresenter().getEventName();
         if (eventName.equals("0")){
             mainMenu();
         }
         else{
-            if (eventController.addAttendee(eventName, name)){
-                presenter.printSignedUp(eventName);
+            if (getEventController().addAttendee(eventName, getMyName())){
+                getPresenter().printSignedUp(eventName);
                 mainMenu();
             }
             else{
-                presenter.printNotSignedUp(eventName);
+                getPresenter().printNotSignedUp(eventName);
                 signUp();
             }
         }
-    }
+    }*/
 
 }

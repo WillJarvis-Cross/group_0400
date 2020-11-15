@@ -1,19 +1,18 @@
 package Controllers;
-import UseCases.*;
 
-import java.time.LocalDateTime;
 import Entities.Event;
-import java.util.Set;
 import java.util.ArrayList;
 /** Represents the controller for Attendee object
  * @author group 400
  */
-public class AttendeeController implements UserController{
+public class AttendeeController extends UserController{
 
-    private EventManager events;
-    private UserManager usermanager;
-    private MessageManager mManager;
-    private String name;
+    /*private final UserManager usermanager;
+    private final getPresenter() getPresenter();
+    private final EventController eventController;
+    private final getMessageController() getMessageController();
+    private final EventManager eventManager;
+    private final String name;*/
 
     /**
      * Creates and initialize an Attendee controller object
@@ -22,12 +21,39 @@ public class AttendeeController implements UserController{
      * @param usermanager UserManager of the program
      * @param events EventManager of the program
      */
-    public AttendeeController(String name, String password, UserManager usermanager, EventManager events,MessageManager messageManager) {
-        this.events = events;
-        this.usermanager = usermanager;
-        this.mManager = messageManager;
-        if (usermanager.login(name, password)) {
-            this.name = name;
+    public AttendeeController(String name){
+        super(name);
+        /*getPresenter() = new getPresenter()();
+        usermanager = new UserManager();
+        eventController = new EventController(this, getPresenter());
+        eventManager = eventController.geteManager();
+        getMessageController() = new getMessageController()(usermanager, this, getPresenter());
+        this.name = name;*/
+        //makeNewAccount();
+        //if(usermanager.login(name, password) && usermanager.getOrganizers().contains(usermanager.getUser(name))){
+        //  OrganizerController.name = name;
+        //}
+    }
+
+    public void makeNewAccount(){
+        String input = getPresenter().printLogin();
+        if (input.equals("2")){
+            if (getUsermanager().canAddPerson(getMyName())){
+                String password = getPresenter().printPassword();
+                getUsermanager().addAttendee(getMyName(), password);
+                mainMenu();
+            }
+            else{
+                getPresenter().printInvalidUsername();
+                makeNewAccount();
+            }
+        }
+        else if (input.equals("1")){
+            loginExistingAccount();
+        }
+        else{
+            getPresenter().printInvalidOption();
+            makeNewAccount();
         }
     }
 
@@ -78,8 +104,8 @@ public class AttendeeController implements UserController{
     /**
      * signup for event
      */
-    public void signUp(){
-        String eventName = presenter.getEventName();
+    /*public void signUp(){
+        String eventName = getPresenter().getEventName();
         if (eventName.equals("0")){
             mainMenu();
         }
@@ -89,12 +115,12 @@ public class AttendeeController implements UserController{
                 mainMenu();
             }
             else{
-                presenter.printInvalidOption();
+                getPresenter().printInvalidOption();
                 signUp();
             }
         }
 
-    }
+    }*/
 
     /**
      * Removes the attendee from an event with the passed event name.
@@ -104,33 +130,33 @@ public class AttendeeController implements UserController{
     public void cancelEvent (String eventName) { this.usermanager.cancelMyEvent(eventName); }
 
     /**
-     * Uses the presenter to show the main menu for the attendee and perform certain
+     * Uses the getPresenter() to show the main menu for the attendee and perform certain
      * actions based on the input
      */
     public void mainMenu(){
         while (true){
-            String input = presenter.printAttendee();
+            String input = getPresenter().printAttendee();
             if (input.equals("1")){
                 signUp();
                 break;
             }
             else if (input.equals("2")){
-                messageController.sendMessage(name);
+                getMessageController().sendMessage(getMyName());
                 break;
             }
             else if (input.equals("3")){
-                messageController.printMyMessages(name);
+                getMessageController().printMyMessages(getMyName());
                 break;
             }
             else if (input.equals("4")){
-                presenter.printAttendeeEvents(getMyEvents());
+                getPresenter().printAttendeeEvents(getMyEvents());
                 break;
             }
             else if (input.equals("5")){
                 //TODO sign out
             }
             else{
-                presenter.printInvalidInput();
+                getPresenter().printInvalidInput();
             }
         }
 
