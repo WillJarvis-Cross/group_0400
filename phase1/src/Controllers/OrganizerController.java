@@ -9,7 +9,6 @@ import Entities.Event;
  */
 public class OrganizerController implements UserController{
 
-    //private EventManager events;
     private final UserManager usermanager;
     private final Presenter presenter;
     private final EventController eventController;
@@ -45,7 +44,7 @@ public class OrganizerController implements UserController{
                 mainMenu();
             }
             else{
-                presenter.printIvalidUsername();
+                presenter.printInvalidUsername();
                 makeNewAccount();
             }
         }
@@ -166,7 +165,7 @@ public class OrganizerController implements UserController{
             usermanager.addSpeaker(speaker, pass);
         }
         else{
-            presenter.printIvalidUsername();
+            presenter.printInvalidUsername();
             createSpeaker();
         }
     }
@@ -284,16 +283,15 @@ public class OrganizerController implements UserController{
             mainMenu();
         }
         else{
-            if (usermanager.canSignUp(name, eventManager.getEvent(eventName), eventManager.getEventsByUsername(name))){
-                usermanager.signUp(name,eventManager.getEvent(eventName),eventManager.getEventsByUsername(name));
+            if (eventController.addAttendee(eventName, name)){
+                presenter.printSignedUp(eventName);
                 mainMenu();
             }
             else{
-                presenter.printInvalidOption();
+                presenter.printNotSignedUp(eventName);
                 signUp();
             }
         }
-
     }
 
 }

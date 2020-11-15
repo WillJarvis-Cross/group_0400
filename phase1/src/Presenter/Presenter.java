@@ -324,7 +324,15 @@ public class Presenter {
         return sc.nextLine();
     }
 
-    public void printIvalidUsername(){
-        System.out.println("That usename is taken, please try again");
+    public void printInvalidUsername(){
+        System.out.println("That username is taken, please try again");
+    }
+
+    public void printSignedUp(String eventName){
+        System.out.println("You have been signed up for "+ eventName);
+    }
+
+    public void printNotSignedUp(String eventName){
+        System.out.println("You could not be signed up for "+ eventName+", please try again");
     }
 }
