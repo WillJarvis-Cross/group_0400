@@ -15,6 +15,7 @@ public class OrganizerController implements UserController{
     private final Presenter presenter;
     private final EventController eventController;
     private final MessageController messageController;
+    private final EventManager eventManager;
     private final String name;
 
 
@@ -27,9 +28,10 @@ public class OrganizerController implements UserController{
      */
     public OrganizerController(String name){
         presenter = new Presenter();
-        eventController = new EventController();
-        messageController = new MessageController();
         usermanager = new UserManager();
+        eventController = new EventController(this, presenter);
+        eventManager = eventController.geteManager();
+        messageController = new MessageController(usermanager, this, presenter);
         this.name = name;
         makeNewAccount();
         //if(usermanager.login(name, password) && usermanager.getOrganizers().contains(usermanager.getUser(name))){
@@ -40,12 +42,22 @@ public class OrganizerController implements UserController{
     public void makeNewAccount(){
         String input = presenter.printLogin();
         if (input.equals("2")){
-            String password = presenter.printPassword();
-            usermanager.addOrganizer(name, password);
-            mainMenu();
+            if (usermanager.canAddPerson(name)){
+                String password = presenter.printPassword();
+                usermanager.addOrganizer(name, password);
+                mainMenu();
+            }
+            else{
+                presenter.printIvalidUsername();
+                makeNewAccount();
+            }
+        }
+        else if (input.equals("1")){
+            loginExistingAccount();
         }
         else{
-            loginExistingAccount();
+            presenter.printInvalidOption();
+            makeNewAccount();
         }
     }
 
@@ -86,18 +98,18 @@ public class OrganizerController implements UserController{
                 break;
             }
             else if (input.equals("6")){
-
+                // TODO create new room using RoomController
             }
             else if (input.equals("7")){
-                String speaker = presenter.printNameSpeaker();
-                String pass = presenter.getPassSpeaker();
-                usermanager.addSpeaker(speaker, pass);
+                createSpeaker();
+                break;
             }
             else if (input.equals("8")){
-
+                signUp();
+                break;
             }
             else if (input.equals("9")){
-
+                //TODO sign out
             }
             else{
                 presenter.printInvalidInput();
@@ -146,6 +158,18 @@ public class OrganizerController implements UserController{
             usermanager.addSpeaker(nameInput, passwordInput);
         }
     }*/
+
+    public void createSpeaker(){
+        String speaker = presenter.printNameSpeaker();
+        String pass = presenter.getPassSpeaker();
+        if (usermanager.canAddPerson(speaker)){
+            usermanager.addSpeaker(speaker, pass);
+        }
+        else{
+            presenter.printIvalidUsername();
+            createSpeaker();
+        }
+    }
 
     /**
      * assign speaker to events
@@ -255,9 +279,21 @@ public class OrganizerController implements UserController{
      *
      * @param eventName name of event
      */
-    public void signUp(String eventName){
-
-        usermanager.signUp(name,events.getEvent(eventName),events.getEventsByUsername(name));
+    public void signUp(){
+        String eventName = presenter.getEventName();
+        if (eventName.equals("0")){
+            mainMenu();
+        }
+        else{
+            if (usermanager.canSignUp(name, eventManager.getEvent(eventName), eventManager.getEventsByUsername(name))){
+                usermanager.signUp(name,eventManager.getEvent(eventName),eventManager.getEventsByUsername(name));
+                mainMenu();
+            }
+            else{
+                presenter.printInvalidOption();
+                signUp();
+            }
+        }
 
     }
 

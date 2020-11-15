@@ -43,6 +43,14 @@ public class EventController {
         eManager = manager;
     }
 
+    public EventManager geteManager() {
+        return eManager;
+    }
+
+    getEventManager(){
+        return
+    }
+
     /**
      * create a event when a create event request is made
      * calls eventManager, userManager, and roomManager to check if event can be created with the information

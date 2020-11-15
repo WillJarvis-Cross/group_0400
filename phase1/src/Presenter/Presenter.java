@@ -318,4 +318,12 @@ public class Presenter {
         return sc.nextLine();
     }
 
+    public String getEventName(){
+        System.out.println("Enter the event you want to sign up for or enter 0 to go back to the main menu");
+        return sc.nextLine();
+    }
+
+    public void printIvalidUsername(){
+        System.out.println("That usename is taken, please try again");
+    }
 }
