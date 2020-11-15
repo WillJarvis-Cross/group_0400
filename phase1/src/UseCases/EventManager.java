@@ -99,6 +99,21 @@ public class EventManager {
         }
         return eventList;
     }
+    /**
+     * Returns a list of all scheduled events the speaker with the given speakerName
+     * is registered in
+     * @param speakerName The name of the speaker.
+     * @return An ArrayList of events that the speakerName is speaking at.
+     */
+    public ArrayList<Event> getEventsBySpeaker(String speakerName){
+        ArrayList<Event> eventList = new ArrayList<Events> ();
+        for (Event event: getEvents()){
+            if (event.speaker == speakerName){
+                eventList.add(event);
+            }
+        }
+        return eventList;
+    }
 
     /**
      * Adds the person with the given username to the given event
