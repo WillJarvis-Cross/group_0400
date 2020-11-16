@@ -15,9 +15,6 @@ public class AttendeeController extends UserController{
     /**
      * Creates and initialize an Attendee controller object
      * @param name name of Attendee
-     * @param password password of Attendee
-     * @param usermanager UserManager of the program
-     * @param events EventManager of the program
      */
     public AttendeeController(String name){
         super(name);
@@ -65,7 +62,7 @@ public class AttendeeController extends UserController{
      * @param recieverName name of receiver
      * @param content content of message
      */
-    public void messageUser(String recieverName, String content, Boolean isAttendee){
+    /*public void messageUser(String recieverName, String content, Boolean isAttendee){
         if (this.name == null) {
             System.out.println("Please log in.");
         }
@@ -76,7 +73,7 @@ public class AttendeeController extends UserController{
                     content
             );
         }
-    }
+    }*/
     /**
      * Retuns a list of events the user is attedning
      * @return list of events
@@ -96,13 +93,13 @@ public class AttendeeController extends UserController{
      * @param eventName name of the event to signUp to
      * @return true if successfuly signed up to the event; otherwise false
      */
-    public boolean attendEvent (String eventName) {
+    /*public boolean attendEvent (String eventName) {
         if (this.events.canAddPerson(eventName)) {
             this.events.addPersonToEvent(eventName, this.name);
             return true;
         }
         return false;
-    }
+    }/*
 
 
     /**
@@ -131,7 +128,7 @@ public class AttendeeController extends UserController{
      *
      * @param eventName name of the event to remove from
      */
-    public void cancelEvent (String eventName) { this.usermanager.cancelMyEvent(eventName); }
+    //public void cancelEvent (String eventName) { this.usermanager.cancelMyEvent(eventName); }
 
     /**
      * Uses the getPresenter() to show the main menu for the attendee and perform certain

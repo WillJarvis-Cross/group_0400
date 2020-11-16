@@ -91,7 +91,7 @@ public abstract class UserController {
      public void removeMyEvent(){
           getPresenter().printAttendeeEvents(getMyEvents());
           String event = getPresenter().printDeleteEvent();
-          if (usermanager.cancelMyEvent(this.name, event) && eventManager.removeAttendee(this.name, event){
+          if (usermanager.cancelMyEvent(this.name, event) && eventManager.removeAttendee(this.name, event)){
                presenter.printRemovedEvent();
           }
           else{

@@ -68,14 +68,12 @@ public class MessageController {
      * </p>
      *
      * @param sender
-     * @param receiver
-     * @param content
      * @return
      */
     public void sendMessage(String sender){
         String receiver;
         while (true){
-            receiver = Presenter.printWhoToSendTo();
+            receiver = presenter.printWhoToSendTo();
             if (userManager.getUsers().containsKey(receiver)){
                 break;
             }
