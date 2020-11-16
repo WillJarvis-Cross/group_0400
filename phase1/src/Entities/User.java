@@ -1,4 +1,5 @@
 package Entities;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
@@ -7,7 +8,7 @@ import java.time.LocalDateTime;
 /** This is an entity for a User who is an organizer
  * @author group 0400
  */
-public abstract class User{
+public abstract class User implements Serializable {
 
     private List<Integer> messageInbox;  // List of messages sent to this user
     private List<String> events;  // List of events the attendee is signed up for
