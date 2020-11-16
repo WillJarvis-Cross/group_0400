@@ -41,6 +41,7 @@ public class OrganizerController extends UserController{
                 String password = getPresenter().printPassword();
                 getUsermanager().addOrganizer(getMyName(), password);
                 mainMenu();
+                System.out.println("jik");
             }
             else{
                 getPresenter().printInvalidUsername();
@@ -97,6 +98,7 @@ public class OrganizerController extends UserController{
                 break;
             }
             else if (input.equals("6")){
+                System.out.println("Still have to do this");
                 // TODO create new room using RoomController
             }
             else if (input.equals("7")){
@@ -108,11 +110,16 @@ public class OrganizerController extends UserController{
                 break;
             }
             else if (input.equals("9")){
-                getPresenter().printAttendeeEvents(getMyEvents());
+                removeMyEvent();
                 break;
             }
             else if (input.equals("10")){
-                //TODO sign out
+                getPresenter().printAttendeeEvents(getMyEvents());
+                break;
+            }
+            else if (input.equals("11")){
+                System.out.println("Still have to do this");
+                //TODO save
             }
             else{
                 getPresenter().printInvalidInput();

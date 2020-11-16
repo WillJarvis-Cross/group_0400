@@ -1,5 +1,8 @@
 package Presenter;
 
+import Controllers.OrganizerController;
+import Controllers.UserController;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -95,8 +98,9 @@ public class Presenter {
         System.out.println("6: Create a new room");
         System.out.println("7: Create a new speaker");
         System.out.println("8: Sign up for event");
-        System.out.println("9: See list of events signed up for");
-        System.out.println("10: Logout");
+        System.out.println("9: Cancel spot in event");
+        System.out.println("10: See list of events signed up for");
+        System.out.println("11: Logout");
         return sc.nextLine();
     }
 
@@ -285,6 +289,7 @@ public class Presenter {
             if (monthInt < 13 && dayInt < 32 && hourInt < 18 && hourInt > 8){
                 return LocalDateTime.of(year, monthInt, dayInt, hourInt, 0);
             }
+            return null;
         }
         System.out.println("Invalid input, please try again");
         return printTimeOfEvent();
@@ -357,5 +362,8 @@ public class Presenter {
 
     public void printSpecificEventInfo(String info){
         System.out.println(info);
+    }
+    public static void main(String[] args){
+        UserController me = new OrganizerController("will");
     }
 }

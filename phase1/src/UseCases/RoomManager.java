@@ -46,6 +46,9 @@ public class RoomManager {
      * @return true if the room is taken at the given time, false otherwise
      */
     public boolean isRoomTaken(String roomNumber, LocalDateTime time) {
+        if (allRooms.get(roomNumber) == null){
+            return true;
+        }
         return allRooms.get(roomNumber).isTimeTaken(time);
     }
 

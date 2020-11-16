@@ -127,6 +127,7 @@ public class SpeakerController extends UserController{
                 break;
             }
             else if (input.equals("5")){
+                System.out.println("Still have to do this");
                 //TODO sign out
             }
             else{

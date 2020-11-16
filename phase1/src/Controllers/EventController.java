@@ -50,11 +50,6 @@ public class EventController {
     /**
      * create a event when a create event request is made
      * calls eventManager, userManager, and roomManager to check if event can be created with the information
-     * @param time The time of the event
-     * @param duration The duration of the event in hours
-     * @param speaker The speaker of the event
-     * @param eventName The name of the event
-     * @param roomNumber The room the event is in
      * @return True if event is created, false if  event cannot be create with the invalid input
      */
     public void makeEventRequest(){
@@ -76,7 +71,7 @@ public class EventController {
         if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber) || duration == 0){
             counter ++;
         }
-        if (!userManager.canSignUp(speaker, eManager.getEvent(eventName), eManager.getEventsByUsername(speaker))){
+        if (!userManager.getSpeakers().containsKey(speaker) || !userManager.canAddSpeaker(time, eManager.getEventsBySpeaker(speaker))){
             counter ++;
         }
         if (counter == 0){

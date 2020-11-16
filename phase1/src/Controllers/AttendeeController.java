@@ -159,6 +159,7 @@ public class AttendeeController extends UserController{
                 break;
             }
             else if (input.equals("6")){
+                System.out.println("Still have to do this");
                 //TODO sign out
             }
             else{

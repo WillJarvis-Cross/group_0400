@@ -138,6 +138,14 @@ public class UserManager {
      */
     public Hashtable<String, User> getUsers(){ return allUsers;}
 
+    public boolean canAddSpeaker(LocalDateTime time, List<Event> events){
+        for (Event event: events){
+            if (event.getTime().equals(time)){
+                return false;
+            }
+        }
+        return true;
+    }
 
     // Helper method for signUp()
     // This is used to find what position the event should be added at in the list of the users events
@@ -186,6 +194,7 @@ public class UserManager {
      * @return True if the user is available to sign up for the event. Return false otherwise.
      */
     public boolean canSignUp(String name, Event event, List<Event> myEvents){
+
         String eventName = event.getEventName();
 
         LocalDateTime eventTime = event.getTime();
