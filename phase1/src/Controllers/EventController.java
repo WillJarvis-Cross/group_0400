@@ -116,6 +116,8 @@ public class EventController {
         return true;
     }
 
+
+
     /**
      * remove Event from event list
      * @param name The name of the event
@@ -145,6 +147,20 @@ public class EventController {
             outString += eventList.get(i).toString()+",";
         }
         return outString;
+    }
+
+    public void specificInfo(){
+        String newInput = presenter.printSpecificEvent();
+
+        String info = eManager.getEventToString(newInput);
+        if (info.equals("")){
+            presenter.printInvalidOption();
+
+        }
+        else{
+            presenter.printSpecificEventInfo(info);
+        }
+        userController.mainMenu();
     }
 
 }

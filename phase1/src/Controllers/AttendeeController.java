@@ -1,7 +1,5 @@
 package Controllers;
 
-import Entities.Event;
-import java.util.ArrayList;
 /** Represents the controller for Attendee object
  * @author group 400
  */
@@ -83,7 +81,13 @@ public class AttendeeController extends UserController{
      * Retuns a list of events the user is attedning
      * @return list of events
      */
-    public ArrayList<Event> getMyEvents () { return this.events.getEventsByUsername(this.name); }
+    /*public ArrayList<String> getMyEvents () {
+        ArrayList<String> newList = new ArrayList<>();
+        for (Event event : getEventManager().getEventsByUsername(getMyName())){
+            newList.add(event.getEventName());
+        }
+        return newList;
+    }*/
 
     /**
      * Adds attendee to the event with the passed event name. Returns true
@@ -141,18 +145,23 @@ public class AttendeeController extends UserController{
                 break;
             }
             else if (input.equals("2")){
-                getMessageController().sendMessage(getMyName());
+                removeMyEvent();
                 break;
             }
             else if (input.equals("3")){
-                getMessageController().printMyMessages(getMyName());
+                getMessageController().sendMessage(getMyName());
                 break;
             }
             else if (input.equals("4")){
-                getPresenter().printAttendeeEvents(getMyEvents());
+                getMessageController().printMyMessages(getMyName());
                 break;
             }
             else if (input.equals("5")){
+                getPresenter().printAttendeeEvents(getMyEvents());
+                getEventController().specificInfo();
+                break;
+            }
+            else if (input.equals("6")){
                 //TODO sign out
             }
             else{

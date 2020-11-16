@@ -108,6 +108,10 @@ public class OrganizerController extends UserController{
                 break;
             }
             else if (input.equals("9")){
+                getPresenter().printAttendeeEvents(getMyEvents());
+                break;
+            }
+            else if (input.equals("10")){
                 //TODO sign out
             }
             else{

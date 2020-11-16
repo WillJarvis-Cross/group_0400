@@ -1,7 +1,6 @@
 package Presenter;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -72,10 +71,11 @@ public class Presenter {
     public String printAttendee() {
         System.out.println("Select a an option by entering the corresponding numbers");
         System.out.println("1: Sign up for an event");
-        System.out.println("2: Send a message");
-        System.out.println("3: See list of received messages");
-        System.out.println("4: See list of events signed up for");
-        System.out.println("5: Logout");
+        System.out.println("2: Cancel spot in event");
+        System.out.println("3: Send a message");
+        System.out.println("4: See list of received messages");
+        System.out.println("5: See list of events signed up for");
+        System.out.println("6: Logout");
         String input = sc.nextLine();
         return input;
     }
@@ -95,9 +95,9 @@ public class Presenter {
         System.out.println("6: Create a new room");
         System.out.println("7: Create a new speaker");
         System.out.println("8: Sign up for event");
-        System.out.println("9: Logout");
-        String input = sc.nextLine();
-        return input;
+        System.out.println("9: See list of events signed up for");
+        System.out.println("10: Logout");
+        return sc.nextLine();
     }
 
     /**
@@ -334,5 +334,28 @@ public class Presenter {
 
     public void printNotSignedUp(String eventName){
         System.out.println("You could not be signed up for "+ eventName+", please try again");
+    }
+
+    public String printDeleteEvent(){
+        System.out.println("Enter which event you want to cancel");
+        return sc.nextLine();
+    }
+
+    public void printRemovedEvent(){
+        System.out.println("Successfully canceled your spot in the event");
+    }
+
+    public void printCantRemove(){
+        System.out.println("Could not remove you from the event");
+    }
+
+    public String printSpecificEvent(){
+        System.out.println("Enter one of these events to see more specific information about them or press enter to" +
+                " go back to the main menu");
+        return sc.nextLine();
+    }
+
+    public void printSpecificEventInfo(String info){
+        System.out.println(info);
     }
 }

@@ -78,6 +78,12 @@ public class Event {
     }
 
     /**
+     * Removes the given string from the list of attending people
+     * @param name The person being removed from the list
+     */
+    public void removeAttending(String name){attending.remove(name);}
+
+    /**
      * Returns the name of the event
      * @return the name of the event
      */

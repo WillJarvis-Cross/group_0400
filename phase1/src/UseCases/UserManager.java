@@ -235,11 +235,13 @@ public class UserManager {
      * @param person The name of the person
      * @param canceledEvent The name of the event person is canceling
      */
-    public void cancelMyEvent(String person, String canceledEvent){
+    public boolean cancelMyEvent(String person, String canceledEvent){
         User thisPerson = getUser(person);
         if (thisPerson.getEvents().contains(canceledEvent)){
             thisPerson.removeEvent(canceledEvent);
+            return true;
         }
+        return false;
     }
 
 

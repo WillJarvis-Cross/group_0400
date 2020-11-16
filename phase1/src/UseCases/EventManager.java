@@ -134,6 +134,18 @@ public class EventManager {
         return this.events.containsKey(eventName);
     }
 
+    public boolean removeAttendee(String eventName, String username){
+        if (!events.containsKey(eventName)){
+            return false;
+        }
+        Event thisEvent = getEvent(eventName);
+        if (getEvent(eventName).getAttending().contains(username)){
+            thisEvent.removeAttending(username);
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Creates and stores an Event with the given parameters if it takes place
      * entirely between 9am and 5pm, and no other event taking place at the
@@ -204,6 +216,12 @@ public class EventManager {
         return (hour > 7) && (hour + e.getDuration() < 18);
     }
 
+    public String getEventToString(String eventName){
+        if (events.containsKey(eventName)){
+            return getEvent(eventName).toString();
+        }
+        return "";
+    }
 }
 
 
