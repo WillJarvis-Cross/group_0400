@@ -53,7 +53,7 @@ public class Presenter {
      * @return User input
      */
     public String printPassword() {
-        System.out.println("Please enter your password");
+        System.out.println("Please enter your password or enter 0 to go back");
         String input = sc.nextLine();
         return input;
     }
@@ -363,7 +363,5 @@ public class Presenter {
     public void printSpecificEventInfo(String info){
         System.out.println(info);
     }
-    public static void main(String[] args){
-        UserController me = new OrganizerController("will");
-    }
+
 }

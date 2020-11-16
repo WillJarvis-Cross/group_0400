@@ -277,8 +277,10 @@ public class UserManager {
      * @return true if the password was correct, false otherwise
      */
     public boolean login(String name, String pass){
-        User thisUser = getUser(name);
-        return pass.equals(thisUser.getPassword());
+        if (getUsers().containsKey(name)){
+            return pass.equals(getUser(name).getPassword());
+        }
+        return false;
     }
 
     /**

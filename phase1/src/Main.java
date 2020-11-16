@@ -19,34 +19,34 @@ public class Main{
      * Kinda messy and incomplete for now, but will finish when gateway class is ready
      * @param args
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Presenter presenter = new Presenter();
         ReadAndWrite readWriter = new ReadAndWrite();
 
-        int input1 = presenter.printLogin();
+        //int input1 = presenter.printLogin();
         //no way of checking/saving anything yet
-        name = presenter.printUsername();
-        pass = presenter.printPassword();
+        String name = presenter.printUsername();
+        //pass = presenter.printPassword();
+        /*
         if input1.equals("1"){
             //nothing yet, ask for username and password, check if correct
         } else if input1.equals("2"){
             //save info
-        }
+        }*/
 
         //this should only be called if the user is creating their account, otherwise this information would be stored.
         //Temporarily setting things up this way until gateways are done
         String userType = presenter.printAttendeeOrOrganizer(); //will be moved into else if input1.equals("2") later
 
 
-
-        if userType.equals("1"){
-            AttendeeController aController = new AttendeeController(name);
-            aController.mainMenu();
-        }  else if userType.equals("2"){
-            OrganizerController oController = new OrganizerController(name);
-            oController.mainMenu();
-        }else if userType.equals("3") {
-            SpeakerController sController = new SpeakerController(name);
-            sController.mainMenu()
+        //AttendeeController aController = new AttendeeController(name);
+        //aController.mainMenu();
+        if (userType.equals("1")) {
+            new AttendeeController(name);
+        } else if (userType.equals("2")) {
+            new OrganizerController(name);
+        } else if (userType.equals("3")) {
+            new SpeakerController(name);
         }
+    }
 }

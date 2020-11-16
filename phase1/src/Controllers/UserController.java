@@ -53,11 +53,16 @@ public abstract class UserController {
      public void loginExistingAccount(){
           while (true){
                String password = presenter.printPassword();
-               if (usermanager.login(name, password)){
-                    break;
+               if (password.equals("0")){
+                    makeNewAccount();
                }
                else{
-                    presenter.printInvalidInput();
+                    if (usermanager.login(name, password)){
+                         break;
+                    }
+                    else{
+                         presenter.printInvalidInput();
+                    }
                }
           }
           mainMenu();
