@@ -86,38 +86,42 @@ public class OrganizerController extends UserController{
                 break;
             }
             else if (input.equals("3")){
-                getMessageController().printMyMessages(getMyName());
+                getEventController().removeEvent();
                 break;
             }
             else if (input.equals("4")){
-                getMessageController().messageAllSpeakers(getMyName());
+                getMessageController().printMyMessages(getMyName());
                 break;
             }
             else if (input.equals("5")){
-                getMessageController().messageAllAttendees(getMyName());
+                getMessageController().messageAllSpeakers(getMyName());
                 break;
             }
             else if (input.equals("6")){
-                System.out.println("Still have to do this");
-                // TODO create new room using RoomController
+                getMessageController().messageAllAttendees(getMyName());
+                break;
             }
             else if (input.equals("7")){
-                createSpeaker();
+                getRoomController().makeRoomRequest();
                 break;
             }
             else if (input.equals("8")){
-                signUp();
+                createSpeaker();
                 break;
             }
             else if (input.equals("9")){
-                removeMyEvent();
+                signUp();
                 break;
             }
             else if (input.equals("10")){
-                getPresenter().printAttendeeEvents(getMyEvents());
+                removeMyEvent();
                 break;
             }
             else if (input.equals("11")){
+                getPresenter().printAttendeeEvents(getMyEvents());
+                break;
+            }
+            else if (input.equals("12")){
                 System.out.println("Still have to do this");
                 //TODO save
             }

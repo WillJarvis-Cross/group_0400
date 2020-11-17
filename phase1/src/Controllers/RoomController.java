@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.lang.String;
 
 import java.time.LocalDateTime;
+import java.util.Hashtable;
+import java.util.Set;
 
 /** Represents the controller for RoomManager.
  * @author group 400
@@ -26,17 +28,17 @@ public class RoomController {
     /**
      * initialize a clean RoomController with new EventManager, UserManager, and RoomManager.
      */
-    public RoomController (UserController userController, Presenter presenter) {
+    public RoomController (UserController userController, Presenter presenter, EventManager eManager, RoomManager roomManager) {
         eManager = new EventManager();
         userManager = new UserManager();
-        roomManager = new RoomManager();
+        this.roomManager = roomManager;
         this.userController = userController;
         this.presenter = presenter;
     }
 
-    public void setRoomController(RoomManager room){
+    /*public void setRoomController(RoomManager room){
         roomManager = room;
-    }
+    }*/
 
     public RoomManager getManager() {
         return roomManager;
@@ -48,7 +50,7 @@ public class RoomController {
      * a room iff it does not exist, otherwise prints invalid request
      * @return True if room is created, false if room cannot be created with the invalid input
      */
-    public void makeRoomRequest(){
+    /*public void makeRoomRequest(){
         String roomNumber = presenter.printRoomNumber();
         if (roomNumber.equals("0")){
             userController.mainMenu();
@@ -62,6 +64,22 @@ public class RoomController {
         else{
             roomManager.addEvent(roomNumber, eventName, time);
         }
+    }*/
+    public void makeRoomRequest(){
+        String roomNumber = presenter.printRoomNumber();
+        if (roomNumber.equals("0")){
+            userController.mainMenu();
+        }
+        else{
+            int capacity = presenter.printRoomCapacity();
+            if (roomManager.addRoom(roomNumber, capacity)){
+                presenter.printRoomAdded();
+                userController.mainMenu();
+            }
+            else{
+                presenter.printInvalidOption();
+            }
+        }
     }
 
     /**
@@ -72,7 +90,7 @@ public class RoomController {
      * @param event The event to add
      * @return True if event is added; otherwise false
      */
-    public boolean addEvent(Event event){
+    /*public boolean addEvent(Event event){
         String roomNumber = event.getRoomNum();
         LocalDateTime time = event.getTime();
         String eventName = event.getEventName();
@@ -84,7 +102,7 @@ public class RoomController {
             return false;
         }
         return false;
-    }
+    }*/
 
     /**
      * add event to room
@@ -94,7 +112,7 @@ public class RoomController {
      * @param event The event to remove
      * @return True if event is added; otherwise false
      */
-    public boolean removeEvent(Event event){
+    /*public boolean removeEvent(Event event){
         String roomNumber = event.getRoomNum();
         String eventName = event.getEventName();
         if (roomNumber) {
@@ -102,7 +120,7 @@ public class RoomController {
             return true;
         }
         return false;
-    }
+    }*/
 
     private ArrayList<Room> getRoomList () {
         ArrayList<Room> roomList = new ArrayList<Room>();

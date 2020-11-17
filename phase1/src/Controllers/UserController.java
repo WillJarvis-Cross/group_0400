@@ -18,6 +18,7 @@ public abstract class UserController {
      private final EventManager eventManager;
      private final MessageManager messageManager;
      private final RoomManager roomManager;
+     private final RoomController roomController;
      private final String name;
 
      public UserController(String name){
@@ -28,6 +29,7 @@ public abstract class UserController {
           messageManager = new MessageManager();
           eventController = new EventController(this, presenter, eventManager, usermanager, roomManager);
           messageController = new MessageController(usermanager, this, presenter, messageManager);
+          roomController = new RoomController(this, presenter, eventManager, roomManager);
           this.name = name;
           makeNewAccount();
      }
@@ -41,6 +43,7 @@ public abstract class UserController {
           this.presenter = new Presenter();
           this.eventController = new EventController(this, presenter, eventManager, usermanager, roomManager);
           this.messageController = new MessageController(usermanager, this, presenter, messageManager);
+          this.roomController = new RoomController(this, presenter, eventManager, roomManager);
           this.name = name;
      }
 
@@ -66,6 +69,9 @@ public abstract class UserController {
 
      public MessageController getMessageController() {
           return messageController;
+     }
+     public RoomController getRoomController() {
+          return roomController;
      }
 
      public void loginExistingAccount(){

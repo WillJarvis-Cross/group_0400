@@ -193,8 +193,13 @@ public class UserManager {
      * @param myEvents The user's list of events
      * @return True if the user is available to sign up for the event. Return false otherwise.
      */
-    public boolean canSignUp(String name, Event event, List<Event> myEvents){
-
+    public boolean canSignUp(LocalDateTime time, List<Event> myEvents){
+        for (Event e:myEvents){
+            if (e.getTime().equals(time)){
+                return false;
+            }
+        }
+        return true;
 
         /*String eventName = event.getEventName();
 

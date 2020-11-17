@@ -103,7 +103,7 @@ public class EventController {
         if (!eManager.canAddPerson(eventName)){
             return false;
         }
-        if (!userManager.canSignUp(username, eManager.getEvent(eventName), eManager.getEventsByUsername(username))){
+        if (!userManager.canSignUp(eManager.getEvent(eventName).getTime(), eManager.getEventsByUsername(username))){
             return false;
         }
         eManager.addPersonToEvent(eventName, username);
@@ -115,18 +115,26 @@ public class EventController {
 
     /**
      * remove Event from event list
-     * @param name The name of the event
      * @return true if event is deleted false if the event does not exist
      */
-    public boolean removeEvent(String name){
-        if (!eManager.canRemoveEvent(name)){
-            return false;
+    public void removeEvent(){
+        presenter.printAllEvents(eManager.getEvents());
+        String name = presenter.printDeleteWholeEvent();
+        if (name.equals("0")){
+            userController.mainMenu();
         }
-        Event thisEvent = eManager.getEvent(name);
-        userManager.cancelWholeEvent(thisEvent.getAttending(), name, eManager.getEvent(name).getSpeaker());
-        eManager.removeEvent(name);
-        roomManager.removeEvent(thisEvent.getRoomNum(), name);
-        return true;
+        else if (!eManager.canRemoveEvent(name)){
+            presenter.printInvalidOption();
+            removeEvent();
+        }
+        else{
+            Event thisEvent = eManager.getEvent(name);
+            userManager.cancelWholeEvent(thisEvent.getAttending(), name, eManager.getEvent(name).getSpeaker());
+            eManager.removeEvent(name);
+            roomManager.removeEvent(thisEvent.getRoomNum(), name);
+            presenter.printEventRemoved();
+            userController.mainMenu();
+        }
     }
 
 

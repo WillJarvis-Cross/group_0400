@@ -2,6 +2,7 @@ package Presenter;
 
 import Controllers.OrganizerController;
 import Controllers.UserController;
+import Entities.Event;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -92,15 +93,16 @@ public class Presenter {
         System.out.println("Select a an option by entering the corresponding numbers");
         System.out.println("1: Send one message");
         System.out.println("2: Create an event");
-        System.out.println("3: See list of received messages");
-        System.out.println("4: Send a message to all speakers");
-        System.out.println("5: Send a message to all Attendees");
-        System.out.println("6: Create a new room");
-        System.out.println("7: Create a new speaker");
-        System.out.println("8: Sign up for event");
-        System.out.println("9: Cancel spot in event");
-        System.out.println("10: See list of events signed up for");
-        System.out.println("11: Logout");
+        System.out.println("3: Delete an event");
+        System.out.println("4: See list of received messages");
+        System.out.println("5: Send a message to all speakers");
+        System.out.println("6: Send a message to all Attendees");
+        System.out.println("7: Create a new room");
+        System.out.println("8: Create a new speaker");
+        System.out.println("9: Sign up for event");
+        System.out.println("10: Cancel spot in event");
+        System.out.println("11: See list of events signed up for");
+        System.out.println("12: Logout");
         return sc.nextLine();
     }
 
@@ -364,4 +366,27 @@ public class Presenter {
         System.out.println(info);
     }
 
+    public int printRoomCapacity(){
+        System.out.println("What is the capacity of the room");
+        return Integer.parseInt(sc.nextLine());
+    }
+
+    public void printRoomAdded(){
+        System.out.println("Room added successfullly");
+    }
+    public void printAllEvents(List<Event> events){
+        System.out.println("Here are all the events");
+        for (Event name:events){
+            System.out.println(name.getEventName());
+        }
+    }
+
+    public String printDeleteWholeEvent(){
+        System.out.println("Enter which event to delete or enter 0 to go back to the main menu");
+        return sc.nextLine();
+    }
+
+    public void printEventRemoved(){
+        System.out.println("Event removed successfully");
+    }
 }
