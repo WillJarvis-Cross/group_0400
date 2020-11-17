@@ -119,6 +119,7 @@ public class OrganizerController extends UserController{
             }
             else if (input.equals("11")){
                 getPresenter().printAttendeeEvents(getMyEvents());
+                getEventController().specificInfo();
                 break;
             }
             else if (input.equals("12")){

@@ -1,6 +1,7 @@
 package Controllers;
 
 import Entities.Room;
+import Entities.User;
 import Presenter.Presenter;
 import UseCases.EventManager;
 import Entities.Event;
@@ -57,35 +58,37 @@ public class EventController {
         if (eventName.equals("0")){
             userController.mainMenu();
         }
-        LocalDateTime time = presenter.printTimeOfEvent();
-        int duration = presenter.printDurationOfEvent();
-        String speaker = presenter.printSpeakerOfEvent();
-        String roomNumber = presenter.printRoomNumber();
-        int counter = 0;
-        if (!userManager.getSpeakers().containsKey(speaker) || roomManager.getRoom(roomNumber) == null){
-            counter ++;
-        }
-        if (roomManager.isRoomTaken(roomNumber, time)){
-            counter ++;
-        }
-        if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber) || duration == 0){
-            counter ++;
-        }
-        if (!userManager.getSpeakers().containsKey(speaker) || !userManager.canAddSpeaker(time, eManager.getEventsBySpeaker(speaker))){
-            counter ++;
-        }
-        if (counter == 0){
-            eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber);
-            ArrayList<Event> speakerEvents = eManager.getEventsBySpeaker(speaker);
-            speakerEvents.remove(eManager.getEvent(eventName));
-            userManager.signUp(speaker, eManager.getEvent(eventName), speakerEvents);
-            roomManager.addEvent(roomNumber, eventName, time);
-            presenter.printEventCreated();
-            userController.mainMenu();
-        }
         else{
-            presenter.printInvalidOption();
-            makeEventRequest();
+            LocalDateTime time = presenter.printTimeOfEvent();
+            int duration = presenter.printDurationOfEvent();
+            String speaker = presenter.printSpeakerOfEvent();
+            String roomNumber = presenter.printRoomNumber();
+            int counter = 0;
+            if (!userManager.getSpeakers().containsKey(speaker) || roomManager.getRoom(roomNumber) == null){
+                counter ++;
+            }
+            if (roomManager.isRoomTaken(roomNumber, time)){
+                counter ++;
+            }
+            if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber) || duration == 0){
+                counter ++;
+            }
+            if (!userManager.getSpeakers().containsKey(speaker) || !userManager.canAddSpeaker(time, eManager.getEventsBySpeaker(speaker))){
+                counter ++;
+            }
+            if (counter == 0){
+                eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber);
+                ArrayList<Event> speakerEvents = eManager.getEventsBySpeaker(speaker);
+                speakerEvents.remove(eManager.getEvent(eventName));
+                userManager.signUp(speaker, eManager.getEvent(eventName), speakerEvents);
+                roomManager.addEvent(roomNumber, eventName, time);
+                presenter.printEventCreated();
+                userController.mainMenu();
+            }
+            else{
+                presenter.printInvalidOption();
+                makeEventRequest();
+            }
         }
     }
 
@@ -98,6 +101,7 @@ public class EventController {
      * @return True if attendee is added and false if not added
      */
     public boolean addAttendee(String eventName, String username){
+        User person = userManager.getUser(username);
         Room thisRoom = roomManager.getRoom(eManager.getEvent(eventName).getRoomNum());
         if (thisRoom == null || this.eManager.isAtCapacity(eventName, thisRoom.getCapacity())){
             return false; //full
@@ -105,11 +109,13 @@ public class EventController {
         if (!eManager.canAddPerson(eventName)){
             return false;
         }
-        if (!userManager.canSignUp(eManager.getEvent(eventName).getTime(), eManager.getEventsByUsername(username))){
+        if (!userManager.canSignUp(eManager.getEvent(eventName).getTime(), eManager.getEventsByUsername(person))){
             return false;
         }
         eManager.addPersonToEvent(eventName, username);
-        userManager.signUp(username, eManager.getEvent(eventName), eManager.getEventsByUsername(username));
+        ArrayList<Event> attendeeEvents = eManager.getEventsByUsername(person);
+        attendeeEvents.remove(eManager.getEvent(eventName));
+        userManager.signUp(username, eManager.getEvent(eventName), attendeeEvents);
         return true;
     }
 

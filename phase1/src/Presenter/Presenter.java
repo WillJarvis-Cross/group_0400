@@ -308,7 +308,7 @@ public class Presenter {
     }
 
     public String printRoomNumber(){
-        System.out.println("What room will the event be in");
+        System.out.println("What will the room be called");
         return sc.nextLine();
     }
 

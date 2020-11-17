@@ -121,6 +121,7 @@ public class SpeakerController extends UserController{
             else if (input.equals("3")){
                 getPresenter().printSpeakerEvents(getMyEvents());
                 getEventController().specificInfo();
+                break;
             }
             else if (input.equals("4")){
                 getMessageController().messageAllAttendees(getMyName());

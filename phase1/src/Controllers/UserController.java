@@ -111,7 +111,7 @@ public abstract class UserController {
 
      public ArrayList<String> getMyEvents () {
           ArrayList<String> newList = new ArrayList<>();
-          for (Event event : getEventManager().getEventsByUsername(getMyName())){
+          for (Event event : getEventManager().getEventsByUsername(usermanager.getUser(getMyName()))){
                newList.add(event.getEventName());
           }
           return newList;

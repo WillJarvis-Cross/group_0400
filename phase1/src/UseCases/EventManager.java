@@ -87,16 +87,18 @@ public class EventManager {
     /**
      * Returns a list of all scheduled events the user with the given useName
      * is registered in
-     * @param userName The name of the user
      * @return An ArrayList of events
      */
-    public ArrayList<Event> getEventsByUsername(String userName){
-        ArrayList<Event> eventList = getEvents();
-        for (Event event: eventList){
+    public ArrayList<Event> getEventsByUsername(User person){
+        ArrayList<Event> eventList = new ArrayList<>();
+        for (String e: person.getEvents()){
+            eventList.add(events.get(e));
+        }
+        /*for (Event event: eventList){
             if (!event.getAttending().contains(userName)){
                 eventList.remove(event);
             }
-        }
+        }*/
         return eventList;
     }
     /**

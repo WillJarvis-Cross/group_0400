@@ -78,6 +78,7 @@ public class RoomController {
             }
             else{
                 presenter.printInvalidOption();
+                makeRoomRequest();
             }
         }
     }
