@@ -35,8 +35,12 @@ public class RoomManager {
      * @param roomNumber The name of the room
      * @param capacity The capacity of the room
     */
-    public void addRoom(String roomNumber, int capacity) {
+    public boolean addRoom(String roomNumber, int capacity) {
+        if (allRooms.containsKey(roomNumber)){
+            return false;
+        }
         allRooms.put(roomNumber, new Room(roomNumber, capacity));
+        return true;
     }
 
     /**

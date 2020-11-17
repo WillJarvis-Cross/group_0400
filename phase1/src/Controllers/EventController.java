@@ -27,10 +27,10 @@ public class EventController {
     /**
      * initialize a clean EventController with new EventManager, UserManager, and RoomManager
      */
-    public EventController(UserController userController, Presenter presenter){
-        eManager = new EventManager();
-        userManager = new UserManager();
-        roomManager = new RoomManager();
+    public EventController(UserController userController, Presenter presenter, EventManager eManager, UserManager userManager, RoomManager roomManager){
+        this.eManager = eManager;
+        this.userManager = userManager;
+        this.roomManager = roomManager;
         this.userController = userController;
         this.presenter = presenter;
     }

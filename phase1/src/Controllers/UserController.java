@@ -3,6 +3,8 @@ package Controllers;
 import Entities.Event;
 import Presenter.Presenter;
 import UseCases.EventManager;
+import UseCases.MessageManager;
+import UseCases.RoomManager;
 import UseCases.UserManager;
 
 import java.util.ArrayList;
@@ -14,16 +16,32 @@ public abstract class UserController {
      private final EventController eventController;
      private final MessageController messageController;
      private final EventManager eventManager;
+     private final MessageManager messageManager;
+     private final RoomManager roomManager;
      private final String name;
 
      public UserController(String name){
           presenter = new Presenter();
           usermanager = new UserManager();
-          eventController = new EventController(this, presenter);
-          eventManager = eventController.geteManager();
-          messageController = new MessageController(usermanager, this, presenter);
+          eventManager = new EventManager();
+          roomManager = new RoomManager();
+          messageManager = new MessageManager();
+          eventController = new EventController(this, presenter, eventManager, usermanager, roomManager);
+          messageController = new MessageController(usermanager, this, presenter, messageManager);
           this.name = name;
           makeNewAccount();
+     }
+
+     //This one is for loading saved info
+     public UserController(String name, UserManager userManager, EventManager eventManager, MessageManager messageManager, RoomManager roomManager){
+          this.usermanager = userManager;
+          this.eventManager = eventManager;
+          this.messageManager = messageManager;
+          this.roomManager = roomManager;
+          this.presenter = new Presenter();
+          this.eventController = new EventController(this, presenter, eventManager, usermanager, roomManager);
+          this.messageController = new MessageController(usermanager, this, presenter, messageManager);
+          this.name = name;
      }
 
      public UserManager getUsermanager() {

@@ -24,8 +24,8 @@ public class MessageController {
      *
      * @param userManager
      */
-    public MessageController(UserManager userManager, UserController userController, Presenter presenter){
-        messageManager = new MessageManager();
+    public MessageController(UserManager userManager, UserController userController, Presenter presenter, MessageManager messageManager){
+        this.messageManager = messageManager;
         this.userManager = userManager;
         this.userController = userController;
         this.presenter = presenter;

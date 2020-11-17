@@ -195,7 +195,8 @@ public class UserManager {
      */
     public boolean canSignUp(String name, Event event, List<Event> myEvents){
 
-        String eventName = event.getEventName();
+
+        /*String eventName = event.getEventName();
 
         LocalDateTime eventTime = event.getTime();
 
@@ -236,7 +237,7 @@ public class UserManager {
                 return false;
             }
         }
-        return true;
+        return true;*/
     }
 
     /**
