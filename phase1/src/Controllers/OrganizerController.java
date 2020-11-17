@@ -177,6 +177,7 @@ public class OrganizerController extends UserController{
         String pass = getPresenter().getPassSpeaker();
         if (getUsermanager().canAddPerson(speaker)){
             getUsermanager().addSpeaker(speaker, pass);
+            mainMenu();
         }
         else{
             getPresenter().printInvalidUsername();

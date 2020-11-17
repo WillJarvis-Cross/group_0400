@@ -156,10 +156,7 @@ public class UserManager {
         }
         int m = (start + end) / 2;
         LocalDateTime time = userEvents.get(m).getTime();
-        if (eventTime.equals(time)){
-            return -1;
-        }
-        else if (eventTime.compareTo(time) < 0){
+        if (eventTime.compareTo(time) < 0){
             return findPosOfEvent(start, m, eventTime, userEvents);
         }
         else{
@@ -181,6 +178,7 @@ public class UserManager {
         User person = getUser(name);
         int numEvents = myEvents.size();
         // pos is the position the event is being added in th e user's list of events
+
         int pos = findPosOfEvent(0, numEvents, eventTime, myEvents);
 
         person.addEvent(eventName, pos);

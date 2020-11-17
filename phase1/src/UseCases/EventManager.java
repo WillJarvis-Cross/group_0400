@@ -106,9 +106,9 @@ public class EventManager {
      * @return An ArrayList of events that the speakerName is speaking at.
      */
     public ArrayList<Event> getEventsBySpeaker(String speakerName){
-        ArrayList<Event> eventList = new ArrayList<Event> ();
+        ArrayList<Event> eventList = new ArrayList<> ();
         for (Event event: getEvents()){
-            if (event.getSpeaker() == speakerName){
+            if (event.getSpeaker().equals(speakerName)){
                 eventList.add(event);
             }
         }

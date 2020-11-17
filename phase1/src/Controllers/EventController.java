@@ -76,7 +76,9 @@ public class EventController {
         }
         if (counter == 0){
             eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber);
-            userManager.signUp(speaker, eManager.getEvent(eventName), eManager.getEventsByUsername(speaker));
+            ArrayList<Event> speakerEvents = eManager.getEventsBySpeaker(speaker);
+            speakerEvents.remove(eManager.getEvent(eventName));
+            userManager.signUp(speaker, eManager.getEvent(eventName), speakerEvents);
             roomManager.addEvent(roomNumber, eventName, time);
             presenter.printEventCreated();
             userController.mainMenu();
