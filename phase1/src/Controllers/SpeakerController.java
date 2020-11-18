@@ -1,18 +1,10 @@
 package Controllers;
 
-import Entities.Event;
-import java.util.ArrayList;
 
 /** Represents the controller for organiser manager object
  * @author group 400
  */
 public class SpeakerController extends UserController{
-
-    /*private EventManager events;
-    private UserManager usermanager;
-    private MessageManager mManager;
-    private String name;*/
-
 
     /**
      * Creates and initialize an organizer controller object
@@ -20,67 +12,12 @@ public class SpeakerController extends UserController{
      */
     public SpeakerController(String name){
         super(name);
-        /*this.events = new EventManager();
-        this.usermanager = new UserManager();
-        this.mManager = messageManager;
-        if(usermanager.login(name, password)){
-            this.name = name;
-        }*/
     }
 
     /**
-     * Retuns a list of events the speaker is attedning
-     * @return list of events
+     * Creates a new Speaker with the users name and the password they input
+     * After, it redirects the user to the main menu
      */
-    //public ArrayList<Event> getMyEvents () { return this.events.getEventsBySpeaker(this.name); }
-    public ArrayList<String> getMyEvents () {
-        ArrayList<String> newList = new ArrayList<>();
-        for (Event event : getEventManager().getEventsBySpeaker(getMyName())){
-            newList.add(event.getEventName());
-        }
-        return newList;
-    }
-
-    /**
-     * send message to a single attendee
-     * <p>
-     *     first check for if user is logged in
-     *     next call message manager to send message
-     * </p>
-     *
-     * @param attendeeName name of receiver
-     * @param content content of message
-     */
-    /*public void messageAttendee(String attendeeName, String content){
-        if(name == null){
-            System.out.println("Please log in.");
-        }
-        else {
-            this.mManager.sendMessage(usermanager.getOrganizer(name), usermanager.getAttendee(attendeeName), content);
-        }
-    }*/
-
-    /**
-     * sending message to all attendees
-     *
-     * @param content content of message
-     */
-    /*public void messageAllAttendees(String content){
-        //Question shouldn't only send message to all attendee of the
-        // event that the organizer host and not all attendee
-        // For instance there can by more than 2 host are we sending all attendee a message??
-        if(name == null){
-            System.out.println("Please log in.");
-        }
-        else {
-            Set<String> keys = usermanager.getAttendees().keySet();
-            for (String key : keys) {
-                this.mManager.sendMessage(usermanager.getOrganizer(name),
-                        usermanager.getAttendee(key), content);
-            }
-        }
-    }*/
-
     public void makeNewAccount(){
         String input = getPresenter().printLogin();
         if (input.equals("2")){

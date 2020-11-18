@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /** Represents the Presenter for the UI
- * @auther group 400
+ * @author group 400
  */
 public class Presenter {
 
@@ -42,8 +42,7 @@ public class Presenter {
      */
     public String printUsername() {
         System.out.println("Please enter your username");
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 
     /**
@@ -53,8 +52,7 @@ public class Presenter {
      */
     public String printPassword() {
         System.out.println("Please enter your password or enter 0 to go back");
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 
     /**
@@ -78,8 +76,7 @@ public class Presenter {
         System.out.println("4: See list of received messages");
         System.out.println("5: See list of events signed up for");
         System.out.println("6: Logout");
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 
     /**
@@ -116,14 +113,13 @@ public class Presenter {
         System.out.println("3: See list of events that you are speaking at");
         System.out.println("4: Send a message to everyone signed up for an event");
         System.out.println("5: Logout");
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 
     /**
      * Prints a list of events that are not at full capacity
      *
-     * @param events
+     * @param events All the events
      * @return User input
      */
     public String printEventList(List<String> events) {
@@ -134,8 +130,7 @@ public class Presenter {
         for (String name: events) {
             System.out.println(n + ": " + name);
         }
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 
     /**
@@ -149,7 +144,7 @@ public class Presenter {
     /**
      * Prints a list of events that the user is signed up for
      *
-     * @param events
+     * @param events The attendee's events
      */
     public void printAttendeeEvents(List<String> events) {
         System.out.println("Here is a list of events you are signed up for");
@@ -161,8 +156,7 @@ public class Presenter {
     /**
      * Prints a list of events that the speaker is speaking at
      *
-     * @param events
-     * @return User input
+     * @param events The speakers events
      */
     public void printSpeakerEvents(List<String> events) {
         System.out.println("Here is a list of events you are speaking at");
@@ -179,8 +173,7 @@ public class Presenter {
     public String printWhoToSendTo() {
         System.out.println("Enter the name of who you want to send your message to or enter 0 " +
                 "to get back to the main menu");
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 
     /**
@@ -198,8 +191,7 @@ public class Presenter {
      */
     public String printWhichEvent() {
         System.out.println("Enter the name of the event that you want to send a message to");
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 
     /**
@@ -217,14 +209,13 @@ public class Presenter {
      */
     public String printMessage() {
         System.out.println("Enter the message you want to send");
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 
     /**
      * Prints a list of messages that were received by the user
      *
-     * @param messages
+     * @param messages All the users messages
      * @return User input
      */
     public String printReceivedMessages(StringBuilder messages) {
@@ -394,7 +385,7 @@ public class Presenter {
     /**
      * Prints that the user could not be signed up for a particular event
      *
-     * @param eventName
+     * @param eventName The event the user tried to sign up for
      */
     public void printNotSignedUp(String eventName){
         System.out.println("You could not be signed up for "+ eventName+", please try again");
@@ -440,7 +431,7 @@ public class Presenter {
     /**
      * Prints the event information of a specific event
      *
-     * @param info
+     * @param info The info being printed
      */
     public void printSpecificEventInfo(String info){
         System.out.println(info);
@@ -467,7 +458,7 @@ public class Presenter {
     /**
      * Prints all the events
      *
-     * @param events
+     * @param events The list of events being printed
      */
     public void printAllEvents(List<Event> events){
         System.out.println("Here are all the events");
