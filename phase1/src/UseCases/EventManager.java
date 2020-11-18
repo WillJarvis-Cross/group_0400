@@ -224,6 +224,11 @@ public class EventManager {
         return (hour > 7) && (hour + e.getDuration() < 18);
     }
 
+    /**
+     * Returns the string representation of the event with the given name.
+     * @param eventName The name of the event
+     * @return String
+     */
     public String getEventToString(String eventName){
         if (events.containsKey(eventName)){
             return getEvent(eventName).toString();
