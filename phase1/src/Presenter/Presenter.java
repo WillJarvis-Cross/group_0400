@@ -148,7 +148,7 @@ public class Presenter {
      */
     public void printAttendeeEvents(List<String> events) {
         if (events.isEmpty()) {
-            System.out.println("You are not signed up for");
+            System.out.println("You are not signed up for any events");
         }
         else {
             System.out.println("Here is a list of events you are signed up for");

@@ -2,7 +2,6 @@ package UseCases;
 import Entities.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 /** Represents the use case for Room objects
@@ -51,7 +50,7 @@ public class UserManager {
      * @param pass The password of the attendee
      */
     public void addAttendee(String name, String pass){
-        Attendee newAttendee = new Attendee(name, pass);
+        Attendee newAttendee = new Attendee(pass, name);
         allAttendees.put(name, newAttendee);
         allUsers.put(name, newAttendee);
     }
@@ -186,8 +185,7 @@ public class UserManager {
 
     /**
      * Returns true if the user is available to sign up for the inputted event
-     * @param name The name of the user
-     * @param event The event being signed up for
+     * @param time The time of the
      * @param myEvents The user's list of events
      * @return True if the user is available to sign up for the event. Return false otherwise.
      */
