@@ -267,6 +267,7 @@ public class UserManager {
      * @param speakerName The name of the speaker of the event
      */
     public void cancelWholeEvent(List<String> attending, String canceledEvent, String speakerName){
+
         for (String name : attending) {
             cancelMyEvent(name, canceledEvent);
         }

@@ -15,7 +15,7 @@ import java.lang.String;
  */
 public class Main{
     /**
-     * Main method where the contollers will be called from and data will be loaded/saved
+     * Main method where the controllers will be called from and data will be loaded/saved
      * Kinda messy and incomplete for now, but will finish when gateway class is ready
      * @param args
      */
