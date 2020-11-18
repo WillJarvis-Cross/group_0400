@@ -41,7 +41,6 @@ public class OrganizerController extends UserController{
                 String password = getPresenter().printPassword();
                 getUsermanager().addOrganizer(getMyName(), password);
                 mainMenu();
-                System.out.println("jik");
             }
             else{
                 getPresenter().printInvalidUsername();

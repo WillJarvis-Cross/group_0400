@@ -1,6 +1,5 @@
 package Controllers;
 
-import Entities.Event;
 import Presenter.Presenter;
 import UseCases.EventManager;
 import UseCases.MessageManager;
@@ -8,6 +7,7 @@ import UseCases.RoomManager;
 import UseCases.UserManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class UserController {
 
@@ -109,12 +109,13 @@ public abstract class UserController {
           }
      }
 
-     public ArrayList<String> getMyEvents () {
-          ArrayList<String> newList = new ArrayList<>();
+     public List<String> getMyEvents () {
+          return usermanager.getUser(getMyName()).getEvents();
+          /*ArrayList<String> newList = new ArrayList<>();
           for (Event event : getEventManager().getEventsByUsername(usermanager.getUser(getMyName()))){
                newList.add(event.getEventName());
           }
-          return newList;
+          return newList;*/
      }
 
      public void removeMyEvent(){

@@ -1,7 +1,6 @@
 package Controllers;
 
 import Entities.Room;
-import Entities.User;
 import Presenter.Presenter;
 import UseCases.EventManager;
 import Entities.Event;
@@ -101,7 +100,6 @@ public class EventController {
      * @return True if attendee is added and false if not added
      */
     public boolean addAttendee(String eventName, String username){
-        User person = userManager.getUser(username);
         Room thisRoom = roomManager.getRoom(eManager.getEvent(eventName).getRoomNum());
         if (thisRoom == null || this.eManager.isAtCapacity(eventName, thisRoom.getCapacity())){
             return false; //full
@@ -109,11 +107,11 @@ public class EventController {
         if (!eManager.canAddPerson(eventName)){
             return false;
         }
-        if (!userManager.canSignUp(eManager.getEvent(eventName).getTime(), eManager.getEventsByUsername(person))){
+        if (!userManager.canSignUp(eManager.getEvent(eventName).getTime(), eManager.getEventsByUsername(userManager.getUser(username)))){
             return false;
         }
         eManager.addPersonToEvent(eventName, username);
-        ArrayList<Event> attendeeEvents = eManager.getEventsByUsername(person);
+        ArrayList<Event> attendeeEvents = eManager.getEventsByUsername(userManager.getUser(username));
         attendeeEvents.remove(eManager.getEvent(eventName));
         userManager.signUp(username, eManager.getEvent(eventName), attendeeEvents);
         return true;
@@ -136,10 +134,9 @@ public class EventController {
             removeEvent();
         }
         else{
-            Event thisEvent = eManager.getEvent(name);
-            userManager.cancelWholeEvent(thisEvent.getAttending(), name, eManager.getEvent(name).getSpeaker());
+            userManager.cancelWholeEvent(eManager.getEvent(name).getAttending(), name, eManager.getEvent(name).getSpeaker());
             eManager.removeEvent(name);
-            roomManager.removeEvent(thisEvent.getRoomNum(), name);
+            roomManager.removeEvent(eManager.getEvent(name).getRoomNum(), name);
             presenter.printEventRemoved();
             userController.mainMenu();
         }

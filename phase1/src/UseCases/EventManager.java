@@ -101,6 +101,8 @@ public class EventManager {
         }*/
         return eventList;
     }
+
+
     /**
      * Returns a list of all scheduled events the speaker with the given speakerName
      * is registered in
