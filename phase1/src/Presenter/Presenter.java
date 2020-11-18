@@ -165,10 +165,17 @@ public class Presenter {
      * @return User input
      */
     public void printSpeakerEvents(List<String> events) {
-        System.out.println("Here is a list of events you are speaking at");
-        for (String name: events) {
-            System.out.println(name);
+        if (events.isEmpty())
+        {
+            System.out.println("You are not speaking at any events");
         }
+        else{
+            System.out.println("Here is a list of events you are speaking at");
+            for (String name: events) {
+                System.out.println(name);
+            }
+        }
+
     }
 
     /**
@@ -228,9 +235,11 @@ public class Presenter {
      * @return User input
      */
     public String printReceivedMessages(StringBuilder messages) {
-        System.out.println(messages);
-        if (messages.toString().equals("Messages:")){
+        if (messages.toString().equals("My Messages:")){
             System.out.println("You have no messages");
+        }
+        else {
+            System.out.println(messages);
         }
         System.out.println("Enter any key to go back to the main menu");
         return sc.nextLine();

@@ -76,7 +76,7 @@ public class MessageController {
                 userController.mainMenu();
             }
             else{
-                presenter.printInvalidInput();
+                presenter.printInvalidOption();
             }
         }
         String content = presenter.printMessage();
