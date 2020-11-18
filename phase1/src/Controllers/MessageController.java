@@ -85,6 +85,11 @@ public class MessageController {
         userController.mainMenu();
     }
 
+    /**
+     * The organizer with the given name sends a message to all speakers.
+     * The contents of thw message will be obtained through the presenter.
+     * @param name of the organizer who is sending the message
+     */
     public void messageAllSpeakers(String name){
         String content = presenter.printMessage();
         Set<String> keys = userManager.getSpeakers().keySet();
@@ -96,6 +101,11 @@ public class MessageController {
         userController.mainMenu();
     }
 
+    /**
+     * The organizer with the given name sends a message to all attendees.
+     * The contents of thw message will be obtained through the presenter.
+     * @param name of the organizer who is sending the message
+     */
     public void messageAllAttendees(String name){
         String content = presenter.printMessage();
         Set<String> keys = userManager.getAttendees().keySet();

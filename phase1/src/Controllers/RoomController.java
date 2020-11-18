@@ -148,6 +148,9 @@ public class RoomController {
         return outString;
     }
 
+    /**
+     * Gets the information of an event that is given by name
+     */
     public void specificInfo(){
         String newInput = presenter.printSpecificEvent();
 

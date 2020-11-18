@@ -33,7 +33,11 @@ public class OrganizerController extends UserController{
           //  OrganizerController.name = name;
         //}
     }
-
+    /**
+     * Asks the user if they want to login to an existing account or create a new account. If they are creating
+     * a new account, the Attendee object will be created here and loginExistingAccount will be called if they are
+     * logging in. Invalid inputs will display a message and call this method again.
+     */
     public void makeNewAccount(){
         String input = getPresenter().printLogin();
         if (input.equals("2")){
@@ -56,6 +60,11 @@ public class OrganizerController extends UserController{
         }
     }
 
+    /**
+     * Logs the organizer into an existing account if then enter the correct password for their username. If the login
+     * is successful, the main menu for organizers is displayed and the method will ask for the password again
+     * otherwise.
+     */
     /*public void loginExistingAccount(){
         while (true){
             String password = presenter.printPassword();
@@ -172,6 +181,10 @@ public class OrganizerController extends UserController{
         }
     }*/
 
+    /**
+     * Creates a new speaker with the username and password obtained from the presenter if the username is unique.
+     * Prints an invalid username message through the presenter and calls the method again otherwise.
+     */
     public void createSpeaker(){
         String speaker = getPresenter().printNameSpeaker();
         String pass = getPresenter().getPassSpeaker();

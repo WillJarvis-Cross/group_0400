@@ -81,6 +81,12 @@ public class SpeakerController extends UserController{
         }
     }*/
 
+    /**
+     * Asks the user if they want to make a new account or login to an existing account through presenter.
+     * If the user chooses to create a new account and their username is unique, it will ask for a password and create
+     * a new Speaker. If the user chooses to login, they will login through loginExistingAccount. An invalid input will
+     * print an invalid option menu through the presenter and run the method again.
+     */
     public void makeNewAccount(){
         String input = getPresenter().printLogin();
         if (input.equals("2")){
