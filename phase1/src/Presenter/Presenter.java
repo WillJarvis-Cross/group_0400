@@ -147,10 +147,16 @@ public class Presenter {
      * @param events The attendee's events
      */
     public void printAttendeeEvents(List<String> events) {
-        System.out.println("Here is a list of events you are signed up for");
-        for (String name: events) {
-            System.out.println(name);
+        if (events.isEmpty()) {
+            System.out.println("You are not signed up for");
         }
+        else {
+            System.out.println("Here is a list of events you are signed up for");
+            for (String name: events) {
+                System.out.println(name);
+            }
+        }
+
     }
 
     /**
@@ -161,7 +167,7 @@ public class Presenter {
     public void printSpeakerEvents(List<String> events) {
         if (events.isEmpty())
         {
-            System.out.println("You are not speaking at any events");
+
         }
         else{
             System.out.println("Here is a list of events you are speaking at");
@@ -470,10 +476,16 @@ public class Presenter {
      * @param events The list of events being printed
      */
     public void printAllEvents(List<Event> events){
-        System.out.println("Here are all the events");
-        for (Event name:events){
-            System.out.println(name.getEventName());
+        if (events.isEmpty()) {
+            System.out.println("There are no events");
         }
+        else {
+            System.out.println("Here are all the events");
+            for (Event name:events){
+                System.out.println(name.getEventName());
+            }
+        }
+
     }
 
     /**
