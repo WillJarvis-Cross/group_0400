@@ -25,7 +25,8 @@ public class EventController {
     private Presenter presenter;
 
     /**
-     * initialize a clean EventController with new EventManager, UserManager, and RoomManager
+     * initialize a clean EventController with given UserController,
+     * EventManager, UserManager, Presenter, and RoomManager
      */
     public EventController(UserController userController, Presenter presenter, EventManager eManager, UserManager userManager, RoomManager roomManager){
         this.eManager = eManager;
@@ -43,14 +44,9 @@ public class EventController {
         eManager = manager;
     }
 
-    public EventManager geteManager() {
-        return eManager;
-    }
-
     /**
      * create a event when a create event request is made
      * calls eventManager, userManager, and roomManager to check if event can be created with the information
-     * @return True if event is created, false if  event cannot be create with the invalid input
      */
     public void makeEventRequest(){
         String eventName = presenter.printNameOfEvent();
@@ -123,7 +119,8 @@ public class EventController {
 
 
     /**
-     * remove Event from event list
+     * remove a whole Event from event list and makes sure no users are still signed up for the event and it removes
+     * the event from its room
      *
      */
     public void removeEvent(){
@@ -162,7 +159,7 @@ public class EventController {
     }
 
     /**
-     * Gets the information of an event that is given by name
+     * prints the information of an event that is given by name
      *
      */
     public void specificInfo(){

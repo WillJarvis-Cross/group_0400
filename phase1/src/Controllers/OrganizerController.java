@@ -33,11 +33,7 @@ public class OrganizerController extends UserController{
           //  OrganizerController.name = name;
         //}
     }
-    /**
-     * Asks the user if they want to login to an existing account or create a new account. If they are creating
-     * a new account, the Attendee object will be created here and loginExistingAccount will be called if they are
-     * logging in. Invalid inputs will display a message and call this method again.
-     */
+
     public void makeNewAccount(){
         String input = getPresenter().printLogin();
         if (input.equals("2")){
@@ -60,11 +56,6 @@ public class OrganizerController extends UserController{
         }
     }
 
-    /**
-     * Logs the organizer into an existing account if then enter the correct password for their username. If the login
-     * is successful, the main menu for organizers is displayed and the method will ask for the password again
-     * otherwise.
-     */
     /*public void loginExistingAccount(){
         while (true){
             String password = presenter.printPassword();
@@ -142,48 +133,8 @@ public class OrganizerController extends UserController{
     }
 
     /**
-     * add event to organizer
-     * <p>
-     * first check if there is a username before allowing event to be created
-     * to create event scheduleEvent is called
-     * <p>
-     * @param time time of event
-     * @param duration duration of event in hours
-     * @param speaker name of speaker
-     * @param eventName name of event
-     * @param roomNumber room of event
-     */
-    /*public void addEvent(LocalDateTime time, int duration, String speaker,
-                          String eventName, String roomNumber){
-        if(name == null){
-            System.out.println("Please log in.");
-        }
-        else{
-            events.scheduleEvent(time, duration, speaker, eventName, roomNumber);
-            //feel like it should have a check if the information enter is correct or not
-            // scheduleEvent will return a bool depend on if the information is correct or not
-            //also System output
-        }
-    }*/
-
-
-    /**
-     * create user as a speaker by giving username and password
-     *
-
-     */
-    /*public void addSpeaker(String passwordInput, String nameInput){
-        if(name == null){
-            System.out.println("Please log in.");
-        }
-        else{
-            usermanager.addSpeaker(nameInput, passwordInput);
-        }
-    }*/
-
-    /**
-     * Creates a new speaker with the username and password obtained from the presenter if the username is unique.
-     * Prints an invalid username message through the presenter and calls the method again otherwise.
+     * Asks the user for the name and password for this new user and creates a new speaker with
+     * that information
      */
     public void createSpeaker(){
         String speaker = getPresenter().printNameSpeaker();
@@ -208,7 +159,7 @@ public class OrganizerController extends UserController{
      * @param speaker name of speaker
      * @param roomNumber room speaker is scheduled to
      */
-    public void scheduleSpeaker(LocalDateTime time, String speaker, String roomNumber){
+    /*public void scheduleSpeaker(LocalDateTime time, String speaker, String roomNumber){
         if(getMyName() == null){
             System.out.println("Please log in.");
         }
@@ -224,102 +175,8 @@ public class OrganizerController extends UserController{
             }
             else{ System.out.println("No event exists at that time and place. Use addEvent"); }
         }
-    }
-
-    /**
-     * send message to a single attendee
-     * <p>
-     *     first check for if user is logged in
-     *     next call message manager to send message
-     * </p>
-     *
-     * @param attendeeName name of receiver
-     * @param content content of message
-     */
-    /*public void messageSomeone(){
-        if(name == null){
-            System.out.println("Please log in.");
-        }
-        else {
-            MessageManager.sendMessage(usermanager.getOrganizer(name), usermanager.getAttendee(thisName), content);
-        }
-
     }*/
 
-    /**
-     * sending message to all attendees
-     *
-     * @param content content of message
-     */
-    /*public void messageAllAttendees(String content){
-        //Question shouldn't only send message to all attendee of the
-        // event that the organizer host and not all attendee
-        // For instance there can by more than 2 host are we sending all attendee a message??
-        if(name == null){
-            System.out.println("Please log in.");
-        }
-        else {
-            Set<String> keys = usermanager.getAttendees().keySet();
-            for (String key : keys) {
-                MessageManager.sendMessage(usermanager.getOrganizer(name),
-                        usermanager.getAttendee(key), content);
-            }
-        }
-    }*/
 
-    /**
-     * direct message to the speaker
-     *
-     * @param speakerName name of receiver
-     * @param content content of message
-     */
-    /*public void messageSpeaker(String speakerName, String content){
-            if(name == null){
-                System.out.println("Please log in.");
-            }
-            else {
-                MessageManager.sendMessage(usermanager.getOrganizer(name),
-                        usermanager.getSpeaker(speakerName), content);
-            }
-    }*/
-
-    /**
-     * sending a message to speaker from organizer
-     *
-     * @param content content of message
-     */
-    /*public void messageAllSpeakers(String content){
-        if(name == null){
-            System.out.println("Please log in.");
-        }
-        else {
-            Set<String> keys = usermanager.getSpeakers().keySet();
-            for (String key : keys) {
-                MessageManager.sendMessage(usermanager.getOrganizer(name),
-                        usermanager.getSpeaker(key), content);
-            }
-        }
-    }*/
-
-    /**
-     * signup for event selected in presenter
-     *
-     */
-    /*public void signUp(){
-        String eventName = getPresenter().getEventName();
-        if (eventName.equals("0")){
-            mainMenu();
-        }
-        else{
-            if (getEventController().addAttendee(eventName, getMyName())){
-                getPresenter().printSignedUp(eventName);
-                mainMenu();
-            }
-            else{
-                getPresenter().printNotSignedUp(eventName);
-                signUp();
-            }
-        }
-    }*/
 
 }

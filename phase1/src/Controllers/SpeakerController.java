@@ -1,18 +1,10 @@
 package Controllers;
 
-import Entities.Event;
-import java.util.ArrayList;
 
 /** Represents the controller for organiser manager object
  * @author group 400
  */
 public class SpeakerController extends UserController{
-
-    /*private EventManager events;
-    private UserManager usermanager;
-    private MessageManager mManager;
-    private String name;*/
-
 
     /**
      * Creates and initialize an organizer controller object
@@ -20,50 +12,11 @@ public class SpeakerController extends UserController{
      */
     public SpeakerController(String name){
         super(name);
-        /*this.events = new EventManager();
-        this.usermanager = new UserManager();
-        this.mManager = messageManager;
-        if(usermanager.login(name, password)){
-            this.name = name;
-        }*/
     }
 
     /**
-     * Retuns a list of events the speaker is attedning
-     * @return list of events
-     */
-    //public ArrayList<Event> getMyEvents () { return this.events.getEventsBySpeaker(this.name); }
-    public ArrayList<String> getMyEvents () {
-        ArrayList<String> newList = new ArrayList<>();
-        for (Event event : getEventManager().getEventsBySpeaker(getMyName())){
-            newList.add(event.getEventName());
-        }
-        return newList;
-    }
-
-    /**
-     * send message to a single attendee
-     * <p>
-     *     first check for if user is logged in
-     *     next call message manager to send message
-     * </p>
-     *
-     * @param attendeeName name of receiver
-     * @param content content of message
-     */
-    /*public void messageAttendee(String attendeeName, String content){
-        if(name == null){
-            System.out.println("Please log in.");
-        }
-        else {
-            this.mManager.sendMessage(usermanager.getOrganizer(name), usermanager.getAttendee(attendeeName), content);
-        }
-    }*/
-
-    /**
-     * sending message to all attendees
-     *
-     * @param content content of message
+     * Creates a new Speaker with the users name and the password they input
+     * After, it redirects the user to the main menu
      */
     /*public void messageAllAttendees(String content){
         //Question shouldn't only send message to all attendee of the
@@ -81,12 +34,6 @@ public class SpeakerController extends UserController{
         }
     }*/
 
-    /**
-     * Asks the user if they want to make a new account or login to an existing account through presenter.
-     * If the user chooses to create a new account and their username is unique, it will ask for a password and create
-     * a new Speaker. If the user chooses to login, they will login through loginExistingAccount. An invalid input will
-     * print an invalid option menu through the presenter and run the method again.
-     */
     public void makeNewAccount(){
         String input = getPresenter().printLogin();
         if (input.equals("2")){

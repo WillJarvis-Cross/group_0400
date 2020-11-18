@@ -6,7 +6,6 @@ import UseCases.MessageManager;
 import UseCases.RoomManager;
 import UseCases.UserManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class UserController {
