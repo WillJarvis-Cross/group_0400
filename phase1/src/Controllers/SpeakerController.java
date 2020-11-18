@@ -15,25 +15,8 @@ public class SpeakerController extends UserController{
     }
 
     /**
-     * Creates a new Speaker with the users name and the password they input
-     * After, it redirects the user to the main menu
+     * Makes a new Speaker given their name and password
      */
-    /*public void messageAllAttendees(String content){
-        //Question shouldn't only send message to all attendee of the
-        // event that the organizer host and not all attendee
-        // For instance there can by more than 2 host are we sending all attendee a message??
-        if(name == null){
-            System.out.println("Please log in.");
-        }
-        else {
-            Set<String> keys = usermanager.getAttendees().keySet();
-            for (String key : keys) {
-                this.mManager.sendMessage(usermanager.getOrganizer(name),
-                        usermanager.getAttendee(key), content);
-            }
-        }
-    }*/
-
     public void makeNewAccount(){
         String input = getPresenter().printLogin();
         if (input.equals("2")){

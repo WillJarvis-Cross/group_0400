@@ -19,10 +19,11 @@ public class MessageController {
     Presenter presenter;
 
     /**
-     * initialize object for message controller
-     * userManager is assigned
-     *
-     * @param userManager
+     * Creates a new MessageController with the already created managers
+     * @param userManager The userManager
+     * @param userController The UserController
+     * @param presenter The Presenter
+     * @param messageManager The MessageManager
      */
     public MessageController(UserManager userManager, UserController userController, Presenter presenter, MessageManager messageManager){
         this.messageManager = messageManager;
@@ -36,7 +37,7 @@ public class MessageController {
      * Present all message send to user
      * Uses Presenter class to output the message to user
      *
-     * @param name
+     * @param name The name of the person whose messages are being printed
      */
     public void printMyMessages(String name){
         StringBuilder output = new StringBuilder("My Messages:");
@@ -62,8 +63,7 @@ public class MessageController {
      *     sender calls userManger to send message to sender
      * </p>
      *
-     * @param sender
-     * @return
+     * @param sender The person sending the message
      */
     public void sendMessage(String sender){
         String receiver;

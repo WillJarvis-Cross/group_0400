@@ -4,11 +4,9 @@ import Entities.*;
 import Presenter.Presenter;
 import UseCases.*;
 
-
 import java.util.ArrayList;
 import java.lang.String;
 
-import java.time.LocalDateTime;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -18,53 +16,28 @@ import java.util.Set;
 
 public class RoomController {
 
-    private EventManager eManager;
-    private UserManager userManager;
-    private RoomManager roomManager;
+    private final RoomManager roomManager;
 
-    private UserController userController;
-    private Presenter presenter;
+    private final UserController userController;
+    private final Presenter presenter;
 
     /**
-     * initialize a clean RoomController with new EventManager, UserManager, and RoomManager.
+     * Creates a new RoomController given the already created managers
+     * @param userController The UserController
+     * @param presenter The Presenter
+     * @param roomManager The RoomManager
      */
-    public RoomController (UserController userController, Presenter presenter, EventManager eManager, RoomManager roomManager) {
-        eManager = new EventManager();
-        userManager = new UserManager();
+    public RoomController (UserController userController, Presenter presenter, RoomManager roomManager) {
         this.roomManager = roomManager;
         this.userController = userController;
         this.presenter = presenter;
-    }
-
-    /*public void setRoomController(RoomManager room){
-        roomManager = room;
-    }*/
-
-    public RoomManager getManager() {
-        return roomManager;
     }
 
     /**
      * create a room when a create room request is made
      * calls roomManager to check if whether a room with the same number exist or not and creates
      * a room iff it does not exist, otherwise prints invalid request
-     * @return True if room is created, false if room cannot be created with the invalid input
      */
-    /*public void makeRoomRequest(){
-        String roomNumber = presenter.printRoomNumber();
-        if (roomNumber.equals("0")){
-            userController.mainMenu();
-        }
-        LocalDateTime time = presenter.printTimeOfEvent();
-        String eventName = presenter.printNameOfEvent();
-        if (roomManager.getRoom(roomNumber)){
-            presenter.printInvalidOption();
-            makeRoomRequest();
-        }
-        else{
-            roomManager.addEvent(roomNumber, eventName, time);
-        }
-    }*/
     public void makeRoomRequest(){
         String roomNumber = presenter.printRoomNumber();
         if (roomNumber.equals("0")){
@@ -83,45 +56,6 @@ public class RoomController {
         }
     }
 
-    /**
-     * add event to room
-     * First checks if the exists and whether there room has an event in the same timeslot.
-     * Returns true if event added successfully, otherwise false
-     *
-     * @param event The event to add
-     * @return True if event is added; otherwise false
-     */
-    /*public boolean addEvent(Event event){
-        String roomNumber = event.getRoomNum();
-        LocalDateTime time = event.getTime();
-        String eventName = event.getEventName();
-        if (roomNumber) {
-            if (!roomManager.isRoomTaken(roomNumber, time)) {
-                roomManager.addEvent(roomNumber, eventName, time);
-                return true;
-            }
-            return false;
-        }
-        return false;
-    }*/
-
-    /**
-     * add event to room
-     * First checks if the exists and whether there room has an event in the same timeslot.
-     * Returns true if event added successfully, otherwise false
-     *
-     * @param event The event to remove
-     * @return True if event is added; otherwise false
-     */
-    /*public boolean removeEvent(Event event){
-        String roomNumber = event.getRoomNum();
-        String eventName = event.getEventName();
-        if (roomNumber) {
-            roomManager.removeEvent(roomNumber, eventName);
-            return true;
-        }
-        return false;
-    }*/
 
     private ArrayList<Room> getRoomList () {
         ArrayList<Room> roomList = new ArrayList<Room>();
@@ -146,23 +80,6 @@ public class RoomController {
             outString += roomList.get(i).toString()+",";
         }
         return outString;
-    }
-
-    /**
-     * Gets the information of an event that is given by name
-     */
-    public void specificInfo(){
-        String newInput = presenter.printSpecificEvent();
-
-        String info = eManager.getEventToString(newInput);
-        if (info.equals("")){
-            presenter.printInvalidOption();
-
-        }
-        else{
-            presenter.printSpecificEventInfo(info);
-        }
-        userController.mainMenu();
     }
 
 }

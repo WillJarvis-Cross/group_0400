@@ -32,7 +32,7 @@ public abstract class UserController {
           messageManager = new MessageManager();
           eventController = new EventController(this, presenter, eventManager, usermanager, roomManager);
           messageController = new MessageController(usermanager, this, presenter, messageManager);
-          roomController = new RoomController(this, presenter, eventManager, roomManager);
+          roomController = new RoomController(this, presenter, roomManager);
           this.name = name;
           makeNewAccount();
      }
@@ -55,7 +55,7 @@ public abstract class UserController {
           this.presenter = new Presenter();
           this.eventController = new EventController(this, presenter, eventManager, usermanager, roomManager);
           this.messageController = new MessageController(usermanager, this, presenter, messageManager);
-          this.roomController = new RoomController(this, presenter, eventManager, roomManager);
+          this.roomController = new RoomController(this, presenter, roomManager);
           this.name = name;
      }
 

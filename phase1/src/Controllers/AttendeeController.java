@@ -5,29 +5,12 @@ package Controllers;
  */
 public class AttendeeController extends UserController{
 
-    /*private final UserManager usermanager;
-    private final getPresenter() getPresenter();
-    private final EventController eventController;
-    private final getMessageController() getMessageController();
-    private final EventManager eventManager;
-    private final String name;*/
-
     /**
      * Creates and initialize an Attendee controller object
      * @param name name of Attendee
      */
     public AttendeeController(String name){
         super(name);
-        /*getPresenter() = new getPresenter()();
-        usermanager = new UserManager();
-        eventController = new EventController(this, getPresenter());
-        eventManager = eventController.geteManager();
-        getMessageController() = new getMessageController()(usermanager, this, getPresenter());
-        this.name = name;*/
-        //makeNewAccount();
-        //if(usermanager.login(name, password) && usermanager.getOrganizers().contains(usermanager.getUser(name))){
-        //  OrganizerController.name = name;
-        //}
     }
 
     /**

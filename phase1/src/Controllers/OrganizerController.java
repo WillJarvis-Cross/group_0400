@@ -1,19 +1,9 @@
 package Controllers;
 
-import java.time.LocalDateTime;
-import Entities.Event;
 /** Represents the controller for organiser manager object
  * @author group 400
  */
 public class OrganizerController extends UserController{
-
-    /*private final UserManager usermanager;
-    private final Presenter presenter;
-    private final EventController eventController;
-    private final MessageController messageController;
-    private final EventManager eventManager;
-    private final String name;
-*/
 
     /**
      * Creates and initialize an organizer controller object
@@ -22,18 +12,11 @@ public class OrganizerController extends UserController{
      */
     public OrganizerController(String name){
         super(name);
-        /*presenter = new Presenter();
-        usermanager = new UserManager();
-        eventController = new EventController(this, presenter);
-        eventManager = eventController.geteManager();
-        messageController = new MessageController(usermanager, this, presenter);
-        this.name = name;
-        makeNewAccount();*/
-        //if(usermanager.login(name, password) && usermanager.getOrganizers().contains(usermanager.getUser(name))){
-          //  OrganizerController.name = name;
-        //}
     }
 
+    /**
+     * Makes a new Organizer using the user's name and the inputed password
+     */
     public void makeNewAccount(){
         String input = getPresenter().printLogin();
         if (input.equals("2")){
@@ -55,19 +38,6 @@ public class OrganizerController extends UserController{
             makeNewAccount();
         }
     }
-
-    /*public void loginExistingAccount(){
-        while (true){
-            String password = presenter.printPassword();
-            if (usermanager.login(name, password)){
-                break;
-            }
-            else{
-                presenter.printInvalidInput();
-            }
-        }
-        mainMenu();
-    }*/
 
     /**
      * Uses the presenter to show the main menu for the organizer and perform certain
@@ -176,7 +146,4 @@ public class OrganizerController extends UserController{
             else{ System.out.println("No event exists at that time and place. Use addEvent"); }
         }
     }*/
-
-
-
 }
