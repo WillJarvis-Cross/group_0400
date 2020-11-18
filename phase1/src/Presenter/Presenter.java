@@ -236,15 +236,29 @@ public class Presenter {
         return sc.nextLine();
     }
 
+    /**
+     * Prints that the message the user inputs has been sent
+     *
+     */
     public void printMessageSent(){
         System.out.println("Message Sent!");
     }
 
+    /**
+     * Prompts the user to enter the name of the new event
+     *
+     * @return User input
+     */
     public String printNameOfEvent(){
         System.out.println("Enter the name of the new event or enter 0 to go back to the main menu");
         return sc.nextLine();
     }
 
+    /**
+     * Prompts the user to enter the time of the event in the form yyyy/mm/dd/hh
+     *
+     * @return LocalDateTime of the User input
+     */
     public LocalDateTime printTimeOfEvent(){
         System.out.println("Enter the time of the new event in the form yyyy/mm/dd/hh (in military time) or enter 0 " +
                 "to go back to the main menu");
@@ -293,83 +307,168 @@ public class Presenter {
         return printTimeOfEvent();
     }
 
+    /**
+     * Prompts the user to enter the duration of the event
+     *
+     * @return User input
+     */
     public int printDurationOfEvent(){
         System.out.println("Enter the duration of the event in hours");
         return Integer.parseInt(sc.nextLine());
     }
 
+    /**
+     * Prompts the user to enter the speaker of the event
+     *
+     * @return User input
+     */
     public String printSpeakerOfEvent(){
         System.out.println("Who do you want to be the speaker of the event?");
         return sc.nextLine();
     }
 
+    /**
+     * Prompts the user to enter the name of the room
+     *
+     * @return User input
+     */
     public String printRoomNumber(){
         System.out.println("What will the room be called");
         return sc.nextLine();
     }
 
+    /**
+     * Prints that the event was successfully created
+     *
+     */
     public void printEventCreated(){
         System.out.println("Event created successfully");
     }
 
+    /**
+     * Prompts the user for the name of the speaker
+     *
+     * @return User input
+     */
     public String printNameSpeaker(){
         System.out.println("Enter the name of the speaker");
         return sc.nextLine();
     }
 
+    /**
+     * Prompts the user for the password of the speaker
+     *
+     * @return User input
+     */
     public String getPassSpeaker(){
         System.out.println("Enter the speaker's password");
         return sc.nextLine();
     }
 
+    /**
+     * Prompts the user for the name of the speaker
+     *
+     * @return User input
+     */
     public String getEventName(){
         System.out.println("Enter the event you want to sign up for or enter 0 to go back to the main menu");
         return sc.nextLine();
     }
 
+    /**
+     * Prints that the username the user inputs is invalid
+     *
+     */
     public void printInvalidUsername(){
         System.out.println("That username is taken, please try again");
     }
 
+    /**
+     * Prints that the user has been signed up for a particular event
+     *
+     */
     public void printSignedUp(String eventName){
         System.out.println("You have been signed up for "+ eventName);
     }
 
+    /**
+     * Prints that the user could not be signed up for a particular event
+     *
+     * @param eventName
+     */
     public void printNotSignedUp(String eventName){
         System.out.println("You could not be signed up for "+ eventName+", please try again");
     }
 
+    /**
+     * Prompts the user to enter the event that they want to cancel
+     *
+     * @return User input
+     */
     public String printDeleteEvent(){
         System.out.println("Enter which event you want to cancel");
         return sc.nextLine();
     }
 
+    /**
+     * Prints that the user's spot in the event was removed
+     *
+     */
     public void printRemovedEvent(){
         System.out.println("Successfully canceled your spot in the event");
     }
 
+    /**
+     * Prints that the user's spot in the event could not be removed
+     *
+     */
     public void printCantRemove(){
         System.out.println("Could not remove you from the event");
     }
 
+    /**
+     * Prompts the user to enter an event they want to know more about
+     *
+     * @return User input
+     */
     public String printSpecificEvent(){
         System.out.println("Enter one of these events to see more specific information about them or press enter to" +
                 " go back to the main menu");
         return sc.nextLine();
     }
 
+    /**
+     * Prints the event information of a specific event
+     *
+     * @param info
+     */
     public void printSpecificEventInfo(String info){
         System.out.println(info);
     }
 
+    /**
+     * Prompts the user to enter the room capacity of a room
+     *
+     * @return User input
+     */
     public int printRoomCapacity(){
         System.out.println("What is the capacity of the room");
         return Integer.parseInt(sc.nextLine());
     }
 
+    /**
+     * Prints that the room was seccessfully added
+     *
+     */
     public void printRoomAdded(){
         System.out.println("Room added successfullly");
     }
+
+    /**
+     * Prints all the events
+     *
+     * @param events
+     */
     public void printAllEvents(List<Event> events){
         System.out.println("Here are all the events");
         for (Event name:events){
@@ -377,11 +476,20 @@ public class Presenter {
         }
     }
 
+    /**
+     * Prompts the user to enter the event they want to delete
+     *
+     * @return User input
+     */
     public String printDeleteWholeEvent(){
         System.out.println("Enter which event to delete or enter 0 to go back to the main menu");
         return sc.nextLine();
     }
 
+    /**
+     * Prints that the event was removed successfully
+     *
+     */
     public void printEventRemoved(){
         System.out.println("Event removed successfully");
     }
