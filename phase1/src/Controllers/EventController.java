@@ -121,7 +121,7 @@ public class EventController {
 
     /**
      * remove Event from event list
-     * @return true if event is deleted false if the event does not exist
+     *
      */
     public void removeEvent(){
         presenter.printAllEvents(eManager.getEvents());
@@ -157,6 +157,10 @@ public class EventController {
         return outString;
     }
 
+    /**
+     * Gets the information of an event that is given by name
+     *
+     */
     public void specificInfo(){
         String newInput = presenter.printSpecificEvent();
 
