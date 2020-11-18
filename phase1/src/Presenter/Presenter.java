@@ -231,12 +231,10 @@ public class Presenter {
      */
     public String printReceivedMessages(StringBuilder messages) {
         System.out.println(messages);
+        if (messages.toString().equals("Messages:")){
+            System.out.println("You have no messages");
+        }
         System.out.println("Enter any key to go back to the main menu");
-        return sc.nextLine();
-    }
-
-    public String printNoMessages(){
-        System.out.println("You have no messages");
         return sc.nextLine();
     }
 

@@ -100,6 +100,9 @@ public class EventController {
      * @return True if attendee is added and false if not added
      */
     public boolean addAttendee(String eventName, String username){
+        if (!eManager.containsEvent(eventName)){
+            return false;
+        }
         Room thisRoom = roomManager.getRoom(eManager.getEvent(eventName).getRoomNum());
         if (thisRoom == null || this.eManager.isAtCapacity(eventName, thisRoom.getCapacity())){
             return false; //full
@@ -134,9 +137,10 @@ public class EventController {
             removeEvent();
         }
         else{
-            userManager.cancelWholeEvent(eManager.getEvent(name).getAttending(), name, eManager.getEvent(name).getSpeaker());
+            Event e = eManager.getEvent(name);
+            userManager.cancelWholeEvent(e.getAttending(), name, eManager.getEvent(name).getSpeaker());
             eManager.removeEvent(name);
-            roomManager.removeEvent(eManager.getEvent(name).getRoomNum(), name);
+            roomManager.removeRoomEvent(e.getRoomNum(), name);
             presenter.printEventRemoved();
             userController.mainMenu();
         }

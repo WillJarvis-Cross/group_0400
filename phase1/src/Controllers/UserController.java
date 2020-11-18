@@ -111,11 +111,6 @@ public abstract class UserController {
 
      public List<String> getMyEvents () {
           return usermanager.getUser(getMyName()).getEvents();
-          /*ArrayList<String> newList = new ArrayList<>();
-          for (Event event : getEventManager().getEventsByUsername(usermanager.getUser(getMyName()))){
-               newList.add(event.getEventName());
-          }
-          return newList;*/
      }
 
      public void removeMyEvent(){

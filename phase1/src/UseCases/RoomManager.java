@@ -71,7 +71,7 @@ public class RoomManager {
      * @param roomNumber
      * @param eventName
      */
-    public void removeEvent(String roomNumber, String eventName) {
+    public void removeRoomEvent(String roomNumber, String eventName) {
         allRooms.get(roomNumber).removeEvent(eventName);
     }
 

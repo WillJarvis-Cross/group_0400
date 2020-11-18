@@ -84,6 +84,10 @@ public class EventManager {
         return eventList;
     }
 
+    public boolean containsEvent(String eventName){
+        return events.containsKey(eventName);
+    }
+
     /**
      * Returns a list of all scheduled events the user with the given useName
      * is registered in

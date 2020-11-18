@@ -41,23 +41,18 @@ public class MessageController {
     public void printMyMessages(String name){
         StringBuilder output = new StringBuilder("My Messages:");
         List<Integer> messagesIds = userManager.getUser(name).getMessageInbox();
-        if (messagesIds.size() == 0){
-            presenter.printReceivedMessages(output);
-            String input = presenter.printNoMessages();
-        }
-        else{
-            ArrayList<Message> messages = messageManager.getMyMessages(messagesIds);
-            // I do this loop counting backwards so it prints the messages based on which was most recent
-            for (int i = messages.size() - 1; i >= 0; i--){
-                output.append(messages.get(i).getSender());
-                output.append(": ");
-                output.append(messages.get(i).getContent());
-                output.append("\n");
-            }
-            String input = presenter.printReceivedMessages(output);
-        }
-        userController.mainMenu();
 
+        ArrayList<Message> messages = messageManager.getMyMessages(messagesIds);
+        // I do this loop counting backwards so it prints the messages based on which was most recent
+        for (int i = messages.size() - 1; i >= 0; i--){
+            output.append(messages.get(i).getSender());
+            output.append(": ");
+            output.append(messages.get(i).getContent());
+            output.append("\n");
+        }
+        String input = presenter.printReceivedMessages(output);
+
+        userController.mainMenu();
     }
 
     /**
