@@ -79,7 +79,7 @@ public class UserManager implements Serializable {
      * @param pass The password of the new organizer
      */
     public void addOrganizer(String name, String pass){
-        Organizer newOrganizer = new Organizer(name, pass);
+        Organizer newOrganizer = new Organizer(pass, name);
         allOrganizers.put(name, newOrganizer);
         allUsers.put(name, newOrganizer);
     }
@@ -107,14 +107,14 @@ public class UserManager implements Serializable {
      * @param pass The password of the new speaker
      */
     public void addSpeaker(String name, String pass){
-        Speaker newSpeaker = new Speaker(name, pass);
+        Speaker newSpeaker = new Speaker(pass, name);
         allSpeakers.put(name, newSpeaker);
         allUsers.put(name, newSpeaker);
     }
-    public void addSpeaker(Speaker newSpeaker){
+    /*public void addSpeaker(Speaker newSpeaker){
         allSpeakers.put(newSpeaker.getUsername(), newSpeaker);
         allUsers.put(newSpeaker.getUsername(), newSpeaker);
-    }
+    }*/
 
     /**
      * Returns true if name is not already in the list of users. Return false otherwise.
