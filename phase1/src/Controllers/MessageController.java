@@ -1,11 +1,9 @@
 package Controllers;
 
-import Entities.Message;
 import UseCases.MessageManager;
 import UseCases.UserManager;
 import Presenter.Presenter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -44,12 +42,11 @@ public class MessageController {
         StringBuilder output = new StringBuilder("My Messages:\n");
         List<Integer> messagesIds = userManager.getUser(name).getMessageInbox();
 
-        ArrayList<Message> messages = messageManager.getMyMessages(messagesIds);
         // I do this loop counting backwards so it prints the messages based on which was most recent
-        for (int i = messages.size() - 1; i >= 0; i--){
-            output.append(messages.get(i).getSender());
+        for (int i = messagesIds.size() - 1; i >= 0; i--){
+            output.append(messageManager.getMyMessages(messagesIds).get(i).getSender());
             output.append(": ");
-            output.append(messages.get(i).getContent());
+            output.append(messageManager.getMyMessages(messagesIds).get(i).getContent());
             output.append("\n");
         }
         String input = presenter.printReceivedMessages(output);

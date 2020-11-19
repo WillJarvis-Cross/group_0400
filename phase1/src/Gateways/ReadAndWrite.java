@@ -45,7 +45,7 @@ public class ReadAndWrite {
      * assign information depend on the user command
      * @param userType string to be pass in by user
      * @param name username entered from user
-     * @return
+     * @return The new UserController
      */
     public UserController controllerDeserialize(String userType, String name){
             try

@@ -108,6 +108,7 @@ public class EventManager implements Serializable {
     /**
      * Returns a list of all scheduled events the user with the given useName
      * is registered in
+     * @param person the person whose events it is returning
      * @return An ArrayList of events
      */
     public ArrayList<Event> getEventsByUsername(User person){
@@ -118,22 +119,35 @@ public class EventManager implements Serializable {
         return eventList;
     }
 
+    /**
+     * Returns a list of all scheduled events the user with the given useName is registered
+     * in except for one given event
+     * @param person The person whose events it is returning
+     * @param event The event we are not including in the arraylist
+     * @return An ArrayList of events
+     */
+    public ArrayList<Event> getEventsExceptOne(User person, Event event){
+        ArrayList<Event> eventList = new ArrayList<>();
+        for (String e: person.getEvents()){
+            eventList.add(events.get(e));
+        }
+        eventList.remove(event);
+        return eventList;
+    }
 
     /**
      * Returns a list of all scheduled events the speaker with the given speakerName
      * is registered in
-     * @param speakerName The name of the speaker.
+     * @param speaker The speaker.
      * @return An ArrayList of events that the speakerName is speaking at.
      */
-    public ArrayList<Event> getEventsBySpeaker(String speakerName){
+    /*public ArrayList<Event> getEventsBySpeaker(User speaker){
         ArrayList<Event> eventList = new ArrayList<> ();
-        for (Event event: getEvents()){
-            if (event.getSpeaker().equals(speakerName)){
-                eventList.add(event);
-            }
+        for (String event: speaker.getEvents()){
+            eventList.add(events.get(event));
         }
         return eventList;
-    }
+    }*/
 
     /**
      * Adds the person with the given username to the given event
@@ -162,7 +176,6 @@ public class EventManager implements Serializable {
      * @return true when the user is removed and false otherwise
      */
     public boolean removeAttendee(String eventName, String username){
-        System.out.println(events);
         if (!events.containsKey(eventName)){
             return false;
         }
