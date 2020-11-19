@@ -8,9 +8,16 @@ import Controllers.*;
  * sent and received the message, and the id of the message
  * @author group 0400
  */
+
 public class ReadAndWrite {
     private static final String fileName = "saveFile";
-        public void objectSerialize(Object controller){
+
+    /**
+     * establish connection to output file and serialize controller
+     * store information to file and try to catch error
+     * @param controller the object that is being serialized to file
+     */
+    public void objectSerialize(Object controller){
             try
             {
                 //Saving of object in a file
@@ -33,7 +40,14 @@ public class ReadAndWrite {
 
         }
 
-        public UserController controllerDeserialize(String userType, String name){
+    /**
+     * load information from file by deserialize information
+     * assign information depend on the user command
+     * @param userType string to be pass in by user
+     * @param name username entered from user
+     * @return
+     */
+    public UserController controllerDeserialize(String userType, String name){
             try
             {
                 UserController user = null;
