@@ -21,7 +21,7 @@ public class Presenter {
      * @return User input
      */
     public String printLogin() {
-        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("Select an option by entering the corresponding numbers");
         System.out.println("1: Login");
         System.out.println("2: Create an account");
         return sc.nextLine();
@@ -74,7 +74,7 @@ public class Presenter {
      *
      */
     public void printInvalidInput() {
-        System.out.println("The username or password is incorrect, please try again");
+        System.out.println("The input is incorrect, please try again");
     }
 
     /**
