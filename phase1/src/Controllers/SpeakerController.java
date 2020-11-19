@@ -67,7 +67,12 @@ public class SpeakerController extends UserController implements Serializable {
             }
             else if (input.equals("3")){
                 getPresenter().printSpeakerEvents(getMyEvents());
-                getEventController().specificInfo();
+                if (getMyEvents().size() > 0){
+                    getEventController().specificInfo();
+                }
+                else{
+                    mainMenu();
+                }
                 break;
             }
             else if (input.equals("4")){

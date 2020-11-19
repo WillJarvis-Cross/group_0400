@@ -181,7 +181,7 @@ public class Presenter {
     public void printSpeakerEvents(List<String> events) {
         if (events.isEmpty())
         {
-
+            System.out.println("You have no events");
         }
         else{
             System.out.println("Here is a list of events you are speaking at");
@@ -321,7 +321,6 @@ public class Presenter {
             if (monthInt < 13 && dayInt < 32 && hourInt < 18 && hourInt > 8){
                 return LocalDateTime.of(year, monthInt, dayInt, hourInt, 0);
             }
-            return null;
         }
         System.out.println("Invalid input, please try again");
         return printTimeOfEvent();

@@ -25,7 +25,8 @@ public class Message implements Serializable {
         this.content = content;
         this.sender = sender;
         this.receiver = receiver;
-        messageId = numMessages;
+        this.messageId = numMessages;
+        System.out.println(numMessages);
         numMessages ++;
     }
 

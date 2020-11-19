@@ -40,7 +40,7 @@ public class MessageController {
      * @param name The name of the person whose messages are being printed
      */
     public void printMyMessages(String name){
-        StringBuilder output = new StringBuilder("My Messages:");
+        StringBuilder output = new StringBuilder("My Messages:\n");
         List<Integer> messagesIds = userManager.getUser(name).getMessageInbox();
 
         ArrayList<Message> messages = messageManager.getMyMessages(messagesIds);

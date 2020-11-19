@@ -75,7 +75,12 @@ public class AttendeeController extends UserController implements Serializable {
             }
             else if (input.equals("5")){
                 getPresenter().printAttendeeEvents(getMyEvents());
-                getEventController().specificInfo();
+                if (getMyEvents().size() > 0){
+                    getEventController().specificInfo();
+                }
+                else{
+                    mainMenu();
+                }
                 break;
             }
             else if (input.equals("6")){

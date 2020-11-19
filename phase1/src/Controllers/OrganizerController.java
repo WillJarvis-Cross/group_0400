@@ -99,7 +99,12 @@ public class OrganizerController extends UserController implements Serializable 
             }
             else if (input.equals("11")){
                 getPresenter().printAttendeeEvents(getMyEvents());
-                getEventController().specificInfo();
+                if (getMyEvents().size() > 0){
+                    getEventController().specificInfo();
+                }
+                else{
+                    mainMenu();
+                }
                 break;
             }
             else if (input.equals("12")){
