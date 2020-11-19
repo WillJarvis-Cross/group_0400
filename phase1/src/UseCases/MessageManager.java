@@ -10,6 +10,8 @@ import java.util.List;
  */
 
 public class MessageManager implements Serializable {
+
+    private int numMessages = 0;
     private ArrayList<Message> messageList = new ArrayList<>();
 
     /**
@@ -19,10 +21,10 @@ public class MessageManager implements Serializable {
      * @param content Content of the message
      */
     public void sendMessage(User sender, User receiver, String content){
-        Message message = new Message(content, sender.getUsername(), receiver.getUsername());
+        Message message = new Message(content, sender.getUsername(), receiver.getUsername(), numMessages);
         messageList.add(message);
-        receiver.addMessage(message.getMessageId());
-
+        receiver.addMessage(numMessages);
+        numMessages++;
     }
     /**
      * Returns a message object with the given id

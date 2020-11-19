@@ -8,7 +8,6 @@ import java.lang.String;
  */
 public class Message implements Serializable {
 
-    private static int numMessages = 0; // This is the total number of messages sent
     private final String content; // This message's content
     private final String sender; // The user who sent the message
     private final String receiver; // The user receiving the message
@@ -21,12 +20,11 @@ public class Message implements Serializable {
      * @param sender The name of the user who sent the message
      * @param receiver The name of the user who received the message
      */
-    public Message(String content, String sender, String receiver){
+    public Message(String content, String sender, String receiver, int numMessages){
         this.content = content;
         this.sender = sender;
         this.receiver = receiver;
         this.messageId = numMessages;
-        numMessages ++;
     }
 
     /**
