@@ -61,6 +61,17 @@ public class Presenter {
     }
 
     /**
+     * Asks the user if they want to re-login after exiting
+     * @return whether or not the user wants to log in again
+     */
+    public boolean relog() {
+        System.out.println("Do you want to log in again or exit the program?");
+        System.out.println("1: Log in Again");
+        System.out.println("2: Exit");
+        return (sc.nextLine().equals("1"));
+    }
+
+    /**
      * Asks the user for their username or to create a new one
      *
      * @return User input

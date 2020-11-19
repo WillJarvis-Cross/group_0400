@@ -17,26 +17,29 @@ public class Main{
         UserController user = null;
         Presenter presenter = new Presenter();
         ReadAndWrite readWriter = new ReadAndWrite();
-        String userType = presenter.printAttendeeOrOrganizer();
-        String name = presenter.printUsername();
-        String load = presenter.loadFromSave();
-        if (load.equals("1")) {
-            user = readWriter.controllerDeserialize(userType, name);
-        } else {
-            switch (userType) {
-                case "1":
-                    user = new AttendeeController(name);
-                    break;
-                case "2":
-                    user = new OrganizerController(name);
-                    break;
-                case "3":
-                    user = new SpeakerController(name);
-                    break;
+        do{
+            String userType = presenter.printAttendeeOrOrganizer();
+            String name = presenter.printUsername();
+            String load = presenter.loadFromSave();
+
+            if (load.equals("1")) {
+                user = readWriter.controllerDeserialize(userType, name);
+            } else {
+                switch (userType) {
+                    case "1":
+                        user = new AttendeeController(name);
+                        break;
+                    case "2":
+                        user = new OrganizerController(name);
+                        break;
+                    case "3":
+                        user = new SpeakerController(name);
+                        break;
+                }
             }
-        }
-        if (presenter.saveWhenExit().equals("1")) {
-            readWriter.objectSerialize(user);
-        }
+            if (presenter.saveWhenExit().equals("1")) {
+                readWriter.objectSerialize(user);
+            }
+        } while(presenter.relog());
     }
 }
