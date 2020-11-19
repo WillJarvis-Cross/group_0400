@@ -21,7 +21,17 @@ public class OrganizerController extends UserController implements Serializable 
         super(name);
     }
 
-    public OrganizerController(String name, UserManager userManager, EventManager eventManager, MessageManager messageManager, RoomManager roomManager){
+    /**
+     * Creates an OrganizerController given the user's name and all the use cases
+     * This constructor is used for when the user is loading saved files
+     * @param name The name of the user
+     * @param userManager The UserManager
+     * @param eventManager The EventManager
+     * @param messageManager The MessageManager
+     * @param roomManager The RoomManager
+     */
+    public OrganizerController(String name, UserManager userManager, EventManager eventManager,
+                               MessageManager messageManager, RoomManager roomManager){
         super(name, userManager, eventManager, messageManager, roomManager);
     }
 

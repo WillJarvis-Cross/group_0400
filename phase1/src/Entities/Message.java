@@ -15,7 +15,7 @@ public class Message implements Serializable {
 
     /**
      * Constructs a new message with content, sender, and receiver which is inputted. The message id is given a value
-     * based on how many messages have been created so far. The number of total messages increases by one.
+     * based on how many messages have been created so far.
      * @param content The content of the message
      * @param sender The name of the user who sent the message
      * @param receiver The name of the user who received the message

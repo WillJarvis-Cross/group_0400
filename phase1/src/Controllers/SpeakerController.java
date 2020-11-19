@@ -1,6 +1,5 @@
 package Controllers;
 
-
 import UseCases.EventManager;
 import UseCases.MessageManager;
 import UseCases.RoomManager;
@@ -21,7 +20,17 @@ public class SpeakerController extends UserController implements Serializable {
         super(name);
     }
 
-    public SpeakerController(String name, UserManager userManager, EventManager eventManager, MessageManager messageManager, RoomManager roomManager){
+    /**
+     * Creates a SpeakerController given the user's name and all the use cases
+     * This constructor is used for when the user is loading saved files
+     * @param name The name of the user
+     * @param userManager The UserManager
+     * @param eventManager The EventManager
+     * @param messageManager The MessageManager
+     * @param roomManager The RoomManager
+     */
+    public SpeakerController(String name, UserManager userManager, EventManager eventManager,
+                             MessageManager messageManager, RoomManager roomManager){
         super(name, userManager, eventManager, messageManager, roomManager);
     }
 

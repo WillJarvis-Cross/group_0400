@@ -11,8 +11,8 @@ import java.util.List;
 
 public class MessageManager implements Serializable {
 
-    private int numMessages = 0;
-    private ArrayList<Message> messageList = new ArrayList<>();
+    private int numMessages = 0; // The total number of messages
+    private ArrayList<Message> messageList = new ArrayList<>(); // arraylist of all the messages
 
     /**
      * Creates a Message with the given sender, receiver and content

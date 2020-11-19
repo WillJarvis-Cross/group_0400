@@ -1,18 +1,7 @@
-
-/** Contains the main method for the program
- * @auther group 400
- */
-import Entities.Attendee;
 import Presenter.*;
 import Controllers.*;
 import Gateways.*;
-import UseCases.EventManager;
-import UseCases.MessageManager;
-import UseCases.RoomManager;
-import UseCases.UserManager;
 
-
-import java.util.ArrayList;
 import java.lang.String;
 
 /** Represents the main method that will be launched
@@ -21,7 +10,7 @@ import java.lang.String;
 public class Main{
     /**
      * Main method where the controllers will be called from and data will be loaded/saved
-     * Kinda messy and incomplete for now, but will finish when gateway class is ready
+     *
      * @param args
      */
     public static void main(String[] args) {

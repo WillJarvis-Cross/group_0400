@@ -13,10 +13,10 @@ import java.util.Set;
  * @author group 400
  */
 public class MessageController {
-    MessageManager messageManager;
-    UserManager userManager;
-    UserController userController;
-    Presenter presenter;
+    private final MessageManager messageManager;
+    private final UserManager userManager;
+    private final UserController userController;
+    private final Presenter presenter;
 
     /**
      * Creates a new MessageController with the already created managers
@@ -25,7 +25,8 @@ public class MessageController {
      * @param presenter The Presenter
      * @param messageManager The MessageManager
      */
-    public MessageController(UserManager userManager, UserController userController, Presenter presenter, MessageManager messageManager){
+    public MessageController(UserManager userManager, UserController userController, Presenter presenter,
+                             MessageManager messageManager){
         this.messageManager = messageManager;
         this.userManager = userManager;
         this.userController = userController;

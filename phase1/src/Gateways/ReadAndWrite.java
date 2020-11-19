@@ -1,13 +1,13 @@
 package Gateways;
 
 import java.io.*;
-import java.util.Hashtable;
-import java.util.Set;
 
 import Controllers.*;
-import Entities.*;
-import UseCases.*;
 
+/** This is an entity for a Message which contains the content of the message, the name of the users who
+ * sent and received the message, and the id of the message
+ * @author group 0400
+ */
 public class ReadAndWrite {
     private static final String fileName = "saveFile";
         public void objectSerialize(Object controller){

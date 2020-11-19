@@ -1,14 +1,10 @@
 package Controllers;
 
-import Entities.*;
 import Presenter.Presenter;
 import UseCases.*;
 
-import java.util.ArrayList;
 import java.lang.String;
 
-import java.util.Hashtable;
-import java.util.Set;
 
 /** Represents the controller for RoomManager.
  * @author group 400
@@ -17,7 +13,6 @@ import java.util.Set;
 public class RoomController {
 
     private final RoomManager roomManager;
-
     private final UserController userController;
     private final Presenter presenter;
 
@@ -56,8 +51,7 @@ public class RoomController {
         }
     }
 
-
-    private ArrayList<Room> getRoomList () {
+    /*private ArrayList<Room> getRoomList () {
         ArrayList<Room> roomList = new ArrayList<Room>();
         Hashtable<String, Room> roomHash = this.roomManager.allRooms;
         Set<String> keys = roomHash.keySet();
@@ -65,7 +59,7 @@ public class RoomController {
             roomList.add(roomHash.get(key));
         }
         return roomList;
-    }
+    }*/
 
 
     /**
@@ -73,13 +67,13 @@ public class RoomController {
      *
      * @return a string of all event information to gateway to store
      */
-    public String writeFileRequest(){
+    /*public String writeFileRequest(){
         ArrayList<Room> roomList = getRoomList();
         String outString = "";
         for (int i = 0; i < roomList.size() ;i++){
             outString += roomList.get(i).toString()+",";
         }
         return outString;
-    }
+    }*/
 
 }

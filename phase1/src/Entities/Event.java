@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * @author group 0400
  */
 public class Event implements Serializable {
-    // Time is the time the event is scheduled for in the form yyyy-mm-ddT11:00
+    // Time is the time the event is scheduled for in the form yyyy-mm-ddThh:mm
     private String time;
     private int duration; // The duration of the event (in hours)
     private String speaker; // The speaker at the event
@@ -21,7 +21,7 @@ public class Event implements Serializable {
 
 
     /**
-     * Constructs an event with the given parameters. Also chooses format for how the time of the event is displayed
+     * Constructs an event with the given parameters.
      * @param time The time the event occurs at
      * @param duration How long the event is in hours
      * @param speaker The speaker speaking at the event
@@ -35,12 +35,11 @@ public class Event implements Serializable {
         this.attending = new ArrayList<>();
         this.eventName = eventName;
         this.roomNumber = roomNumber;
-
     }
 
     /**
-     * Returns the time of the event in the form [yyyy, mm, dd, hh, mm]
-     * @return the time of the event in the form [yyyy, mm, dd, hh, mm]
+     * Returns the time of the event in the LocalDateTime object
+     * @return the time of the event in the LocalDateTime object
      */
     public LocalDateTime getTime() {
         return LocalDateTime.parse(time);
@@ -113,7 +112,8 @@ public class Event implements Serializable {
      * @return a string of the properties of the event formatted nicely
      */
     public String toString(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); // The format that the time of the event is printed
+        // The format that the time of the event is printed
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return "Event: "+ eventName+ "\nSpeaker: "+ speaker+ "\nDate: "+
                 getTime().format(formatter)+ "\nDuration: "+ duration+ " hour"+"\nRoom: "+roomNumber;
     }

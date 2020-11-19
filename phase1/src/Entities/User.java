@@ -1,9 +1,9 @@
 package Entities;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
-import java.time.LocalDateTime;
 
 /** This is an entity for a User who is an organizer
  * @author group 0400

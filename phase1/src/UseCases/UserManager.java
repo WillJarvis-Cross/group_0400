@@ -55,10 +55,6 @@ public class UserManager implements Serializable {
         allAttendees.put(name, newAttendee);
         allUsers.put(name, newAttendee);
     }
-    public void addAttendee(Attendee newAttendee){
-        allAttendees.put(newAttendee.getUsername(), newAttendee);
-        allUsers.put(newAttendee.getUsername(), newAttendee);
-    }
 
     /**
      * Returns a Hashtable of all Organizers
@@ -82,10 +78,6 @@ public class UserManager implements Serializable {
         Organizer newOrganizer = new Organizer(pass, name);
         allOrganizers.put(name, newOrganizer);
         allUsers.put(name, newOrganizer);
-    }
-    public void addOrganizer(Organizer newOrganizer){
-        allOrganizers.put(newOrganizer.getUsername(), newOrganizer);
-        allUsers.put(newOrganizer.getUsername(), newOrganizer);
     }
 
     /**
@@ -111,15 +103,11 @@ public class UserManager implements Serializable {
         allSpeakers.put(name, newSpeaker);
         allUsers.put(name, newSpeaker);
     }
-    /*public void addSpeaker(Speaker newSpeaker){
-        allSpeakers.put(newSpeaker.getUsername(), newSpeaker);
-        allUsers.put(newSpeaker.getUsername(), newSpeaker);
-    }*/
 
     /**
      * Returns true if name is not already in the list of users. Return false otherwise.
-     * @param name
-     * @return
+     * @param name The person we are trying to add
+     * @return True is the person can be added and false otherwise
      */
     public boolean canAddPerson(String name){
         return !allUsers.containsKey(name);
@@ -138,6 +126,12 @@ public class UserManager implements Serializable {
      */
     public Hashtable<String, User> getUsers(){ return allUsers;}
 
+    /**
+     * Returns true when the speaker can be added to an event
+     * @param time The time of the event
+     * @param events The list of events the speaker is speaking at
+     * @return true when the speaker can be added to an event
+     */
     public boolean canAddSpeaker(LocalDateTime time, List<Event> events){
         for (Event event: events){
             if (event.getTime().equals(time)){

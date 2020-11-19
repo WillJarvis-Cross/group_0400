@@ -69,11 +69,10 @@ public class RoomManager implements Serializable {
 
     /**
      * Removes an event from the room
-     * @param roomNumber
-     * @param eventName
+     * @param roomNumber The name of the room
+     * @param eventName The name of the event being removed
      */
     public void removeRoomEvent(String roomNumber, String eventName) {
         allRooms.get(roomNumber).removeEvent(eventName);
     }
-
 }

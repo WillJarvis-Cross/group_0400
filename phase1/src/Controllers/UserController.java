@@ -1,6 +1,5 @@
 package Controllers;
 
-import Entities.Message;
 import Presenter.Presenter;
 import UseCases.EventManager;
 import UseCases.MessageManager;
@@ -24,6 +23,8 @@ public abstract class UserController implements Serializable {
 
      /**
       * Creates an instance of UserController with the given name
+      * Also initializes the other controllers and use cases
+      * When its done initializing it calls makeNewAccount which is the login/make new account screen for the user
       * @param name Name of the user
       */
      public UserController(String name){
@@ -39,10 +40,8 @@ public abstract class UserController implements Serializable {
           makeNewAccount();
      }
 
-     //This one is for loading saved info
-
      /**
-      *
+      * This constructor is used for when we are loading a file
       * @param name Name of the User
       * @param userManager The UserManager to be stored
       * @param eventManager The EventManager to be stored
@@ -178,7 +177,7 @@ public abstract class UserController implements Serializable {
 
      /**
       * Returns a list of events the user is signed up for
-      * @return List<String>
+      * @return List<String> of the users events they are signed up for
       */
      public List<String> getMyEvents () {
           return usermanager.getUser(getMyName()).getEvents();

@@ -14,7 +14,7 @@ import java.util.Set;
 public class EventManager implements Serializable {
 
 
-    private Hashtable<String, Event> events; //
+    private Hashtable<String, Event> events; // Hashtable of the event name and its corresponding event
     /**
      * Create an instance of eventManager with no scheduled events
      */
@@ -24,7 +24,7 @@ public class EventManager implements Serializable {
 
     /**
      * Create an instance of eventManager with the events listed in the parameter
-     * @param events
+     * @param events The list of events
      */
     public EventManager(ArrayList<Event> events){
         for (Event event: events){
@@ -96,6 +96,11 @@ public class EventManager implements Serializable {
         return eventList;
     }
 
+    /**
+     * returns whether or not an events exists
+     * @param eventName The event we are checking
+     * @return true or false
+     */
     public boolean containsEvent(String eventName){
         return events.containsKey(eventName);
     }
@@ -149,6 +154,13 @@ public class EventManager implements Serializable {
         return this.events.containsKey(eventName);
     }
 
+    /**
+     * If the given attendee can be removed from the given event then it does so and returns true
+     * Otherwise it returns false
+     * @param eventName The event in question
+     * @param username The user being removed from the above event
+     * @return true when the user is removed and false otherwise
+     */
     public boolean removeAttendee(String eventName, String username){
         System.out.println(events);
         if (!events.containsKey(eventName)){
@@ -219,9 +231,6 @@ public class EventManager implements Serializable {
     public void setSpeaker(String eventName, String speakerName){
         events.get(eventName).setSpeaker(speakerName);
     }
-
-    //returns true if the event occurs entirely within conference hours
-    //we are assuming all events start on the hour
 
     /**
      * Returns true if the event occurs between 9am and 5pm. Returns false otherwise.

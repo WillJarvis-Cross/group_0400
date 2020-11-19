@@ -12,7 +12,6 @@ import java.util.Scanner;
  */
 public class Presenter {
 
-    //private Scanner sc;
     private Scanner sc = new Scanner(System.in);
 
     /**
@@ -27,6 +26,10 @@ public class Presenter {
         return sc.nextLine();
     }
 
+    /**
+     * Asks the user what type of user they are and returns their answer
+     * @return what type of user this user is
+     */
     public String printAttendeeOrOrganizer(){
         System.out.println("Are you an attendee, organizer, or a speaker?");
         System.out.println("1: Attendee");
@@ -35,6 +38,10 @@ public class Presenter {
         return sc.nextLine();
     }
 
+    /**
+     * Asks the user if they want to load saved files and returns their answer
+     * @return whether or not the user wants to load the saved files
+     */
     public String loadFromSave(){
         System.out.println("Do you want to load saved files? (Only load if you have previously saved)");
         System.out.println("1: Yes");
@@ -42,6 +49,10 @@ public class Presenter {
         return sc.nextLine();
     }
 
+    /**
+     * Asks the user if they want to save their progress and returns their answer
+     * @return whether or not the user wants to save their progress
+     */
     public String saveWhenExit(){
         System.out.println("Do you want to save the changes made this session?");
         System.out.println("1: Yes");
@@ -287,7 +298,7 @@ public class Presenter {
             return null;
         }
         List<String> time = Arrays.asList(thisTime.split("/"));
-        if (time.size() == 4){
+        if (time.size() == 4){ // valid time
             int year = Integer.parseInt(time.get(0));
 
             int monthInt;
@@ -295,7 +306,7 @@ public class Presenter {
             int hourInt;
 
             String monthString = time.get(1);
-            if (monthString.startsWith("0")){
+            if (monthString.startsWith("0")){ // I want months entered as "4" instead of "04"
                 monthInt = Integer.parseInt(String.valueOf(monthString.charAt(1)));
             }
             else{
@@ -303,7 +314,7 @@ public class Presenter {
             }
 
             String dayString = time.get(2);
-            if (monthString.startsWith("0")){
+            if (dayString.startsWith("0")){
                 dayInt = Integer.parseInt(String.valueOf(dayString.charAt(1)));
             }
             else{

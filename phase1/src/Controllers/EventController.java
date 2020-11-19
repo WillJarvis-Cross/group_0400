@@ -18,30 +18,23 @@ import java.time.LocalDateTime;
  */
 public class EventController {
 
-    private EventManager eManager;
-    private UserManager userManager;
-    private RoomManager roomManager;
-    private UserController userController;
-    private Presenter presenter;
+    private final EventManager eManager;
+    private final UserManager userManager;
+    private final RoomManager roomManager;
+    private final UserController userController;
+    private final Presenter presenter;
 
     /**
      * initialize a clean EventController with given UserController,
      * EventManager, UserManager, Presenter, and RoomManager
      */
-    public EventController(UserController userController, Presenter presenter, EventManager eManager, UserManager userManager, RoomManager roomManager){
+    public EventController(UserController userController, Presenter presenter, EventManager eManager,
+                           UserManager userManager, RoomManager roomManager){
         this.eManager = eManager;
         this.userManager = userManager;
         this.roomManager = roomManager;
         this.userController = userController;
         this.presenter = presenter;
-    }
-
-    /**
-     * initialize a EventController with a already defined manager
-     * @param manager The already defined EventManager
-     */
-    public EventController(EventManager manager){
-        eManager = manager;
     }
 
     /**
@@ -149,14 +142,14 @@ public class EventController {
      *
      * @return a string of all event information to gateway to store
      */
-    public String writeFileRequest(){
+    /*public String writeFileRequest(){
         ArrayList<Event> eventList = this.eManager.getEvents();
         String outString = "";
         for (int i = 0; i < eventList.size() ;i++){
             outString += eventList.get(i).toString()+",";
         }
         return outString;
-    }
+    }*/
 
     /**
      * prints the information of an event that is given by name

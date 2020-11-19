@@ -20,7 +20,17 @@ public class AttendeeController extends UserController implements Serializable {
         super(name);
     }
 
-    public AttendeeController(String name, UserManager userManager, EventManager eventManager, MessageManager messageManager, RoomManager roomManager){
+    /**
+     * Creates an AttendeeController given the user's name and all the use cases
+     * This constructor is used for when the user is loading saved files
+     * @param name The name of the user
+     * @param userManager The UserManager
+     * @param eventManager The EventManager
+     * @param messageManager The MessageManager
+     * @param roomManager The RoomManager
+     */
+    public AttendeeController(String name, UserManager userManager, EventManager eventManager,
+                              MessageManager messageManager, RoomManager roomManager){
         super(name, userManager, eventManager, messageManager, roomManager);
     }
     /**
