@@ -1,32 +1,38 @@
 package Entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
 
 /** This is an entity for a Room which contains the name of the room, the room's capacity, and the events that are
  * in the room
  * @author group 0400
  */
-public class Room {
+public class Room implements Serializable {
 
     private String roomNumber; // The room number of the room
 
     // The Events that is in the room and what time the events are happening
-    private Hashtable<String, LocalDateTime> events;
+    private Hashtable<String, String> events;
     private int capacity; // The number of attendees allowed in the room
-    private final DateTimeFormatter formatter; // The format that the time of the event is printed
 
     /**
      * Constructs a room given its name and its capacity. It also initializes a hashtable of events in the room
      * @param roomNumber The name of the room
-     * @param capactiy The maximum amount of attendees allowed in the room
+     * @param capacity The maximum amount of attendees allowed in the room
      */
     public Room(String roomNumber, int capacity) {
         this.roomNumber = roomNumber;
         this.capacity = capacity;
         this.events = new Hashtable<>();
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    }
+
+    /**
+     * Returns the LocalDateTime object refering to the string
+     * @return The LocalDateTime object refering to the string
+     */
+    public LocalDateTime getTime(String time) {
+        return LocalDateTime.parse(time);
     }
 
     /**
@@ -38,7 +44,7 @@ public class Room {
         boolean timeTaken = false;
         for (String event : events.keySet())
         {
-            if (events.get(event) == time)
+            if (getTime(events.get(event)) == time)
             {
                 timeTaken = true;
             }
@@ -53,7 +59,7 @@ public class Room {
      * @param time The time of this new event
      */
     public void addEvent(String eventName, LocalDateTime time) {
-        events.put(eventName, time);
+        events.put(eventName, time.toString());
     }
 
     /**

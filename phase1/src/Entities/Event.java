@@ -11,14 +11,14 @@ import java.time.format.DateTimeFormatter;
  * @author group 0400
  */
 public class Event implements Serializable {
-    // Time is the time the event is scheduled for in the form [yyyy, mm, dd, hh, mm]
-    private LocalDateTime time;
+    // Time is the time the event is scheduled for in the form yyyy-mm-ddT11:00
+    private String time;
     private int duration; // The duration of the event (in hours)
     private String speaker; // The speaker at the event
     private List<String> attending; // List of people attending the event
     private String eventName; // The name of the event
     private String roomNumber; // The room the event is in
-    private final DateTimeFormatter formatter; // The format that the time of the event is printed
+
 
     /**
      * Constructs an event with the given parameters. Also chooses format for how the time of the event is displayed
@@ -28,14 +28,14 @@ public class Event implements Serializable {
      * @param eventName The name of the event
      * @param roomNumber The room the event is in
      */
-    public Event(LocalDateTime time, int duration, String speaker, String eventName, String roomNumber) {
+    public Event(String time, int duration, String speaker, String eventName, String roomNumber) {
         this.time = time;
         this.duration = duration;
         this.speaker = speaker;
         this.attending = new ArrayList<>();
         this.eventName = eventName;
         this.roomNumber = roomNumber;
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     }
 
     /**
@@ -43,7 +43,7 @@ public class Event implements Serializable {
      * @return the time of the event in the form [yyyy, mm, dd, hh, mm]
      */
     public LocalDateTime getTime() {
-        return time;
+        return LocalDateTime.parse(time);
     }
 
     /**
@@ -51,7 +51,7 @@ public class Event implements Serializable {
      * @param time The new time of the event
      */
     public void setTime(LocalDateTime time) {
-        this.time = time;
+        this.time = time.toString();
     }
 
     /**
@@ -113,7 +113,8 @@ public class Event implements Serializable {
      * @return a string of the properties of the event formatted nicely
      */
     public String toString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); // The format that the time of the event is printed
         return "Event: "+ eventName+ "\nSpeaker: "+ speaker+ "\nDate: "+
-                time.format(formatter)+ "\nDuration: "+ duration+ " hour"+"\nRoom: "+roomNumber;
+                getTime().format(formatter)+ "\nDuration: "+ duration+ " hour"+"\nRoom: "+roomNumber;
     }
 }

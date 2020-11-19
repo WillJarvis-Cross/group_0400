@@ -319,7 +319,10 @@ public class Presenter {
             }
 
             if (monthInt < 13 && dayInt < 32 && hourInt < 18 && hourInt > 8){
-                return LocalDateTime.of(year, monthInt, dayInt, hourInt, 0);
+                LocalDateTime finalTime =  LocalDateTime.of(year, monthInt, dayInt, hourInt, 0);
+                if (finalTime.isAfter(LocalDateTime.now())){
+                    return finalTime;
+                }
             }
         }
         System.out.println("Invalid input, please try again");

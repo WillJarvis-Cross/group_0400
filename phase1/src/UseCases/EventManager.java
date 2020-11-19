@@ -152,7 +152,6 @@ public class EventManager implements Serializable {
     public boolean removeAttendee(String eventName, String username){
         System.out.println(events);
         if (!events.containsKey(eventName)){
-            System.out.println("eav");
             return false;
         }
         Event thisEvent = getEvent(eventName);
@@ -176,7 +175,7 @@ public class EventManager implements Serializable {
      * @param room The name of the room which hosts the event
      */
     public void scheduleEvent(LocalDateTime time, int duration, String speaker, String eName, String room){
-        Event e = new Event(time, duration, speaker, eName, room);
+        Event e = new Event(time.toString(), duration, speaker, eName, room);
         this.events.put(eName, e);
     }
 
@@ -191,7 +190,7 @@ public class EventManager implements Serializable {
      * @return True or false
      */
     public boolean canScheduleEvent(LocalDateTime time, int duration, String speaker, String eName, String room){
-        Event e = new Event(time, duration, speaker, eName, room);
+        Event e = new Event(time.toString(), duration, speaker, eName, room);
         return (!doesOverlap(e)) && (withinHours(e));
     }
 
