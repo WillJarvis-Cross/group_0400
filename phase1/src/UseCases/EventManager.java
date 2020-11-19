@@ -32,6 +32,10 @@ public class EventManager implements Serializable {
         }
     }
 
+    /**
+     * Returns an arraylist with the name of every event
+     * @return an arraylist with the name of every event
+     */
     public ArrayList<String> getAllEventsString(){
         ArrayList<String> allEvents = new ArrayList<>();
         allEvents.addAll(events.keySet());

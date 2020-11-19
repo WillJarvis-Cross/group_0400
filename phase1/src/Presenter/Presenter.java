@@ -386,8 +386,9 @@ public class Presenter {
     }
 
     /**
-     * Prompts the user for the name of the speaker
+     * Lists the events the user can sign up for and asks which event they want to sign up for
      *
+     * @param events The list of events to be printed
      * @return User input
      */
     public String getEventName(List<String> events){
