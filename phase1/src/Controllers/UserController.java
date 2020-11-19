@@ -1,23 +1,25 @@
 package Controllers;
 
+import Entities.Message;
 import Presenter.Presenter;
 import UseCases.EventManager;
 import UseCases.MessageManager;
 import UseCases.RoomManager;
 import UseCases.UserManager;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class UserController {
+public abstract class UserController implements Serializable {
 
      private final UserManager usermanager;
-     private final Presenter presenter;
-     private final EventController eventController;
-     private final MessageController messageController;
+     private transient final Presenter presenter;
+     private transient final EventController eventController;
+     private transient final MessageController messageController;
      private final EventManager eventManager;
      private final MessageManager messageManager;
      private final RoomManager roomManager;
-     private final RoomController roomController;
+     private transient final RoomController roomController;
      private final String name;
 
      /**
@@ -57,6 +59,7 @@ public abstract class UserController {
           this.messageController = new MessageController(usermanager, this, presenter, messageManager);
           this.roomController = new RoomController(this, presenter, roomManager);
           this.name = name;
+          makeNewAccount();
      }
 
      /**
@@ -108,6 +111,14 @@ public abstract class UserController {
      }
 
      /**
+      * Gets the messageManager
+      * @return MessageManager
+      */
+     public MessageManager getMessageManager() {
+          return messageManager;
+     }
+
+     /**
       * Gets the roomController
       * @return RoomController
       */
@@ -115,6 +126,13 @@ public abstract class UserController {
           return roomController;
      }
 
+     /**
+      * Gets the roomManager
+      * @return RoomManager
+      */
+     public RoomManager getRoomManager() {
+          return roomManager;
+     }
      /**
       * Logs the user into their account if they enter the correct password. The user will be taken to the main menu
       * if the password is correct, and the error message will be displayed and the user will enter their password

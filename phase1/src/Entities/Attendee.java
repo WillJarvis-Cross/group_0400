@@ -5,7 +5,7 @@ import java.lang.String;
 /** This is an entity for a User who attends events
  * @author group 0400
  */
-public class Attendee extends User{
+public class Attendee extends User {
 
     /**
      * Constructs a new attendee with the username nameInput and password passwordInput.

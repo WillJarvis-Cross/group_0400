@@ -1,5 +1,7 @@
 package UseCases;
 import Entities.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.lang.String;
 import java.time.LocalDateTime;
@@ -9,7 +11,7 @@ import java.util.Set;
 /** Represents the use case for Event objects
  * @author group 400
  */
-public class EventManager {
+public class EventManager implements Serializable {
 
 
     private Hashtable<String, Event> events; //

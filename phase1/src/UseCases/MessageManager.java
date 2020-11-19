@@ -1,5 +1,7 @@
 package UseCases;
 import Entities.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.lang.String;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.List;
  * @author group 400
  */
 
-public class MessageManager{
+public class MessageManager implements Serializable {
     private ArrayList<Message> messageList = new ArrayList<>();
 
     /**

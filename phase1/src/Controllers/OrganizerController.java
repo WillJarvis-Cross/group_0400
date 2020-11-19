@@ -1,9 +1,16 @@
 package Controllers;
 
+import UseCases.EventManager;
+import UseCases.MessageManager;
+import UseCases.RoomManager;
+import UseCases.UserManager;
+
+import java.io.Serializable;
+
 /** Represents the controller for organiser manager object
  * @author group 400
  */
-public class OrganizerController extends UserController{
+public class OrganizerController extends UserController implements Serializable {
 
     /**
      * Creates and initialize an organizer controller object
@@ -12,6 +19,10 @@ public class OrganizerController extends UserController{
      */
     public OrganizerController(String name){
         super(name);
+    }
+
+    public OrganizerController(String name, UserManager userManager, EventManager eventManager, MessageManager messageManager, RoomManager roomManager){
+        super(name, userManager, eventManager, messageManager, roomManager);
     }
 
     /**

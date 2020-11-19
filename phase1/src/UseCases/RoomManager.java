@@ -1,13 +1,14 @@
 package UseCases;
 import Entities.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Hashtable;
 
 /** Represents the use case for Room objects
  * @author group 0400
  */
-public class RoomManager {
+public class RoomManager implements Serializable {
 
     public Hashtable<String, Room> allRooms; // The room numbers with the corresponding room
 

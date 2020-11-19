@@ -1,9 +1,16 @@
 package Controllers;
 
+import UseCases.EventManager;
+import UseCases.MessageManager;
+import UseCases.RoomManager;
+import UseCases.UserManager;
+
+import java.io.Serializable;
+
 /** Represents the controller for Attendee object
  * @author group 400
  */
-public class AttendeeController extends UserController{
+public class AttendeeController extends UserController implements Serializable {
 
     /**
      * Creates and initialize an Attendee controller object
@@ -13,6 +20,9 @@ public class AttendeeController extends UserController{
         super(name);
     }
 
+    public AttendeeController(String name, UserManager userManager, EventManager eventManager, MessageManager messageManager, RoomManager roomManager){
+        super(name, userManager, eventManager, messageManager, roomManager);
+    }
     /**
      * Creates a new Attendee with the users name and the password they input
      * After, it redirects the user to the main menu

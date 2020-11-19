@@ -35,6 +35,13 @@ public class Presenter {
         return sc.nextLine();
     }
 
+    public String loadFromSave(){
+        System.out.println("Do you want to load saved files?");
+        System.out.println("1: Yes");
+        System.out.println("2: No");
+        return sc.nextLine();
+    }
+
     /**
      * Asks the user for their username or to create a new one
      *

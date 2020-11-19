@@ -2,9 +2,14 @@
 /** Contains the main method for the program
  * @auther group 400
  */
+import Entities.Attendee;
 import Presenter.*;
 import Controllers.*;
 import Gateways.*;
+import UseCases.EventManager;
+import UseCases.MessageManager;
+import UseCases.RoomManager;
+import UseCases.UserManager;
 
 
 import java.util.ArrayList;
@@ -24,12 +29,22 @@ public class Main{
         ReadAndWrite readWriter = new ReadAndWrite();
         String userType = presenter.printAttendeeOrOrganizer();
         String name = presenter.printUsername();
-        if (userType.equals("1")) {
-            new AttendeeController(name);
-        } else if (userType.equals("2")) {
-            new OrganizerController(name);
-        } else if (userType.equals("3")) {
-            new SpeakerController(name);
+        String load = presenter.loadFromSave();
+
+        if (load.equals("1")) {
+            readWriter.controllerDeserialize("saveFile", userType, name);
+        } else {
+            switch (userType) {
+                case "1":
+                    new AttendeeController(name);
+                    break;
+                case "2":
+                    new OrganizerController(name);
+                    break;
+                case "3":
+                    new SpeakerController(name);
+                    break;
+            }
         }
     }
 }
