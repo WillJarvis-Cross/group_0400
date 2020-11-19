@@ -1,4 +1,5 @@
 package Entities;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
@@ -9,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * the people attending, the capacity of the event, the name of the event, and the room its in
  * @author group 0400
  */
-public class Event {
+public class Event implements Serializable {
     // Time is the time the event is scheduled for in the form [yyyy, mm, dd, hh, mm]
     private LocalDateTime time;
     private int duration; // The duration of the event (in hours)

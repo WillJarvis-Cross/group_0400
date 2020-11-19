@@ -25,26 +25,29 @@ public class Main{
      * @param args
      */
     public static void main(String[] args) {
+        UserController user = null;
         Presenter presenter = new Presenter();
         ReadAndWrite readWriter = new ReadAndWrite();
         String userType = presenter.printAttendeeOrOrganizer();
         String name = presenter.printUsername();
         String load = presenter.loadFromSave();
-
         if (load.equals("1")) {
-            readWriter.controllerDeserialize("saveFile", userType, name);
+            user = readWriter.controllerDeserialize(userType, name);
         } else {
             switch (userType) {
                 case "1":
-                    new AttendeeController(name);
+                    user = new AttendeeController(name);
                     break;
                 case "2":
-                    new OrganizerController(name);
+                    user = new OrganizerController(name);
                     break;
                 case "3":
-                    new SpeakerController(name);
+                    user = new SpeakerController(name);
                     break;
             }
+        }
+        if (presenter.saveWhenExit().equals("1")) {
+            readWriter.objectSerialize(user);
         }
     }
 }

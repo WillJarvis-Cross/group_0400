@@ -1,11 +1,12 @@
 package Entities;
+import java.io.Serializable;
 import java.lang.String;
 
 /** This is an entity for a Message which contains the content of the message, the name of the users who
  * sent and received the message, and the id of the message
  * @author group 0400
  */
-public class Message {
+public class Message implements Serializable {
 
     private static int numMessages = 0; // This is the total number of messages sent
     private final String content; // This message's content

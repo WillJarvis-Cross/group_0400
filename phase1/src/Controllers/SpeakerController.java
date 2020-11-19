@@ -75,8 +75,7 @@ public class SpeakerController extends UserController implements Serializable {
                 break;
             }
             else if (input.equals("5")){
-                System.out.println("Still have to do this");
-                //TODO sign out
+                break;
             }
             else{
                 getPresenter().printInvalidInput();

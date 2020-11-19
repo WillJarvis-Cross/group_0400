@@ -36,7 +36,14 @@ public class Presenter {
     }
 
     public String loadFromSave(){
-        System.out.println("Do you want to load saved files?");
+        System.out.println("Do you want to load saved files? (Only load if you have previously saved)");
+        System.out.println("1: Yes");
+        System.out.println("2: No");
+        return sc.nextLine();
+    }
+
+    public String saveWhenExit(){
+        System.out.println("Do you want to save the changes made this session?");
         System.out.println("1: Yes");
         System.out.println("2: No");
         return sc.nextLine();

@@ -79,8 +79,7 @@ public class AttendeeController extends UserController implements Serializable {
                 break;
             }
             else if (input.equals("6")){
-                System.out.println("Still have to do this");
-                //TODO sign out
+                break;
             }
             else{
                 getPresenter().printInvalidInput();

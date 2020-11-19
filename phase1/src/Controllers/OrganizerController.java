@@ -103,8 +103,7 @@ public class OrganizerController extends UserController implements Serializable 
                 break;
             }
             else if (input.equals("12")){
-                System.out.println("Still have to do this");
-                //TODO save
+                break;
             }
             else{
                 getPresenter().printInvalidInput();

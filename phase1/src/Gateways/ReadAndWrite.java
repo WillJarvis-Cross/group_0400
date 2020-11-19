@@ -9,11 +9,12 @@ import Entities.*;
 import UseCases.*;
 
 public class ReadAndWrite {
-        public void objectSerialize(String filename, Object controller){
+    private static final String fileName = "saveFile";
+        public void objectSerialize(Object controller){
             try
             {
                 //Saving of object in a file
-                FileOutputStream file = new FileOutputStream(filename);
+                FileOutputStream file = new FileOutputStream(fileName);
                 ObjectOutputStream out = new ObjectOutputStream(file);
 
                 // Method for serialization of object
@@ -32,17 +33,18 @@ public class ReadAndWrite {
 
         }
 
-        public void controllerDeserialize(String filename, String userType, String name){
+        public UserController controllerDeserialize(String userType, String name){
             try
             {
+                UserController user = null;
                 // Reading the object from a file
-                FileInputStream file = new FileInputStream(filename);
+                FileInputStream file = new FileInputStream(fileName);
                 ObjectInputStream in = new ObjectInputStream(file);
 
                 switch (userType) {
                     case "1": {
                         UserController loaded = (UserController) in.readObject();
-                        new AttendeeController(name, loaded.getUsermanager(),
+                        user = new AttendeeController(name, loaded.getUsermanager(),
                                 loaded.getEventManager(),
                                 loaded.getMessageManager(),
                                 loaded.getRoomManager());
@@ -50,7 +52,7 @@ public class ReadAndWrite {
                     }
                     case "2": {
                         UserController loaded = (UserController) in.readObject();
-                        new OrganizerController(name, loaded.getUsermanager(),
+                        user = new OrganizerController(name, loaded.getUsermanager(),
                                 loaded.getEventManager(),
                                 loaded.getMessageManager(),
                                 loaded.getRoomManager());
@@ -58,7 +60,7 @@ public class ReadAndWrite {
                     }
                     case "3": {
                         UserController loaded = (UserController) in.readObject();
-                        new SpeakerController(name, loaded.getUsermanager(),
+                        user = new SpeakerController(name, loaded.getUsermanager(),
                                 loaded.getEventManager(),
                                 loaded.getMessageManager(),
                                 loaded.getRoomManager());
@@ -68,18 +70,21 @@ public class ReadAndWrite {
 
                 in.close();
                 file.close();
+                return user;
             }
 
             catch(IOException ex)
             {
                 System.out.println("IOException during loading of serialized file");
                 ex.printStackTrace();
+                return null;
             }
 
             catch(ClassNotFoundException ex)
             {
                 System.out.println("ClassNotFoundException during loading of serialized file");
                 ex.printStackTrace();
+                return null;
             }
         }
     }
