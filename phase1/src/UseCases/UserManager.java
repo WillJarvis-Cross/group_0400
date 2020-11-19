@@ -249,6 +249,7 @@ public class UserManager implements Serializable {
      */
     public boolean cancelMyEvent(String person, String canceledEvent){
         User thisPerson = getUser(person);
+        System.out.println(thisPerson.getEvents());
         if (thisPerson.getEvents().contains(canceledEvent)){
             thisPerson.removeEvent(canceledEvent);
             return true;

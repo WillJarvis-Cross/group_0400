@@ -32,6 +32,12 @@ public class EventManager implements Serializable {
         }
     }
 
+    public ArrayList<String> getAllEventsString(){
+        ArrayList<String> allEvents = new ArrayList<>();
+        allEvents.addAll(events.keySet());
+        return allEvents;
+    }
+
     /**
      * Checks if the event with the given name is at capacity
      * @param eventName The name of the event
@@ -100,11 +106,6 @@ public class EventManager implements Serializable {
         for (String e: person.getEvents()){
             eventList.add(events.get(e));
         }
-        /*for (Event event: eventList){
-            if (!event.getAttending().contains(userName)){
-                eventList.remove(event);
-            }
-        }*/
         return eventList;
     }
 
@@ -145,10 +146,13 @@ public class EventManager implements Serializable {
     }
 
     public boolean removeAttendee(String eventName, String username){
+        System.out.println(events);
         if (!events.containsKey(eventName)){
+            System.out.println("eav");
             return false;
         }
         Event thisEvent = getEvent(eventName);
+
         if (getEvent(eventName).getAttending().contains(username)){
             thisEvent.removeAttending(username);
             return true;

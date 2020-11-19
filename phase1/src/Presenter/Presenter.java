@@ -82,7 +82,7 @@ public class Presenter {
         System.out.println("3: Send a message");
         System.out.println("4: See list of received messages");
         System.out.println("5: See list of events signed up for");
-        System.out.println("6: Logout");
+        System.out.println("6: Save");
         return sc.nextLine();
     }
 
@@ -104,7 +104,7 @@ public class Presenter {
         System.out.println("9: Sign up for event");
         System.out.println("10: Cancel spot in event");
         System.out.println("11: See list of events signed up for");
-        System.out.println("12: Logout");
+        System.out.println("12: Save");
         return sc.nextLine();
     }
 
@@ -119,7 +119,7 @@ public class Presenter {
         System.out.println("2: See list of received messages");
         System.out.println("3: See list of events that you are speaking at");
         System.out.println("4: Send a message to everyone signed up for an event");
-        System.out.println("5: Logout");
+        System.out.println("5: Save");
         return sc.nextLine();
     }
 
@@ -383,8 +383,11 @@ public class Presenter {
      *
      * @return User input
      */
-    public String getEventName(){
-        System.out.println("Enter the event you want to sign up for or enter 0 to go back to the main menu");
+    public String getEventName(List<String> events){
+        System.out.println("Enter the event you want to sign up for or enter 0 to go back to the main menu:");
+        for (String event : events){
+            System.out.println(event);
+        }
         return sc.nextLine();
     }
 

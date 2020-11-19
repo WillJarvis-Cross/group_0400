@@ -160,7 +160,7 @@ public abstract class UserController implements Serializable {
       * Signs the user up for the event of their choosing if they are able to.
       */
      public void signUp(){
-          String eventName = getPresenter().getEventName();
+          String eventName = getPresenter().getEventName(eventManager.getAllEventsString());
           if (eventName.equals("0")){
                mainMenu();
           }
@@ -190,7 +190,7 @@ public abstract class UserController implements Serializable {
      public void removeMyEvent(){
           getPresenter().printAttendeeEvents(getMyEvents());
           String event = getPresenter().printDeleteEvent();
-          if (usermanager.cancelMyEvent(this.name, event) && eventManager.removeAttendee(this.name, event)){
+          if (usermanager.cancelMyEvent(this.name, event) && eventManager.removeAttendee(event, this.name)){
                presenter.printRemovedEvent();
           }
           else{
