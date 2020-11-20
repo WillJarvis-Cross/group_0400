@@ -7,5 +7,31 @@ ReadAndWrite:
     correctly again
 
 Creating events:
-    The program will ask for the duration of an event in hours, but the overlapping protection will not work
+    -You have to create a room and a speaker first in order to create an event. If you don't, then the program will tell
+        you that you can't create an event with that information and will redirect you back to try again.
+    -When you request to see all the events you have signed up for, you have a further option to look at the details of that event
+        -Also the events appear in the order of when the events are. So the the first event that shows up is your next event
+    -The program will ask for the duration of an event in hours, but the overlapping protection will not work
     unless the input is 1 (all events last for an hour in phase 1)
+
+Controllers:
+    -UserController: general controller for all users
+    -AttendeeController: extends UserController and is used just for attendees
+    -OrganizerController: extends UserController and is used just for organizers
+    -SpeakerController: extends UserController and is used just for speakers
+    -MessageController: handles all message things
+    -EventController: handles all event things
+    -RoomController: handles all room things which is basically just creating rooms
+Use Cases:
+    -EventManager: Does everything related to events
+    -MessageManager: Does everything to do with messages
+    -RoomManager: Does everything to do with rooms
+    -UserManager: Does everything to do with the users
+Entities:
+    -User: Parent class of attendee, organizer, and speaker
+    -Attendee
+    -Organizer
+    -Speaker
+    -Event
+    -Room
+    -Message
