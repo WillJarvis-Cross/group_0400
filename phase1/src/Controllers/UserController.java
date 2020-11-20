@@ -188,12 +188,13 @@ public abstract class UserController implements Serializable {
       */
      public void removeMyEvent(){
           getPresenter().printAttendeeEvents(getMyEvents());
-          String event = getPresenter().printDeleteEvent();
-          if (usermanager.cancelMyEvent(this.name, event) && eventManager.removeAttendee(event, this.name)){
-               presenter.printRemovedEvent();
-          }
-          else{
-               presenter.printCantRemove();
+          if (getMyEvents().size() > 0) {
+               String event = getPresenter().printDeleteEvent();
+               if (usermanager.cancelMyEvent(this.name, event) && eventManager.removeAttendee(event, this.name)) {
+                    presenter.printRemovedEvent();
+               } else {
+                    presenter.printCantRemove();
+               }
           }
           mainMenu();
      }
