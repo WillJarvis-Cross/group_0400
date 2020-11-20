@@ -1,4 +1,11 @@
 Phase 1, Group 0400
 
 The main method for this program is in the Main class
-The user chooses their user type and enters a username.
+
+ReadAndWrite:
+    If the program fails to serialize then it corrupts the file and you need to serialize over the file for it to run
+    correctly again
+
+Creating events:
+    The program will ask for the duration of an event in hours, but the overlapping protection will not work
+    unless the input is 1 (all events last for an hour in phase 1)

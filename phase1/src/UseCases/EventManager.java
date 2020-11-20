@@ -216,7 +216,7 @@ public class EventManager implements Serializable {
      */
     public boolean canScheduleEvent(LocalDateTime time, int duration, String speaker, String eName, String room){
         Event e = new Event(time.toString(), duration, speaker, eName, room);
-        return (!doesOverlap(e)) && (withinHours(e));
+        return (!doesOverlap(e)) && (withinHours(e) && !containsEvent(eName));
     }
 
     /**
