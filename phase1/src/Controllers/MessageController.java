@@ -1,5 +1,6 @@
 package Controllers;
 
+import UseCases.EventManager;
 import UseCases.MessageManager;
 import UseCases.UserManager;
 import Presenter.Presenter;
@@ -15,6 +16,7 @@ public class MessageController {
     private final UserManager userManager;
     private final UserController userController;
     private final Presenter presenter;
+    private final EventManager eventManager;
 
     /**
      * Creates a new MessageController with the already created managers
@@ -24,11 +26,12 @@ public class MessageController {
      * @param messageManager The MessageManager
      */
     public MessageController(UserManager userManager, UserController userController, Presenter presenter,
-                             MessageManager messageManager){
+                             MessageManager messageManager, EventManager eventManager){
         this.messageManager = messageManager;
         this.userManager = userManager;
         this.userController = userController;
         this.presenter = presenter;
+        this.eventManager = eventManager;
     }
 
 
@@ -112,6 +115,31 @@ public class MessageController {
                     userManager.getAttendee(key), content);
         }
         presenter.printMessageSent();
+        userController.mainMenu();
+    }
+
+    /**
+     * Sends a message to every attendee at a given event
+     * @param name The speaker sending the message
+     */
+    public void messageAllAttendeesAtEvent(String name){
+        presenter.printAttendeeEvents(userManager.getUser(name).getEvents());
+        String eventName = presenter.printMessageEvent();
+        if (!eventManager.containsEvent(eventName)){
+            presenter.printInvalidOption();
+        }
+        else {
+            String content = presenter.printMessage();
+            List<String> allPeople = eventManager.getEvent(eventName).getAttending();
+            if (allPeople.size() == 0) {
+                presenter.printEmptyEvent();
+            } else {
+                for (String person : allPeople) {
+                    messageManager.sendMessage(userManager.getUser(name), userManager.getUser(person), content);
+                }
+                presenter.printMessageSent();
+            }
+        }
         userController.mainMenu();
     }
 }

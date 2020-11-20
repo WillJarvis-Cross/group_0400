@@ -66,15 +66,15 @@ public class SpeakerController extends UserController implements Serializable {
     public void mainMenu(){
         while (true){
             String input = getPresenter().printSpeaker();
-            if (input.equals("1")){
+            if (input.equals("1")){ // Send a message to someone
                 getMessageController().sendMessage(getMyName());
                 break;
             }
-            else if (input.equals("2")){
+            else if (input.equals("2")){ // Show list of received messages
                 getMessageController().printMyMessages(getMyName());
                 break;
             }
-            else if (input.equals("3")){
+            else if (input.equals("3")){ // Show events the speaker is speaking at
                 getPresenter().printSpeakerEvents(getMyEvents());
                 if (getMyEvents().size() > 0){
                     getEventController().specificInfo();
@@ -84,11 +84,11 @@ public class SpeakerController extends UserController implements Serializable {
                 }
                 break;
             }
-            else if (input.equals("4")){
-                getMessageController().messageAllAttendees(getMyName());
+            else if (input.equals("4")){ // Send a message to everyone at a given event
+                getMessageController().messageAllAttendeesAtEvent(getMyName());
                 break;
             }
-            else if (input.equals("5")){
+            else if (input.equals("5")){ // save and log out
                 break;
             }
             else{

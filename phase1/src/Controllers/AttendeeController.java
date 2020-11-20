@@ -67,23 +67,23 @@ public class AttendeeController extends UserController implements Serializable {
     public void mainMenu(){
         while (true){
             String input = getPresenter().printAttendee();
-            if (input.equals("1")){
+            if (input.equals("1")){ // Sign up for an event
                 signUp();
                 break;
             }
-            else if (input.equals("2")){
+            else if (input.equals("2")){ // Cancel spot in event
                 removeMyEvent();
                 break;
             }
-            else if (input.equals("3")){
+            else if (input.equals("3")){ // Send a message to someone
                 getMessageController().sendMessage(getMyName());
                 break;
             }
-            else if (input.equals("4")){
+            else if (input.equals("4")){ // See list of received messages
                 getMessageController().printMyMessages(getMyName());
                 break;
             }
-            else if (input.equals("5")){
+            else if (input.equals("5")){ // Show attendee's list of events
                 getPresenter().printAttendeeEvents(getMyEvents());
                 if (getMyEvents().size() > 0){
                     getEventController().specificInfo();
@@ -93,7 +93,7 @@ public class AttendeeController extends UserController implements Serializable {
                 }
                 break;
             }
-            else if (input.equals("6")){
+            else if (input.equals("6")){ // save and log out
                 break;
             }
             else{

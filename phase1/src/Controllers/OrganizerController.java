@@ -67,57 +67,23 @@ public class OrganizerController extends UserController implements Serializable 
     public void mainMenu(){
         while (true){
             String input = getPresenter().printOrganizer();
-            if (input.equals("1")){
-                getMessageController().sendMessage(getMyName());
+            if (input.equals("1")){ // Go to the message menu
+                messageMenu();
                 break;
             }
-            else if (input.equals("2")){
-                getEventController().makeEventRequest();
+            else if (input.equals("2")){ // Go to the event menu
+                eventMenu();
                 break;
             }
-            else if (input.equals("3")){
-                getEventController().removeEvent();
-                break;
-            }
-            else if (input.equals("4")){
-                getMessageController().printMyMessages(getMyName());
-                break;
-            }
-            else if (input.equals("5")){
-                getMessageController().messageAllSpeakers(getMyName());
-                break;
-            }
-            else if (input.equals("6")){
-                getMessageController().messageAllAttendees(getMyName());
-                break;
-            }
-            else if (input.equals("7")){
+            else if (input.equals("3")){ // Create a room
                 getRoomController().makeRoomRequest();
                 break;
             }
-            else if (input.equals("8")){
+            else if (input.equals("4")){ // Create a speaker
                 createSpeaker();
                 break;
             }
-            else if (input.equals("9")){
-                signUp();
-                break;
-            }
-            else if (input.equals("10")){
-                removeMyEvent();
-                break;
-            }
-            else if (input.equals("11")){
-                getPresenter().printAttendeeEvents(getMyEvents());
-                if (getMyEvents().size() > 0){
-                    getEventController().specificInfo();
-                }
-                else{
-                    mainMenu();
-                }
-                break;
-            }
-            else if (input.equals("12")){
+            else if (input.equals("5")){ // This is when the user wants to save and log out
                 break;
             }
             else{
@@ -125,6 +91,69 @@ public class OrganizerController extends UserController implements Serializable 
             }
         }
 
+    }
+
+    /**
+     * Uses the presenter to show the message menu for the organizer and perform certain
+     * actions based on the input
+     */
+    public void messageMenu(){
+        String input = getPresenter().printMessageMenu();
+        if (input.equals("1")){ // Send a single message to someone
+            getMessageController().sendMessage(getMyName());
+        }
+        else if (input.equals("2")){ // Print the list of this user's received messages
+            getMessageController().printMyMessages(getMyName());
+        }
+        else if (input.equals("3")){ // Send a message to all speakers
+            getMessageController().messageAllSpeakers(getMyName());
+        }
+        else if (input.equals("4")){ // Send a message to all attendees
+            getMessageController().messageAllAttendees(getMyName());
+        }
+        else if (input.equals("0")){ // Go back to the main menu
+            mainMenu();
+        }
+        else{
+            getPresenter().printInvalidOption();
+            messageMenu();
+        }
+    }
+
+    /**
+     * Uses the presenter to show the event menu for the organizer and perform certain
+     * actions based on the input
+     */
+    public void eventMenu(){
+        String input = getPresenter().printEventMenu();
+        if (input.equals("1")){ // Create an event
+            getEventController().makeEventRequest();
+        }
+        else if (input.equals("2")){ // Remove an event
+            getEventController().removeEvent();
+        }
+        else if (input.equals("3")){ // Sign up for an event
+            signUp();
+        }
+        else if (input.equals("4")){ // Cancel spot in event
+            removeMyEvent();
+        }
+        else if (input.equals("5")){ // Show my list of events
+            getPresenter().printAttendeeEvents(getMyEvents());
+            if (getMyEvents().size() > 0){
+                getEventController().specificInfo();
+            }
+            else{
+                mainMenu();
+            }
+        }
+        else if (input.equals("0")){ // Go back to the main menu
+            mainMenu();
+        }
+        else{
+            getPresenter().printInvalidOption();
+            eventMenu();
+        }
     }
 
     /**
@@ -143,32 +172,4 @@ public class OrganizerController extends UserController implements Serializable 
             createSpeaker();
         }
     }
-
-    /**
-     * assign speaker to events
-     * <p>
-     * first check if the user is logged in
-     * second see if the event have a speaker
-     * <p>
-     * @param time time speaker is scheduled to
-     * @param speaker name of speaker
-     * @param roomNumber room speaker is scheduled to
-     */
-    /*public void scheduleSpeaker(LocalDateTime time, String speaker, String roomNumber){
-        if(getMyName() == null){
-            System.out.println("Please log in.");
-        }
-        else{
-            Event e = null;
-            for(Event event: getEventManager().getEvents()) {
-                if (event.getTime().equals(time) && event.getRoomNum().equals(roomNumber)) {
-                    e = event;
-                }
-            }
-            if(e != null){
-                getEventManager().setSpeaker(e.getEventName(), speaker);
-            }
-            else{ System.out.println("No event exists at that time and place. Use addEvent"); }
-        }
-    }*/
 }

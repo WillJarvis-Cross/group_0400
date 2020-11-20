@@ -122,18 +122,40 @@ public class Presenter {
      */
     public String printOrganizer() {
         System.out.println("Select a an option by entering the corresponding numbers");
-        System.out.println("1: Send one message");
-        System.out.println("2: Create an event");
-        System.out.println("3: Delete an event");
-        System.out.println("4: See list of received messages");
-        System.out.println("5: Send a message to all speakers");
-        System.out.println("6: Send a message to all Attendees");
-        System.out.println("7: Create a new room");
-        System.out.println("8: Create a new speaker");
-        System.out.println("9: Sign up for event");
-        System.out.println("10: Cancel spot in event");
-        System.out.println("11: See list of events signed up for");
-        System.out.println("12: Save");
+        System.out.println("1: Access the message menu");
+        System.out.println("2: Access the event menu");
+        System.out.println("3: Create a new room");
+        System.out.println("4: Create a new speaker");
+        System.out.println("5: Save");
+        return sc.nextLine();
+    }
+
+    /**
+     * Prints the options the user can do in the message menu and returns their action
+     * @return The user's preferred action
+     */
+    public String printMessageMenu(){
+        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("0: Go back to the main menu");
+        System.out.println("1: Send a message");
+        System.out.println("2: Show my received messages");
+        System.out.println("3: Send a message to all of the speakers");
+        System.out.println("4: Send a message to all of the attendees");
+        return sc.nextLine();
+    }
+
+    /**
+     * Prints the options the user can do in the event menu and returns their action
+     * @return The user's preferred action
+     */
+    public String printEventMenu(){
+        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("0: Go back to the main menu");
+        System.out.println("1: Create an event");
+        System.out.println("2: Delete an event");
+        System.out.println("3: Sign up for event");
+        System.out.println("4: Cancel my spot in an event");
+        System.out.println("5: Show the events I am signed up for");
         return sc.nextLine();
     }
 
@@ -196,6 +218,15 @@ public class Presenter {
     }
 
     /**
+     * Asks speaker which event they want to send a message to
+     * @return The event name
+     */
+    public String printMessageEvent(){
+        System.out.println("Which event do you want to message");
+        return sc.nextLine();
+    }
+
+    /**
      * Prints a list of events that the speaker is speaking at
      *
      * @param events The speakers events
@@ -212,6 +243,10 @@ public class Presenter {
             }
         }
 
+    }
+
+    public void printEmptyEvent(){
+        System.out.println("There is no one at this event");
     }
 
     /**
@@ -231,16 +266,6 @@ public class Presenter {
      */
     public void printNoName() {
         System.out.println("There is no user that has that name");
-    }
-
-    /**
-     * Gets the name of an event an organizer wants to send a mass message to
-     *
-     * @return User input
-     */
-    public String printWhichEvent() {
-        System.out.println("Enter the name of the event that you want to send a message to");
-        return sc.nextLine();
     }
 
     /**
