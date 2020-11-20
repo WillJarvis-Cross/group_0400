@@ -191,49 +191,6 @@ public class UserManager implements Serializable {
             }
         }
         return true;
-
-        /*String eventName = event.getEventName();
-
-        LocalDateTime eventTime = event.getTime();
-
-        LocalDateTime timePlusDuration = eventTime.plusHours(event.getDuration());
-        User person = getUser(name);
-        int numEvents = myEvents.size();
-
-        if (numEvents == 0){
-            person.addEvent(eventName, 0);
-            return true;
-        }
-
-        int pos = findPosOfEvent(0, numEvents, eventTime, myEvents);
-
-        if (pos == -1){
-            return false;
-        }
-
-
-        if (pos == 0){
-            Event afterEvent = myEvents.get(pos);
-            if (afterEvent.getTime().compareTo(timePlusDuration) < 0){
-                return false;
-            }
-        }
-        else if (pos == numEvents){
-            Event behindEvent = myEvents.get(pos - 1);
-            LocalDateTime behindEventTime = behindEvent.getTime().plusHours(behindEvent.getDuration());
-            if (behindEventTime.compareTo(eventTime) > 0){
-                return false;
-            }
-        }
-        else {
-            Event behindEvent = myEvents.get(pos - 1);
-            Event afterEvent = myEvents.get(pos);
-            LocalDateTime behindEventTime = behindEvent.getTime().plusHours(behindEvent.getDuration());
-            if (afterEvent.getTime().compareTo(timePlusDuration) < 0 || behindEventTime.compareTo(eventTime) > 0){
-                return false;
-            }
-        }
-        return true;*/
     }
 
     /**
