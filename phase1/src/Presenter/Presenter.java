@@ -449,11 +449,12 @@ public class Presenter {
     }
 
     /**
-     * Prints that the username the user inputs is invalid
-     *
+     * Prints that the username the user inputs is invalid and asks for a different one
+     * @return the user's input
      */
-    public void printInvalidUsername(){
-        System.out.println("That username is taken, please try again");
+    public String printInvalidUsername(){
+        System.out.println("That username is taken, please enter a different username");
+        return sc.nextLine();
     }
 
     /**

@@ -47,7 +47,7 @@ public class OrganizerController extends UserController implements Serializable 
                 mainMenu();
             }
             else{
-                getPresenter().printInvalidUsername();
+                setMyName(getPresenter().printInvalidUsername());
                 makeNewAccount();
             }
         }
@@ -58,6 +58,34 @@ public class OrganizerController extends UserController implements Serializable 
             getPresenter().printInvalidOption();
             makeNewAccount();
         }
+    }
+
+    /**
+     * Allows the organizer to login into their account
+     */
+    public void loginExistingAccount(){
+        boolean zero = false;
+        while (true){
+            String password = getPresenter().printPassword();
+            if (password.equals("0")){
+                makeNewAccount();
+                zero = true;
+                break;
+            }
+            else{
+                if (getUsermanager().login(getMyName(), password, "organizer")){
+                    break;
+                }
+                else{
+                    getPresenter().printInvalidInput();
+                }
+            }
+        }
+        if (!zero)
+        {
+            mainMenu();
+        }
+
     }
 
     /**

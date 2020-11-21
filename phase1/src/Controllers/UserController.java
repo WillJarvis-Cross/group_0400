@@ -19,7 +19,7 @@ public abstract class UserController implements Serializable {
      private final MessageManager messageManager;
      private final RoomManager roomManager;
      private transient final RoomController roomController;
-     private final String name;
+     private String name;
 
      /**
       * Creates an instance of UserController with the given name
@@ -86,6 +86,14 @@ public abstract class UserController implements Serializable {
      }
 
      /**
+      * Changes the user's username
+      * @param name The new name
+      */
+     public void setMyName(String name){
+          this.name = name;
+     }
+
+     /**
       * Gets the eventController
       * @return EventController
       */
@@ -131,35 +139,6 @@ public abstract class UserController implements Serializable {
       */
      public RoomManager getRoomManager() {
           return roomManager;
-     }
-     /**
-      * Logs the user into their account if they enter the correct password. The user will be taken to the main menu
-      * if the password is correct, and the error message will be displayed and the user will enter their password
-      * again if it is incorrect.
-      */
-     public void loginExistingAccount(){
-          boolean zero = false;
-          while (true){
-               String password = presenter.printPassword();
-               if (password.equals("0")){
-                    makeNewAccount();
-                    zero = true;
-                    break;
-               }
-               else{
-                    if (usermanager.login(name, password)){
-                         break;
-                    }
-                    else{
-                         presenter.printInvalidInput();
-                    }
-               }
-          }
-          if (!zero)
-          {
-               mainMenu();
-          }
-
      }
 
      /**
@@ -215,4 +194,9 @@ public abstract class UserController implements Serializable {
       *  Displays the actions available for the user through the presenter
       */
      abstract void mainMenu();
+
+     /**
+      * Logs user into their account
+      */
+     abstract void loginExistingAccount();
 }
