@@ -68,6 +68,7 @@ public class MessageController {
      */
     public void sendMessage(String sender){
         String receiver;
+        Boolean send = true;
         while (true){
             receiver = presenter.printWhoToSendTo();
             if (userManager.getUsers().containsKey(receiver)){
@@ -75,15 +76,20 @@ public class MessageController {
             }
             else if (receiver.equals("0")){
                 userController.mainMenu();
+                send = false;
+                break;
             }
             else{
                 presenter.printNoName();
             }
         }
-        String content = presenter.printMessage();
-        messageManager.sendMessage(userManager.getUser(sender), userManager.getUser(receiver), content);
-        presenter.printMessageSent();
-        userController.mainMenu();
+        if (send) {
+            String content = presenter.printMessage();
+            messageManager.sendMessage(userManager.getUser(sender), userManager.getUser(receiver), content);
+            presenter.printMessageSent();
+            userController.mainMenu();
+        }
+
     }
 
     /**

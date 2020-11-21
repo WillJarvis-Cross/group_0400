@@ -138,10 +138,13 @@ public abstract class UserController implements Serializable {
       * again if it is incorrect.
       */
      public void loginExistingAccount(){
+          boolean zero = false;
           while (true){
                String password = presenter.printPassword();
                if (password.equals("0")){
                     makeNewAccount();
+                    zero = true;
+                    break;
                }
                else{
                     if (usermanager.login(name, password)){
@@ -152,7 +155,11 @@ public abstract class UserController implements Serializable {
                     }
                }
           }
-          mainMenu();
+          if (!zero)
+          {
+               mainMenu();
+          }
+
      }
 
      /**
