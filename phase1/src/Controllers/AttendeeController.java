@@ -46,7 +46,7 @@ public class AttendeeController extends UserController implements Serializable {
                 mainMenu();
             }
             else{
-                getPresenter().printInvalidUsername();
+                setMyName(getPresenter().printInvalidUsername());
                 makeNewAccount();
             }
         }
@@ -59,6 +59,33 @@ public class AttendeeController extends UserController implements Serializable {
         }
     }
 
+    /**
+     * Allows the organizer to login into their account
+     */
+    public void loginExistingAccount(){
+        boolean zero = false;
+        while (true){
+            String password = getPresenter().printPassword();
+            if (password.equals("0")){
+                makeNewAccount();
+                zero = true;
+                break;
+            }
+            else{
+                if (getUsermanager().login(getMyName(), password, "attendee")){
+                    break;
+                }
+                else{
+                    getPresenter().printInvalidInput();
+                }
+            }
+        }
+        if (!zero)
+        {
+            mainMenu();
+        }
+
+    }
 
     /**
      * Uses the getPresenter() to show the main menu for the attendee and perform certain

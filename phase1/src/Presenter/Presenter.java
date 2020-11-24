@@ -111,7 +111,7 @@ public class Presenter {
         System.out.println("3: Send a message");
         System.out.println("4: See list of received messages");
         System.out.println("5: See list of events signed up for");
-        System.out.println("6: Save");
+        System.out.println("6: Save and exit");
         return sc.nextLine();
     }
 
@@ -126,7 +126,7 @@ public class Presenter {
         System.out.println("2: Access the event menu");
         System.out.println("3: Create a new room");
         System.out.println("4: Create a new speaker");
-        System.out.println("5: Save");
+        System.out.println("5: Save and exit");
         return sc.nextLine();
     }
 
@@ -170,7 +170,7 @@ public class Presenter {
         System.out.println("2: See list of received messages");
         System.out.println("3: See list of events that you are speaking at");
         System.out.println("4: Send a message to everyone signed up for an event");
-        System.out.println("5: Save");
+        System.out.println("5: Save and exit");
         return sc.nextLine();
     }
 
@@ -449,11 +449,12 @@ public class Presenter {
     }
 
     /**
-     * Prints that the username the user inputs is invalid
-     *
+     * Prints that the username the user inputs is invalid and asks for a different one
+     * @return the user's input
      */
-    public void printInvalidUsername(){
-        System.out.println("That username is taken, please try again");
+    public String printInvalidUsername(){
+        System.out.println("That username is taken, please enter a different username");
+        return sc.nextLine();
     }
 
     /**
