@@ -180,13 +180,17 @@ public class UserManager implements Serializable {
 
     /**
      * Returns true if the user is available to sign up for the inputted event
-     * @param time The time of the
+     * @param event the inputted event
      * @param myEvents The user's list of events
      * @return True if the user is available to sign up for the event. Return false otherwise.
      */
-    public boolean canSignUp(LocalDateTime time, List<Event> myEvents){
+    public boolean canSignUp(Event event, List<Event> myEvents){
         for (Event e:myEvents){
-            if (e.getTime().equals(time)){
+            LocalDateTime t1 = e.getTime();
+            LocalDateTime f1 = t1.plusHours(e.getDuration());
+            LocalDateTime t2 = event.getTime();
+            LocalDateTime f2 = t2.plusHours(event.getDuration());
+            if (((t1.compareTo(f2)<=0)&&(f1.compareTo(t2)>0))&&((t1.compareTo(f2)<0)&&(f1.compareTo(t2)>=0))){
                 return false;
             }
         }

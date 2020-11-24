@@ -64,8 +64,12 @@ public class EventManager implements Serializable {
         Set<String> keys = this.events.keySet();
         for (String key: keys){
             Event event = getEvent(key);
-            if (event.getTime().equals(e.getTime())){
-                if ((event.getRoomNum().equals(e.getRoomNum()))||event.getSpeaker().equals(e.getSpeaker())) {
+            if ((event.getRoomNum().equals(e.getRoomNum()))||event.getSpeaker().equals(e.getSpeaker())){
+                LocalDateTime t1 = e.getTime();
+                LocalDateTime f1 = t1.plusHours(e.getDuration());
+                LocalDateTime t2 = event.getTime();
+                LocalDateTime f2 = t2.plusHours(event.getDuration());
+                if (((t1.compareTo(f2)<=0)&&(f1.compareTo(t2)>0))&&((t1.compareTo(f2)<0)&&(f1.compareTo(t2)>=0))){
                     return true;
                 }
             }

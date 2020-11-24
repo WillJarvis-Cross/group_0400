@@ -96,7 +96,7 @@ public class EventController {
         if (!eManager.canAddPerson(eventName)){
             return false;
         }
-        if (!userManager.canSignUp(eManager.getEvent(eventName).getTime(), eManager.getEventsByUsername(userManager.getUser(username)))){
+        if (!userManager.canSignUp(eManager.getEvent(eventName), eManager.getEventsByUsername(userManager.getUser(username)))){
             return false;
         }
         userManager.signUp(username, eManager.getEvent(eventName), eManager.getEventsByUsername(userManager.getUser(username)));
