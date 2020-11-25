@@ -61,19 +61,4 @@ public class RoomController {
         return roomList;
     }*/
 
-
-    /**
-     * when the program exist store all information needed to gateway
-     *
-     * @return a string of all event information to gateway to store
-     */
-    /*public String writeFileRequest(){
-        ArrayList<Room> roomList = getRoomList();
-        String outString = "";
-        for (int i = 0; i < roomList.size() ;i++){
-            outString += roomList.get(i).toString()+",";
-        }
-        return outString;
-    }*/
-
 }

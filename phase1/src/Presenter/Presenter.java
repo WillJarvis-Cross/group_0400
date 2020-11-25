@@ -42,22 +42,42 @@ public class Presenter {
      * Asks the user if they want to load saved files and returns their answer
      * @return whether or not the user wants to load the saved files
      */
-    public String loadFromSave(){
-        System.out.println("Do you want to load saved files? (Only load if you have previously saved)");
-        System.out.println("1: Yes");
-        System.out.println("2: No");
-        return sc.nextLine();
+    public boolean loadFromSave(){
+        while (true){
+            System.out.println("Do you want to load saved files? (Only load if you have previously saved)");
+            System.out.println("1: Yes");
+            System.out.println("2: No");
+            String input = sc.nextLine();
+            if (input.equals("1")){
+                return true;
+            }
+            else if (input.equals("2")){
+                return false;
+            }
+            else{
+                System.out.println("Incorrect input, please try again");
+            }
+        }
     }
 
     /**
      * Asks the user if they want to save their progress and returns their answer
      * @return whether or not the user wants to save their progress
      */
-    public String saveWhenExit(){
-        System.out.println("Do you want to save the changes made this session?");
-        System.out.println("1: Yes");
-        System.out.println("2: No");
-        return sc.nextLine();
+    public boolean saveWhenExit(){
+        while (true){
+            System.out.println("Do you want to save the changes made this session?");
+            System.out.println("1: Yes");
+            System.out.println("2: No");
+            String input = sc.nextLine();
+            if (input.equals("1")){
+                return true;
+            }
+            else if (input.equals("2")){
+                return false;
+            }
+            System.out.println("Incorrect input, please try again");
+        }
     }
 
     /**

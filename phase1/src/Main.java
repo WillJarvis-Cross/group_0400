@@ -20,9 +20,8 @@ public class Main{
         do{
             String userType = presenter.printAttendeeOrOrganizer();
             String name = presenter.printUsername();
-            String load = presenter.loadFromSave();
 
-            if (load.equals("1")) {
+            if (presenter.loadFromSave()) { // when the user wants to load saved files
                 user = readWriter.controllerDeserialize(userType, name);
             } else {
                 switch (userType) {
@@ -37,7 +36,7 @@ public class Main{
                         break;
                 }
             }
-            if (presenter.saveWhenExit().equals("1")) {
+            if (presenter.saveWhenExit()) { //the user wants to save their file
                 readWriter.objectSerialize(user);
             }
         } while(presenter.relog());
