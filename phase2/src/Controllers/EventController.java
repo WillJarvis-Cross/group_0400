@@ -47,6 +47,7 @@ public class EventController {
             int duration = presenter.printDurationOfEvent();
             String speaker = presenter.printSpeakerOfEvent();
             String roomNumber = presenter.printRoomNumber();
+            int capacity = presenter.printEventCapacity();
             int counter = 0;
             if (!userManager.getSpeakers().containsKey(speaker) || roomManager.getRoom(roomNumber) == null){
                 counter ++;
@@ -54,7 +55,10 @@ public class EventController {
             if (roomManager.isRoomTaken(roomNumber, time)){
                 counter ++;
             }
-            if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber) || duration == 0){
+            if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber, capacity) || duration == 0){
+                counter ++;
+            }
+            if (capacity > roomManager.getRoom(roomNumber).getCapacity()){
                 counter ++;
             }
             if (!userManager.getSpeakers().containsKey(speaker) || !userManager.canAddSpeaker(time, eManager.getEventsByUsername(userManager.getUser(speaker)))){
@@ -62,7 +66,7 @@ public class EventController {
             }
             if (counter == 0){
 
-                eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber);
+                eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber, capacity);
                 userManager.signUp(speaker, eManager.getEvent(eventName), eManager.getEventsExceptOne(userManager.getUser(speaker), eManager.getEvent(eventName)));
                 roomManager.addEvent(roomNumber, eventName, time);
                 presenter.printEventCreated();
@@ -90,7 +94,7 @@ public class EventController {
         if (roomManager.getRoom(eManager.getEvent(eventName).getRoomNum()) == null){
             return false;
         }
-        if (this.eManager.isAtCapacity(eventName, roomManager.getRoom(eManager.getEvent(eventName).getRoomNum()).getCapacity())){
+        if (this.eManager.isAtCapacity(eventName)){
             return false;
         }
         if (!eManager.containsEvent(eventName)){
@@ -127,6 +131,33 @@ public class EventController {
             roomManager.removeRoomEvent(eManager.getEvent(name).getRoomNum(), name);
             eManager.removeEvent(name);
             presenter.printEventRemoved();
+            userController.mainMenu();
+        }
+    }
+
+    /**
+     * Change the capacity of an event
+     *
+     */
+    public void changeEventCapacity(){
+        presenter.printAllEvents(eManager.getEvents());
+        String name = presenter.printChangeEventCapacity();
+        if (name.equals("0")){
+            userController.mainMenu();
+        }
+        else if (!eManager.containsEvent(name)){
+            presenter.printInvalidOption();
+            changeEventCapacity();
+        }
+        else{
+            int capacity = presenter.printEventCapacity();
+            if (capacity > roomManager.getRoom(eManager.getEvent(name).getRoomNum()).getCapacity()) {
+                presenter.printInvalidOption();
+                changeEventCapacity();
+            }
+            else{
+                eManager.getEvent(name).setCapacity(capacity);
+            }
             userController.mainMenu();
         }
     }
