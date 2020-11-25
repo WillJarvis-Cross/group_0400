@@ -3,7 +3,7 @@ package Controllers;
 import UseCases.EventManager;
 import UseCases.MessageManager;
 import UseCases.UserManager;
-import Presenter.Presenter;
+import Presenter.*;
 
 import java.util.List;
 import java.util.Set;
@@ -15,7 +15,7 @@ public class MessageController {
     private final MessageManager messageManager;
     private final UserManager userManager;
     private final UserController userController;
-    private final Presenter presenter;
+    private final MessagePresenter presenter;
     private final EventManager eventManager;
 
     /**
@@ -25,7 +25,7 @@ public class MessageController {
      * @param presenter The Presenter
      * @param messageManager The MessageManager
      */
-    public MessageController(UserManager userManager, UserController userController, Presenter presenter,
+    public MessageController(UserManager userManager, UserController userController, MessagePresenter presenter,
                              MessageManager messageManager, EventManager eventManager){
         this.messageManager = messageManager;
         this.userManager = userManager;

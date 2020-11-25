@@ -1,6 +1,6 @@
 package Controllers;
 
-import Presenter.Presenter;
+import Presenter.*;
 import UseCases.EventManager;
 import UseCases.RoomManager;
 import UseCases.UserManager;
@@ -18,13 +18,13 @@ public class EventController {
     private final UserManager userManager;
     private final RoomManager roomManager;
     private final UserController userController;
-    private final Presenter presenter;
+    private final RoomEventPresenter presenter;
 
     /**
      * initialize a clean EventController with given UserController,
      * EventManager, UserManager, Presenter, and RoomManager
      */
-    public EventController(UserController userController, Presenter presenter, EventManager eManager,
+    public EventController(UserController userController, RoomEventPresenter presenter, EventManager eManager,
                            UserManager userManager, RoomManager roomManager){
         this.eManager = eManager;
         this.userManager = userManager;

@@ -1,6 +1,6 @@
 package Controllers;
 
-import Presenter.Presenter;
+import Presenter.*;
 import UseCases.*;
 
 import java.lang.String;
@@ -14,7 +14,7 @@ public class RoomController {
 
     private final RoomManager roomManager;
     private final UserController userController;
-    private final Presenter presenter;
+    private final RoomEventPresenter presenter;
 
     /**
      * Creates a new RoomController given the already created managers
@@ -22,7 +22,7 @@ public class RoomController {
      * @param presenter The Presenter
      * @param roomManager The RoomManager
      */
-    public RoomController (UserController userController, Presenter presenter, RoomManager roomManager) {
+    public RoomController (UserController userController, RoomEventPresenter presenter, RoomManager roomManager) {
         this.roomManager = roomManager;
         this.userController = userController;
         this.presenter = presenter;

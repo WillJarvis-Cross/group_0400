@@ -1,6 +1,7 @@
 package Entities;
 import java.io.Serializable;
 import java.lang.String;
+import java.util.List;
 
 /** This is an entity for a Message which contains the content of the message, the name of the users who
  * sent and received the message, and the id of the message
@@ -56,5 +57,17 @@ public class Message implements Serializable {
      * @return the messageId
      */
     public int getMessageId(){ return messageId;}
+
+    public void printAttendeeEvents(List<String> events) {
+        if (events.isEmpty()) {
+            System.out.println("You are not signed up for any events");
+        }
+        else {
+            System.out.println("Here is a list of events you are signed up for");
+            for (String name: events) {
+                System.out.println(name);
+            }
+        }
+    }
 }
 

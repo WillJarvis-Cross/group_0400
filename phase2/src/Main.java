@@ -15,7 +15,7 @@ public class Main{
      */
     public static void main(String[] args) {
         UserController user = null;
-        Presenter presenter = new Presenter();
+        MainPresenter presenter = new MainPresenter();
         ReadAndWrite readWriter = new ReadAndWrite();
         do{
             String userType = presenter.printAttendeeOrOrganizer();
