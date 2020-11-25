@@ -18,6 +18,7 @@ public class Event implements Serializable {
     private List<String> attending; // List of people attending the event
     private String eventName; // The name of the event
     private String roomNumber; // The room the event is in
+    private int capacity; // The maximum capacity of the event
 
 
     /**
@@ -27,14 +28,16 @@ public class Event implements Serializable {
      * @param speaker The speaker speaking at the event
      * @param eventName The name of the event
      * @param roomNumber The room the event is in
+     * @param capacity The capacity of the event
      */
-    public Event(String time, int duration, String speaker, String eventName, String roomNumber) {
+    public Event(String time, int duration, String speaker, String eventName, String roomNumber, int capacity) {
         this.time = time;
         this.duration = duration;
         this.speaker = speaker;
         this.attending = new ArrayList<>();
         this.eventName = eventName;
         this.roomNumber = roomNumber;
+        this.capacity = capacity;
     }
 
     /**
@@ -100,6 +103,18 @@ public class Event implements Serializable {
      * @return the room this event is in
      */
     public String getRoomNum(){ return roomNumber;}
+
+    /**
+     * Returns the capacity of the event
+     * @return the capacity
+     */
+    public int getCapacity(){ return capacity;}
+
+    /**
+     * Sets the new capacity of the event
+     * @param capacity capacity of the event
+     */
+    public void setCapacity(int capacity){ this.capacity = capacity;}
 
     /**
      * Changes the speaker of this event to the name of the speaker inputted

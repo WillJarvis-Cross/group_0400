@@ -44,12 +44,11 @@ public class EventManager implements Serializable {
     /**
      * Checks if the event with the given name is at capacity
      * @param eventName The name of the event
-     * @param capacity How many people are allowed at the event
      * @return true if the event with the give eventName is at capacity, and false otherwise
      */
-    public boolean isAtCapacity(String eventName, int capacity){
+    public boolean isAtCapacity(String eventName){
         Event event = this.events.get(eventName);
-        return capacity <= event.getAttending().size();
+        return event.getCapacity() <= event.getAttending().size();
     }
 
     /**
@@ -178,9 +177,10 @@ public class EventManager implements Serializable {
      * @param speaker The speaker at the event
      * @param eName The name of the event
      * @param room The name of the room which hosts the event
+     * @param capacity The capacity of the event
      */
-    public void scheduleEvent(LocalDateTime time, int duration, String speaker, String eName, String room){
-        Event e = new Event(time.toString(), duration, speaker, eName, room);
+    public void scheduleEvent(LocalDateTime time, int duration, String speaker, String eName, String room, int capacity){
+        Event e = new Event(time.toString(), duration, speaker, eName, room, capacity);
         this.events.put(eName, e);
     }
 
@@ -192,10 +192,11 @@ public class EventManager implements Serializable {
      * @param speaker The speaker at the event
      * @param eName The name of the event
      * @param room The name of the room which hosts the event
+     * @param capacity The capacity of the event
      * @return True or false
      */
-    public boolean canScheduleEvent(LocalDateTime time, int duration, String speaker, String eName, String room){
-        Event e = new Event(time.toString(), duration, speaker, eName, room);
+    public boolean canScheduleEvent(LocalDateTime time, int duration, String speaker, String eName, String room, int capacity){
+        Event e = new Event(time.toString(), duration, speaker, eName, room, capacity);
         return (!doesOverlap(e)) && (withinHours(e) && !containsEvent(eName));
     }
 
