@@ -11,7 +11,8 @@ import java.util.List;
 
 public class MessageManager implements Serializable {
 
-    private List<Message> messageList = new ArrayList<>(); // arraylist of all the messages
+    private int numMessages = 0; // The total number of messages
+    private ArrayList<Message> messageList = new ArrayList<>(); // arraylist of all the messages
 
     /**
      * Creates a Message with the given sender, receiver and content
@@ -20,9 +21,10 @@ public class MessageManager implements Serializable {
      * @param content Content of the message
      */
     public void sendMessage(User sender, User receiver, String content){
-        Message message = new Message(content, sender.getUsername(), receiver.getUsername(), messageList.size());
-        receiver.addMessage(messageList.size());
+        Message message = new Message(content, sender.getUsername(), receiver.getUsername(), numMessages);
         messageList.add(message);
+        receiver.addMessage(numMessages);
+        numMessages++;
     }
     /**
      * Returns a message object with the given id
@@ -38,8 +40,8 @@ public class MessageManager implements Serializable {
      * @param messages an ArrayList of message IDs
      * @return an ArrayList of Messages
      */
-    public List<Message> getMyMessages(List<Integer> messages){
-        List<Message> newList = new ArrayList<>();
+    public ArrayList<Message> getMyMessages(List<Integer> messages){
+        ArrayList<Message> newList = new ArrayList<>();
         for (int i: messages){
             if (i < messageList.size()){
                 newList.add(messageList.get(i));
