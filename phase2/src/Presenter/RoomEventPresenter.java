@@ -27,12 +27,8 @@ public class RoomEventPresenter extends Presenter{
      * @return LocalDateTime of the User input
      */
     public LocalDateTime printTimeOfEvent(){
-        System.out.println("Enter the time of the new event in the form yyyy/mm/dd/hh (in military time) or enter 0 " +
-                "to go back to the main menu");
+        System.out.println("Enter the time of the new event in the form yyyy/mm/dd/hh (in military time)");
         String thisTime = sc.nextLine();
-        if (thisTime.equals("0")){
-            return null;
-        }
         List<String> time = Arrays.asList(thisTime.split("/"));
         if (time.size() == 4){ // valid time
             int year = Integer.parseInt(time.get(0));
@@ -64,7 +60,6 @@ public class RoomEventPresenter extends Presenter{
             else{
                 hourInt = Integer.parseInt(hourString);
             }
-
             if (monthInt < 13 && dayInt < 32 && hourInt < 18 && hourInt > 8){
                 LocalDateTime finalTime =  LocalDateTime.of(year, monthInt, dayInt, hourInt, 0);
                 if (finalTime.isAfter(LocalDateTime.now())){
@@ -140,16 +135,16 @@ public class RoomEventPresenter extends Presenter{
      * @return User input
      */
     public int printRoomCapacity(){
-            System.out.println("What is the capacity of the room");
+            System.out.println("What is the capacity of the room?");
         return Integer.parseInt(sc.nextLine());
     }
 
     /**
-     * Prints that the room was seccessfully added
+     * Prints that the room was successfully added
      *
      */
     public void printRoomAdded(){
-        System.out.println("Room added successfullly");
+        System.out.println("Room added successfully");
     }
 
     /**
@@ -177,6 +172,26 @@ public class RoomEventPresenter extends Presenter{
     public String printDeleteWholeEvent(){
         System.out.println("Enter which event to delete or enter 0 to go back to the main menu");
         return sc.nextLine();
+    }
+
+    /**
+     * Prompts the user to enter the event they want to change capacity
+     *
+     * @return User input
+     */
+    public String printChangeEventCapacity(){
+        System.out.println("Enter which event's capacity to change or enter 0 to go back to the main menu");
+        return sc.nextLine();
+    }
+
+    /**
+     * Prompts the user to enter the capacity of an event
+     *
+     * @return User input
+     */
+    public int printEventCapacity(){
+        System.out.println("What is the capacity of the event?");
+        return Integer.parseInt(sc.nextLine());
     }
 
     /**

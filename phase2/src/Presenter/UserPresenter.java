@@ -95,9 +95,10 @@ public class UserPresenter extends Presenter{
         System.out.println("0: Go back to the main menu");
         System.out.println("1: Create an event");
         System.out.println("2: Delete an event");
-        System.out.println("3: Sign up for event");
-        System.out.println("4: Cancel my spot in an event");
-        System.out.println("5: Show the events I am signed up for");
+        System.out.println("3: Change an event's capacity");
+        System.out.println("4: Sign up for event");
+        System.out.println("5: Cancel my spot in an event");
+        System.out.println("6: Show the events I am signed up for");
         return sc.nextLine();
     }
 
