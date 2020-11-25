@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.lang.String;
 import java.time.LocalDateTime;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Set;
 
 /** Represents the use case for Event objects
@@ -27,7 +26,7 @@ public class EventManager implements Serializable {
      * Create an instance of eventManager with the events listed in the parameter
      * @param events The list of events
      */
-    public EventManager(List<Event> events){
+    public EventManager(ArrayList<Event> events){
         for (Event event: events){
             this.events.put(event.getEventName(), event);
         }
@@ -37,8 +36,10 @@ public class EventManager implements Serializable {
      * Returns an arraylist with the name of every event
      * @return an arraylist with the name of every event
      */
-    public List<String> getAllEventsString(){
-        return new ArrayList<>(events.keySet());
+    public ArrayList<String> getAllEventsString(){
+        ArrayList<String> allEvents = new ArrayList<>();
+        allEvents.addAll(events.keySet());
+        return allEvents;
     }
 
     /**
@@ -63,12 +64,8 @@ public class EventManager implements Serializable {
         Set<String> keys = this.events.keySet();
         for (String key: keys){
             Event event = getEvent(key);
-            if ((event.getRoomNum().equals(e.getRoomNum()))||event.getSpeaker().equals(e.getSpeaker())){
-                LocalDateTime t1 = e.getTime();
-                LocalDateTime f1 = t1.plusHours(e.getDuration());
-                LocalDateTime t2 = event.getTime();
-                LocalDateTime f2 = t2.plusHours(event.getDuration());
-                if (((t1.compareTo(f2)<=0)&&(f1.compareTo(t2)>0))&&((t1.compareTo(f2)<0)&&(f1.compareTo(t2)>=0))){
+            if (event.getTime().equals(e.getTime())){
+                if ((event.getRoomNum().equals(e.getRoomNum()))||event.getSpeaker().equals(e.getSpeaker())) {
                     return true;
                 }
             }
@@ -90,8 +87,8 @@ public class EventManager implements Serializable {
      * Returns a list of all scheduled events
      * @return An ArrayList of events
      */
-    public List<Event> getEvents(){
-        List<Event> eventList = new ArrayList<>();
+    public ArrayList<Event> getEvents(){
+        ArrayList<Event> eventList = new ArrayList<>();
         Set<String> keys = this.events.keySet();
         for (String key: keys) {
             eventList.add(getEvent(key));
@@ -114,8 +111,8 @@ public class EventManager implements Serializable {
      * @param person the person whose events it is returning
      * @return An ArrayList of events
      */
-    public List<Event> getEventsByUsername(User person){
-        List<Event> eventList = new ArrayList<>();
+    public ArrayList<Event> getEventsByUsername(User person){
+        ArrayList<Event> eventList = new ArrayList<>();
         for (String e: person.getEvents()){
             eventList.add(events.get(e));
         }
@@ -129,8 +126,8 @@ public class EventManager implements Serializable {
      * @param event The event we are not including in the arraylist
      * @return An ArrayList of events
      */
-    public List<Event> getEventsExceptOne(User person, Event event){
-        List<Event> eventList = new ArrayList<>();
+    public ArrayList<Event> getEventsExceptOne(User person, Event event){
+        ArrayList<Event> eventList = new ArrayList<>();
         for (String e: person.getEvents()){
             eventList.add(events.get(e));
         }
@@ -146,6 +143,15 @@ public class EventManager implements Serializable {
      */
     public void addPersonToEvent(String eventName, String userName){
         this.events.get(eventName).addAttending(userName);
+    }
+
+    /**
+     * Returns true when a person can be added to the event. Return false when they can't.
+     * @param eventName The name of the event the person is being added to
+     * @return true or false
+     */
+    public boolean canAddPerson(String eventName){
+        return this.events.containsKey(eventName);
     }
 
     /**
@@ -205,6 +211,15 @@ public class EventManager implements Serializable {
      */
     public void removeEvent(String eventName){
         this.events.remove(eventName);
+    }
+
+    /**
+     * Returns true when the event can be removed without causing an error. Return false otherwise.
+     * @param eventName The name of the event
+     * @return true or false
+     */
+    public boolean canRemoveEvent(String eventName){
+        return events.containsKey(eventName);
     }
 
     /**

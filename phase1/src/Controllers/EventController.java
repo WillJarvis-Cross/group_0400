@@ -93,10 +93,10 @@ public class EventController {
         if (this.eManager.isAtCapacity(eventName, roomManager.getRoom(eManager.getEvent(eventName).getRoomNum()).getCapacity())){
             return false;
         }
-        if (!eManager.containsEvent(eventName)){
+        if (!eManager.canAddPerson(eventName)){
             return false;
         }
-        if (!userManager.canSignUp(eManager.getEvent(eventName), eManager.getEventsByUsername(userManager.getUser(username)))){
+        if (!userManager.canSignUp(eManager.getEvent(eventName).getTime(), eManager.getEventsByUsername(userManager.getUser(username)))){
             return false;
         }
         userManager.signUp(username, eManager.getEvent(eventName), eManager.getEventsByUsername(userManager.getUser(username)));
@@ -118,7 +118,7 @@ public class EventController {
         if (name.equals("0")){
             userController.mainMenu();
         }
-        else if (!eManager.containsEvent(name)){
+        else if (!eManager.canRemoveEvent(name)){
             presenter.printInvalidOption();
             removeEvent();
         }
@@ -130,6 +130,21 @@ public class EventController {
             userController.mainMenu();
         }
     }
+
+
+    /**
+     * when the program exist store all information needed to gateway
+     *
+     * @return a string of all event information to gateway to store
+     */
+    /*public String writeFileRequest(){
+        ArrayList<Event> eventList = this.eManager.getEvents();
+        String outString = "";
+        for (int i = 0; i < eventList.size() ;i++){
+            outString += eventList.get(i).toString()+",";
+        }
+        return outString;
+    }*/
 
     /**
      * prints the information of an event that is given by name
