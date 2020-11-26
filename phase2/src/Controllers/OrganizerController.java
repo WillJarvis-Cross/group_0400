@@ -43,8 +43,13 @@ public class OrganizerController extends UserController implements Serializable 
         if (input.equals("2")){
             if (getUsermanager().canAddPerson(getMyName())){
                 String password = getPresenter().printPassword();
-                getUsermanager().addOrganizer(getMyName(), password);
-                mainMenu();
+                if (password.equals("0")){
+                    makeNewAccount();
+                }
+                else{
+                    getUsermanager().addOrganizer(getMyName(), password);
+                    mainMenu();
+                }
             }
             else{
                 setMyName(getPresenter().printInvalidUsername());

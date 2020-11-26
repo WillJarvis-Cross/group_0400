@@ -35,7 +35,7 @@ public class RoomManager implements Serializable {
      * Creates a room with the given room number and capacity
      * @param roomNumber The name of the room
      * @param capacity The capacity of the room
-    */
+     */
     public boolean addRoom(String roomNumber, int capacity) {
         if (allRooms.containsKey(roomNumber)){
             return false;

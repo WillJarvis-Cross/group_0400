@@ -42,8 +42,13 @@ public class AttendeeController extends UserController implements Serializable {
         if (input.equals("2")){
             if (getUsermanager().canAddPerson(getMyName())){
                 String password = getPresenter().printPassword();
-                getUsermanager().addAttendee(getMyName(), password);
-                mainMenu();
+                if (password.equals("0")){
+                    makeNewAccount();
+                }
+                else{
+                    getUsermanager().addAttendee(getMyName(), password);
+                    mainMenu();
+                }
             }
             else{
                 setMyName(getPresenter().printInvalidUsername());

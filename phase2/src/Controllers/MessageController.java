@@ -22,15 +22,14 @@ public class MessageController {
      * Creates a new MessageController with the already created managers
      * @param userManager The userManager
      * @param userController The UserController
-     * @param presenter The Presenter
      * @param messageManager The MessageManager
      */
-    public MessageController(UserManager userManager, UserController userController, MessagePresenter presenter,
+    public MessageController(UserManager userManager, UserController userController,
                              MessageManager messageManager, EventManager eventManager){
         this.messageManager = messageManager;
         this.userManager = userManager;
         this.userController = userController;
-        this.presenter = presenter;
+        this.presenter = new MessagePresenter();
         this.eventManager = eventManager;
     }
 

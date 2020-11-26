@@ -42,8 +42,13 @@ public class SpeakerController extends UserController implements Serializable {
         if (input.equals("2")){
             if (getUsermanager().canAddPerson(getMyName())){
                 String password = getPresenter().printPassword();
-                getUsermanager().addSpeaker(getMyName(), password);
-                mainMenu();
+                if (password.equals("0")){
+                    makeNewAccount();
+                }
+                else{
+                    getUsermanager().addSpeaker(getMyName(), password);
+                    mainMenu();
+                }
             }
             else{
                 setMyName(getPresenter().printInvalidUsername());

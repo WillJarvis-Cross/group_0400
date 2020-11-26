@@ -33,11 +33,11 @@ public abstract class UserController implements Serializable {
           eventManager = new EventManager();
           roomManager = new RoomManager();
           messageManager = new MessageManager();
-          eventController = new EventController(this, new RoomEventPresenter(), eventManager, usermanager,
+          eventController = new EventController(this, eventManager, usermanager,
                                                 roomManager);
-          messageController = new MessageController(usermanager, this, new MessagePresenter(),
+          messageController = new MessageController(usermanager, this,
                                                     messageManager, eventManager);
-          roomController = new RoomController(this, new RoomEventPresenter(), roomManager);
+          roomController = new RoomController(this, roomManager);
           this.name = name;
           makeNewAccount();
      }
@@ -55,12 +55,12 @@ public abstract class UserController implements Serializable {
           this.eventManager = eventManager;
           this.messageManager = messageManager;
           this.roomManager = roomManager;
-          this.presenter = new UserPresenter();
-          this.eventController = new EventController(this, new RoomEventPresenter(), eventManager,
+          presenter = new UserPresenter();
+          this.eventController = new EventController(this, eventManager,
                                                       usermanager, roomManager);
-          this.messageController = new MessageController(usermanager, this, new MessagePresenter(),
+          this.messageController = new MessageController(usermanager, this,
                                    messageManager, eventManager);
-          this.roomController = new RoomController(this, new RoomEventPresenter(), roomManager);
+          this.roomController = new RoomController(this, roomManager);
           this.name = name;
           makeNewAccount();
      }

@@ -97,7 +97,7 @@ public class RoomEventPresenter extends Presenter{
      * @return User input
      */
     public String printRoomNumber(){
-        System.out.println("What will the room be called");
+        System.out.println("What will the room be called or enter 0 to go back");
         return sc.nextLine();
     }
 
@@ -147,8 +147,13 @@ public class RoomEventPresenter extends Presenter{
      * @return User input
      */
     public int printRoomCapacity(){
-            System.out.println("What is the capacity of the room?");
-        return Integer.parseInt(sc.nextLine());
+        System.out.println("What is the capacity of the room?");
+        try{
+            return Integer.parseInt(sc.nextLine());
+        }
+        catch (NumberFormatException numberFormatException){
+            return 0;
+        }
     }
 
     /**

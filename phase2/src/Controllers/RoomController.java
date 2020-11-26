@@ -19,13 +19,12 @@ public class RoomController {
     /**
      * Creates a new RoomController given the already created managers
      * @param userController The UserController
-     * @param presenter The Presenter
      * @param roomManager The RoomManager
      */
-    public RoomController (UserController userController, RoomEventPresenter presenter, RoomManager roomManager) {
+    public RoomController (UserController userController, RoomManager roomManager) {
         this.roomManager = roomManager;
         this.userController = userController;
-        this.presenter = presenter;
+        this.presenter = new RoomEventPresenter();
     }
 
     /**
@@ -40,13 +39,19 @@ public class RoomController {
         }
         else{
             int capacity = presenter.printRoomCapacity();
-            if (roomManager.addRoom(roomNumber, capacity)){
-                presenter.printRoomAdded();
-                userController.mainMenu();
-            }
-            else{
+            if (capacity <= 0){
                 presenter.printInvalidOption();
                 makeRoomRequest();
+            }
+            else{
+                if (roomManager.addRoom(roomNumber, capacity)){
+                    presenter.printRoomAdded();
+                    userController.mainMenu();
+                }
+                else{
+                    presenter.printInvalidOption();
+                    makeRoomRequest();
+                }
             }
         }
     }

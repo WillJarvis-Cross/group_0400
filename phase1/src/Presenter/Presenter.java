@@ -269,14 +269,6 @@ public class Presenter {
     }
 
     /**
-     * Prints if the user inputs a event name that is not stored in user
-     *
-     */
-    public void printNoEvent() {
-        System.out.println("There is no event that has that name");
-    }
-
-    /**
      * Gets the message that the user wants to send
      *
      * @return User input
