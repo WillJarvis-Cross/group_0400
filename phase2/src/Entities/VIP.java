@@ -1,11 +1,11 @@
 package Entities;
-
 import java.lang.String;
+import java.util.List;
 
-/** This is an entity for a User who attends events
+/** This is an entity for a User who is a speaker at events
  * @author group 0400
  */
-public class Attendee extends User {
+public class VIP extends User{
 
     /**
      * Constructs a new attendee with the username nameInput and password passwordInput.
@@ -13,7 +13,7 @@ public class Attendee extends User {
      * @param passwordInput  The Attendee's password
      * @param nameInput   The Attendee's username
      */
-    public Attendee(String passwordInput, String nameInput){
+    public VIP(String passwordInput, String nameInput){
         super(passwordInput, nameInput);
     }
 
@@ -36,5 +36,5 @@ public class Attendee extends User {
      * @return false
      */
     @Override
-    public boolean isVIP() { return false;}
+    public boolean isVIP() { return true;}
 }

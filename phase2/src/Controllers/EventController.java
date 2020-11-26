@@ -48,6 +48,7 @@ public class EventController {
             String speaker = presenter.printSpeakerOfEvent();
             String roomNumber = presenter.printRoomNumber();
             int capacity = presenter.printEventCapacity();
+            boolean boolVIP = presenter.printVIP();
             int counter = 0;
             if (!userManager.getSpeakers().containsKey(speaker) || roomManager.getRoom(roomNumber) == null){
                 counter ++;
@@ -55,7 +56,7 @@ public class EventController {
             if (roomManager.isRoomTaken(roomNumber, time)){
                 counter ++;
             }
-            if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber, capacity) || duration == 0){
+            if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP) || duration == 0){
                 counter ++;
             }
             if (capacity > roomManager.getRoom(roomNumber).getCapacity()){
@@ -66,7 +67,7 @@ public class EventController {
             }
             if (counter == 0){
 
-                eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber, capacity);
+                eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP);
                 userManager.signUp(speaker, eManager.getEvent(eventName), eManager.getEventsExceptOne(userManager.getUser(speaker), eManager.getEvent(eventName)));
                 roomManager.addEvent(roomNumber, eventName, time);
                 presenter.printEventCreated();
@@ -101,6 +102,9 @@ public class EventController {
             return false;
         }
         if (!userManager.canSignUp(eManager.getEvent(eventName), eManager.getEventsByUsername(userManager.getUser(username)))){
+            return false;
+        }
+        if(!userManager.checkVIPSignUp(eManager.getEvent(eventName), userManager.getUser(username))){
             return false;
         }
         userManager.signUp(username, eManager.getEvent(eventName), eManager.getEventsByUsername(userManager.getUser(username)));

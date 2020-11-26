@@ -30,4 +30,11 @@ public class Speaker extends User{
      */
     @Override
     public boolean isSpeaker() { return true;}
+
+    /**
+     * Returns whether or not the Attendee is a VIP or not
+     * @return false
+     */
+    @Override
+    public boolean isVIP() { return false;}
 }

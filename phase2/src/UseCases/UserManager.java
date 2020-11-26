@@ -18,8 +18,12 @@ public class UserManager implements Serializable {
     // hashtable where the key is the name of the speaker and the value is the speaker
     Hashtable<String, Speaker> allSpeakers;
 
+    // hashtable where the key is the name of the VIP and the value is the speaker
+    Hashtable<String, VIP> allVIP;
+
     // hashtable where the key is the name of the user and the value is the user
     Hashtable<String, User> allUsers;
+
 
     /**
      * Instantiates a UserManager with no users of any kind registered
@@ -30,6 +34,30 @@ public class UserManager implements Serializable {
         allOrganizers = new Hashtable<>();
         allSpeakers = new Hashtable<>();
         allUsers = new Hashtable<>();
+        allVIP = new Hashtable<>();
+    }
+    /**
+     * Returns a Hashtable of all Attendees
+     * @return allAttendees
+     */
+    public Hashtable<String, VIP> getAllVIPs(){ return allVIP;}
+
+    /**
+     * Returns an Attendee with the given username
+     * @param name The name of the attendee
+     * @return Attendee object corresponding to name
+     */
+    public VIP getVIP(String name){ return allVIP.get(name);}
+
+    /**
+     * Creates a new Attendee with the given username and password
+     * @param name The name of the new Attendee
+     * @param pass The password of the attendee
+     */
+    public void addVIP(String name, String pass){
+        VIP newVIP = new VIP(pass, name);
+        allVIP.put(name, newVIP);
+        allUsers.put(name, newVIP);
     }
 
     /**
@@ -197,6 +225,17 @@ public class UserManager implements Serializable {
         return true;
     }
 
+
+    public boolean checkVIPSignUp(Event event,User user){
+        if(event.isVIPOnly()) {
+            if (user.isVIP()) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Cancels the person's spot in the event with the given name
      * @param person The name of the person
@@ -245,6 +284,9 @@ public class UserManager implements Serializable {
         }
         if (type.equals("speaker") && getSpeakers().containsKey(name)){
             return pass.equals(getSpeaker(name).getPassword());
+        }
+        if (type.equals("VIP") && getAllVIPs().containsKey(name)){
+            return pass.equals(getVIP(name).getPassword());
         }
         return false;
     }

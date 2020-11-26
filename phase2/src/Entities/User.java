@@ -94,4 +94,9 @@ public abstract class User implements Serializable {
      */
     public abstract boolean isSpeaker();
 
+    /**
+     * Returns True or false depending on whether or not this user is a VIP or not
+     * @return True or false depending on whether or not this user is a VIP or not
+     */
+    public abstract boolean isVIP();
 }

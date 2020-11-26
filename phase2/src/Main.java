@@ -34,6 +34,9 @@ public class Main{
                     case "3":
                         user = new SpeakerController(name);
                         break;
+                    case "4":
+                        user = new VIPController(name);
+                        break;
                 }
             }
             if (presenter.saveWhenExit()) { //the user wants to save their file

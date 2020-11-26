@@ -80,6 +80,15 @@ public class ReadAndWrite {
                                 loaded.getRoomManager());
                         break;
                     }
+                    case "4": {
+                        UserController loaded = (UserController) in.readObject();
+                        user = new VIPController(name, loaded.getUsermanager(),
+                                loaded.getEventManager(),
+                                loaded.getMessageManager(),
+                                loaded.getRoomManager());
+                        break;
+                    }
+
                 }
 
                 in.close();

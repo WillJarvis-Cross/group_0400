@@ -101,6 +101,18 @@ public class RoomEventPresenter extends Presenter{
         return sc.nextLine();
     }
 
+    public Boolean printVIP(){
+        System.out.println("Will this event be VIP-only? (T/F)");
+
+        if (sc.nextLine().equals("T")) {
+            return true;
+        }else if (sc.nextLine().equals("F")) {
+            return false;
+        }else{
+            return false;
+        }
+    }
+
     /**
      * Prints that the event was successfully created
      *

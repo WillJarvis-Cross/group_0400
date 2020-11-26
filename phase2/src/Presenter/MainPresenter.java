@@ -18,6 +18,7 @@ public class MainPresenter {
         System.out.println("1: Attendee");
         System.out.println("2: Organizer");
         System.out.println("3: Speaker");
+        System.out.println("4: VIP");
         return sc.nextLine();
     }
 

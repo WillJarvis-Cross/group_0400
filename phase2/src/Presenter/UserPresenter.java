@@ -57,6 +57,17 @@ public class UserPresenter extends Presenter{
         return sc.nextLine();
     }
 
+    public String printVIP() {
+        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("1: Sign up for an event");
+        System.out.println("2: Cancel spot in event");
+        System.out.println("3: Send a message");
+        System.out.println("4: See list of received messages");
+        System.out.println("5: See list of events signed up for");
+        System.out.println("6: Save and exit");
+        return sc.nextLine();
+    }
+
     /**
      * Prints options that Organizers can select
      *
