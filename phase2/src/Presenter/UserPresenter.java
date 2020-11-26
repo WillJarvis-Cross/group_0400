@@ -78,7 +78,7 @@ public class UserPresenter extends Presenter{
         System.out.println("1: Access the message menu");
         System.out.println("2: Access the event menu");
         System.out.println("3: Create a new room");
-        System.out.println("4: Create a new speaker");
+        System.out.println("4: Create a new account");
         System.out.println("5: Save and exit");
         return sc.nextLine();
     }
@@ -164,24 +164,40 @@ public class UserPresenter extends Presenter{
     }
 
     /**
-     * Prompts the user for the name of the speaker
+     * Prompts the user for account type that they want to add
      *
      * @return User input
      */
-    public String printNameSpeaker(){
-        System.out.println("Enter the name of the speaker");
+    public String getAccountType() {
+        System.out.println("Select an account type by entering the corresponding numbers");
+        System.out.println("1: Organizer");
+        System.out.println("2: Speaker");
+        System.out.println("3: Attendee");
+        System.out.println("4: VIP");
         return sc.nextLine();
     }
 
     /**
-     * Prompts the user for the password of the speaker
+     * Prompts the user for the name of the account
      *
      * @return User input
      */
-    public String getPassSpeaker(){
-        System.out.println("Enter the speaker's password");
+    public String printNameAccount(){
+        System.out.println("Enter the Username of the Account");
         return sc.nextLine();
     }
+
+    /**
+     * Prompts the user for the password of the accouont
+     *
+     * @return User input
+     */
+    public String getPassAccount(){
+        System.out.println("Enter the Account's password");
+        return sc.nextLine();
+    }
+
+
 
     /**
      * Lists the events the user can sign up for and asks which event they want to sign up for

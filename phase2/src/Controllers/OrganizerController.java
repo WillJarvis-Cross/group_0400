@@ -107,8 +107,8 @@ public class OrganizerController extends UserController implements Serializable 
                 getRoomController().makeRoomRequest();
                 break;
             }
-            else if (input.equals("4")){ // Create a speaker
-                createSpeaker();
+            else if (input.equals("4")){ // Create an account
+                createAccount();
                 break;
             }
             else if (input.equals("5")){ // This is when the user wants to save and log out
@@ -188,19 +188,36 @@ public class OrganizerController extends UserController implements Serializable 
     }
 
     /**
-     * Asks the user for the name and password for this new user and creates a new speaker with
+     * Asks the user for the name and password for this new user and creates a new account with
      * that information
      */
-    public void createSpeaker(){
-        String speaker = getPresenter().printNameSpeaker();
-        String pass = getPresenter().getPassSpeaker();
-        if (getUsermanager().canAddPerson(speaker)){
-            getUsermanager().addSpeaker(speaker, pass);
+    public void createAccount(){
+        String input = getPresenter().getAccountType();
+        String name = getPresenter().printNameAccount();
+        String pass = getPresenter().getPassAccount();
+        while (!getUsermanager().canAddPerson(name)) {
+            name = getPresenter().printInvalidUsername();
+        }
+        if (input.equals("1")) {
+            getUsermanager().addOrganizer(name, pass);
             mainMenu();
         }
-        else{
-            getPresenter().printInvalidUsername();
-            createSpeaker();
+        else if (input.equals("2")) {
+            getUsermanager().addSpeaker(name, pass);
+            mainMenu();
         }
+        else if (input.equals("3")) {
+            getUsermanager().addAttendee(name, pass);
+            mainMenu();
+        }
+        else if (input.equals("4")) {
+            getUsermanager().addVIP(name, pass);
+            mainMenu();
+        }
+        else {
+            getPresenter().printInvalidInput();
+            mainMenu();
+        }
+
     }
 }
