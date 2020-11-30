@@ -13,7 +13,7 @@ public class Message implements Serializable {
     private final String sender; // The user who sent the message
     private final String receiver; // The user receiving the message
     private final Integer messageId; // The ID of the message
-    private boolean unread = false; // Whether the message has been marked as unread or not
+    private boolean unread = true; // Whether the message has been marked as unread or not
 
     /**
      * Constructs a new message with content, sender, and receiver which is inputted. The message id is given a value

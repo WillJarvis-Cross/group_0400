@@ -69,15 +69,13 @@ public class MessageController {
         String sender = messageManager.getMyMessages(messageIds).get(input - 1).getSender();
         String content = messageManager.getMyMessages(messageIds).get(input - 1).getContent();
         int id = messageManager.getMyMessages(messageIds).get(input - 1).getMessageId();
-        int option = presenter.printMessageOption(sender, content);
+        int option = presenter.printMessageOption(sender, content, messageManager.unreadStatus(id));
 
         if (option == 0){
             printMyMessages(name);
         }
         else if (option == 1){
-            if (!messageManager.markUnread(id)){
-                presenter.printAlreadyUnread();
-            }
+            messageManager.markUnread(id);
         }
         else if (option == 2){
             presenter.printDeleted(messageManager.delMessage(userManager.getUser(name), id));
@@ -115,6 +113,12 @@ public class MessageController {
     private void helpPrintMessages(List<Integer> messageIds, StringBuilder output){
         // I do this loop counting backwards so it prints the messages based on which was most recent
         for (int i = messageIds.size() - 1; i >= 0; i--){
+            if (messageManager.getMyMessages(messageIds).get(i).getUnread()){
+                output.append("(Unread) ");
+            }
+            else{
+                output.append("(Read)   ");
+            }
             output.append(messageIds.size()-i);
             output.append(": ");
             output.append(messageManager.getMyMessages(messageIds).get(i).getSender());

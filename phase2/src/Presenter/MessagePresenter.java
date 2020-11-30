@@ -91,11 +91,16 @@ public class MessagePresenter extends Presenter{
      * @param content The content of the message
      * @return The users option
      */
-    public int printMessageOption(String sender, String content){
+    public int printMessageOption(String sender, String content, boolean unread){
         while (true){
             System.out.println("Pick an option for this message or enter 0 to go back");
             System.out.println(sender + ": " + content);
-            System.out.println("1: Mark as unread");
+            if (unread){
+                System.out.println("1: Mark as read");
+            }
+            else{
+                System.out.println("1: Mark as unread");
+            }
             System.out.println("2: delete");
             System.out.println("3: Archive");
             int input = Integer.parseInt(sc.nextLine());
@@ -104,10 +109,6 @@ public class MessagePresenter extends Presenter{
             }
             printInvalidOption();
         }
-    }
-
-    public void printAlreadyUnread(){
-        System.out.println("You have already marked this as unread");
     }
 
     public void printDeleted(boolean del){

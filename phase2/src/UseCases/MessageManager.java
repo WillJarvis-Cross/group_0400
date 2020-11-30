@@ -49,23 +49,39 @@ public class MessageManager implements Serializable {
     }
 
     /**
-     * Marks the given message as unread if it not already marked as unread
-     * @param id The id of the message being marked as unread
-     * @return True if the message was marked as unread
+     * Marks the given message as unread or read depending on its current status.
+     * It will mark it as unread if it was previously read
+     * @param id The id of the message being altered
      */
-    public boolean markUnread(int id){
-        Message message = getMessage(id);
-        if (message.getUnread()){
-            return false;
-        }
-        message.setUnread(true);
-        return true;
+    public void markUnread(int id){
+        getMessage(id).setUnread(!unreadStatus(id));
     }
 
+    /**
+     * Returns true when the message is unread and false when it is read
+     * @param id The id of the message in question
+     * @return true when the message is unread and false when it is read
+     */
+    public boolean unreadStatus(int id){
+        return getMessage(id).getUnread();
+    }
+
+    /**
+     * Deletes the given message from the users inbox
+     * @param person The user in which the message is being deleted from
+     * @param id The id of the message in question
+     * @return True if the message was deleted and false otherwise
+     */
     public boolean delMessage(User person, int id){
         return person.deleteMessage(id);
     }
 
+    /**
+     * Changes a message from the message inbox to the archived messages
+     * @param person The person who's message we are altering
+     * @param id The id of the message in question
+     * @return True if the message was archived and false otherwise
+     */
     public boolean archiveMessage(User person, int id){
         if (delMessage(person, id)){
             person.addArchivedMessage(id);
@@ -74,6 +90,12 @@ public class MessageManager implements Serializable {
         return false;
     }
 
+    /**
+     * Changes a message from archived to the message inbox
+     * @param person The person who's message we are altering
+     * @param id The id of the message in question
+     * @return True if the message was unarchived and false otherwise
+     */
     public boolean unArchiveMessage(User person, int id){
         if (person.delArchivedMessage(id)){
             person.addMessage(id);
