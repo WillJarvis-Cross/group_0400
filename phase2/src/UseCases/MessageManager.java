@@ -47,4 +47,38 @@ public class MessageManager implements Serializable {
         }
         return newList;
     }
+
+    /**
+     * Marks the given message as unread if it not already marked as unread
+     * @param id The id of the message being marked as unread
+     * @return True if the message was marked as unread
+     */
+    public boolean markUnread(int id){
+        Message message = getMessage(id);
+        if (message.getUnread()){
+            return false;
+        }
+        message.setUnread(true);
+        return true;
+    }
+
+    public boolean delMessage(User person, int id){
+        return person.deleteMessage(id);
+    }
+
+    public boolean archiveMessage(User person, int id){
+        if (delMessage(person, id)){
+            person.addArchivedMessage(id);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unArchiveMessage(User person, int id){
+        if (person.delArchivedMessage(id)){
+            person.addMessage(id);
+            return true;
+        }
+        return false;
+    }
 }

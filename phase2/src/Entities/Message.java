@@ -13,6 +13,7 @@ public class Message implements Serializable {
     private final String sender; // The user who sent the message
     private final String receiver; // The user receiving the message
     private final Integer messageId; // The ID of the message
+    private boolean unread = false; // Whether the message has been marked as unread or not
 
     /**
      * Constructs a new message with content, sender, and receiver which is inputted. The message id is given a value
@@ -58,7 +59,19 @@ public class Message implements Serializable {
      */
     public int getMessageId(){ return messageId;}
 
-    public void printAttendeeEvents(List<String> events) {
+    /**
+     * Returns true when the message has been marked as unread and false otherwise
+     * @returntrue when the message has been marked as unread and false otherwise
+     */
+    public boolean getUnread(){ return unread; }
+
+    /**
+     * Sets the value of unread to the new status of the message
+     * @param read The status of the new message
+     */
+    public void setUnread(boolean read){ unread = read;}
+
+    /*public void printAttendeeEvents(List<String> events) {
         if (events.isEmpty()) {
             System.out.println("You are not signed up for any events");
         }
@@ -68,6 +81,6 @@ public class Message implements Serializable {
                 System.out.println(name);
             }
         }
-    }
+    }*/
 }
 

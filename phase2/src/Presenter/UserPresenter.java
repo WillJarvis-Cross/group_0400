@@ -53,7 +53,8 @@ public class UserPresenter extends Presenter{
         System.out.println("3: Send a message");
         System.out.println("4: See list of received messages");
         System.out.println("5: See list of events signed up for");
-        System.out.println("6: Save and exit");
+        System.out.println("6: See your archived messages");
+        System.out.println("7: Save and exit");
         return sc.nextLine();
     }
 
@@ -64,7 +65,8 @@ public class UserPresenter extends Presenter{
         System.out.println("3: Send a message");
         System.out.println("4: See list of received messages");
         System.out.println("5: See list of events signed up for");
-        System.out.println("6: Save and exit");
+        System.out.println("6: See your archived messages");
+        System.out.println("7: Save and exit");
         return sc.nextLine();
     }
 
@@ -94,6 +96,7 @@ public class UserPresenter extends Presenter{
         System.out.println("2: Show my received messages");
         System.out.println("3: Send a message to all of the speakers");
         System.out.println("4: Send a message to all of the attendees");
+        System.out.println("5: See your archived messages");
         return sc.nextLine();
     }
 
@@ -124,7 +127,8 @@ public class UserPresenter extends Presenter{
         System.out.println("2: See list of received messages");
         System.out.println("3: See list of events that you are speaking at");
         System.out.println("4: Send a message to everyone signed up for an event");
-        System.out.println("5: Save and exit");
+        System.out.println("5: See your archived messages");
+        System.out.println("6: Save and exit");
         return sc.nextLine();
     }
 

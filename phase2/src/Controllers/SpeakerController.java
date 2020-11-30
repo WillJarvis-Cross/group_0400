@@ -122,6 +122,9 @@ public class SpeakerController extends UserController implements Serializable {
                 break;
             }
             else if (input.equals("5")){ // save and log out
+                getMessageController().seeArchivedMessages(getMyName());
+                break;
+            }else if (input.equals("6")){ // save and log out
                 break;
             }
             else{

@@ -44,16 +44,74 @@ public class MessageController {
         StringBuilder output = new StringBuilder("My Messages:\n");
         List<Integer> messagesIds = userManager.getUser(name).getMessageInbox();
 
-        // I do this loop counting backwards so it prints the messages based on which was most recent
-        for (int i = messagesIds.size() - 1; i >= 0; i--){
-            output.append(messageManager.getMyMessages(messagesIds).get(i).getSender());
-            output.append(": ");
-            output.append(messageManager.getMyMessages(messagesIds).get(i).getContent());
-            output.append("\n");
+        helpPrintMessages(messagesIds, output);
+
+        if (!output.toString().equals("My Messages:\n")){
+            int input = presenter.printReceivedMessages(output);
+            if (input > 0 && input <= messagesIds.size()){
+                advancedMessageOptions(messagesIds, input, name);
+            }
         }
-        String input = presenter.printReceivedMessages(output);
+        else{
+            presenter.printNoMessages();
+        }
 
         userController.mainMenu();
+    }
+
+    private void advancedMessageOptions(List<Integer> messageIds, int input, String name){
+        String sender = messageManager.getMyMessages(messageIds).get(input - 1).getSender();
+        String content = messageManager.getMyMessages(messageIds).get(input - 1).getContent();
+        int id = messageManager.getMyMessages(messageIds).get(input - 1).getMessageId();
+        int option = presenter.printMessageOption(sender, content);
+
+        if (option == 0){
+            printMyMessages(name);
+        }
+        else if (option == 1){
+            if (!messageManager.markUnread(id)){
+                presenter.printAlreadyUnread();
+            }
+        }
+        else if (option == 2){
+            presenter.printDeleted(messageManager.delMessage(userManager.getUser(name), id));
+        }
+        else{
+            presenter.printArchived(messageManager.archiveMessage(userManager.getUser(name), id));
+        }
+    }
+
+    public void seeArchivedMessages(String name){
+        StringBuilder output = new StringBuilder("My Archived Messages:\n");
+        List<Integer> messagesIds = userManager.getUser(name).getArchivedMessages();
+
+        helpPrintMessages(messagesIds, output);
+        if (output.toString().equals("My Archived Messages:\n")){
+            int input = presenter.printReceivedMessages(output);
+            if (input != 0){
+                if (presenter.printUnarchive()){
+                    int id = messageManager.getMyMessages(messagesIds).get(input - 1).getMessageId();
+                    messageManager.archiveMessage(userManager.getUser(name), id);
+                }
+            }
+        }
+        else{
+            presenter.printNoMessages();
+        }
+
+        userController.mainMenu();
+    }
+
+    private void helpPrintMessages(List<Integer> messageIds, StringBuilder output){
+        // I do this loop counting backwards so it prints the messages based on which was most recent
+        for (int i = messageIds.size() - 1; i >= 0; i--){
+            output.append(messageIds.size()-i);
+            output.append(": ");
+            output.append(messageManager.getMyMessages(messageIds).get(i).getSender());
+            output.append(": ");
+            output.append(messageManager.getMyMessages(messageIds).get(i).getContent());
+            output.append("\n");
+        }
     }
 
     /**

@@ -11,6 +11,7 @@ import java.lang.String;
 public abstract class User implements Serializable {
 
     private List<Integer> messageInbox;  // List of messages sent to this user
+    private List<Integer> archivedMessages; // List of the user's archived messages
     private List<String> events;  // List of events the attendee is signed up for
     private String password, username;  // The user's username and password which is used to log in
 
@@ -25,6 +26,7 @@ public abstract class User implements Serializable {
         this.password = passwordInput;
         this.messageInbox = new ArrayList<>();
         this.events = new ArrayList<>();
+        this.archivedMessages = new ArrayList<>();
     }
 
     /**
@@ -40,6 +42,31 @@ public abstract class User implements Serializable {
      * @param newMessage  The ID of the message that this User has received
      */
     public void addMessage(int newMessage){ messageInbox.add(newMessage);}
+
+    public List<Integer> getArchivedMessages(){ return archivedMessages; }
+
+    public void addArchivedMessage(int newMessage){ archivedMessages.add(newMessage);}
+
+    /**
+     * Deletes the given message if it exists
+     * @param id The id of the message being deleted
+     * @return True if the message has been deleted and false otherwise
+     */
+    public boolean deleteMessage(int id){
+        if (messageInbox.contains(id)){
+            messageInbox.remove(id);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean delArchivedMessage(int id){
+        if (archivedMessages.contains(id)){
+            archivedMessages.remove(id);
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Returns this User's password

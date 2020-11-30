@@ -60,15 +60,72 @@ public class MessagePresenter extends Presenter{
      * @param messages All the users messages
      * @return User input
      */
-    public String printReceivedMessages(StringBuilder messages) {
-        if (messages.toString().equals("My Messages:")){
-            System.out.println("You have no messages");
+    public int printReceivedMessages(StringBuilder messages) {
+        System.out.println(messages);
+        System.out.println("Enter the number of the message you want to see more info about or enter 0" +
+                " to go back to the main menu");
+        return Integer.parseInt(sc.nextLine());
+    }
+
+    public void printNoMessages(){
+        System.out.println("You have no messages");
+    }
+
+    public boolean printUnarchive(){
+        while (true){
+            System.out.println("Do you want to unarchive this message? Enter yes or no.");
+            String input = sc.nextLine();
+            if (input.equals("yes")){
+                return true;
+            }
+            else if (input.equals("no")){
+                return false;
+            }
+            printInvalidOption();
         }
-        else {
-            System.out.println(messages);
+    }
+
+    /**
+     * Prompts the user to select whether they want to "Mark as unread", delete, or archive their current message
+     * @param sender The user who sent the message
+     * @param content The content of the message
+     * @return The users option
+     */
+    public int printMessageOption(String sender, String content){
+        while (true){
+            System.out.println("Pick an option for this message or enter 0 to go back");
+            System.out.println(sender + ": " + content);
+            System.out.println("1: Mark as unread");
+            System.out.println("2: delete");
+            System.out.println("3: Archive");
+            int input = Integer.parseInt(sc.nextLine());
+            if (input >= 0 && input <=3){
+                return input;
+            }
+            printInvalidOption();
         }
-        System.out.println("Enter any key to go back to the main menu");
-        return sc.nextLine();
+    }
+
+    public void printAlreadyUnread(){
+        System.out.println("You have already marked this as unread");
+    }
+
+    public void printDeleted(boolean del){
+        if (del){
+            System.out.println("Message successfully deleted");
+        }
+        else{
+            System.out.println("Message could not be deleted");
+        }
+    }
+
+    public void printArchived(boolean archived){
+        if (archived){
+            System.out.println("Message successfully archived");
+        }
+        else{
+            System.out.println("Message could not be archived");
+        }
     }
 
     /**
