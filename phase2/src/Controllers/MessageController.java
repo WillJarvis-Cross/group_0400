@@ -59,6 +59,12 @@ public class MessageController {
         userController.mainMenu();
     }
 
+    /**
+     * This is used to deal with the advanced message options("Mark as unread", delete, archive)
+     * @param messageIds The list of the user's messages
+     * @param input The message they are looking at using advanced options on
+     * @param name The name of the user
+     */
     private void advancedMessageOptions(List<Integer> messageIds, int input, String name){
         String sender = messageManager.getMyMessages(messageIds).get(input - 1).getSender();
         String content = messageManager.getMyMessages(messageIds).get(input - 1).getContent();
@@ -81,17 +87,21 @@ public class MessageController {
         }
     }
 
+    /**
+     * This shows the users archived messages and also allows them to unarchive messages
+     * @param name The name of the user
+     */
     public void seeArchivedMessages(String name){
         StringBuilder output = new StringBuilder("My Archived Messages:\n");
         List<Integer> messagesIds = userManager.getUser(name).getArchivedMessages();
 
         helpPrintMessages(messagesIds, output);
-        if (output.toString().equals("My Archived Messages:\n")){
+        if (!output.toString().equals("My Archived Messages:\n")){
             int input = presenter.printReceivedMessages(output);
             if (input != 0){
                 if (presenter.printUnarchive()){
                     int id = messageManager.getMyMessages(messagesIds).get(input - 1).getMessageId();
-                    messageManager.archiveMessage(userManager.getUser(name), id);
+                    messageManager.unArchiveMessage(userManager.getUser(name), id);
                 }
             }
         }

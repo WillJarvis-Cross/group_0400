@@ -43,8 +43,16 @@ public abstract class User implements Serializable {
      */
     public void addMessage(int newMessage){ messageInbox.add(newMessage);}
 
+    /**
+     * Returns a list of all the user's archived messages
+     * @return a list of all the user's archived messages
+     */
     public List<Integer> getArchivedMessages(){ return archivedMessages; }
 
+    /**
+     * Add an archived message to the list of archived messages
+     * @param newMessage The new message being added
+     */
     public void addArchivedMessage(int newMessage){ archivedMessages.add(newMessage);}
 
     /**
@@ -54,15 +62,20 @@ public abstract class User implements Serializable {
      */
     public boolean deleteMessage(int id){
         if (messageInbox.contains(id)){
-            messageInbox.remove(id);
+            messageInbox.remove(new Integer(id));
             return true;
         }
         return false;
     }
 
+    /**
+     * deletes a messages from the list of archived messages
+     * @param id The message being deleted
+     * @return True if the message is deleted and false otherwise
+     */
     public boolean delArchivedMessage(int id){
         if (archivedMessages.contains(id)){
-            archivedMessages.remove(id);
+            archivedMessages.remove(new Integer(id));
             return true;
         }
         return false;

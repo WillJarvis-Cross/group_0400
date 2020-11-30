@@ -125,7 +125,7 @@ public class AttendeeController extends UserController implements Serializable {
                 }
                 break;
             }
-            else if (input.equals("6")){
+            else if (input.equals("6")){ // See their archived messages
                 getMessageController().seeArchivedMessages(getMyName());
                 break;
             }
