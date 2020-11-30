@@ -121,7 +121,7 @@ public class SpeakerController extends UserController implements Serializable {
                 getMessageController().messageAllAttendeesAtEvent(getMyName());
                 break;
             }
-            else if (input.equals("5")){ // save and log out
+            else if (input.equals("5")){ // See the user's archived messages
                 getMessageController().seeArchivedMessages(getMyName());
                 break;
             }else if (input.equals("6")){ // save and log out

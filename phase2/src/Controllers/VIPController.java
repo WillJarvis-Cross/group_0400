@@ -109,7 +109,7 @@ public class VIPController extends UserController implements Serializable {
                     mainMenu();
                 }
                 break;
-            } else if (input.equals("6")){
+            } else if (input.equals("6")){ // See the user's archived messages
                 getMessageController().seeArchivedMessages(getMyName());
                 break;
             }

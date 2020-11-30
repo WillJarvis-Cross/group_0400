@@ -119,10 +119,6 @@ public class OrganizerController extends UserController implements Serializable 
             else if (input.equals("5")){ // This is when the user wants to save and log out
                 break;
             }
-            else if (input.equals("6")){
-                getMessageController().seeArchivedMessages(getMyName());
-                break;
-            }
             else{
                 getPresenter().printInvalidInput();
             }
@@ -147,6 +143,9 @@ public class OrganizerController extends UserController implements Serializable 
         }
         else if (input.equals("4")){ // Send a message to all attendees
             getMessageController().messageAllAttendees(getMyName());
+        }
+        else if (input.equals("5")){ // See their archived messages
+            getMessageController().seeArchivedMessages(getMyName());
         }
         else if (input.equals("0")){ // Go back to the main menu
             mainMenu();
