@@ -1,10 +1,7 @@
 package Controllers;
 
 import Presenter.*;
-import UseCases.EventManager;
-import UseCases.MessageManager;
-import UseCases.RoomManager;
-import UseCases.UserManager;
+import UseCases.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,7 +15,9 @@ public abstract class UserController implements Serializable {
      private final EventManager eventManager;
      private final MessageManager messageManager;
      private final RoomManager roomManager;
+     private final GroupChatManager groupChatManager;
      private transient final RoomController roomController;
+     private transient final GroupChatController groupChatController;
      private String name;
 
      /**
@@ -33,11 +32,14 @@ public abstract class UserController implements Serializable {
           eventManager = new EventManager();
           roomManager = new RoomManager();
           messageManager = new MessageManager();
+          groupChatManager = new GroupChatManager(messageManager);
           eventController = new EventController(this, eventManager, usermanager,
                                                 roomManager);
           messageController = new MessageController(usermanager, this,
                                                     messageManager, eventManager);
           roomController = new RoomController(this, roomManager);
+          this.groupChatController = new GroupChatController(usermanager, this, groupChatManager,
+                  messageManager);
           this.name = name;
           makeNewAccount();
      }
@@ -50,17 +52,21 @@ public abstract class UserController implements Serializable {
       * @param messageManager The MessageManager to be stored
       * @param roomManager The RoomManager to be stored
       */
-     public UserController(String name, UserManager userManager, EventManager eventManager, MessageManager messageManager, RoomManager roomManager){
+     public UserController(String name, UserManager userManager, EventManager eventManager,
+                           MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager){
           this.usermanager = userManager;
           this.eventManager = eventManager;
           this.messageManager = messageManager;
           this.roomManager = roomManager;
           presenter = new UserPresenter();
+          this.groupChatManager = groupChatManager;
           this.eventController = new EventController(this, eventManager,
                                                       usermanager, roomManager);
           this.messageController = new MessageController(usermanager, this,
                                    messageManager, eventManager);
           this.roomController = new RoomController(this, roomManager);
+          this.groupChatController = new GroupChatController(usermanager, this, groupChatManager,
+                  messageManager);
           this.name = name;
           makeNewAccount();
      }
@@ -113,6 +119,8 @@ public abstract class UserController implements Serializable {
           return eventManager;
      }
 
+     public GroupChatManager getGroupChatManager(){ return groupChatManager;}
+
      /**
       * Gets the messageController
       * @return MessageController
@@ -144,6 +152,12 @@ public abstract class UserController implements Serializable {
      public RoomManager getRoomManager() {
           return roomManager;
      }
+
+     /**
+      * Gets the groupChatController
+      * @return the groupChatController
+      */
+     public GroupChatController getGroupChatController(){ return groupChatController;}
 
      /**
       * Signs the user up for the event of their choosing if they are able to.

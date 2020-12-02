@@ -20,10 +20,17 @@ public class MessageManager implements Serializable {
      * @param content Content of the message
      */
     public void sendMessage(User sender, User receiver, String content){
-        Message message = new Message(content, sender.getUsername(), receiver.getUsername(), messageList.size());
+        Message message = new Message(content, sender.getUsername(), messageList.size());
         receiver.addMessage(messageList.size());
         messageList.add(message);
     }
+
+    public void groupMessage(String sender, GroupChat group, String content){
+        Message message = new Message(content, sender, messageList.size());
+        group.newMessage(messageList.size());
+        messageList.add(message);
+    }
+
     /**
      * Returns a message object with the given id
      * @param id id of the message
@@ -103,4 +110,6 @@ public class MessageManager implements Serializable {
         }
         return false;
     }
+
+
 }

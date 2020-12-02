@@ -45,16 +45,6 @@ public class MessagePresenter extends Presenter{
     }
 
     /**
-     * Gets the message that the user wants to send
-     *
-     * @return User input
-     */
-    public String printMessage() {
-        System.out.println("Enter the message you want to send");
-        return sc.nextLine();
-    }
-
-    /**
      * Prints a list of messages that were received by the user
      *
      * @param messages All the users messages
@@ -129,13 +119,7 @@ public class MessagePresenter extends Presenter{
         }
     }
 
-    /**
-     * Prints that the message the user inputs has been sent
-     *
-     */
-    public void printMessageSent(){
-        System.out.println("Message Sent!");
-    }
+
 
     public void printAttendeeEvents(List<String> events) {
         if (events.isEmpty()) {

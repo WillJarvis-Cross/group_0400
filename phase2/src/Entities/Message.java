@@ -11,7 +11,6 @@ public class Message implements Serializable {
 
     private final String content; // This message's content
     private final String sender; // The user who sent the message
-    private final String receiver; // The user receiving the message
     private final Integer messageId; // The ID of the message
     private boolean unread = true; // Whether the message has been marked as unread or not
 
@@ -22,10 +21,9 @@ public class Message implements Serializable {
      * @param sender The name of the user who sent the message
      * @param receiver The name of the user who received the message
      */
-    public Message(String content, String sender, String receiver, int numMessages){
+    public Message(String content, String sender, int numMessages){
         this.content = content;
         this.sender = sender;
-        this.receiver = receiver;
         this.messageId = numMessages;
     }
 
@@ -43,14 +41,6 @@ public class Message implements Serializable {
      */
     public String getSender(){
         return sender;
-    }
-
-    /**
-     * Returns the name of the user who received the message
-     * @return the name of the user who received the message
-     */
-    public String getReceiver(){
-        return receiver;
     }
 
     /**

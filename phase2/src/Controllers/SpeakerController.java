@@ -1,9 +1,6 @@
 package Controllers;
 
-import UseCases.EventManager;
-import UseCases.MessageManager;
-import UseCases.RoomManager;
-import UseCases.UserManager;
+import UseCases.*;
 
 import java.io.Serializable;
 
@@ -30,8 +27,8 @@ public class SpeakerController extends UserController implements Serializable {
      * @param roomManager The RoomManager
      */
     public SpeakerController(String name, UserManager userManager, EventManager eventManager,
-                             MessageManager messageManager, RoomManager roomManager){
-        super(name, userManager, eventManager, messageManager, roomManager);
+                             MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager){
+        super(name, userManager, eventManager, messageManager, roomManager, groupChatManager);
     }
 
     /**
@@ -124,7 +121,15 @@ public class SpeakerController extends UserController implements Serializable {
             else if (input.equals("5")){ // See the user's archived messages
                 getMessageController().seeArchivedMessages(getMyName());
                 break;
-            }else if (input.equals("6")){ // save and log out
+            }else if (input.equals("6")){ // Create a group chat
+                getGroupChatController().createGroupChat(getMyName());
+                break;
+            }
+            else if (input.equals("7")){ // See their group chats
+                getGroupChatController().showGroupChats(getMyName());
+                break;
+            }
+            else if (input.equals("8")){ // save and log out
                 break;
             }
             else{

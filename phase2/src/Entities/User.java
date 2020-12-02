@@ -13,6 +13,7 @@ public abstract class User implements Serializable {
     private List<Integer> messageInbox;  // List of messages sent to this user
     private List<Integer> archivedMessages; // List of the user's archived messages
     private List<String> events;  // List of events the attendee is signed up for
+    private List<String> groupChats; // List of the names of the group chats this user is in
     private String password, username;  // The user's username and password which is used to log in
 
     /**
@@ -27,7 +28,10 @@ public abstract class User implements Serializable {
         this.messageInbox = new ArrayList<>();
         this.events = new ArrayList<>();
         this.archivedMessages = new ArrayList<>();
+        this.groupChats = new ArrayList<>();
     }
+
+    public List<String> getGroupChats(){ return groupChats;}
 
     /**
      * Returns the list of message IDs which correspond to this User's received messages
@@ -120,6 +124,16 @@ public abstract class User implements Serializable {
      */
     public void removeEvent(String removedEvent){
         events.remove(removedEvent);
+    }
+
+    public void addGroupChat(String name){ groupChats.add(name);}
+
+    public boolean removeGroupChat(String name){
+        if (groupChats.contains(name)){
+            groupChats.remove(name);
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -85,7 +85,8 @@ public class ReadAndWrite {
                         user = new AttendeeController(name, loaded.getUsermanager(),
                                 loaded.getEventManager(),
                                 loaded.getMessageManager(),
-                                loaded.getRoomManager());
+                                loaded.getRoomManager(),
+                                loaded.getGroupChatManager());
                         break;
                     }
                     case "2": {
@@ -93,7 +94,8 @@ public class ReadAndWrite {
                         user = new OrganizerController(name, loaded.getUsermanager(),
                                 loaded.getEventManager(),
                                 loaded.getMessageManager(),
-                                loaded.getRoomManager());
+                                loaded.getRoomManager(),
+                                loaded.getGroupChatManager());
                         break;
                     }
                     case "3": {
@@ -101,7 +103,8 @@ public class ReadAndWrite {
                         user = new SpeakerController(name, loaded.getUsermanager(),
                                 loaded.getEventManager(),
                                 loaded.getMessageManager(),
-                                loaded.getRoomManager());
+                                loaded.getRoomManager(),
+                                loaded.getGroupChatManager());
                         break;
                     }
                     case "4": {
@@ -109,7 +112,8 @@ public class ReadAndWrite {
                         user = new VIPController(name, loaded.getUsermanager(),
                                 loaded.getEventManager(),
                                 loaded.getMessageManager(),
-                                loaded.getRoomManager());
+                                loaded.getRoomManager(),
+                                loaded.getGroupChatManager());
                         break;
                     }
 

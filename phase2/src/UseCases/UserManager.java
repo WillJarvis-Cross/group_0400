@@ -3,6 +3,7 @@ import Entities.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 /** Represents the use case for Room objects
@@ -139,6 +140,18 @@ public class UserManager implements Serializable {
      */
     public boolean canAddPerson(String name){
         return !allUsers.containsKey(name);
+    }
+
+    public boolean canMakeGroupChat(String[] names){
+        if (names.length == 0){
+            return false;
+        }
+        for (String name: names){
+            if (canAddPerson(name)){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -298,6 +311,14 @@ public class UserManager implements Serializable {
      */
     public void changePassword(String person, String pass){
         allUsers.get(person).setPassword(pass);
+    }
+
+    public List<User> getListOfUsers(List<String> names){
+        List<User> users = new ArrayList<>();
+        for (String name: names){
+            users.add(getUser(name));
+        }
+        return users;
     }
 }
 

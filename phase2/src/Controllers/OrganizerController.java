@@ -1,9 +1,6 @@
 package Controllers;
 
-import UseCases.EventManager;
-import UseCases.MessageManager;
-import UseCases.RoomManager;
-import UseCases.UserManager;
+import UseCases.*;
 
 import java.io.Serializable;
 
@@ -31,8 +28,8 @@ public class OrganizerController extends UserController implements Serializable 
      * @param roomManager The RoomManager
      */
     public OrganizerController(String name, UserManager userManager, EventManager eventManager,
-                               MessageManager messageManager, RoomManager roomManager){
-        super(name, userManager, eventManager, messageManager, roomManager);
+                               MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager){
+        super(name, userManager, eventManager, messageManager, roomManager, groupChatManager);
     }
 
     /**
@@ -146,6 +143,12 @@ public class OrganizerController extends UserController implements Serializable 
         }
         else if (input.equals("5")){ // See their archived messages
             getMessageController().seeArchivedMessages(getMyName());
+        }
+        else if (input.equals("6")){ // Create a group chat
+            getGroupChatController().createGroupChat(getMyName());
+        }
+        else if (input.equals("7")){ // See their group chats
+            getGroupChatController().showGroupChats(getMyName());
         }
         else if (input.equals("0")){ // Go back to the main menu
             mainMenu();
