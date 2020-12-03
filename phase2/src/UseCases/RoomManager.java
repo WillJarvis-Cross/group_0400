@@ -3,7 +3,10 @@ import Entities.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Set;
 
 /** Represents the use case for Room objects
  * @author group 0400
@@ -35,12 +38,13 @@ public class RoomManager implements Serializable {
      * Creates a room with the given room number and capacity
      * @param roomNumber The name of the room
      * @param capacity The capacity of the room
+     * @param techLevel techLevel the tech level of the room's equipment
      */
-    public boolean addRoom(String roomNumber, int capacity) {
+    public boolean addRoom(String roomNumber, int capacity, int techLevel) {
         if (allRooms.containsKey(roomNumber)){
             return false;
         }
-        allRooms.put(roomNumber, new Room(roomNumber, capacity));
+        allRooms.put(roomNumber, new Room(roomNumber, capacity, techLevel));
         return true;
     }
 
@@ -74,5 +78,21 @@ public class RoomManager implements Serializable {
      */
     public void removeRoomEvent(String roomNumber, String eventName) {
         allRooms.get(roomNumber).removeEvent(eventName);
+    }
+
+    /**
+     * Returns a list of eventNames with at least the given tech level
+     * @param techLevel The minimum tech level for a room to be returned
+     * @return a list of rooms
+     */
+    public List<String> getRoomsByTech(int techLevel) {
+        List<String> roomList = new ArrayList<>();
+        Set<String> keys = this.allRooms.keySet();
+        for (String key: keys) {
+            if (allRooms.get(key).getTechLevel() >= techLevel){
+                roomList.add(allRooms.get(key).getRoomNumber());
+            }
+        }
+        return roomList;
     }
 }

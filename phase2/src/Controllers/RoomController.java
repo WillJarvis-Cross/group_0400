@@ -39,12 +39,13 @@ public class RoomController {
         }
         else{
             int capacity = presenter.printRoomCapacity();
-            if (capacity <= 0){
+            int techLevel = presenter.printRoomTech();
+            if ((capacity <= 0) || (techLevel < 1) || (techLevel>5)){
                 presenter.printInvalidOption();
                 makeRoomRequest();
             }
             else{
-                if (roomManager.addRoom(roomNumber, capacity)){
+                if (roomManager.addRoom(roomNumber, capacity, techLevel)){
                     presenter.printRoomAdded();
                     userController.mainMenu();
                 }

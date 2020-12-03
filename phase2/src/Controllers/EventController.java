@@ -46,6 +46,8 @@ public class EventController {
             LocalDateTime time = presenter.printTimeOfEvent();
             int duration = presenter.printDurationOfEvent();
             String speaker = presenter.printSpeakerOfEvent();
+            int techLevel = presenter.printTechEvent();
+            presenter.printRoomsSuitableTech(roomManager.getRoomsByTech(techLevel));
             String roomNumber = presenter.printRoomNumber();
             int capacity = presenter.printEventCapacity();
             boolean boolVIP = presenter.printVIP();
@@ -56,18 +58,20 @@ public class EventController {
             if (roomManager.isRoomTaken(roomNumber, time)){
                 counter ++;
             }
-            if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP) || duration == 0){
+            if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP, techLevel) || duration == 0){
                 counter ++;
             }
             if (capacity > roomManager.getRoom(roomNumber).getCapacity()){
+                counter ++;
+            }
+            if (techLevel > roomManager.getRoom(roomNumber).getTechLevel()){
                 counter ++;
             }
             if (!userManager.getSpeakers().containsKey(speaker) || !userManager.canAddSpeaker(time, eManager.getEventsByUsername(userManager.getUser(speaker)))){
                 counter ++;
             }
             if (counter == 0){
-
-                eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP);
+                eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP, techLevel);
                 userManager.signUp(speaker, eManager.getEvent(eventName), eManager.getEventsExceptOne(userManager.getUser(speaker), eManager.getEvent(eventName)));
                 roomManager.addEvent(roomNumber, eventName, time);
                 presenter.printEventCreated();

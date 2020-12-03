@@ -103,10 +103,10 @@ public class RoomEventPresenter extends Presenter{
 
     public Boolean printVIP(){
         System.out.println("Will this event be VIP-only? (T/F)");
-
-        if (sc.nextLine().equals("T")) {
+        String isVip = sc.nextLine();
+        if (isVip.equals("T")) {
             return true;
-        }else if (sc.nextLine().equals("F")) {
+        }else if (isVip.equals("F")) {
             return false;
         }else{
             return false;
@@ -218,5 +218,49 @@ public class RoomEventPresenter extends Presenter{
     public void printEventRemoved(){
         System.out.println("Event removed successfully");
     }
+
+    /**
+     * Prompts the user to enter the tech level of the room
+     * @return User input
+     */
+    public int printRoomTech() {
+        System.out.println("What is the tech level of the room? Please enter the number corresponding to the level:");
+        return printTechLevels();
+    }
+
+    /**
+     * Prompts the user to enter the tech level of the event
+     * @return User input
+     */
+    public int printTechEvent() {
+        System.out.println("What is the tech level of the event? Please enter the number corresponding to the level:");
+        return printTechLevels();
+    }
+
+    /**
+     * Prints the possible levels of technology to choose from
+     * @return User input
+     */
+    public int printTechLevels() {
+        System.out.println("1:Primitive");
+        System.out.println("2:Basic");
+        System.out.println("3:Regular");
+        System.out.println("4:Advanced");
+        System.out.println("5:Futuristic");
+        return Integer.parseInt(sc.nextLine());
+    }
+
+    /**
+     * Prints a list of rooms with a suitable tech level
+     * @param roomsByTech The list of names of rooms with at least the required tech level
+     */
+    public void printRoomsSuitableTech(List<String> roomsByTech){
+        System.out.println("The following rooms have the tech level of the event or greater:");
+        for (String room: roomsByTech){
+            System.out.println(room);
+        }
+
+    }
+
 
 }

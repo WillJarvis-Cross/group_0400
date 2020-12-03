@@ -15,16 +15,19 @@ public class Room implements Serializable {
     // The Events that is in the room and what time the events are happening
     private Hashtable<String, String> events;
     private int capacity; // The number of attendees allowed in the room
+    private int techLevel; // The tech level of the room's equipment
 
     /**
      * Constructs a room given its name and its capacity. It also initializes a hashtable of events in the room
      * @param roomNumber The name of the room
      * @param capacity The maximum amount of attendees allowed in the room
+     * @param techLevel the tech level of the room's equipment
      */
-    public Room(String roomNumber, int capacity) {
+    public Room(String roomNumber, int capacity, int techLevel) {
         this.roomNumber = roomNumber;
         this.capacity = capacity;
         this.events = new Hashtable<>();
+        this.techLevel = techLevel;
     }
 
     /**
@@ -81,4 +84,12 @@ public class Room implements Serializable {
      * @return the capacity of this room
      */
     public int getCapacity(){ return capacity;}
+
+    /**
+     * Returns the tech level
+     * @return the tech level
+     */
+    public int getTechLevel(){ return techLevel;}
+
+
 }

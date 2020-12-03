@@ -20,6 +20,7 @@ public class Event implements Serializable {
     private String roomNumber; // The room the event is in
     private int capacity; // The maximum capacity of the event
     private boolean VIPOnly;
+    private int techLevel;
 
     /**
      * Constructs an event with the given parameters.
@@ -30,7 +31,7 @@ public class Event implements Serializable {
      * @param roomNumber The room the event is in
      * @param capacity The capacity of the event
      */
-    public Event(String time, int duration, String speaker, String eventName, String roomNumber, int capacity,boolean VIP) {
+    public Event(String time, int duration, String speaker, String eventName, String roomNumber, int capacity,boolean VIP, int techLevel) {
         this.time = time;
         this.duration = duration;
         this.speaker = speaker;
@@ -39,6 +40,7 @@ public class Event implements Serializable {
         this.roomNumber = roomNumber;
         this.capacity = capacity;
         this.VIPOnly = VIP;
+        this.techLevel = techLevel;
     }
 
     public boolean isVIPOnly() {
@@ -130,6 +132,7 @@ public class Event implements Serializable {
      * @param speaker The name of the new speaker of the event
      */
     public void setSpeaker(String speaker){ this.speaker = speaker;}
+
 
     /**
      * Returns a string of the properties of the event formatted nicely
