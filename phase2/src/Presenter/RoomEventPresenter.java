@@ -103,10 +103,10 @@ public class RoomEventPresenter extends Presenter{
 
     public Boolean printVIP(){
         System.out.println("Will this event be VIP-only? (T/F)");
-
-        if (sc.nextLine().equals("T")) {
+        String input = sc.nextLine();
+        if (input.equals("T")) {
             return true;
-        }else if (sc.nextLine().equals("F")) {
+        }else if (input.equals("F")) {
             return false;
         }else{
             return false;

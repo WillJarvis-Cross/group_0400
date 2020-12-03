@@ -50,20 +50,24 @@ public class EventController {
             int capacity = presenter.printEventCapacity();
             boolean boolVIP = presenter.printVIP();
             int counter = 0;
-            if (!userManager.getSpeakers().containsKey(speaker) || roomManager.getRoom(roomNumber) == null){
-                counter ++;
-            }
-            if (roomManager.isRoomTaken(roomNumber, time)){
-                counter ++;
-            }
-            if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP) || duration == 0){
-                counter ++;
-            }
-            if (capacity > roomManager.getRoom(roomNumber).getCapacity()){
-                counter ++;
-            }
-            if (!userManager.getSpeakers().containsKey(speaker) || !userManager.canAddSpeaker(time, eManager.getEventsByUsername(userManager.getUser(speaker)))){
-                counter ++;
+            if (!(roomManager.getRoom(roomNumber) == null)) {
+                if (!userManager.getSpeakers().containsKey(speaker)) {
+                    counter++;
+                }
+                if (roomManager.isRoomTaken(roomNumber, time)) {
+                    counter++;
+                }
+                if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber, capacity, boolVIP) || duration == 0) {
+                    counter++;
+                }
+                if (capacity > roomManager.getRoom(roomNumber).getCapacity()) {
+                    counter++;
+                }
+                if (!userManager.getSpeakers().containsKey(speaker) || !userManager.canAddSpeaker(time, eManager.getEventsByUsername(userManager.getUser(speaker)))) {
+                    counter++;
+                }
+            } else {
+                counter++;
             }
             if (counter == 0){
 
