@@ -14,7 +14,7 @@ public class Event implements Serializable {
     // Time is the time the event is scheduled for in the form yyyy-mm-ddThh:mm
     private String time;
     private int duration; // The duration of the event (in hours)
-    private ArrayList<String> speaker; // The speaker at the event
+    private List<String> speaker; // The speaker at the event
     private List<String> attending; // List of people attending the event
     private String eventName; // The name of the event
     private String roomNumber; // The room the event is in
@@ -31,7 +31,7 @@ public class Event implements Serializable {
      * @param roomNumber The room the event is in
      * @param capacity The capacity of the event
      */
-    public Event(String time, int duration, ArrayList<String> speaker, String eventName, String roomNumber, int capacity,boolean VIP, int techLevel) {
+    public Event(String time, int duration, List<String> speaker, String eventName, String roomNumber, int capacity,boolean VIP, int techLevel) {
         this.time = time;
         this.duration = duration;
         this.speaker = speaker;
@@ -71,7 +71,7 @@ public class Event implements Serializable {
      * Returns the name of the speaker of the event
      * @return the name of the speaker of the event
      */
-    public ArrayList<String> getSpeaker() {
+    public List<String> getSpeaker() {
         return speaker;
     }
 

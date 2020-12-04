@@ -9,6 +9,7 @@ import java.lang.String;
 import java.util.ArrayList;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /** Represents the controller for EventManager
  * @author group 400
@@ -34,21 +35,17 @@ public class EventController {
         this.presenter = new RoomEventPresenter();
     }
 
-    private boolean isSpeakerInUsers(ArrayList<String> speakers){
+    private boolean isSpeakerInUsers(List<String> speakers){
         for (int i = 0; i < speakers.size(); i++) {
             if (!userManager.getSpeakers().containsKey(speakers.get(i))){
                 return false;
-
             }
-
-
-
         }
         return true;
 
     }
 
-    private boolean canAddSpeaker(ArrayList<String> speakers, LocalDateTime time){
+    private boolean canAddSpeaker(List<String> speakers, LocalDateTime time){
         for (int i = 0; i < speakers.size(); i++) {
             if(!userManager.canAddSpeaker(time, eManager.getEventsByUsername(userManager.getUser(speakers.get(i))))){
                 return false;
@@ -61,10 +58,10 @@ public class EventController {
 
     }
 
-    private void signUp(ArrayList<String> speaker, String eventName){
-        for (int i = 0; i < speaker.size(); i++)
+    private void signUp(List<String> speaker, String eventName){
+        for (int i = 0; i < speaker.size(); i++) {
             userManager.signUp(speaker.get(i), eManager.getEvent(eventName), eManager.getEventsExceptOne(userManager.getUser(speaker.get(i)), eManager.getEvent(eventName)));
-
+        }
     }
 
 
@@ -82,7 +79,7 @@ public class EventController {
         else{
             LocalDateTime time = presenter.printTimeOfEvent();
             int duration = presenter.printDurationOfEvent();
-            ArrayList<String> speaker = presenter.printSpeakerOfEvent();
+            List<String> speaker = presenter.printSpeakerOfEvent();
             int techLevel = presenter.printTechEvent();
             presenter.printRoomsSuitableTech(roomManager.getRoomsByTech(techLevel));
             String roomNumber = presenter.printRoomNumber();
