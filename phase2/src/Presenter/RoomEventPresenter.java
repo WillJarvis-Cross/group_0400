@@ -3,6 +3,7 @@ package Presenter;
 import Entities.Event;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -86,10 +87,26 @@ public class RoomEventPresenter extends Presenter{
      *
      * @return User input
      */
-    public String printSpeakerOfEvent(){
+    /** public String printSpeakerOfEvent(){
         System.out.println("Who do you want to be the speaker of the event?");
         return sc.nextLine();
     }
+     **/
+
+    public ArrayList<String> printSpeakerOfEvent(){
+        ArrayList<String> speakers = new ArrayList<String>();
+        System.out.println("How many speakers would you like to add?");
+        String stringNumberOfSpeakers = sc.nextLine();
+        int numberOfSpeakers = Integer.parseInt(stringNumberOfSpeakers);
+        for (int i = 0; i < numberOfSpeakers; i++) {
+            System.out.println("Enter Speaker Name:");
+            speakers.add(sc.nextLine());
+
+
+        }
+        return speakers;
+    }
+
 
     /**
      * Prompts the user to enter the name of the room

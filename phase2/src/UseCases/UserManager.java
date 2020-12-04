@@ -270,14 +270,15 @@ public class UserManager implements Serializable {
      * speaker from their respective lists of events
      * @param attending The list of the names of the attendees attending the event
      * @param canceledEvent The event getting canceled
-     * @param speakerName The name of the speaker of the event
+     * @param speaker The names of the speaker of the event
      */
-    public void cancelWholeEvent(List<String> attending, String canceledEvent, String speakerName){
+    public void cancelWholeEvent(List<String> attending, String canceledEvent, ArrayList<String> speaker){
 
         for (String name : attending) {
             cancelMyEvent(name, canceledEvent);
         }
-        cancelMyEvent(speakerName, canceledEvent);
+        for (String name: speaker){cancelMyEvent(name, canceledEvent);}
+
     }
 
     /**

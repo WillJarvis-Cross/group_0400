@@ -6,6 +6,7 @@ import UseCases.RoomManager;
 import UseCases.UserManager;
 
 import java.lang.String;
+import java.util.ArrayList;
 
 import java.time.LocalDateTime;
 
@@ -33,10 +34,46 @@ public class EventController {
         this.presenter = new RoomEventPresenter();
     }
 
+    private boolean isSpeakerInUsers(ArrayList<String> speakers){
+        for (int i = 0; i < speakers.size(); i++) {
+            if (!userManager.getSpeakers().containsKey(speakers.get(i))){
+                return false;
+
+            }
+
+
+
+        }
+        return true;
+
+    }
+
+    private boolean canAddSpeaker(ArrayList<String> speakers, LocalDateTime time){
+        for (int i = 0; i < speakers.size(); i++) {
+            if(!userManager.canAddSpeaker(time, eManager.getEventsByUsername(userManager.getUser(speakers.get(i))))){
+                return false;
+
+            }
+
+
+        }
+        return true;
+
+    }
+
+    private void signUp(ArrayList<String> speaker, String eventName){
+        for (int i = 0; i < speaker.size(); i++)
+            userManager.signUp(speaker.get(i), eManager.getEvent(eventName), eManager.getEventsExceptOne(userManager.getUser(speaker.get(i)), eManager.getEvent(eventName)));
+
+    }
+
+
     /**
      * create a event when a create event request is made
      * calls eventManager, userManager, and roomManager to check if event can be created with the information
      */
+
+
     public void makeEventRequest(){
         String eventName = presenter.printNameOfEvent();
         if (eventName.equals("0")){
@@ -45,7 +82,7 @@ public class EventController {
         else{
             LocalDateTime time = presenter.printTimeOfEvent();
             int duration = presenter.printDurationOfEvent();
-            String speaker = presenter.printSpeakerOfEvent();
+            ArrayList<String> speaker = presenter.printSpeakerOfEvent();
             int techLevel = presenter.printTechEvent();
             presenter.printRoomsSuitableTech(roomManager.getRoomsByTech(techLevel));
             String roomNumber = presenter.printRoomNumber();
@@ -53,7 +90,7 @@ public class EventController {
             boolean boolVIP = presenter.printVIP();
             int counter = 0;
             if (roomManager.getRoom(roomNumber) != null) {
-                if (!userManager.getSpeakers().containsKey(speaker) || roomManager.getRoom(roomNumber) == null) {
+                if (!isSpeakerInUsers(speaker)|| roomManager.getRoom(roomNumber) == null) {
                     counter++;
                 }
                 if (roomManager.isRoomTaken(roomNumber, time)) {
@@ -68,7 +105,7 @@ public class EventController {
                 if (techLevel > roomManager.getRoom(roomNumber).getTechLevel()) {
                     counter++;
                 }
-                if (!userManager.getSpeakers().containsKey(speaker) || !userManager.canAddSpeaker(time, eManager.getEventsByUsername(userManager.getUser(speaker)))) {
+                if (!isSpeakerInUsers(speaker) || ! canAddSpeaker(speaker,time)) {
                     counter++;
                 }
             }
@@ -77,7 +114,7 @@ public class EventController {
             }
             if (counter == 0){
                 eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP, techLevel);
-                userManager.signUp(speaker, eManager.getEvent(eventName), eManager.getEventsExceptOne(userManager.getUser(speaker), eManager.getEvent(eventName)));
+                signUp(speaker,eventName);
                 roomManager.addEvent(roomNumber, eventName, time);
                 presenter.printEventCreated();
                 userController.mainMenu();

@@ -179,7 +179,7 @@ public class EventManager implements Serializable {
      * @param room The name of the room which hosts the event
      * @param capacity The capacity of the event
      */
-    public void scheduleEvent(LocalDateTime time, int duration, String speaker, String eName, String room, int capacity,boolean VIPcheck, int techLevel){
+    public void scheduleEvent(LocalDateTime time, int duration, ArrayList<String> speaker, String eName, String room, int capacity,boolean VIPcheck, int techLevel){
         Event e = new Event(time.toString(), duration, speaker, eName, room, capacity,VIPcheck, techLevel);
         this.events.put(eName, e);
     }
@@ -195,7 +195,7 @@ public class EventManager implements Serializable {
      * @param capacity The capacity of the event
      * @return True or false
      */
-    public boolean canScheduleEvent(LocalDateTime time, int duration, String speaker, String eName, String room, int capacity,boolean VIPcheck, int techLevel){
+    public boolean canScheduleEvent(LocalDateTime time, int duration, ArrayList<String> speaker, String eName, String room, int capacity,boolean VIPcheck, int techLevel){
         Event e = new Event(time.toString(), duration, speaker, eName, room, capacity,VIPcheck, techLevel);
         return (!doesOverlap(e)) && (withinHours(e) && !containsEvent(eName));
     }
@@ -214,7 +214,7 @@ public class EventManager implements Serializable {
      * @param speakerName The name of the new speaker at this event
      */
     public void setSpeaker(String eventName, String speakerName){
-        events.get(eventName).setSpeaker(speakerName);
+        events.get(eventName).addSpeaker(speakerName);
     }
 
     /**

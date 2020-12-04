@@ -14,7 +14,7 @@ public class Event implements Serializable {
     // Time is the time the event is scheduled for in the form yyyy-mm-ddThh:mm
     private String time;
     private int duration; // The duration of the event (in hours)
-    private String speaker; // The speaker at the event
+    private ArrayList<String> speaker; // The speaker at the event
     private List<String> attending; // List of people attending the event
     private String eventName; // The name of the event
     private String roomNumber; // The room the event is in
@@ -31,7 +31,7 @@ public class Event implements Serializable {
      * @param roomNumber The room the event is in
      * @param capacity The capacity of the event
      */
-    public Event(String time, int duration, String speaker, String eventName, String roomNumber, int capacity,boolean VIP, int techLevel) {
+    public Event(String time, int duration, ArrayList<String> speaker, String eventName, String roomNumber, int capacity,boolean VIP, int techLevel) {
         this.time = time;
         this.duration = duration;
         this.speaker = speaker;
@@ -71,7 +71,7 @@ public class Event implements Serializable {
      * Returns the name of the speaker of the event
      * @return the name of the speaker of the event
      */
-    public String getSpeaker() {
+    public ArrayList<String> getSpeaker() {
         return speaker;
     }
 
@@ -131,7 +131,19 @@ public class Event implements Serializable {
      * Changes the speaker of this event to the name of the speaker inputted
      * @param speaker The name of the new speaker of the event
      */
+
+    /**
     public void setSpeaker(String speaker){ this.speaker = speaker;}
+    **/
+
+    public void addSpeaker(String newSpeaker){
+        this.speaker.add(newSpeaker);
+
+    }
+
+    public void removeSpeaker(String speakerRemoved){
+        this.speaker.remove(speakerRemoved);
+    }
 
 
     /**
@@ -141,7 +153,16 @@ public class Event implements Serializable {
     public String toString(){
         // The format that the time of the event is printed
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return "Event: "+ eventName+ "\nSpeaker: "+ speaker+ "\nDate: "+
+        String speakers = "";
+        if(speaker.size() == 0){
+            speakers = "None";
+        }
+        else{
+            for  (int i = 0; i < speaker.size(); i++){
+                speakers += speaker;
+            }
+        }
+        return "Event: "+ eventName+ "\nSpeaker: "+ speakers+ "\nDate: "+
                 getTime().format(formatter)+ "\nDuration: "+ duration+ " hour"+"\nRoom: "+roomNumber;
     }
 }
