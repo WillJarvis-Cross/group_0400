@@ -44,6 +44,7 @@ public class AttendeeController extends UserController implements Serializable {
                 }
                 else{
                     getUsermanager().addAttendee(getMyName(), password);
+                    covidQuestions();
                     mainMenu();
                 }
             }
@@ -66,6 +67,7 @@ public class AttendeeController extends UserController implements Serializable {
      */
     public void loginExistingAccount(){
         boolean zero = false;
+
         while (true){
             String password = getPresenter().printPassword();
             if (password.equals("0")){
@@ -84,6 +86,7 @@ public class AttendeeController extends UserController implements Serializable {
         }
         if (!zero)
         {
+            covidQuestions();
             mainMenu();
         }
 

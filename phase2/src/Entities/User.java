@@ -15,6 +15,7 @@ public abstract class User implements Serializable {
     private List<String> events;  // List of events the attendee is signed up for
     private List<String> groupChats; // List of the names of the group chats this user is in
     private String password, username;  // The user's username and password which is used to log in
+    private boolean hasCovid = false;
 
     /**
      * Constructs a User of types Attendee, Organizer, and Speaker. It instantiates the User's username and password,
@@ -135,6 +136,10 @@ public abstract class User implements Serializable {
         }
         return false;
     }
+
+    public boolean getHasCovid(){return hasCovid;}
+
+    public void setHasCovid(boolean positive){hasCovid = positive;}
 
     /**
      * Returns True or false depending on whether or not this user is an organizer or not

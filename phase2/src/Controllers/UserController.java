@@ -163,20 +163,27 @@ public abstract class UserController implements Serializable {
       * Signs the user up for the event of their choosing if they are able to.
       */
      public void signUp(){
-          String eventName = getPresenter().getEventName(eventManager.getAllEventsString());
-          if (eventName.equals("0")){
+          if (usermanager.getUser(this.name).getHasCovid()){
+               presenter.printYouHaveCovid();
                mainMenu();
           }
           else{
-               if (getEventController().addAttendee(eventName, getMyName())){
-                    getPresenter().printSignedUp(eventName);
+               String eventName = getPresenter().getEventName(eventManager.getAllEventsString());
+               if (eventName.equals("0")){
                     mainMenu();
                }
                else{
-                    getPresenter().printNotSignedUp(eventName);
-                    signUp();
+                    if (getEventController().addAttendee(eventName, getMyName())){
+                         getPresenter().printSignedUp(eventName);
+                         mainMenu();
+                    }
+                    else{
+                         getPresenter().printNotSignedUp(eventName);
+                         signUp();
+                    }
                }
           }
+
      }
 
      /**
@@ -201,6 +208,18 @@ public abstract class UserController implements Serializable {
                }
           }
           mainMenu();
+     }
+
+     public void covidQuestions(){
+          boolean positive = presenter.printCovidQuestions();
+          if (positive && !usermanager.getUser(this.name).getHasCovid()){
+               usermanager.changeCovid(this.name, true);
+               messageManager.messagePeople(usermanager.getAttendeeObjects(), "COVID ALERT", this.name+" has COVID-19. watch out!");
+          }
+          else if (!positive && usermanager.getUser(this.name).getHasCovid()){
+               usermanager.changeCovid(this.name, false);
+          }
+
      }
 
      /**

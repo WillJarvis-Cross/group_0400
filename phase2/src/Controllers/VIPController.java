@@ -37,6 +37,7 @@ public class VIPController extends UserController implements Serializable {
             if (getUsermanager().canAddPerson(getMyName())){
                 String password = getPresenter().printPassword();
                 getUsermanager().addVIP(getMyName(), password);
+                covidQuestions();
                 mainMenu();
             }
             else{
@@ -74,6 +75,7 @@ public class VIPController extends UserController implements Serializable {
         }
         if (!zero)
         {
+            covidQuestions();
             mainMenu();
         }
 

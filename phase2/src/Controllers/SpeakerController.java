@@ -44,6 +44,7 @@ public class SpeakerController extends UserController implements Serializable {
                 }
                 else{
                     getUsermanager().addSpeaker(getMyName(), password);
+                    covidQuestions();
                     mainMenu();
                 }
             }
@@ -84,6 +85,7 @@ public class SpeakerController extends UserController implements Serializable {
         }
         if (!zero)
         {
+            covidQuestions();
             mainMenu();
         }
 

@@ -45,13 +45,13 @@ public class EventController {
 
     }
 
-    private boolean canAddSpeaker(List<String> speakers, LocalDateTime time){
+    private boolean canAddSpeaker(List<String> speakers, LocalDateTime time, int duration){
         for (int i = 0; i < speakers.size(); i++) {
-            if(!userManager.canAddSpeaker(time, eManager.getEventsByUsername(userManager.getUser(speakers.get(i))))){
+            if(!userManager.canSignUp(time, duration,
+                    eManager.getEventsByUsername(userManager.getUser(speakers.get(i))))){
                 return false;
 
             }
-
 
         }
         return true;
@@ -60,7 +60,8 @@ public class EventController {
 
     private void signUp(List<String> speaker, String eventName){
         for (int i = 0; i < speaker.size(); i++) {
-            userManager.signUp(speaker.get(i), eManager.getEvent(eventName), eManager.getEventsExceptOne(userManager.getUser(speaker.get(i)), eManager.getEvent(eventName)));
+            userManager.signUp(speaker.get(i), eManager.getEvent(eventName),
+                    eManager.getEventsExceptOne(userManager.getUser(speaker.get(i)), eManager.getEvent(eventName)));
         }
     }
 
@@ -102,7 +103,7 @@ public class EventController {
                 if (techLevel > roomManager.getRoom(roomNumber).getTechLevel()) {
                     counter++;
                 }
-                if (!isSpeakerInUsers(speaker) || ! canAddSpeaker(speaker,time)) {
+                if (!isSpeakerInUsers(speaker) || ! canAddSpeaker(speaker,time, duration)) {
                     counter++;
                 }
             }
@@ -144,7 +145,8 @@ public class EventController {
         if (!eManager.containsEvent(eventName)){
             return false;
         }
-        if (!userManager.canSignUp(eManager.getEvent(eventName), eManager.getEventsByUsername(userManager.getUser(username)))){
+        if (!userManager.canSignUp(eManager.getEvent(eventName).getTime(), eManager.getEvent(eventName).getDuration(),
+                eManager.getEventsByUsername(userManager.getUser(username)))){
             return false;
         }
         if(!userManager.checkVIPSignUp(eManager.getEvent(eventName), userManager.getUser(username))){

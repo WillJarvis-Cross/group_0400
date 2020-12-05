@@ -276,4 +276,19 @@ public class UserPresenter extends Presenter{
     public void printCantRemove(){
         System.out.println("Could not remove you from the event");
     }
+
+    public boolean printCovidQuestions(){
+        System.out.println("Answer 'yes' or 'no' to the following questions:");
+        System.out.println("Have you come into contact with the virus or someone who has tested positive for the virus in the past 14 days?");
+        if (sc.nextLine().equals("yes")){return true;}
+        System.out.println("Have you been outside Ontario in the past month?");
+        if (sc.nextLine().equals("yes")){return true;}
+        System.out.println("Do you have any flu-like symptoms?");
+        if (sc.nextLine().equals("yes")){return true;}
+        return false;
+    }
+
+    public void printYouHaveCovid(){
+        System.out.println("You can't sign up for any events because you are a risk for COVID-19");
+    }
 }

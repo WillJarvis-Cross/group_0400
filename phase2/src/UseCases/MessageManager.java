@@ -19,8 +19,8 @@ public class MessageManager implements Serializable {
      * @param receiver Receiver of the message
      * @param content Content of the message
      */
-    public void sendMessage(User sender, User receiver, String content){
-        Message message = new Message(content, sender.getUsername(), messageList.size());
+    public void sendMessage(String sender, User receiver, String content){
+        Message message = new Message(content, sender, messageList.size());
         receiver.addMessage(messageList.size());
         messageList.add(message);
     }
@@ -111,5 +111,10 @@ public class MessageManager implements Serializable {
         return false;
     }
 
+    public void messagePeople(List<User> people, String sender, String content){
+        for (User person: people){
+            sendMessage(sender, person, content);
+        }
+    }
 
 }

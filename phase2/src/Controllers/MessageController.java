@@ -1,5 +1,6 @@
 package Controllers;
 
+import Entities.User;
 import UseCases.EventManager;
 import UseCases.MessageManager;
 import UseCases.UserManager;
@@ -156,7 +157,7 @@ public class MessageController {
         }
         if (send) {
             String content = presenter.printMessage();
-            messageManager.sendMessage(userManager.getUser(sender), userManager.getUser(receiver), content);
+            messageManager.sendMessage(sender, userManager.getUser(receiver), content);
             presenter.printMessageSent();
             userController.mainMenu();
         }
@@ -170,11 +171,11 @@ public class MessageController {
      */
     public void messageAllSpeakers(String name){
         String content = presenter.printMessage();
-        Set<String> keys = userManager.getSpeakers().keySet();
-        for (String key : keys) {
-            messageManager.sendMessage(userManager.getOrganizer(name),
+        messageManager.messagePeople(userManager.getSpeakerObjects(), name, content);
+        /*for (String key : keys) {
+            messageManager.sendMessage(name,
                     userManager.getSpeaker(key), content);
-        }
+        }*/
         presenter.printMessageSent();
         userController.mainMenu();
     }
@@ -186,11 +187,7 @@ public class MessageController {
      */
     public void messageAllAttendees(String name){
         String content = presenter.printMessage();
-        Set<String> keys = userManager.getAttendees().keySet();
-        for (String key : keys) {
-            messageManager.sendMessage(userManager.getOrganizer(name),
-                    userManager.getAttendee(key), content);
-        }
+        messageManager.messagePeople(userManager.getAttendeeObjects(), name, content);
         presenter.printMessageSent();
         userController.mainMenu();
     }
@@ -212,7 +209,7 @@ public class MessageController {
                 presenter.printEmptyEvent();
             } else {
                 for (String person : allPeople) {
-                    messageManager.sendMessage(userManager.getUser(name), userManager.getUser(person), content);
+                    messageManager.sendMessage(name, userManager.getUser(person), content);
                 }
                 presenter.printMessageSent();
             }

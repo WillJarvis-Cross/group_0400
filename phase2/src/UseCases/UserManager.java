@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Set;
+
 /** Represents the use case for Room objects
  * @author group 400
  */
@@ -115,6 +117,24 @@ public class UserManager implements Serializable {
      */
     public Hashtable<String, Speaker> getSpeakers(){ return allSpeakers;}
 
+    public List<User> getSpeakerObjects(){
+        List<User> speakers = new ArrayList<>();
+        Set<String> keys = allSpeakers.keySet();
+        for (String key: keys){
+            speakers.add(allSpeakers.get(key));
+        }
+        return speakers;
+    }
+
+    public List<User> getAttendeeObjects(){
+        List<User> attendees = new ArrayList<>();
+        Set<String> keys = allAttendees.keySet();
+        for (String key: keys){
+            attendees.add(allAttendees.get(key));
+        }
+        return attendees;
+    }
+
     /**
      * Returns a Speaker with the given name
      * @param name The name of the speaker
@@ -173,14 +193,14 @@ public class UserManager implements Serializable {
      * @param events The list of events the speaker is speaking at
      * @return true when the speaker can be added to an event
      */
-    public boolean canAddSpeaker(LocalDateTime time, List<Event> events){
+    /*public boolean canAddSpeaker(LocalDateTime time, List<Event> events){
         for (Event event: events){
             if (event.getTime().equals(time)){
                 return false;
             }
         }
         return true;
-    }
+    }*/
 
     // Helper method for signUp()
     // This is used to find what position the event should be added at in the list of the users events
@@ -221,17 +241,18 @@ public class UserManager implements Serializable {
 
     /**
      * Returns true if the user is available to sign up for the inputted event
-     * @param event the inputted event
+     * @param time The time of the event
+     * @param duration The duration of the event in hours
      * @param myEvents The user's list of events
      * @return True if the user is available to sign up for the event. Return false otherwise.
      */
-    public boolean canSignUp(Event event, List<Event> myEvents){
+    public boolean canSignUp(LocalDateTime time, int duration, List<Event> myEvents){
         for (Event e:myEvents){
             LocalDateTime t1 = e.getTime();
             LocalDateTime f1 = t1.plusHours(e.getDuration());
-            LocalDateTime t2 = event.getTime();
-            LocalDateTime f2 = t2.plusHours(event.getDuration());
-            if (((t1.compareTo(f2)<=0)&&(f1.compareTo(t2)>0))&&((t1.compareTo(f2)<0)&&(f1.compareTo(t2)>=0))){
+            //LocalDateTime t2 = event.getTime();
+            LocalDateTime f2 = time.plusHours(duration);
+            if (((t1.compareTo(f2)<=0)&&(f1.compareTo(time)>0))&&((t1.compareTo(f2)<0)&&(f1.compareTo(time)>=0))){
                 return false;
             }
         }
@@ -320,6 +341,10 @@ public class UserManager implements Serializable {
             users.add(getUser(name));
         }
         return users;
+    }
+
+    public void changeCovid(String name, boolean positive){
+        getUser(name).setHasCovid(positive);
     }
 }
 
