@@ -99,45 +99,15 @@ public class AttendeeController extends UserController implements Serializable {
     public void mainMenu(){
         while (true){
             String input = getPresenter().printAttendee();
-            if (input.equals("1")){ // Sign up for an event
-                signUp();
+            if (input.equals("1")){
+                messageMenu();
                 break;
             }
-            else if (input.equals("2")){ // Cancel spot in event
-                removeMyEvent();
+            else if (input.equals("2")){
+                eventMenu();
                 break;
             }
-            else if (input.equals("3")){ // Send a message to someone
-                getMessageController().sendMessage(getMyName());
-                break;
-            }
-            else if (input.equals("4")){ // See list of received messages
-                getMessageController().printMyMessages(getMyName());
-                break;
-            }
-            else if (input.equals("5")){ // Show attendee's list of events
-                getPresenter().printAttendeeEvents(getMyEvents());
-                if (getMyEvents().size() > 0){
-                    getEventController().specificInfo();
-                }
-                else{
-                    mainMenu();
-                }
-                break;
-            }
-            else if (input.equals("6")){ // See their archived messages
-                getMessageController().seeArchivedMessages(getMyName());
-                break;
-            }
-            else if (input.equals("7")){ // Create a group chat
-                getGroupChatController().createGroupChat(getMyName());
-                break;
-            }
-            else if (input.equals("8")){ // See their group chats
-                getGroupChatController().showGroupChats(getMyName());
-                break;
-            }
-            else if (input.equals("9")){ // save and log out
+            else if (input.equals("3")){ // save and log out
                 break;
             }
             else{
@@ -145,6 +115,45 @@ public class AttendeeController extends UserController implements Serializable {
             }
         }
 
+    }
+
+    public void eventMenu(){
+        String input = getPresenter().printAttendeeEvent();
+        if (input.equals("1")){ // Sign up for an event
+            signUp();
+        }
+        else if (input.equals("2")){ // Cancel spot in event
+            removeMyEvent();
+        }
+        else if (input.equals("3")){ // Show attendee's list of events
+            getPresenter().printAttendeeEvents(getMyEvents());
+            if (getMyEvents().size() > 0){
+                getEventController().specificInfo();
+            }
+            else{
+                mainMenu();
+            }
+        }
+        else{ mainMenu();}
+    }
+
+    public void messageMenu(){
+        String input = getPresenter().printAttendeeMessage();
+        if (input.equals("1")){ // Send a message to someone
+            getMessageController().sendMessage(getMyName());
+        }
+        else if (input.equals("2")){ // See list of received messages
+            getMessageController().printMyMessages(getMyName());
+        }
+        else if (input.equals("3")){ // See their archived messages
+            getMessageController().seeArchivedMessages(getMyName());
+        }
+        else if (input.equals("4")){ // Create a group chat
+            getGroupChatController().createGroupChat(getMyName());
+        }
+        else if (input.equals("5")){ // See their group chats
+            getGroupChatController().showGroupChats(getMyName());
+        }
     }
 }
 

@@ -48,31 +48,42 @@ public class UserPresenter extends Presenter{
      */
     public String printAttendee() {
         System.out.println("Select a an option by entering the corresponding numbers");
-        System.out.println("1: Sign up for an event");
-        System.out.println("2: Cancel spot in event");
-        System.out.println("3: Send a message");
-        System.out.println("4: See list of received messages");
-        System.out.println("5: See list of events signed up for");
-        System.out.println("6: See your archived messages");
-        System.out.println("7: Create a group chat");
-        System.out.println("8: See your Group Chats");
-        System.out.println("9: Save and exit");
+        System.out.println("1: Enter the message menu");
+        System.out.println("2: Enter the event menu");
+        System.out.println("3: Save and exit");
         return sc.nextLine();
     }
 
-    public String printVIP() {
+    public String printAttendeeEvent(){
         System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("0: Go back to the main menu");
         System.out.println("1: Sign up for an event");
         System.out.println("2: Cancel spot in event");
-        System.out.println("3: Send a message");
-        System.out.println("4: See list of received messages");
-        System.out.println("5: See list of events signed up for");
-        System.out.println("6: See your archived messages");
-        System.out.println("7: Create a group chat");
-        System.out.println("8: See your Group Chats");
-        System.out.println("9: Save and exit");
+        System.out.println("3: See list of events signed up for");
         return sc.nextLine();
     }
+
+    public String printAttendeeMessage(){
+        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("0: Go back to the main menu");
+        System.out.println("1: Send a message");
+        System.out.println("2: See list of received messages");
+        System.out.println("3: See your archived messages");
+        System.out.println("4: Create a group chat");
+        System.out.println("5: See your Group Chats");
+        return sc.nextLine();
+    }
+
+    /*public String printVIP() {
+        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("1: Send a message");
+        System.out.println("2: See list of received messages");
+        System.out.println("3: See your archived messages");
+        System.out.println("4: Create a group chat");
+        System.out.println("5: See your Group Chats");
+        System.out.println("6: Save and exit");
+        return sc.nextLine();
+    }*/
 
     /**
      * Prints options that Organizers can select
