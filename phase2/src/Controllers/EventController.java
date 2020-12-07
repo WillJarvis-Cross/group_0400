@@ -81,10 +81,8 @@ public class EventController {
 
     public void makeEventRequest(){
         String eventName = presenter.printNameOfEvent();
-        if (eventName.equals("0")){
-            userController.mainMenu();
-        }
-        else{
+
+        if (!eventName.equals("0")){
             LocalDateTime time = presenter.printTimeOfEvent();
             int duration = presenter.printDurationOfEvent();
             List<String> speaker = presenter.printSpeakerOfEvent();
@@ -123,7 +121,6 @@ public class EventController {
                 signUp(speaker,eventName);
                 roomManager.addEvent(roomNumber, eventName, time);
                 presenter.printEventCreated();
-                userController.mainMenu();
             }
             else{
                 presenter.printInvalidOption();
@@ -177,20 +174,19 @@ public class EventController {
     public void removeEvent(){
         presenter.printAllEvents(eManager.getEvents());
         String name = presenter.printDeleteWholeEvent();
-        if (name.equals("0")){
-            userController.mainMenu();
+        if (!name.equals("0")){
+            if (!eManager.containsEvent(name)){
+                presenter.printInvalidOption();
+                removeEvent();
+            }
+            else{
+                userManager.cancelWholeEvent(eManager.getEvent(name).getAttending(), name, eManager.getEvent(name).getSpeaker(), eManager.getEvent(name).getPrice());
+                roomManager.removeRoomEvent(eManager.getEvent(name).getRoomNum(), name);
+                eManager.removeEvent(name);
+                presenter.printEventRemoved();
+            }
         }
-        else if (!eManager.containsEvent(name)){
-            presenter.printInvalidOption();
-            removeEvent();
-        }
-        else{
-            userManager.cancelWholeEvent(eManager.getEvent(name).getAttending(), name, eManager.getEvent(name).getSpeaker(), eManager.getEvent(name).getPrice());
-            roomManager.removeRoomEvent(eManager.getEvent(name).getRoomNum(), name);
-            eManager.removeEvent(name);
-            presenter.printEventRemoved();
-            userController.mainMenu();
-        }
+
     }
 
     /**
@@ -201,23 +197,22 @@ public class EventController {
         presenter.printAllEvents(eManager.getEvents());
         String name = presenter.printChangeEventCapacity();
         if (name.equals("0")){
-            userController.mainMenu();
-        }
-        else if (!eManager.containsEvent(name)){
-            presenter.printInvalidOption();
-            changeEventCapacity();
-        }
-        else{
-            int capacity = presenter.printEventCapacity();
-            if (capacity > roomManager.getRoom(eManager.getEvent(name).getRoomNum()).getCapacity()) {
+            if (!eManager.containsEvent(name)){
                 presenter.printInvalidOption();
                 changeEventCapacity();
             }
             else{
-                eManager.getEvent(name).setCapacity(capacity);
+                int capacity = presenter.printEventCapacity();
+                if (capacity > roomManager.getRoom(eManager.getEvent(name).getRoomNum()).getCapacity()) {
+                    presenter.printInvalidOption();
+                    changeEventCapacity();
+                }
+                else{
+                    eManager.getEvent(name).setCapacity(capacity);
+                }
             }
-            userController.mainMenu();
         }
+
     }
 
     /**
@@ -235,7 +230,5 @@ public class EventController {
         else{
             presenter.printSpecificEventInfo(info);
         }
-        userController.mainMenu();
     }
-
 }

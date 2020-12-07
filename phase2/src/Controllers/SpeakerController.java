@@ -102,36 +102,26 @@ public class SpeakerController extends UserController implements Serializable {
             String input = getPresenter().printSpeaker();
             if (input.equals("1")){ // Send a message to someone
                 getMessageController().sendMessage(getMyName());
-                break;
             }
             else if (input.equals("2")){ // Show list of received messages
                 getMessageController().printMyMessages(getMyName());
-                break;
             }
             else if (input.equals("3")){ // Show events the speaker is speaking at
                 getPresenter().printSpeakerEvents(getMyEvents());
                 if (getMyEvents().size() > 0){
                     getEventController().specificInfo();
                 }
-                else{
-                    mainMenu();
-                }
-                break;
             }
             else if (input.equals("4")){ // Send a message to everyone at a given event
                 getMessageController().messageAllAttendeesAtEvent(getMyName());
-                break;
             }
             else if (input.equals("5")){ // See the user's archived messages
                 getMessageController().seeArchivedMessages(getMyName());
-                break;
             }else if (input.equals("6")){ // Create a group chat
                 getGroupChatController().createGroupChat(getMyName());
-                break;
             }
             else if (input.equals("7")){ // See their group chats
                 getGroupChatController().showGroupChats(getMyName());
-                break;
             }
             else if (input.equals("8")){ // save and log out
                 break;
@@ -142,12 +132,9 @@ public class SpeakerController extends UserController implements Serializable {
                     ExportHTML schedule = new ExportHTML();
                     schedule.setEvents(getEventController().getListOfEvents());
                     System.out.println("Export Complete");
-                    mainMenu();
                 } else if (decision.equals("2")) { //go back
-                    mainMenu();
                 } else {
                     System.out.println("invalid selection, going back");
-                    mainMenu();
                 }
             } else{
                 getPresenter().printInvalidInput();

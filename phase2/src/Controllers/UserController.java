@@ -180,20 +180,16 @@ public abstract class UserController implements Serializable {
      public void signUp(){
           if (usermanager.getUser(this.name).getHasCovid()){
                presenter.printYouHaveCovid();
-               mainMenu();
           }
           else{
                String eventName = getPresenter().getEventName(eventManager.getAllEventsString());
-               if (eventName.equals("0")){
-                    mainMenu();
-               }
-               else{
+
+               if (!eventName.equals("0") && eventManager.containsEvent(eventName)){
                     if (usermanager.canAfford(name, eventManager.getEvent(eventName).getPrice()))
                     {
                          if (getEventController().addAttendee(eventName, getMyName())){
                               getPresenter().printSignedUp(eventName);
                               getPresenter().printCurrentBalance(usermanager.getUser(this.name).getBalance());
-                              mainMenu();
                          }
                          else{
                               getPresenter().printNotSignedUp(eventName);
@@ -203,10 +199,11 @@ public abstract class UserController implements Serializable {
                     else{
                          getPresenter().printCantAfford();
                          getPresenter().printCurrentBalance(usermanager.getUser(this.name).getBalance());
-                         mainMenu();
                     }
-
-
+               }
+               else if (!eventManager.containsEvent(eventName)){
+                    presenter.printInvalidOption();
+                    signUp();
                }
           }
 
@@ -234,7 +231,6 @@ public abstract class UserController implements Serializable {
                     presenter.printCantRemove();
                }
           }
-          mainMenu();
      }
 
      public void covidQuestions(){

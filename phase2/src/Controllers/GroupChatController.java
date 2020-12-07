@@ -36,7 +36,6 @@ public class GroupChatController {
             }
 
         }
-        userController.mainMenu();
     }
 
     public void createGroupChat(String name){
@@ -61,8 +60,5 @@ public class GroupChatController {
                 presenter.printInvalidOption();
             }
         }
-        userController.mainMenu();
     }
-
-
 }

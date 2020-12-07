@@ -35,19 +35,24 @@ public class VIPController extends UserController implements Serializable {
 
     public void makeNewAccount(){
         String input = getPresenter().printLogin();
-        if (input.equals("2")){
+        if (input.equals("2")){ // making new account
             if (getUsermanager().canAddPerson(getMyName())){
                 String password = getPresenter().printPassword();
-                getUsermanager().addVIP(getMyName(), password);
-                covidQuestions();
-                mainMenu();
+                if (password.equals("0")){
+                    makeNewAccount();
+                }
+                else{
+                    getUsermanager().addVIP(getMyName(), password);
+                    covidQuestions();
+                    mainMenu();
+                }
             }
             else{
                 setMyName(getPresenter().printInvalidUsername());
                 makeNewAccount();
             }
         }
-        else if (input.equals("1")){
+        else if (input.equals("1")){ // login to existing account
             loginExistingAccount();
         }
         else{
@@ -92,11 +97,9 @@ public class VIPController extends UserController implements Serializable {
             String input = getPresenter().printAttendee();
             if (input.equals("1")){
                 messageMenu();
-                break;
             }
             else if (input.equals("2")){
                 eventMenu();
-                break;
             }
             else if (input.equals("3")){ // save and log out
                 break;
@@ -121,9 +124,6 @@ public class VIPController extends UserController implements Serializable {
             if (getMyEvents().size() > 0){
                 getEventController().specificInfo();
             }
-            else{
-                mainMenu();
-            }
         } else if (input.equals("4")) { //export to HTML
             String decision = getPresenter().exportEventsToHTML();
 
@@ -131,14 +131,13 @@ public class VIPController extends UserController implements Serializable {
                 ExportHTML schedule = new ExportHTML();
                 schedule.setEvents(getEventController().getListOfEvents());
                 System.out.println("Export Complete");
-                mainMenu();
             } else if (decision.equals("2")) { //go back
                 eventMenu();
             } else {
                 System.out.println("invalid selection, going back");
                 eventMenu();
             }
-        } else{ mainMenu();}
+        }
     }
 
     public void messageMenu(){

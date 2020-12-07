@@ -103,11 +103,9 @@ public class AttendeeController extends UserController implements Serializable {
             String input = getPresenter().printAttendee();
             if (input.equals("1")){
                 messageMenu();
-                break;
             }
             else if (input.equals("2")){
                 eventMenu();
-                break;
             }
             else if (input.equals("3")){
                 addToBalance();
@@ -135,9 +133,6 @@ public class AttendeeController extends UserController implements Serializable {
             if (getMyEvents().size() > 0){
                 getEventController().specificInfo();
             }
-            else{
-                mainMenu();
-            }
         }
         else if (input.equals("4")) { //export to HTML
             String decision = getPresenter().exportEventsToHTML();
@@ -146,7 +141,6 @@ public class AttendeeController extends UserController implements Serializable {
                 ExportHTML schedule = new ExportHTML();
                 schedule.setEvents(getEventController().getListOfEvents());
                 System.out.println("Export Complete");
-                mainMenu();
             } else if (decision.equals("2")) { //go back
                 eventMenu();
             } else {
@@ -154,7 +148,6 @@ public class AttendeeController extends UserController implements Serializable {
                 eventMenu();
             }
         }
-        else{ mainMenu();}
     }
 
     public void messageMenu(){

@@ -21,6 +21,15 @@ public class ConferenceManager implements Serializable {
         return null;
     }
 
+    public List<String> getConferences(){
+        List<String> returnList = new ArrayList<>();
+        Set<String> conferences = allConferenece.keySet();
+        for (String conference: conferences){
+            returnList.add(conference);
+        }
+        return returnList;
+    }
+
     public boolean addConference(String conferenceNumber){
         if (allConferenece.containsKey(conferenceNumber)){
             return false;

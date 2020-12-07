@@ -34,10 +34,7 @@ public class RoomController {
      */
     public String makeRoomRequest(){
         String roomNumber = presenter.printRoomNumber();
-        if (roomNumber.equals("0")){
-            userController.mainMenu();
-        }
-        else{
+        if (!roomNumber.equals("0")){
             int capacity = presenter.printRoomCapacity();
             int techLevel = presenter.printRoomTech();
             if ((capacity <= 0) || (techLevel < 1) || (techLevel>5)){
@@ -54,8 +51,9 @@ public class RoomController {
                     makeRoomRequest();
                 }
             }
+            return roomNumber;
         }
-        return roomNumber;
+        return null;
     }
 
     /*private ArrayList<Room> getRoomList () {

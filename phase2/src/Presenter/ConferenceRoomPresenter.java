@@ -16,8 +16,14 @@ public class ConferenceRoomPresenter extends Presenter{
      *
      * @return User input
      */
-    public String printNameOfConference(){
-        System.out.println("Enter the name of the new conference or enter 0 to go back to the main menu");
+    public String printNameOfConference(List<String> conferences){
+        if (conferences != null){
+            System.out.println("Here are the available conferences:");
+            for (String conference: conferences){
+                System.out.println(conference);
+            }
+        }
+        System.out.println("Enter the name of the conference or enter 0 to go back to the main menu");
         return sc.nextLine();
     }
 

@@ -102,19 +102,18 @@ public class OrganizerController extends UserController implements Serializable 
             String input = getPresenter().printOrganizer();
             if (input.equals("1")){ // Go to the message menu
                 messageMenu();
-                break;
+
             }
             else if (input.equals("2")){ // Go to the event menu
                 eventMenu();
-                break;
+
             }
             else if (input.equals("3")){ // Create a room
                 getConferenceController().makeConferenceRequest();
-                break;
             }
             else if (input.equals("4")){ // Create an account
                 createAccount();
-                break;
+
             }
             else if (input.equals("5")){ // This is when the user wants to save and log out
                 break;
@@ -153,12 +152,11 @@ public class OrganizerController extends UserController implements Serializable 
         else if (input.equals("7")){ // See their group chats
             getGroupChatController().showGroupChats(getMyName());
         }
-        else if (input.equals("0")){ // Go back to the main menu
-            mainMenu();
-        }
         else{
-            getPresenter().printInvalidOption();
-            messageMenu();
+            if (!input.equals("0")){
+                getPresenter().printInvalidOption();
+                messageMenu();
+            }
         }
     }
 
@@ -188,11 +186,6 @@ public class OrganizerController extends UserController implements Serializable 
             if (getMyEvents().size() > 0){
                 getEventController().specificInfo();
             }
-            else{
-                mainMenu();
-            }
-        } else if (input.equals("0")) { // Go back to the main menu
-            mainMenu();
         } else if (input.equals("7")) { // Export events
             String decision = getPresenter().exportEventsToHTML();
 
@@ -200,7 +193,7 @@ public class OrganizerController extends UserController implements Serializable 
                 ExportHTML schedule = new ExportHTML();
                 schedule.setEvents(getEventController().getListOfEvents());
                 System.out.println("Export Complete");
-                mainMenu();
+
             } else if (decision.equals("2")) { //go back
                 eventMenu();
             } else {
@@ -208,8 +201,10 @@ public class OrganizerController extends UserController implements Serializable 
                 eventMenu();
             }
         } else {
-            getPresenter().printInvalidOption();
-            eventMenu();
+            if (!input.equals("0")){
+                getPresenter().printInvalidOption();
+                eventMenu();
+            }
         }
     }
 
@@ -226,23 +221,18 @@ public class OrganizerController extends UserController implements Serializable 
         }
         if (input.equals("1")) {
             getUsermanager().addOrganizer(name, pass);
-            mainMenu();
         }
         else if (input.equals("2")) {
             getUsermanager().addSpeaker(name, pass);
-            mainMenu();
         }
         else if (input.equals("3")) {
             getUsermanager().addAttendee(name, pass);
-            mainMenu();
         }
         else if (input.equals("4")) {
             getUsermanager().addVIP(name, pass);
-            mainMenu();
         }
         else {
             getPresenter().printInvalidInput();
-            mainMenu();
         }
 
     }

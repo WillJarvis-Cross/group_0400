@@ -27,34 +27,38 @@ public class ConferenceController {
 
     public void makeConferenceRequest(){
         String roomNumber = presenter.conferenceMain();
-        if (roomNumber.equals("0")){
-            userController.mainMenu();
-        }
-        else if(roomNumber.equals("1")){   //make conference
-            String nameOfConference = presenter.printNameOfConference();
+
+        if(roomNumber.equals("1")){   //make conference
+            String nameOfConference = presenter.printNameOfConference(null);
             if(conferenceManager.addConference(nameOfConference)){
                 presenter.printConferenceAdded();
-                makeConferenceRequest();
             }
             else{
+                presenter.printInvalidOption();
+            }
+            makeConferenceRequest();
+
+        }
+        else if(roomNumber.equals("2")){ //add room
+            String nameOfConference = presenter.printNameOfConference(conferenceManager.getConferences());
+            String roomNum = roomController.makeRoomRequest();
+            if (roomNum == null || !this.conferenceManager.addRoomToConference(nameOfConference, roomNum)){
+                presenter.printInvalidOption();
+            }
+            makeConferenceRequest();
+
+        }else if(roomNumber.equals("3")){ //remove conference
+            String nameOfConference = presenter.printNameOfConference(conferenceManager.getConferences());
+            if (!this.conferenceManager.removeConference(nameOfConference)){
+                presenter.printInvalidOption();
+            }
+            makeConferenceRequest();
+        }else{
+            if (!roomNumber.equals("0")){ // 0 means they are going back to the main menu
                 presenter.printInvalidOption();
                 makeConferenceRequest();
             }
 
-        }
-        else if(roomNumber.equals("2")){ //add room
-            String nameOfConference = presenter.printNameOfConference();
-            String roomNum = roomController.makeRoomRequest();
-            this.conferenceManager.addRoomToConference(nameOfConference, roomNum);
-            makeConferenceRequest();
-
-        }else if(roomNumber.equals("3")){ //remove conference
-            String nameOfConference = presenter.printNameOfConference();
-            this.conferenceManager.removeConference(nameOfConference);
-            makeConferenceRequest();
-        }else{
-            presenter.printInvalidOption();
-            makeConferenceRequest();
         }
     }
 }

@@ -56,8 +56,6 @@ public class MessageController {
         else{
             presenter.printNoMessages();
         }
-
-        userController.mainMenu();
     }
 
     /**
@@ -107,8 +105,6 @@ public class MessageController {
         else{
             presenter.printNoMessages();
         }
-
-        userController.mainMenu();
     }
 
     private void helpPrintMessages(List<Integer> messageIds, StringBuilder output){
@@ -147,7 +143,6 @@ public class MessageController {
                 break;
             }
             else if (receiver.equals("0")){
-                userController.mainMenu();
                 send = false;
                 break;
             }
@@ -159,7 +154,6 @@ public class MessageController {
             String content = presenter.printMessage();
             messageManager.sendMessage(sender, userManager.getUser(receiver), content);
             presenter.printMessageSent();
-            userController.mainMenu();
         }
 
     }
@@ -172,12 +166,7 @@ public class MessageController {
     public void messageAllSpeakers(String name){
         String content = presenter.printMessage();
         messageManager.messagePeople(userManager.getSpeakerObjects(), name, content);
-        /*for (String key : keys) {
-            messageManager.sendMessage(name,
-                    userManager.getSpeaker(key), content);
-        }*/
         presenter.printMessageSent();
-        userController.mainMenu();
     }
 
     /**
@@ -189,7 +178,6 @@ public class MessageController {
         String content = presenter.printMessage();
         messageManager.messagePeople(userManager.getAttendeeObjects(), name, content);
         presenter.printMessageSent();
-        userController.mainMenu();
     }
 
     /**
@@ -214,8 +202,5 @@ public class MessageController {
                 presenter.printMessageSent();
             }
         }
-        userController.mainMenu();
     }
-
-
 }
