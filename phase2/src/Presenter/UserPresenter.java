@@ -12,6 +12,18 @@ public class UserPresenter extends Presenter{
     private Scanner sc = new Scanner(System.in);
 
     /**
+     * Creates instance of the ExportHTML class, and hands all events to it
+     *
+     * @return User input
+     */
+    public String exportEventsToHTML() {
+        System.out.println("Select an option by entering the corresponding numbers");
+        System.out.println("1: Export Events to HTML");
+        System.out.println("2: Back");
+        return sc.nextLine();
+    }
+
+    /**
      * Prints the first text that the user will see
      *
      * @return User input
@@ -60,6 +72,7 @@ public class UserPresenter extends Presenter{
         System.out.println("1: Sign up for an event");
         System.out.println("2: Cancel spot in event");
         System.out.println("3: See list of events signed up for");
+        System.out.println("4: Export Events to HTML");
         return sc.nextLine();
     }
 
@@ -130,6 +143,7 @@ public class UserPresenter extends Presenter{
         System.out.println("4: Sign up for event");
         System.out.println("5: Cancel my spot in an event");
         System.out.println("6: Show the events I am signed up for");
+        System.out.println("7: Export Events to HTML");
         return sc.nextLine();
     }
 
@@ -148,6 +162,7 @@ public class UserPresenter extends Presenter{
         System.out.println("6: Create a group chat");
         System.out.println("7: See your Group Chats");
         System.out.println("8: Save and exit");
+        System.out.println("9: Export Events to HTML");
         return sc.nextLine();
     }
 

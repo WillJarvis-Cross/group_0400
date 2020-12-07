@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class ExportHTML {
     private String pathPrefix = "";
+    private ArrayList Events = null;
 
     private static final String head = "<!DOCTYPE html>" +
             "<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width," +
@@ -34,6 +35,11 @@ public class ExportHTML {
             "  </style>" +
             "</body>" +
             "</html>";
+
+    public void setEvents(ArrayList events) {
+        Events = events;
+        System.out.println(this.Events);
+    }
 
     private String encapsulateTag(String tagName, String content) {
         if (tagName.equals("html")) return head + content + footer;

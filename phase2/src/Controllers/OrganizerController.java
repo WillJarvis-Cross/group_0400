@@ -1,5 +1,6 @@
 package Controllers;
 
+import Gateways.ExportHTML;
 import UseCases.*;
 
 import java.io.Serializable;
@@ -190,11 +191,23 @@ public class OrganizerController extends UserController implements Serializable 
             else{
                 mainMenu();
             }
-        }
-        else if (input.equals("0")){ // Go back to the main menu
+        } else if (input.equals("0")) { // Go back to the main menu
             mainMenu();
-        }
-        else{
+        } else if (input.equals("7")) { // Export events
+            String decision = getPresenter().exportEventsToHTML();
+
+            if (decision.equals("1")){ //export
+                ExportHTML schedule = new ExportHTML();
+                schedule.setEvents(getEventController().getListOfEvents());
+                System.out.println("Export Complete");
+                mainMenu();
+            } else if (decision.equals("2")) { //go back
+                eventMenu();
+            } else {
+                System.out.println("invalid selection, going back");
+                eventMenu();
+            }
+        } else {
             getPresenter().printInvalidOption();
             eventMenu();
         }
