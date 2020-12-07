@@ -1,5 +1,6 @@
 package Controllers;
 
+import Gateways.ExportHTML;
 import UseCases.*;
 
 import java.io.Serializable;
@@ -132,6 +133,21 @@ public class AttendeeController extends UserController implements Serializable {
             }
             else{
                 mainMenu();
+            }
+        }
+        else if (input.equals("4")) { //export to HTML
+            String decision = getPresenter().exportEventsToHTML();
+
+            if (decision.equals("1")){ //export
+                ExportHTML schedule = new ExportHTML();
+                schedule.setEvents(getEventController().getListOfEvents());
+                System.out.println("Export Complete");
+                mainMenu();
+            } else if (decision.equals("2")) { //go back
+                eventMenu();
+            } else {
+                System.out.println("invalid selection, going back");
+                eventMenu();
             }
         }
         else{ mainMenu();}

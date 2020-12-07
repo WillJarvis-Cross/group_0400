@@ -1,5 +1,6 @@
 package Controllers;
 
+import Gateways.ExportHTML;
 import UseCases.*;
 
 import java.io.Serializable;
@@ -133,8 +134,21 @@ public class SpeakerController extends UserController implements Serializable {
             }
             else if (input.equals("8")){ // save and log out
                 break;
-            }
-            else{
+            } else if (input.equals("9")) { //Export Events to HTML
+                String decision = getPresenter().exportEventsToHTML();
+
+                if (decision.equals("1")){ //export
+                    ExportHTML schedule = new ExportHTML();
+                    schedule.setEvents(getEventController().getListOfEvents());
+                    System.out.println("Export Complete");
+                    mainMenu();
+                } else if (decision.equals("2")) { //go back
+                    mainMenu();
+                } else {
+                    System.out.println("invalid selection, going back");
+                    mainMenu();
+                }
+            } else{
                 getPresenter().printInvalidInput();
             }
         }

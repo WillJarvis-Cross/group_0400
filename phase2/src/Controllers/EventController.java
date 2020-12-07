@@ -1,5 +1,6 @@
 package Controllers;
 
+import Entities.Event;
 import Presenter.*;
 import UseCases.EventManager;
 import UseCases.RoomManager;
@@ -9,6 +10,7 @@ import java.lang.String;
 import java.util.ArrayList;
 
 import java.time.LocalDateTime;
+import java.util.Hashtable;
 import java.util.List;
 
 /** Represents the controller for EventManager
@@ -33,6 +35,10 @@ public class EventController {
         this.roomManager = roomManager;
         this.userController = userController;
         this.presenter = new RoomEventPresenter();
+    }
+
+    public ArrayList<Event> getListOfEvents() {
+        return (ArrayList<Event>) eManager.getEvents();
     }
 
     private boolean isSpeakerInUsers(List<String> speakers){
