@@ -67,7 +67,8 @@ public class EventController {
     private void signUp(List<String> speaker, String eventName){
         for (int i = 0; i < speaker.size(); i++) {
             userManager.signUp(speaker.get(i), eManager.getEvent(eventName),
-                    eManager.getEventsExceptOne(userManager.getUser(speaker.get(i)), eManager.getEvent(eventName)));
+                    eManager.getEventsExceptOne(userManager.getUser(speaker.get(i)), eManager.getEvent(eventName)),
+                    eManager.getEvent(eventName).getPrice());
         }
     }
 
@@ -93,6 +94,7 @@ public class EventController {
             int capacity = presenter.printEventCapacity();
             boolean boolVIP = presenter.printVIP();
             int counter = 0;
+            double price = presenter.printPrice();
             if (roomManager.getRoom(roomNumber) != null) {
                 if (!isSpeakerInUsers(speaker)|| roomManager.getRoom(roomNumber) == null) {
                     counter++;
@@ -100,7 +102,7 @@ public class EventController {
                 if (roomManager.isRoomTaken(roomNumber, time)) {
                     counter++;
                 }
-                if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber, capacity, boolVIP, techLevel) || duration == 0) {
+                if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber, capacity, boolVIP, techLevel, price) || duration == 0) {
                     counter++;
                 }
                 if (capacity > roomManager.getRoom(roomNumber).getCapacity()) {
@@ -117,7 +119,7 @@ public class EventController {
                 counter++;
             }
             if (counter == 0){
-                eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP, techLevel);
+                eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP, techLevel, price);
                 signUp(speaker,eventName);
                 roomManager.addEvent(roomNumber, eventName, time);
                 presenter.printEventCreated();
@@ -158,7 +160,8 @@ public class EventController {
         if(!userManager.checkVIPSignUp(eManager.getEvent(eventName), userManager.getUser(username))){
             return false;
         }
-        userManager.signUp(username, eManager.getEvent(eventName), eManager.getEventsByUsername(userManager.getUser(username)));
+        userManager.signUp(username, eManager.getEvent(eventName), eManager.getEventsByUsername(userManager.getUser(username)),
+                eManager.getEvent(eventName).getPrice());
         eManager.addPersonToEvent(eventName, username);
 
         return true;
@@ -182,7 +185,7 @@ public class EventController {
             removeEvent();
         }
         else{
-            userManager.cancelWholeEvent(eManager.getEvent(name).getAttending(), name, eManager.getEvent(name).getSpeaker());
+            userManager.cancelWholeEvent(eManager.getEvent(name).getAttending(), name, eManager.getEvent(name).getSpeaker(), eManager.getEvent(name).getPrice());
             roomManager.removeRoomEvent(eManager.getEvent(name).getRoomNum(), name);
             eManager.removeEvent(name);
             presenter.printEventRemoved();

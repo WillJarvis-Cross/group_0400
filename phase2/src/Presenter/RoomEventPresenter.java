@@ -279,4 +279,13 @@ public class RoomEventPresenter extends Presenter{
 
     }
 
+    /**
+     * Prompts the user to enter the price of the event]
+     * @return User input
+     */
+    public double printPrice() {
+        System.out.println("Enter the price to attend the event");
+        return Double.parseDouble(sc.nextLine());
+    }
+
 }

@@ -62,7 +62,8 @@ public class UserPresenter extends Presenter{
         System.out.println("Select a an option by entering the corresponding numbers");
         System.out.println("1: Enter the message menu");
         System.out.println("2: Enter the event menu");
-        System.out.println("3: Save and exit");
+        System.out.println("3: Add to your balance");
+        System.out.println("4: Save and exit");
         return sc.nextLine();
     }
 
@@ -316,5 +317,31 @@ public class UserPresenter extends Presenter{
 
     public void printYouHaveCovid(){
         System.out.println("You can't sign up for any events because you are a risk for COVID-19");
+    }
+
+    /**
+     * Prints that the user could not afford to attend the event
+     *
+     */
+    public void printCantAfford(){
+        System.out.println("You do not have enough money to attend this event");
+    }
+
+    /**
+     * Prints the current balance of the user
+     *
+     */
+    public void printCurrentBalance(double balance){
+
+        System.out.println("Your current balance is " + balance);
+    }
+
+    /**
+     * Prompts the user to enter the amount they want to add
+     *
+     */
+    public double printAddToBalance(){
+        System.out.println("Enter the amount you want to add to the balance");
+        return Double.parseDouble(sc.nextLine());
     }
 }

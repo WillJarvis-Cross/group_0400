@@ -108,7 +108,10 @@ public class AttendeeController extends UserController implements Serializable {
                 eventMenu();
                 break;
             }
-            else if (input.equals("3")){ // save and log out
+            else if (input.equals("3")){
+                addToBalance();
+            }
+            else if (input.equals("4")){ // save and log out
                 break;
             }
             else{

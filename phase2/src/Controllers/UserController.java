@@ -173,14 +173,25 @@ public abstract class UserController implements Serializable {
                     mainMenu();
                }
                else{
-                    if (getEventController().addAttendee(eventName, getMyName())){
-                         getPresenter().printSignedUp(eventName);
-                         mainMenu();
+                    if (usermanager.canAfford(name, eventManager.getEvent(eventName).getPrice()))
+                    {
+                         if (getEventController().addAttendee(eventName, getMyName())){
+                              getPresenter().printSignedUp(eventName);
+                              getPresenter().printCurrentBalance(usermanager.getUser(this.name).getBalance());
+                              mainMenu();
+                         }
+                         else{
+                              getPresenter().printNotSignedUp(eventName);
+                              signUp();
+                         }
                     }
                     else{
-                         getPresenter().printNotSignedUp(eventName);
-                         signUp();
+                         getPresenter().printCantAfford();
+                         getPresenter().printCurrentBalance(usermanager.getUser(this.name).getBalance());
+                         mainMenu();
                     }
+
+
                }
           }
 
@@ -201,8 +212,9 @@ public abstract class UserController implements Serializable {
           getPresenter().printAttendeeEvents(getMyEvents());
           if (getMyEvents().size() > 0) {
                String event = getPresenter().printDeleteEvent();
-               if (usermanager.cancelMyEvent(this.name, event) && eventManager.removeAttendee(event, this.name)) {
+               if (usermanager.cancelMyEvent(this.name, event, eventManager.getEvent(event).getPrice()) && eventManager.removeAttendee(event, this.name)) {
                     presenter.printRemovedEvent();
+                    presenter.printCurrentBalance(usermanager.getUser(getMyName()).getBalance());
                } else {
                     presenter.printCantRemove();
                }
@@ -220,6 +232,15 @@ public abstract class UserController implements Serializable {
                usermanager.changeCovid(this.name, false);
           }
 
+     }
+
+     /**
+      * Adds money to the user's balance
+      */
+     public void addToBalance(){
+          double amount = getPresenter().printAddToBalance();
+          usermanager.getUser(getMyName()).addToBalance(amount);
+          getPresenter().printCurrentBalance(usermanager.getUser(getMyName()).getBalance());
      }
 
      /**

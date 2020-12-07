@@ -225,7 +225,7 @@ public class UserManager implements Serializable {
      * @param event The event being signed up for
      * @param myEvents The list of the user's events
      */
-    public void signUp(String name, Event event, List<Event> myEvents){
+    public void signUp(String name, Event event, List<Event> myEvents, double price){
         String eventName = event.getEventName();
 
         LocalDateTime eventTime = event.getTime();
@@ -235,7 +235,7 @@ public class UserManager implements Serializable {
         // pos is the position the event is being added in th e user's list of events
 
         int pos = findPosOfEvent(0, numEvents, eventTime, myEvents);
-
+        person.removeFromBalance(price);
         person.addEvent(eventName, pos);
     }
 
@@ -275,10 +275,11 @@ public class UserManager implements Serializable {
      * @param person The name of the person
      * @param canceledEvent The name of the event person is canceling
      */
-    public boolean cancelMyEvent(String person, String canceledEvent){
+    public boolean cancelMyEvent(String person, String canceledEvent, double price){
         User thisPerson = getUser(person);
         if (thisPerson.getEvents().contains(canceledEvent)){
             thisPerson.removeEvent(canceledEvent);
+            thisPerson.addToBalance(price);
             return true;
         }
         return false;
@@ -293,12 +294,12 @@ public class UserManager implements Serializable {
      * @param canceledEvent The event getting canceled
      * @param speaker The names of the speaker of the event
      */
-    public void cancelWholeEvent(List<String> attending, String canceledEvent, List<String> speaker){
+    public void cancelWholeEvent(List<String> attending, String canceledEvent, List<String> speaker, double price){
 
         for (String name : attending) {
-            cancelMyEvent(name, canceledEvent);
+            cancelMyEvent(name, canceledEvent, price);
         }
-        for (String name: speaker){cancelMyEvent(name, canceledEvent);}
+        for (String name: speaker){cancelMyEvent(name, canceledEvent, price);}
 
     }
 
@@ -345,6 +346,19 @@ public class UserManager implements Serializable {
 
     public void changeCovid(String name, boolean positive){
         getUser(name).setHasCovid(positive);
+    }
+
+    /**
+     * Checks if the user has enough money to attend the event
+     * @param name The name of the user
+     * @param price The price of the event
+     */
+    public boolean canAfford(String name, double price) {
+        if (price <= getUser(name).getBalance()) {
+            return true;
+        }
+        else
+            return false;
     }
 }
 

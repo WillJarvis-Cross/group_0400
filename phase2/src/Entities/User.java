@@ -16,6 +16,7 @@ public abstract class User implements Serializable {
     private List<String> groupChats; // List of the names of the group chats this user is in
     private String password, username;  // The user's username and password which is used to log in
     private boolean hasCovid = false;
+    private double balance;
 
     /**
      * Constructs a User of types Attendee, Organizer, and Speaker. It instantiates the User's username and password,
@@ -30,6 +31,7 @@ public abstract class User implements Serializable {
         this.events = new ArrayList<>();
         this.archivedMessages = new ArrayList<>();
         this.groupChats = new ArrayList<>();
+        this.balance = 0.0;
     }
 
     public List<String> getGroupChats(){ return groupChats;}
@@ -158,4 +160,22 @@ public abstract class User implements Serializable {
      * @return True or false depending on whether or not this user is a VIP or not
      */
     public abstract boolean isVIP();
+
+    /**
+     * Returns this User's balance
+     * @return this User's balance
+     */
+    public double getBalance(){ return balance;}
+
+    /**
+     * Adds amount to this User's balance
+     * @param amount The amount to add
+     */
+    public void addToBalance(double amount){balance += amount;}
+
+    /**
+     * Removes amount to this User's balance
+     * @param amount The amount to remove
+     */
+    public void removeFromBalance(double amount){balance -= amount;}
 }

@@ -21,6 +21,7 @@ public class Event implements Serializable {
     private int capacity; // The maximum capacity of the event
     private boolean VIPOnly;
     private int techLevel;
+    private double price;
 
     /**
      * Constructs an event with the given parameters.
@@ -30,8 +31,9 @@ public class Event implements Serializable {
      * @param eventName The name of the event
      * @param roomNumber The room the event is in
      * @param capacity The capacity of the event
+     * @param price The price of the event
      */
-    public Event(String time, int duration, List<String> speaker, String eventName, String roomNumber, int capacity,boolean VIP, int techLevel) {
+    public Event(String time, int duration, List<String> speaker, String eventName, String roomNumber, int capacity,boolean VIP, int techLevel, double price) {
         this.time = time;
         this.duration = duration;
         this.speaker = speaker;
@@ -41,6 +43,7 @@ public class Event implements Serializable {
         this.capacity = capacity;
         this.VIPOnly = VIP;
         this.techLevel = techLevel;
+        this.price = price;
     }
 
     public boolean isVIPOnly() {
@@ -163,6 +166,13 @@ public class Event implements Serializable {
             }
         }
         return "Event: "+ eventName+ "\nSpeaker: "+ speakers+ "\nDate: "+
-                getTime().format(formatter)+ "\nDuration: "+ duration+ " hour"+"\nRoom: "+roomNumber;
+                getTime().format(formatter)+ "\nDuration: "+ duration+ " hour"+"\nRoom: "+roomNumber+ "\nPrice: " + price;
+    }
+    /**
+     * Returns the price of the event
+     * @return the price
+     */
+    public double getPrice() {
+        return price;
     }
 }
