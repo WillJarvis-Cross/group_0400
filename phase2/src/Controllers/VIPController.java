@@ -26,10 +26,11 @@ public class VIPController extends UserController implements Serializable {
      * @param eventManager The EventManager
      * @param messageManager The MessageManager
      * @param roomManager The RoomManager
+     * @param conferenceManager
      */
     public VIPController(String name, UserManager userManager, EventManager eventManager,
-                         MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager){
-        super(name, userManager, eventManager, messageManager, roomManager, groupChatManager);
+                         MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager, ConferenceManager conferenceManager){
+        super(name, userManager, eventManager, messageManager, roomManager, groupChatManager, conferenceManager);
     }
 
     public void makeNewAccount(){

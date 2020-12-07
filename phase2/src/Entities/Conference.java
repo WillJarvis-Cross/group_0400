@@ -36,13 +36,23 @@ public class Conference implements Serializable {
         this.room = room;
     }
 
-    public void addRoom(String room){
+    public boolean addRoom(String room){
         if(!this.room.contains(room)){
             this.room.add(room);
+            return true;
+        }
+        else{
+            return false;
         }
     }
-    public void removeRoom(String room){
-        this.room.remove(room);
+    public boolean removeRoom(String room){
+        if(this.room.contains(room)) {
+            this.room.remove(room);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }

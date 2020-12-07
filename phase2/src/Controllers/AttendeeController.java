@@ -26,10 +26,11 @@ public class AttendeeController extends UserController implements Serializable {
      * @param eventManager The EventManager
      * @param messageManager The MessageManager
      * @param roomManager The RoomManager
+     * @param conferenceManager
      */
     public AttendeeController(String name, UserManager userManager, EventManager eventManager,
-                              MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager){
-        super(name, userManager, eventManager, messageManager, roomManager, groupChatManager);
+                              MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager, ConferenceManager conferenceManager){
+        super(name, userManager, eventManager, messageManager, roomManager, groupChatManager,conferenceManager);
     }
     /**
      * Creates a new Attendee with the users name and the password they input

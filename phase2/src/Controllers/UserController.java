@@ -12,9 +12,12 @@ public abstract class UserController implements Serializable {
      private transient final UserPresenter presenter;
      private transient final EventController eventController;
      private transient final MessageController messageController;
+     private transient final ConferenceController conferenceController;
+
      private final EventManager eventManager;
      private final MessageManager messageManager;
      private final RoomManager roomManager;
+     private final ConferenceManager conferenceManager;
      private final GroupChatManager groupChatManager;
      private transient final RoomController roomController;
      private transient final GroupChatController groupChatController;
@@ -31,6 +34,7 @@ public abstract class UserController implements Serializable {
           usermanager = new UserManager();
           eventManager = new EventManager();
           roomManager = new RoomManager();
+          conferenceManager = new ConferenceManager();
           messageManager = new MessageManager();
           groupChatManager = new GroupChatManager(messageManager);
           eventController = new EventController(this, eventManager, usermanager,
@@ -38,6 +42,7 @@ public abstract class UserController implements Serializable {
           messageController = new MessageController(usermanager, this,
                                                     messageManager, eventManager);
           roomController = new RoomController(this, roomManager);
+          conferenceController = new ConferenceController(this, roomController,conferenceManager);
           this.groupChatController = new GroupChatController(usermanager, this, groupChatManager,
                   messageManager);
           this.name = name;
@@ -53,11 +58,12 @@ public abstract class UserController implements Serializable {
       * @param roomManager The RoomManager to be stored
       */
      public UserController(String name, UserManager userManager, EventManager eventManager,
-                           MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager){
+                           MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager, ConferenceManager conferenceManager){
           this.usermanager = userManager;
           this.eventManager = eventManager;
           this.messageManager = messageManager;
           this.roomManager = roomManager;
+          this.conferenceManager = conferenceManager;
           presenter = new UserPresenter();
           this.groupChatManager = groupChatManager;
           this.eventController = new EventController(this, eventManager,
@@ -65,10 +71,19 @@ public abstract class UserController implements Serializable {
           this.messageController = new MessageController(usermanager, this,
                                    messageManager, eventManager);
           this.roomController = new RoomController(this, roomManager);
+          this.conferenceController = new ConferenceController(this, roomController, conferenceManager);
           this.groupChatController = new GroupChatController(usermanager, this, groupChatManager,
                   messageManager);
           this.name = name;
           makeNewAccount();
+     }
+
+     public ConferenceManager getConferenceManager() {
+          return conferenceManager;
+     }
+
+     public ConferenceController getConferenceController() {
+          return conferenceController;
      }
 
      /**

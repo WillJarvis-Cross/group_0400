@@ -29,8 +29,8 @@ public class OrganizerController extends UserController implements Serializable 
      * @param roomManager The RoomManager
      */
     public OrganizerController(String name, UserManager userManager, EventManager eventManager,
-                               MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager){
-        super(name, userManager, eventManager, messageManager, roomManager, groupChatManager);
+                               MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager,ConferenceManager conferenceManager){
+        super(name, userManager, eventManager, messageManager, roomManager, groupChatManager, conferenceManager);
     }
 
     /**
@@ -109,7 +109,7 @@ public class OrganizerController extends UserController implements Serializable 
                 break;
             }
             else if (input.equals("3")){ // Create a room
-                getRoomController().makeRoomRequest();
+                getConferenceController().makeConferenceRequest();
                 break;
             }
             else if (input.equals("4")){ // Create an account

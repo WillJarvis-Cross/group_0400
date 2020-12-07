@@ -32,7 +32,7 @@ public class RoomController {
      * calls roomManager to check if whether a room with the same number exist or not and creates
      * a room iff it does not exist, otherwise prints invalid request
      */
-    public void makeRoomRequest(){
+    public String makeRoomRequest(){
         String roomNumber = presenter.printRoomNumber();
         if (roomNumber.equals("0")){
             userController.mainMenu();
@@ -47,7 +47,7 @@ public class RoomController {
             else{
                 if (roomManager.addRoom(roomNumber, capacity, techLevel)){
                     presenter.printRoomAdded();
-                    userController.mainMenu();
+                    return roomNumber;
                 }
                 else{
                     presenter.printInvalidOption();
@@ -55,6 +55,7 @@ public class RoomController {
                 }
             }
         }
+        return roomNumber;
     }
 
     /*private ArrayList<Room> getRoomList () {

@@ -108,7 +108,7 @@ public class UserPresenter extends Presenter{
         System.out.println("Select a an option by entering the corresponding numbers");
         System.out.println("1: Access the message menu");
         System.out.println("2: Access the event menu");
-        System.out.println("3: Create a new room");
+        System.out.println("3: Access to conference");
         System.out.println("4: Create a new account");
         System.out.println("5: Save and exit");
         return sc.nextLine();

@@ -86,7 +86,8 @@ public class ReadAndWrite {
                                 loaded.getEventManager(),
                                 loaded.getMessageManager(),
                                 loaded.getRoomManager(),
-                                loaded.getGroupChatManager());
+                                loaded.getGroupChatManager(),
+                                loaded.getConferenceManager());
                         break;
                     }
                     case "2": {
@@ -95,7 +96,7 @@ public class ReadAndWrite {
                                 loaded.getEventManager(),
                                 loaded.getMessageManager(),
                                 loaded.getRoomManager(),
-                                loaded.getGroupChatManager());
+                                loaded.getGroupChatManager(),loaded.getConferenceManager());
                         break;
                     }
                     case "3": {
@@ -104,7 +105,8 @@ public class ReadAndWrite {
                                 loaded.getEventManager(),
                                 loaded.getMessageManager(),
                                 loaded.getRoomManager(),
-                                loaded.getGroupChatManager());
+                                loaded.getGroupChatManager(),
+                                loaded.getConferenceManager());
                         break;
                     }
                     case "4": {
@@ -113,7 +115,8 @@ public class ReadAndWrite {
                                 loaded.getEventManager(),
                                 loaded.getMessageManager(),
                                 loaded.getRoomManager(),
-                                loaded.getGroupChatManager());
+                                loaded.getGroupChatManager(),
+                                loaded.getConferenceManager());
                         break;
                     }
 

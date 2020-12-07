@@ -29,12 +29,30 @@ public class ConferenceManager implements Serializable {
         return true;
     }
 
-    public void addRoomToConference(String conferenceNumber, String roomNumber){
-        allConferenece.get(conferenceNumber).addRoom(roomNumber);
+    public boolean addRoomToConference(String conferenceNumber, String roomNumber){
+        if (allConferenece.containsKey(conferenceNumber)){
+            allConferenece.get(conferenceNumber).addRoom(roomNumber);
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
-    public void removeRoomFromConference(String conferenceNumber, String roomNumber){
-        allConferenece.get(roomNumber).removeRoom(roomNumber);
+    public boolean removeRoomFromConference(String conferenceNumber, String roomNumber){
+        if(allConferenece.containsKey(conferenceNumber)){
+            return allConferenece.get(roomNumber).removeRoom(roomNumber);
+        }
+        return false;
+
+    }
+
+    public boolean removeConference(String conferenceNumber){
+        if(allConferenece.contains(conferenceNumber)){
+            allConferenece.remove(conferenceNumber);
+            return true;
+        }
+        return false;
     }
 
 }
