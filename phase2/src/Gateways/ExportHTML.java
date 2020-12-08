@@ -1,10 +1,10 @@
 package Gateways;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExportHTML {
     private String pathPrefix = "";
-    private ArrayList Events = null;
 
     private static final String head = "<!DOCTYPE html>" +
             "<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width," +
@@ -36,17 +36,13 @@ public class ExportHTML {
             "</body>" +
             "</html>";
 
-    public void setEvents(ArrayList events) {
-        Events = events;
-        System.out.println(this.Events);
-    }
-
     private String encapsulateTag(String tagName, String content) {
         if (tagName.equals("html")) return head + content + footer;
         return "<" + tagName + ">" + content + "</" + tagName + ">";
     }
 
-    private String createTableBody(String[] columns, String[][] rows) {
+
+    private String createTableBody(List<String> columns, List<List<String>> rows) {
         String headerContent = "";
         for (String column : columns) {
             headerContent += encapsulateTag("th", column);
@@ -54,7 +50,7 @@ public class ExportHTML {
         headerContent = encapsulateTag("thead", encapsulateTag("tr", headerContent));
 
         String tableBodyContent = "";
-        for (String[] row : rows) {
+        for (List<String> row : rows) {
             String tableRow = "";
             for (String cell : row) {
                 tableRow += encapsulateTag("td", cell);
@@ -65,12 +61,12 @@ public class ExportHTML {
         return encapsulateTag("html", (headerContent + tableBodyContent));
     }
 
-    public boolean exportHTML(String fileName, String[] columns, String[][] rows) {
+    public boolean exportHTML(String fileName, List<String> columns, List<List<String>> rows) {
         try {
             ReadAndWrite writeHTMl = new ReadAndWrite();
             String content = createTableBody(columns, rows);
             System.out.println(content);
-            writeHTMl.exportAsHTML("index", content);
+            writeHTMl.exportAsHTML(fileName, content);
         } catch (Exception e) {
             System.out.println("There was some error: " + e.toString());
             return false;
