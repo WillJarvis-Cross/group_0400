@@ -48,6 +48,15 @@ public class ConferenceManager implements Serializable {
 
     }
 
+    public boolean CheckConferenceExist(String conferenceNumber){
+        if(allConferenece.containsKey(conferenceNumber)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
     public boolean removeRoomFromConference(String conferenceNumber, String roomNumber){
         if(allConferenece.containsKey(conferenceNumber)){
             return allConferenece.get(roomNumber).removeRoom(roomNumber);
@@ -63,5 +72,7 @@ public class ConferenceManager implements Serializable {
         }
         return false;
     }
-
+    public List<String> getRoomsByConference(String conferenceN){
+        return allConferenece.get(conferenceN).getRoom();
+    }
 }

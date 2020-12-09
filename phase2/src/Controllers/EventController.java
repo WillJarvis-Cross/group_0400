@@ -2,6 +2,7 @@ package Controllers;
 
 import Entities.Event;
 import Presenter.*;
+import UseCases.ConferenceManager;
 import UseCases.EventManager;
 import UseCases.RoomManager;
 import UseCases.UserManager;
@@ -23,17 +24,18 @@ public class EventController {
     private final UserManager userManager;
     private final RoomManager roomManager;
     private final RoomEventPresenter presenter;
-
+    private final ConferenceManager conferenceManager;
     /**
      * initialize a clean EventController with given
      * EventManager, UserManager, Presenter, and RoomManager
      */
     public EventController(EventManager eManager,
-                           UserManager userManager, RoomManager roomManager){
+                           UserManager userManager, RoomManager roomManager, ConferenceManager conferenceManager){
         this.eManager = eManager;
         this.userManager = userManager;
         this.roomManager = roomManager;
         this.presenter = new RoomEventPresenter();
+        this.conferenceManager = conferenceManager;
     }
 
     public ArrayList<Event> getListOfEvents() {
@@ -248,4 +250,15 @@ public class EventController {
         }
         return list;
     }
+    public List<String> getEventByConference(String conference) {
+
+        List<String> roomNames = this.conferenceManager.getConference(conference).getRoom();
+        List<String> eventNames = new ArrayList<String>();
+        for (String temp: roomNames){
+            eventNames.addAll(this.roomManager.getEventByRooms(temp));
+        }
+        return eventNames;
+
+    }
+
 }

@@ -1,4 +1,5 @@
 package Controllers;
+import Entities.Room;
 import Presenter.*;
 import UseCases.*;
 
@@ -61,4 +62,5 @@ public class ConferenceController {
 
         }
     }
+
 }

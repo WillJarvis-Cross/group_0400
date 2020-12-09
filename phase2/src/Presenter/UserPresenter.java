@@ -88,6 +88,18 @@ public class UserPresenter extends Presenter{
         return sc.nextLine();
     }
 
+    public String printConference(){
+        System.out.println("Enter the Conference Name you like to enter:");
+        return sc.nextLine();
+    }
+
+    public String printNoConferenceExist(){
+        System.out.println("No conference exists going to Event Menu");
+        System.out.println("1. Re-enter the Conference Name");
+        System.out.println("2. Enter Event Menu without specific Conference");
+        return sc.nextLine();
+    }
+
     /*public String printVIP() {
         System.out.println("Select a an option by entering the corresponding numbers");
         System.out.println("1: Send a message");

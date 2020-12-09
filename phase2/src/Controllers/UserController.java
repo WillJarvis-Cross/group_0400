@@ -40,7 +40,7 @@ public abstract class UserController implements Serializable {
           conferenceManager = new ConferenceManager();
           messageManager = new MessageManager();
           groupChatManager = new GroupChatManager(messageManager);
-          eventController = new EventController(eventManager, usermanager, roomManager);
+          eventController = new EventController(eventManager, usermanager, roomManager,conferenceManager);
           messageController = new MessageController(usermanager, messageManager, eventManager);
           roomController = new RoomController(roomManager);
           conferenceController = new ConferenceController(this, roomController,conferenceManager);
@@ -67,7 +67,7 @@ public abstract class UserController implements Serializable {
           this.conferenceManager = conferenceManager;
           presenter = new UserPresenter();
           this.groupChatManager = groupChatManager;
-          this.eventController = new EventController(eventManager, usermanager, roomManager);
+          this.eventController = new EventController(eventManager, usermanager, roomManager,conferenceManager);
           this.messageController = new MessageController(usermanager, messageManager, eventManager);
           this.roomController = new RoomController(roomManager);
           this.conferenceController = new ConferenceController(this, roomController, conferenceManager);
@@ -209,6 +209,40 @@ public abstract class UserController implements Serializable {
 
      }
 
+     public void signUp(String conferenceName){
+          if (usermanager.getUser(this.name).getHasCovid()){
+               presenter.printYouHaveCovid();
+          }
+          else{
+
+
+               String eventName = getPresenter().getEventName(this.eventController.getEventByConference(conferenceName));
+
+               if (!eventName.equals("0") && eventManager.containsEvent(eventName)){
+                    if (usermanager.canAfford(name, eventManager.getEvent(eventName).getPrice()))
+                    {
+                         if (getEventController().addAttendee(eventName, getMyName())){
+                              getPresenter().printSignedUp(eventName);
+                              getPresenter().printCurrentBalance(usermanager.getUser(this.name).getBalance());
+                              eventSignups += 1;
+                         }
+                         else{
+                              getPresenter().printNotSignedUp(eventName);
+                              signUp();
+                         }
+                    }
+                    else{
+                         getPresenter().printCantAfford();
+                         getPresenter().printCurrentBalance(usermanager.getUser(this.name).getBalance());
+                    }
+               }
+               else if (!eventManager.containsEvent(eventName)){
+                    presenter.printInvalidOption();
+                    signUp();
+               }
+          }
+
+     }
      /**
       * Returns a list of events the user is signed up for
       * @return List<String> of the users events they are signed up for
@@ -233,58 +267,58 @@ public abstract class UserController implements Serializable {
                }
           }
      }
-
-     /**
-      * Adds the inputted event to the list of the user's event
-      * @param likeEvent If true adds the event name in the list of names of liked events, otherwise removes the event
-      *                  from the list of liked events if exists
-      */
-     public void likeUnlikeEvent(boolean likeEvent){
-
-          if (usermanager.getUser(this.name).getHasCovid()){
-               presenter.printYouHaveCovid();
-          }
-          else{
-               String eventName = getPresenter().getEventName(usermanager.getUser(this.name).getEvents());
-               List<String> myLikedEvents = usermanager.getUser(this.name).getLikedEvents();
-               if (!eventName.equals("0")) {
-                    int eventIndexInLiked = myLikedEvents.indexOf(eventName);
-
-                    if (likeEvent && eventIndexInLiked < 0) myLikedEvents.add(eventName);
-                    else if (!likeEvent && eventIndexInLiked >= 0) myLikedEvents.remove(eventIndexInLiked);
-               }
-          }
-          mainMenu();
-     }
-
-     /** Returns true if the users event schedule has been exported successfully, otherwise returns false
-      * @return true iff schedule has been exported successfully, otherwise returns false
-      */
-     public boolean exportMyEvents () {
-          List<String> myEvents = this.getMyEvents();
-
-          if (myEvents.size() <= 0) return false;
-
-          ExportHTML export = new ExportHTML();
-          String currentTime = java.time.LocalDate.now().toString();
-
-          List<String> likedEvents = usermanager.getUser(this.name).getLikedEvents();
-          List<String> columns = createColumnHeader();
-          List<List<String>> rows = new ArrayList<>();
-          for (String eventName : myEvents) {
-               Event event = eventManager.getEvent(eventName);
-
-               List<String> line = new ArrayList<>();
-               line.add(event.getTime().toString());
-               line.add(Integer.toString(event.getDuration()));
-               line.add(eventName);
-               line.add(Boolean.toString(likedEvents.contains(eventName)));
-
-               rows.add(line);
-          }
-
-          return export.exportHTML(this.name + "_schedule_" + currentTime, columns, rows);
-     }
+//
+//     /**
+//      * Adds the inputted event to the list of the user's event
+//      * @param likeEvent If true adds the event name in the list of names of liked events, otherwise removes the event
+//      *                  from the list of liked events if exists
+//      */
+//     public void likeUnlikeEvent(boolean likeEvent){
+//
+//          if (usermanager.getUser(this.name).getHasCovid()){
+//               presenter.printYouHaveCovid();
+//          }
+//          else{
+//               String eventName = getPresenter().getEventName(usermanager.getUser(this.name).getEvents());
+//               List<String> myLikedEvents = usermanager.getUser(this.name).getLikedEvents();
+//               if (!eventName.equals("0")) {
+//                    int eventIndexInLiked = myLikedEvents.indexOf(eventName);
+//
+//                    if (likeEvent && eventIndexInLiked < 0) myLikedEvents.add(eventName);
+//                    else if (!likeEvent && eventIndexInLiked >= 0) myLikedEvents.remove(eventIndexInLiked);
+//               }
+//          }
+//          mainMenu();
+//     }
+//
+//     /** Returns true if the users event schedule has been exported successfully, otherwise returns false
+//      * @return true iff schedule has been exported successfully, otherwise returns false
+//      */
+//     public boolean exportMyEvents () {
+//          List<String> myEvents = this.getMyEvents();
+//
+//          if (myEvents.size() <= 0) return false;
+//
+//          ExportHTML export = new ExportHTML();
+//          String currentTime = java.time.LocalDate.now().toString();
+//
+//          List<String> likedEvents = usermanager.getUser(this.name).getLikedEvents();
+//          List<String> columns = createColumnHeader();
+//          List<List<String>> rows = new ArrayList<>();
+//          for (String eventName : myEvents) {
+//               Event event = eventManager.getEvent(eventName);
+//
+//               List<String> line = new ArrayList<>();
+//               line.add(event.getTime().toString());
+//               line.add(Integer.toString(event.getDuration()));
+//               line.add(eventName);
+//               line.add(Boolean.toString(likedEvents.contains(eventName)));
+//
+//               rows.add(line);
+//          }
+//
+//          return export.exportHTML(this.name + "_schedule_" + currentTime, columns, rows);
+//     }
 
      public void covidQuestions(){
           boolean positive = presenter.printCovidQuestions();
@@ -338,4 +372,8 @@ public abstract class UserController implements Serializable {
       * Logs user into their account
       */
      abstract void loginExistingAccount();
+
+
+
+
 }

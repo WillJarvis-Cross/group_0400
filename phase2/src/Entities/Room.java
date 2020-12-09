@@ -2,7 +2,10 @@ package Entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 
 /** This is an entity for a Room which contains the name of the room, the room's capacity, and the events that are
  * in the room
@@ -56,6 +59,14 @@ public class Room implements Serializable {
         return timeTaken;
     }
 
+    public List<String> getAllEvents(){
+        List<String> eventList = new ArrayList<String>();
+        Enumeration emu = this.events.keys();
+        while(emu.hasMoreElements()){
+            eventList.add(emu.nextElement().toString());
+        }
+        return eventList;
+    }
     /**
      * Adds an event to the hashtable of events
      * @param eventName The new event being added to the hashtable

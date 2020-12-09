@@ -142,7 +142,7 @@ public class SpeakerController extends UserController implements Serializable {
 
                 if (decision.equals("1")){ //export
                     ExportHTML schedule = new ExportHTML();
-                    schedule.setEvents(getEventController().getListOfEvents());
+                    //schedule.setEvents(getEventController().getListOfEvents());
                     System.out.println("Export Complete");
                 } else if (decision.equals("2")) { //go back
                 } else {

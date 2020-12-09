@@ -5,6 +5,7 @@ import Gateways.ExportHTML;
 import UseCases.*;
 
 import java.io.Serializable;
+import java.util.Enumeration;
 
 public class VIPController extends UserController implements Serializable {
 
@@ -92,6 +93,8 @@ public class VIPController extends UserController implements Serializable {
 
     }
 
+
+
     /**
      * Returns the total number of times VIPs have logged in
      * @return the total number of times VIPs have logged in
@@ -111,7 +114,7 @@ public class VIPController extends UserController implements Serializable {
                 messageMenu();
             }
             else if (input.equals("2")){
-                eventMenu();
+                conferenceMenu();
             }
             else if (input.equals("3")){ // save and log out
                 break;
@@ -121,6 +124,58 @@ public class VIPController extends UserController implements Serializable {
             }
         }
 
+    }
+
+    public void conferenceMenu(){
+        Enumeration enu = this.getConferenceManager().allConferenece.keys();
+        while(enu.hasMoreElements()){
+            System.out.println(enu.nextElement());
+        }
+        String input = getPresenter().printConference();
+        if(this.getConferenceManager().CheckConferenceExist(input)){
+            eventMenu(input);
+        }else{
+            String response = getPresenter().printNoConferenceExist();
+            if (response.equals("1")){
+                conferenceMenu();
+            }
+            else if(response.equals("2")){
+                eventMenu();
+            }
+            else{
+                mainMenu();
+            }
+        }
+
+    }
+
+    public void eventMenu(String conference){
+        String input = getPresenter().printAttendeeEvent();
+        if (input.equals("1")){ // Sign up for an event
+            signUp(conference);
+        }
+        else if (input.equals("2")){ // Cancel spot in event
+            removeMyEvent();
+        }
+        else if (input.equals("3")){ // Show attendee's list of events
+            getPresenter().printAttendeeEvents(getMyEvents());
+            if (getMyEvents().size() > 0){
+                getEventController().specificInfo();
+            }
+        } else if (input.equals("4")) { //export to HTML
+            String decision = getPresenter().exportEventsToHTML();
+
+            if (decision.equals("1")){ //export
+                ExportHTML schedule = new ExportHTML();
+                //schedule.setEvents(getEventController().getListOfEvents());
+                System.out.println("Export Complete");
+            } else if (decision.equals("2")) { //go back
+                eventMenu();
+            } else {
+                System.out.println("invalid selection, going back");
+                eventMenu();
+            }
+        }
     }
 
     public void eventMenu(){
@@ -141,7 +196,7 @@ public class VIPController extends UserController implements Serializable {
 
             if (decision.equals("1")){ //export
                 ExportHTML schedule = new ExportHTML();
-                schedule.setEvents(getEventController().getListOfEvents());
+                //schedule.setEvents(getEventController().getListOfEvents());
                 System.out.println("Export Complete");
             } else if (decision.equals("2")) { //go back
                 eventMenu();
