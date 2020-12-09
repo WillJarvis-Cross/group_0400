@@ -10,12 +10,12 @@ import java.util.Hashtable;
  */
 public class Room implements Serializable {
 
-    private String roomNumber; // The room number of the room
+    private final String roomNumber; // The room number of the room
 
     // The Events that is in the room and what time the events are happening
     private Hashtable<String, String> events;
-    private int capacity; // The number of attendees allowed in the room
-    private int techLevel; // The tech level of the room's equipment
+    private final int capacity; // The number of attendees allowed in the room
+    private final int techLevel; // The tech level of the room's equipment
 
     /**
      * Constructs a room given its name and its capacity. It also initializes a hashtable of events in the room
@@ -74,12 +74,6 @@ public class Room implements Serializable {
     }
 
     /**
-     * Returns the name of this room
-     * @return the name of this room
-     */
-    public String getRoomNumber(){ return roomNumber;}
-
-    /**
      * Returns the capacity of this room
      * @return the capacity of this room
      */
@@ -91,5 +85,11 @@ public class Room implements Serializable {
      */
     public int getTechLevel(){ return techLevel;}
 
-
+    /**
+     * Returns the roomNumber of this room
+     * @return the roomNumber of this room
+     */
+    public String getRoomNumber() {
+        return roomNumber;
+    }
 }

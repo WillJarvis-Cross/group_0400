@@ -40,13 +40,11 @@ public abstract class UserController implements Serializable {
           conferenceManager = new ConferenceManager();
           messageManager = new MessageManager();
           groupChatManager = new GroupChatManager(messageManager);
-          eventController = new EventController(this, eventManager, usermanager,
-                                                roomManager);
-          messageController = new MessageController(usermanager, this,
-                                                    messageManager, eventManager);
-          roomController = new RoomController(this, roomManager);
+          eventController = new EventController(eventManager, usermanager, roomManager);
+          messageController = new MessageController(usermanager, messageManager, eventManager);
+          roomController = new RoomController(roomManager);
           conferenceController = new ConferenceController(this, roomController,conferenceManager);
-          this.groupChatController = new GroupChatController(usermanager, this, groupChatManager,
+          this.groupChatController = new GroupChatController(usermanager, groupChatManager,
                   messageManager);
           this.name = name;
           makeNewAccount();
@@ -69,13 +67,11 @@ public abstract class UserController implements Serializable {
           this.conferenceManager = conferenceManager;
           presenter = new UserPresenter();
           this.groupChatManager = groupChatManager;
-          this.eventController = new EventController(this, eventManager,
-                                                      usermanager, roomManager);
-          this.messageController = new MessageController(usermanager, this,
-                                   messageManager, eventManager);
-          this.roomController = new RoomController(this, roomManager);
+          this.eventController = new EventController(eventManager, usermanager, roomManager);
+          this.messageController = new MessageController(usermanager, messageManager, eventManager);
+          this.roomController = new RoomController(roomManager);
           this.conferenceController = new ConferenceController(this, roomController, conferenceManager);
-          this.groupChatController = new GroupChatController(usermanager, this, groupChatManager,
+          this.groupChatController = new GroupChatController(usermanager, groupChatManager,
                   messageManager);
           this.name = name;
           makeNewAccount();

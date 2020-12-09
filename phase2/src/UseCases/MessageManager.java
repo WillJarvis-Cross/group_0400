@@ -25,6 +25,12 @@ public class MessageManager implements Serializable {
         messageList.add(message);
     }
 
+    /**
+     * This creates a message for the given group chat
+     * @param sender The person who sent the message
+     * @param group The group the message is being sent to
+     * @param content The content of the message
+     */
     public void groupMessage(String sender, GroupChat group, String content){
         Message message = new Message(content, sender, messageList.size());
         group.newMessage(messageList.size());
@@ -111,10 +117,15 @@ public class MessageManager implements Serializable {
         return false;
     }
 
+    /**
+     * Message every user in people
+     * @param people The list of people being messaged
+     * @param sender The person who sent the message
+     * @param content The content of the message
+     */
     public void messagePeople(List<User> people, String sender, String content){
         for (User person: people){
             sendMessage(sender, person, content);
         }
     }
-
 }

@@ -360,5 +360,14 @@ public class UserManager implements Serializable {
         else
             return false;
     }
+
+    /**
+     * Returns a list of the given user's groupchats
+     * @param name The person we are looking at
+     * @return The list of group chats the person is in
+     */
+    public List<String> getMyGroupChats(String name){
+        return getUser(name).getGroupChats();
+    }
 }
 
