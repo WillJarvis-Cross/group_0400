@@ -59,7 +59,7 @@ public class UserPresenter extends Presenter{
      * @return User input
      */
     public String printAttendee() {
-        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("Select an option by entering the corresponding numbers");
         System.out.println("1: Enter the message menu");
         System.out.println("2: Enter the event menu");
         System.out.println("3: Add to your balance");
@@ -68,7 +68,7 @@ public class UserPresenter extends Presenter{
     }
 
     public String printAttendeeEvent(){
-        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("Select an option by entering the corresponding numbers");
         System.out.println("0: Go back to the main menu");
         System.out.println("1: Sign up for an event");
         System.out.println("2: Cancel spot in event");
@@ -78,7 +78,7 @@ public class UserPresenter extends Presenter{
     }
 
     public String printAttendeeMessage(){
-        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("Select an option by entering the corresponding numbers");
         System.out.println("0: Go back to the main menu");
         System.out.println("1: Send a message");
         System.out.println("2: See list of received messages");
@@ -101,7 +101,7 @@ public class UserPresenter extends Presenter{
     }
 
     /*public String printVIP() {
-        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("Select an option by entering the corresponding numbers");
         System.out.println("1: Send a message");
         System.out.println("2: See list of received messages");
         System.out.println("3: See your archived messages");
@@ -117,7 +117,7 @@ public class UserPresenter extends Presenter{
      * @return User input
      */
     public String printOrganizer() {
-        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("Select an option by entering the corresponding numbers");
         System.out.println("1: Access the message menu");
         System.out.println("2: Access the event menu");
         System.out.println("3: Access to conference");
@@ -132,7 +132,7 @@ public class UserPresenter extends Presenter{
      * @return The user's preferred action
      */
     public String printMessageMenu(){
-        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("Select an option by entering the corresponding numbers");
         System.out.println("0: Go back to the main menu");
         System.out.println("1: Send a message");
         System.out.println("2: Show my received messages");
@@ -149,7 +149,7 @@ public class UserPresenter extends Presenter{
      * @return The user's preferred action
      */
     public String printEventMenu(){
-        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("Select an option by entering the corresponding numbers");
         System.out.println("0: Go back to the main menu");
         System.out.println("1: Create an event");
         System.out.println("2: Delete an event");
@@ -167,7 +167,7 @@ public class UserPresenter extends Presenter{
      * @return User input
      */
     public String printSpeaker() {
-        System.out.println("Select a an option by entering the corresponding numbers");
+        System.out.println("Select an option by entering the corresponding numbers");
         System.out.println("1: Send a message");
         System.out.println("2: See list of received messages");
         System.out.println("3: See list of events that you are speaking at");
