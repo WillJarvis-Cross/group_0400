@@ -7,7 +7,6 @@ import UseCases.UserManager;
 import Presenter.*;
 
 import java.util.List;
-import java.util.Set;
 
 /** Represents the controller for Message
  * @author group 400
@@ -15,21 +14,18 @@ import java.util.Set;
 public class MessageController {
     private final MessageManager messageManager;
     private final UserManager userManager;
-    private final UserController userController;
     private final MessagePresenter presenter;
     private final EventManager eventManager;
 
     /**
      * Creates a new MessageController with the already created managers
      * @param userManager The userManager
-     * @param userController The UserController
      * @param messageManager The MessageManager
      */
-    public MessageController(UserManager userManager, UserController userController,
+    public MessageController(UserManager userManager,
                              MessageManager messageManager, EventManager eventManager){
         this.messageManager = messageManager;
         this.userManager = userManager;
-        this.userController = userController;
         this.presenter = new MessagePresenter();
         this.eventManager = eventManager;
     }

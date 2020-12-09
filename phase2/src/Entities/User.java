@@ -129,8 +129,17 @@ public abstract class User implements Serializable {
         events.remove(removedEvent);
     }
 
+    /**
+     * Adds a group chat to this user's list of group chats
+     * @param name The name of the group chat
+     */
     public void addGroupChat(String name){ groupChats.add(name);}
 
+    /**
+     * Remove the given group chat from this user's list of group chats if possible
+     * @param name The name of the group chat
+     * @return True if the group chat was deleted and false otherwise
+     */
     public boolean removeGroupChat(String name){
         if (groupChats.contains(name)){
             groupChats.remove(name);
@@ -139,8 +148,16 @@ public abstract class User implements Serializable {
         return false;
     }
 
+    /**
+     * Returns true if this user is a risk for COVID-19 and false otherwise
+     * @return true if this user is a risk for COVID-19 and false otherwise
+     */
     public boolean getHasCovid(){return hasCovid;}
 
+    /**
+     * Sets the user's value of hasCovid based on in the parameter
+     * @param positive True when this user is a risk for COVID-19 and false otherwise
+     */
     public void setHasCovid(boolean positive){hasCovid = positive;}
 
     /**

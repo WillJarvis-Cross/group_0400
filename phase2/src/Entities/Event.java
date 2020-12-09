@@ -16,12 +16,12 @@ public class Event implements Serializable {
     private int duration; // The duration of the event (in hours)
     private List<String> speaker; // The speaker at the event
     private List<String> attending; // List of people attending the event
-    private String eventName; // The name of the event
-    private String roomNumber; // The room the event is in
+    private final String eventName; // The name of the event
+    private final String roomNumber; // The room the event is in
     private int capacity; // The maximum capacity of the event
-    private boolean VIPOnly;
-    private int techLevel;
-    private double price;
+    private final boolean VIPOnly; // True when the event is a VIP event
+    private final int techLevel; // The level of tech needed that the event requires from its room (1-5 where 5 is the most advanced)
+    private final double price; //  The cost of admission for the event
 
     /**
      * Constructs an event with the given parameters.
@@ -46,12 +46,12 @@ public class Event implements Serializable {
         this.price = price;
     }
 
+    /**
+     * Returns true when this is a VIP event and false otherwise
+     * @return true when this is a VIP event and false otherwise
+     */
     public boolean isVIPOnly() {
         return VIPOnly;
-    }
-
-    public void setVIPOnly(boolean VIPOnly) {
-        this.VIPOnly = VIPOnly;
     }
 
     /**
@@ -131,23 +131,13 @@ public class Event implements Serializable {
     public void setCapacity(int capacity){ this.capacity = capacity;}
 
     /**
-     * Changes the speaker of this event to the name of the speaker inputted
-     * @param speaker The name of the new speaker of the event
+     * Adds a new speaker to the list of speakers of this event
+     * @param newSpeaker The new speaker being added to this event
      */
-
-    /**
-    public void setSpeaker(String speaker){ this.speaker = speaker;}
-    **/
-
     public void addSpeaker(String newSpeaker){
         this.speaker.add(newSpeaker);
 
     }
-
-    public void removeSpeaker(String speakerRemoved){
-        this.speaker.remove(speakerRemoved);
-    }
-
 
     /**
      * Returns a string of the properties of the event formatted nicely
@@ -170,7 +160,7 @@ public class Event implements Serializable {
     }
     /**
      * Returns the price of the event
-     * @return the price
+     * @return the price of the event
      */
     public double getPrice() {
         return price;

@@ -13,17 +13,14 @@ import java.lang.String;
 public class RoomController {
 
     private final RoomManager roomManager;
-    private final UserController userController;
     private final RoomEventPresenter presenter;
 
     /**
      * Creates a new RoomController given the already created managers
-     * @param userController The UserController
      * @param roomManager The RoomManager
      */
-    public RoomController (UserController userController, RoomManager roomManager) {
+    public RoomController (RoomManager roomManager) {
         this.roomManager = roomManager;
-        this.userController = userController;
         this.presenter = new RoomEventPresenter();
     }
 
@@ -55,15 +52,4 @@ public class RoomController {
         }
         return null;
     }
-
-    /*private ArrayList<Room> getRoomList () {
-        ArrayList<Room> roomList = new ArrayList<Room>();
-        Hashtable<String, Room> roomHash = this.roomManager.allRooms;
-        Set<String> keys = roomHash.keySet();
-        for(String key: keys){
-            roomList.add(roomHash.get(key));
-        }
-        return roomList;
-    }*/
-
 }
