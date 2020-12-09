@@ -10,6 +10,8 @@ import java.io.Serializable;
  */
 public class SpeakerController extends UserController implements Serializable {
 
+    private static int speakersLoggedIn = 0;
+
     /**
      * Creates and initialize an organizer controller object
      * @param name name of Organizer
@@ -26,7 +28,7 @@ public class SpeakerController extends UserController implements Serializable {
      * @param eventManager The EventManager
      * @param messageManager The MessageManager
      * @param roomManager The RoomManager
-     * @param conferenceManager
+     * @param conferenceManager The ConferenceManager
      */
     public SpeakerController(String name, UserManager userManager, EventManager eventManager,
                              MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager, ConferenceManager conferenceManager){
@@ -78,6 +80,8 @@ public class SpeakerController extends UserController implements Serializable {
             }
             else{
                 if (getUsermanager().login(getMyName(), password, "speaker")){
+                    speakersLoggedIn += 1;
+                    usersLoggedIn += 1;
                     break;
                 }
                 else{
@@ -91,6 +95,14 @@ public class SpeakerController extends UserController implements Serializable {
             mainMenu();
         }
 
+    }
+
+    /**
+     * Returns the total number of times speakers have logged in
+     * @return the total number of times speakers have logged in
+     */
+    public static int getSpeakersLoggedIn(){
+        return speakersLoggedIn;
     }
 
     /**

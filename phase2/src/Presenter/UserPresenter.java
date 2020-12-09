@@ -110,7 +110,8 @@ public class UserPresenter extends Presenter{
         System.out.println("2: Access the event menu");
         System.out.println("3: Access to conference");
         System.out.println("4: Create a new account");
-        System.out.println("5: Save and exit");
+        System.out.println("5: View Conference Statistics");
+        System.out.println("6: Save and exit");
         return sc.nextLine();
     }
 
@@ -343,5 +344,12 @@ public class UserPresenter extends Presenter{
     public double printAddToBalance(){
         System.out.println("Enter the amount you want to add to the balance");
         return Double.parseDouble(sc.nextLine());
+    }
+
+    /**
+     * Takes in any user input and does nothing. (Detecting enter key)
+     */
+    public void returnMenu(){
+        sc.nextLine();
     }
 }

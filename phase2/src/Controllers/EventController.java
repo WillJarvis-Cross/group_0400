@@ -10,6 +10,7 @@ import java.lang.String;
 import java.util.ArrayList;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -230,5 +231,23 @@ public class EventController {
         else{
             presenter.printSpecificEventInfo(info);
         }
+    }
+
+    /**
+     * Returns a List of the top 5 events with most people signed up
+     *
+     */
+    public ArrayList<String> topFiveAttendedEvents(){
+        ArrayList<String> list = new ArrayList<String>();
+
+        ArrayList<Event> copy = new ArrayList<Event>(eManager.getEvents());
+        Collections.sort(copy);
+        Collections.reverse(copy);
+        int i = 0;
+        while(i<5 && i < copy.size()){
+            list.add(copy.get(i).getEventName());
+            i++;
+        }
+        return list;
     }
 }

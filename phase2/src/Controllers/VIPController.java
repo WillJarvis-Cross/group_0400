@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 public class VIPController extends UserController implements Serializable {
 
+    private static int vipsLoggedIn = 0;
+
     /**
      * Creates and initialize an organizer controller object
      *
@@ -73,6 +75,8 @@ public class VIPController extends UserController implements Serializable {
             }
             else{
                 if (getUsermanager().login(getMyName(), password, "VIP")){
+                    vipsLoggedIn += 1;
+                    usersLoggedIn += 1;
                     break;
                 }
                 else{
@@ -86,6 +90,14 @@ public class VIPController extends UserController implements Serializable {
             mainMenu();
         }
 
+    }
+
+    /**
+     * Returns the total number of times VIPs have logged in
+     * @return the total number of times VIPs have logged in
+     */
+    public static int getVipsLoggedIn(){
+        return vipsLoggedIn;
     }
 
     /**

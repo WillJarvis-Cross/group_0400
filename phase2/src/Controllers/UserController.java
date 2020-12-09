@@ -23,6 +23,8 @@ public abstract class UserController implements Serializable {
      private transient final RoomController roomController;
      private transient final GroupChatController groupChatController;
      private String name;
+     public static int usersLoggedIn = 0;
+     public static int eventSignups = 0;
 
      /**
       * Creates an instance of UserController with the given name
@@ -191,6 +193,7 @@ public abstract class UserController implements Serializable {
                          if (getEventController().addAttendee(eventName, getMyName())){
                               getPresenter().printSignedUp(eventName);
                               getPresenter().printCurrentBalance(usermanager.getUser(this.name).getBalance());
+                              eventSignups += 1;
                          }
                          else{
                               getPresenter().printNotSignedUp(eventName);
@@ -228,6 +231,7 @@ public abstract class UserController implements Serializable {
                if (usermanager.cancelMyEvent(this.name, event, eventManager.getEvent(event).getPrice()) && eventManager.removeAttendee(event, this.name)) {
                     presenter.printRemovedEvent();
                     presenter.printCurrentBalance(usermanager.getUser(getMyName()).getBalance());
+                    eventSignups = eventSignups - 1;
                } else {
                     presenter.printCantRemove();
                }
@@ -306,6 +310,23 @@ public abstract class UserController implements Serializable {
           usermanager.getUser(getMyName()).addToBalance(amount);
           getPresenter().printCurrentBalance(usermanager.getUser(getMyName()).getBalance());
      }
+
+     /**
+      * Returns the total number of times users have logged in
+      * @return the total number of times users have logged in
+      */
+     public static int getUsersLoggedIn(){
+          return usersLoggedIn;
+     }
+
+     /**
+      * Return the total number of times users have signed up for events.
+      * This number will go down if a user removes themselves from an event
+      */
+     public static int getEventSignups(){
+          return eventSignups;
+     }
+
 
      /**
       * Creates a new account

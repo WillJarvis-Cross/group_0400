@@ -10,6 +10,8 @@ import java.io.Serializable;
  */
 public class AttendeeController extends UserController implements Serializable {
 
+    private static int attendeesLoggedIn = 0;
+
     /**
      * Creates and initialize an Attendee controller object
      * @param name name of Attendee
@@ -79,6 +81,8 @@ public class AttendeeController extends UserController implements Serializable {
             }
             else{
                 if (getUsermanager().login(getMyName(), password, "attendee")){
+                    attendeesLoggedIn += 1;
+                    usersLoggedIn += 1;
                     break;
                 }
                 else{
@@ -92,6 +96,14 @@ public class AttendeeController extends UserController implements Serializable {
             mainMenu();
         }
 
+    }
+
+    /**
+     * Returns the total number of times attendees have logged in
+     * @return the total number of times attendees have logged in
+     */
+    public static int getAttendeesLoggedIn(){
+        return attendeesLoggedIn;
     }
 
     /**

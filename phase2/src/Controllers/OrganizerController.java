@@ -1,5 +1,8 @@
 package Controllers;
 
+import Entities.Attendee;
+import Entities.Organizer;
+import Entities.Speaker;
 import Gateways.ExportHTML;
 import UseCases.*;
 
@@ -9,6 +12,8 @@ import java.io.Serializable;
  * @author group 400
  */
 public class OrganizerController extends UserController implements Serializable {
+
+    private static int organizersLoggedIn = 0;
 
     /**
      * Creates and initialize an organizer controller object
@@ -78,6 +83,8 @@ public class OrganizerController extends UserController implements Serializable 
             }
             else{
                 if (getUsermanager().login(getMyName(), password, "organizer")){
+                    organizersLoggedIn += 1;
+                    usersLoggedIn += 1;
                     break;
                 }
                 else{
@@ -91,6 +98,14 @@ public class OrganizerController extends UserController implements Serializable 
             mainMenu();
         }
 
+    }
+
+    /**
+     * Returns the total number of times organizers have logged in
+     * @return the total number of times organizers have logged in
+     */
+    public static int getOrganizersLoggedIn(){
+        return organizersLoggedIn;
     }
 
     /**
@@ -115,7 +130,10 @@ public class OrganizerController extends UserController implements Serializable 
                 createAccount();
 
             }
-            else if (input.equals("5")){ // This is when the user wants to save and log out
+            else if (input.equals("5")) { // Display statistics for a conference
+                displayStats();
+            }
+            else if (input.equals("6")){ // This is when the user wants to save and log out
                 break;
             }
             else{
@@ -206,6 +224,22 @@ public class OrganizerController extends UserController implements Serializable 
                 eventMenu();
             }
         }
+    }
+
+    /**
+     * Displays some statistics about the conference,then returns to the menu after user input.
+     */
+    public void displayStats(){
+        System.out.println("There are "+UserController.getUsersLoggedIn()+" users that have logged in using the program.");
+        System.out.println("There are "+ AttendeeController.getAttendeesLoggedIn() +" attendees that have logged in using the program.");
+        System.out.println("There are "+ SpeakerController.getSpeakersLoggedIn() +" speakers that have logged in using the program.");
+        System.out.println("There are "+ VIPController.getVipsLoggedIn() +" VIPs that have logged in using the program.");
+        System.out.println("There are "+ OrganizerController.getOrganizersLoggedIn() +" organizers that have logged in using the program.");
+        System.out.println("The total number of events users have signed up for is "+UserController.getEventSignups()+".");
+        System.out.println("The top 5 most popular events are "+getEventController().topFiveAttendedEvents());
+        System.out.println("Press enter to return to the main menu");
+        getPresenter().returnMenu();
+        mainMenu();
     }
 
     /**
