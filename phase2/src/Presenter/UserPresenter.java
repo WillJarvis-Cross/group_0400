@@ -20,8 +20,9 @@ public class UserPresenter extends Presenter{
      */
     public String exportEventsToHTML() {
         System.out.println("Select an option by entering the corresponding numbers");
+        System.out.println("0: Go back to the event menu");
         System.out.println("1: Export Events to HTML");
-        System.out.println("2: Back");
+
         return sc.nextLine();
     }
 
@@ -37,12 +38,49 @@ public class UserPresenter extends Presenter{
             System.out.println("You are not signed up for any events");
         }
         else {
-            System.out.println("Here is a list of events you are signed up for");
+            System.out.println("Here is a list of events you are signed up for, " +
+                    "(*) denotes liked events");
             for (String name: events) {
                 System.out.println(name);
             }
         }
     }
+
+    /**
+     * Prints a list of events that the user is signed up for
+     *
+     * @param events The attendee's events
+     * @param likedEvents The attendee's liked events
+     */
+    public void printAttendeeEvents(List<String> events, List<String> likedEvents) {
+        if (events.isEmpty()) {
+            System.out.println("You are not signed up for any events");
+        }
+        else {
+            System.out.println(
+                    "Here is a list of events you are signed up for, " +
+                            "(*) denotes liked events"
+            );
+            for (String name: events) {
+                if (likedEvents.contains(name)) {
+                    name += " (*)";
+                }
+                System.out.println(name);
+            }
+        }
+    }
+
+    /**
+     * Prints a list of events that the user is signed up for
+     *
+     * @param events The attendee's events
+     * @param likedEvents The attendee's liked events
+     */
+    public String printAttendeeLikeOption(List<String> events, List<String> likedEvents) {
+        printAttendeeEvents(events, likedEvents);
+        return sc.nextLine();
+    }
+
 
     /**
      * Prints a list of events that the speaker is speaking at
@@ -60,6 +98,15 @@ public class UserPresenter extends Presenter{
                 System.out.println(name);
             }
         }
+    }
+
+    /**
+     * Shows the user the status of the export action on the screen
+     * @param isSuccessful true iff export was successful, otherwise false
+     */
+    public void printExportStatus(boolean isSuccessful) {
+        if (isSuccessful) System.out.println("Successfully exported schedule.");
+        else System.out.println("Something went wrong! Could not export schedule.");
     }
 
     /**
