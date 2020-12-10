@@ -4,6 +4,8 @@ import Gateways.ExportHTML;
 import UseCases.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /** Represents the controller for organiser manager object
  * @author group 400
@@ -207,7 +209,8 @@ public class OrganizerController extends UserController implements Serializable 
             if (getMyEvents().size() > 0){
                 getEventController().specificInfo();
             }
-        } else if (input.equals("7")) { // Export events
+        }
+        else if (input.equals("7")) { // Export events
             String decision = getPresenter().exportEventsToHTML();
 
             if (decision.equals("1")){ //export
@@ -220,7 +223,63 @@ public class OrganizerController extends UserController implements Serializable 
                 System.out.println("invalid selection, going back");
                 eventMenu();
             }
-        } else {
+        }  else if (input.equals("8")){
+            String speakerName = getMenuPresenter().nameOfSpeaker();
+            String eventName = getMenuPresenter().addSpeakerToEvent();
+
+            if(!getUsermanager().canAddSpeaker(speakerName)){
+                getPresenter().userDoesNotExist();
+                eventMenu();
+            }
+            if (!getEventManager().containsEvent(eventName)){
+                getEventController().getEventPresenter().printEventDoesnotExist();
+                eventMenu();
+
+            }
+            LocalDateTime time = getEventManager().getEventtime(eventName);
+            int duration = getEventManager().getEventDuration(eventName);
+
+            if (!getUsermanager().canSignUp(time,duration,
+                    getEventManager().getEventsByUsername(getUsermanager().getUser(speakerName)))){
+                getEventController().getEventPresenter().speakerNotFree();
+                eventMenu();
+            }
+            else{
+                getEventManager().setSpeaker(eventName,speakerName);
+                getEventController().getEventPresenter().speakerAdded();
+            }
+
+
+            }
+
+            else if (input.equals("9")){
+                  String speaker = getMenuPresenter().speakerToBeRemoved();
+                  String event = getMenuPresenter().eventToBeRemoved();
+                  if (!getEventManager().containsEvent(event)){
+                getEventController().getEventPresenter().printEventDoesnotExist();
+                eventMenu();
+                if(!getUsermanager().canAddSpeaker(speaker)){
+                          getPresenter().userDoesNotExist();
+                          eventMenu();
+                      }
+                List speakerofEvent = getEventManager().getEventsByUsername(getUsermanager().getUser(speaker));
+                if(!speakerofEvent.contains(getEventManager().getEvent(event))){
+                    getEventController().getEventPresenter().notASpeaker();
+                    eventMenu();
+
+                }
+                else{
+                    getEventManager().removeSpeaker(event,speaker);
+                    getEventController().getEventPresenter().speakerRemoved();
+
+                }
+
+
+            }
+
+            }
+
+        else {
             if (!input.equals("0")){
                 getPresenter().printInvalidOption();
                 eventMenu();
