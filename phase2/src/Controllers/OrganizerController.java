@@ -29,9 +29,11 @@ public class OrganizerController extends UserController implements Serializable 
      * @param eventManager The EventManager
      * @param messageManager The MessageManager
      * @param roomManager The RoomManager
+     * @param conferenceManager The Conference Manager
      */
     public OrganizerController(String name, UserManager userManager, EventManager eventManager,
-                               MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager,ConferenceManager conferenceManager){
+                               MessageManager messageManager, RoomManager roomManager,
+                               GroupChatManager groupChatManager,ConferenceManager conferenceManager){
         super(name, userManager, eventManager, messageManager, roomManager, groupChatManager, conferenceManager);
     }
 
@@ -204,8 +206,7 @@ public class OrganizerController extends UserController implements Serializable 
             String decision = getPresenter().exportEventsToHTML();
 
             if (decision.equals("1")){ //export
-                ExportHTML schedule = new ExportHTML();
-                //schedule.setEvents(getEventController().getListOfEvents());
+                getPresenter().printExportStatus(exportMyEvents());
                 System.out.println("Export Complete");
 
             } else if (decision.equals("2")) { //go back
