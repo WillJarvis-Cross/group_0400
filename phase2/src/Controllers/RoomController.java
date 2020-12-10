@@ -30,7 +30,7 @@ public class RoomController {
      * a room iff it does not exist, otherwise prints invalid request
      */
     public String makeRoomRequest(){
-        String roomNumber = presenter.printRoomNumber();
+        String roomNumber = presenter.printRoomNumber(true);
         if (!roomNumber.equals("0")){
             int capacity = presenter.printRoomCapacity();
             int techLevel = presenter.printRoomTech();

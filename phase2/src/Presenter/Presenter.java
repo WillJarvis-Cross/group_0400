@@ -1,7 +1,5 @@
 package Presenter;
 
-
-import java.util.List;
 import java.util.Scanner;
 
 /** Represents the Presenter for the UI
