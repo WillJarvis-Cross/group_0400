@@ -2,9 +2,12 @@ package Controllers;
 
 import Presenter.*;
 import UseCases.*;
+import Entities.Event;
+import Gateways.ExportHTML;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.ArrayList;
 
 public abstract class UserController implements Serializable {
 
@@ -250,58 +253,72 @@ public abstract class UserController implements Serializable {
                }
           }
      }
-//
-//     /**
-//      * Adds the inputted event to the list of the user's event
-//      * @param likeEvent If true adds the event name in the list of names of liked events, otherwise removes the event
-//      *                  from the list of liked events if exists
-//      */
-//     public void likeUnlikeEvent(boolean likeEvent){
-//
-//          if (usermanager.getUser(this.name).getHasCovid()){
-//               presenter.printYouHaveCovid();
-//          }
-//          else{
-//               String eventName = getPresenter().getEventName(usermanager.getUser(this.name).getEvents());
-//               List<String> myLikedEvents = usermanager.getUser(this.name).getLikedEvents();
-//               if (!eventName.equals("0")) {
-//                    int eventIndexInLiked = myLikedEvents.indexOf(eventName);
-//
-//                    if (likeEvent && eventIndexInLiked < 0) myLikedEvents.add(eventName);
-//                    else if (!likeEvent && eventIndexInLiked >= 0) myLikedEvents.remove(eventIndexInLiked);
-//               }
-//          }
-//          mainMenu();
-//     }
-//
-//     /** Returns true if the users event schedule has been exported successfully, otherwise returns false
-//      * @return true iff schedule has been exported successfully, otherwise returns false
-//      */
-//     public boolean exportMyEvents () {
-//          List<String> myEvents = this.getMyEvents();
-//
-//          if (myEvents.size() <= 0) return false;
-//
-//          ExportHTML export = new ExportHTML();
-//          String currentTime = java.time.LocalDate.now().toString();
-//
-//          List<String> likedEvents = usermanager.getUser(this.name).getLikedEvents();
-//          List<String> columns = createColumnHeader();
-//          List<List<String>> rows = new ArrayList<>();
-//          for (String eventName : myEvents) {
-//               Event event = eventManager.getEvent(eventName);
-//
-//               List<String> line = new ArrayList<>();
-//               line.add(event.getTime().toString());
-//               line.add(Integer.toString(event.getDuration()));
-//               line.add(eventName);
-//               line.add(Boolean.toString(likedEvents.contains(eventName)));
-//
-//               rows.add(line);
-//          }
-//
-//          return export.exportHTML(this.name + "_schedule_" + currentTime, columns, rows);
-//     }
+
+     /**
+      * Adds the inputted event to the list of the user's event
+      * @param likeEvent If true adds the event name in the list of names of liked events, otherwise removes the event
+      *                  from the list of liked events if exists
+      */
+     public void likeUnlikeEvent(boolean likeEvent){
+
+          if (usermanager.getUser(this.name).getHasCovid()){
+               presenter.printYouHaveCovid();
+          }
+          else{
+               String eventName = getPresenter().getEventName(usermanager.getUser(this.name).getEvents());
+               List<String> myLikedEvents = usermanager.getUser(this.name).getLikedEvents();
+               if (!eventName.equals("0")) {
+                    int eventIndexInLiked = myLikedEvents.indexOf(eventName);
+
+                    if (likeEvent && eventIndexInLiked < 0) myLikedEvents.add(eventName);
+                    else if (!likeEvent && eventIndexInLiked >= 0) myLikedEvents.remove(eventIndexInLiked);
+               }
+          }
+          mainMenu();
+     }
+
+     /**
+      *
+      * @return
+      */
+
+     private List<String> createColumnHeader() {
+          List<String> columns = new ArrayList<>();
+          columns.add("Day");
+          columns.add("Duration");
+          columns.add("Event Name");
+          columns.add("Liked");
+          return columns;
+     }
+
+     /** Returns true if the users event schedule has been exported successfully, otherwise returns false
+      * @return true iff schedule has been exported successfully, otherwise returns false
+      */
+     public boolean exportMyEvents () {
+          List<String> myEvents = this.getMyEvents();
+
+          if (myEvents.size() <= 0) return false;
+
+          ExportHTML export = new ExportHTML();
+          String currentTime = java.time.LocalDate.now().toString();
+
+          List<String> likedEvents = usermanager.getUser(this.name).getLikedEvents();
+          List<String> columns = createColumnHeader();
+          List<List<String>> rows = new ArrayList<>();
+          for (String eventName : myEvents) {
+               Event event = eventManager.getEvent(eventName);
+
+               List<String> line = new ArrayList<>();
+               line.add(event.getTime().toString());
+               line.add(Integer.toString(event.getDuration()));
+               line.add(eventName);
+               line.add(Boolean.toString(likedEvents.contains(eventName)));
+
+               rows.add(line);
+          }
+
+          return export.exportHTML(this.name + "_schedule_" + currentTime, columns, rows);
+     }
 
      public void covidQuestions(){
           boolean positive = menuPresenter.printCovidQuestions();
