@@ -285,7 +285,7 @@ public abstract class UserController implements Serializable {
 
      /**
       *
-      * @return
+      * @return A list of Strings with the names of the headers of each column
       */
 
      private List<String> createColumnHeader() {

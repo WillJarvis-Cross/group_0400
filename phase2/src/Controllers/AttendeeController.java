@@ -48,6 +48,8 @@ public class AttendeeController extends UserController implements Serializable {
                 }
                 else{
                     getUsermanager().addAttendee(getMyName(), password);
+                    attendeesLoggedIn += 1;
+                    usersLoggedIn += 1;
                     covidQuestions();
                 }
             }

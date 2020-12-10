@@ -50,6 +50,8 @@ public class OrganizerController extends UserController implements Serializable 
                 }
                 else{
                     getUsermanager().addOrganizer(getMyName(), password);
+                    organizersLoggedIn += 1;
+                    usersLoggedIn += 1;
                     covidQuestions();
                 }
             }

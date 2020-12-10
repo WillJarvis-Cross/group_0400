@@ -44,6 +44,8 @@ public class VIPController extends UserController implements Serializable {
                 }
                 else{
                     getUsermanager().addVIP(getMyName(), password);
+                    vipsLoggedIn += 1;
+                    usersLoggedIn += 1;
                     covidQuestions();
                 }
             }
