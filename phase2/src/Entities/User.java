@@ -14,6 +14,7 @@ public abstract class User implements Serializable {
     private List<Integer> archivedMessages; // List of the user's archived messages
     private List<String> events;  // List of events the attendee is signed up for
     private List<String> groupChats; // List of the names of the group chats this user is in
+    private List<String> eventLiked; // List of event names liked by the user
     private String password, username;  // The user's username and password which is used to log in
     private boolean hasCovid = false;
     private double balance;
@@ -31,10 +32,13 @@ public abstract class User implements Serializable {
         this.events = new ArrayList<>();
         this.archivedMessages = new ArrayList<>();
         this.groupChats = new ArrayList<>();
+        this.eventLiked = new ArrayList<>();
         this.balance = 0.0;
     }
 
     public List<String> getGroupChats(){ return groupChats;}
+
+    public List<String> getLikedEvents() { return eventLiked; }
 
     /**
      * Returns the list of message IDs which correspond to this User's received messages
