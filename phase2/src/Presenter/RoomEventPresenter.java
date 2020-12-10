@@ -32,36 +32,37 @@ public class RoomEventPresenter extends Presenter{
         String thisTime = sc.nextLine();
         List<String> time = Arrays.asList(thisTime.split("/"));
         if (time.size() == 4){ // valid time
-            int year = Integer.parseInt(time.get(0));
+            Integer year = tryParse(time.get(0));
 
-            int monthInt;
-            int dayInt;
-            int hourInt;
+            Integer monthInt;
+            Integer dayInt;
+            Integer hourInt;
 
             String monthString = time.get(1);
             if (monthString.startsWith("0")){ // I want months entered as "4" instead of "04"
-                monthInt = Integer.parseInt(String.valueOf(monthString.charAt(1)));
+                monthInt = tryParse(String.valueOf(monthString.charAt(1)));
             }
             else{
-                monthInt = Integer.parseInt(monthString);
+                monthInt = tryParse(monthString);
             }
 
             String dayString = time.get(2);
             if (dayString.startsWith("0")){
-                dayInt = Integer.parseInt(String.valueOf(dayString.charAt(1)));
+                dayInt = tryParse(String.valueOf(dayString.charAt(1)));
             }
             else{
-                dayInt = Integer.parseInt(dayString);
+                dayInt = tryParse(dayString);
             }
 
             String hourString = time.get(3);
             if (hourString.startsWith("0")){
-                hourInt = Integer.parseInt(String.valueOf(hourString.charAt(1)));
+                hourInt = tryParse(String.valueOf(hourString.charAt(1)));
             }
             else{
-                hourInt = Integer.parseInt(hourString);
+                hourInt = tryParse(hourString);
             }
-            if (monthInt < 13 && dayInt < 32 && hourInt < 18 && hourInt > 8){
+            if (year != null && monthInt != null && hourInt!=null && dayInt!=null && monthInt < 13 && dayInt < 32 &&
+                    hourInt < 18 && hourInt > 8){
                 LocalDateTime finalTime =  LocalDateTime.of(year, monthInt, dayInt, hourInt, 0);
                 if (finalTime.isAfter(LocalDateTime.now())){
                     return finalTime;
@@ -78,8 +79,14 @@ public class RoomEventPresenter extends Presenter{
      * @return User input
      */
     public int printDurationOfEvent(){
-        System.out.println("Enter the duration of the event in hours");
-        return Integer.parseInt(sc.nextLine());
+        while (true){
+            System.out.println("Enter the duration of the event in hours");
+            Integer choice = tryParse(sc.nextLine());
+            if (choice != null) {
+                return choice;
+            }
+            printInvalidOption();
+        }
     }
 
     /**
@@ -93,11 +100,18 @@ public class RoomEventPresenter extends Presenter{
     }
      **/
 
-    public ArrayList<String> printSpeakerOfEvent(){
-        ArrayList<String> speakers = new ArrayList<String>();
-        System.out.println("How many speakers would you like to add?");
-        String stringNumberOfSpeakers = sc.nextLine();
-        int numberOfSpeakers = Integer.parseInt(stringNumberOfSpeakers);
+    public List<String> printSpeakerOfEvent(){
+        List<String> speakers = new ArrayList<String>();
+        Integer numberOfSpeakers;
+        while (true){
+            System.out.println("How many speakers would you like to add?");
+            numberOfSpeakers = tryParse(sc.nextLine());
+            if (numberOfSpeakers != null){
+                break;
+            }
+            printInvalidOption();
+        }
+
         for (int i = 0; i < numberOfSpeakers; i++) {
             System.out.println("Enter Speaker Name:");
             speakers.add(sc.nextLine());
@@ -110,11 +124,16 @@ public class RoomEventPresenter extends Presenter{
 
     /**
      * Prompts the user to enter the name of the room
-     *
+     * @param newRoom if you are intending to create a new room then this is true
      * @return User input
      */
-    public String printRoomNumber(){
-        System.out.println("What will the room be called or enter 0 to go back");
+    public String printRoomNumber(boolean newRoom){
+        if (newRoom){
+            System.out.println("What will the room be called or enter 0 to go back");
+        }
+        else {
+            System.out.println("Which room do you want to use");
+        }
         return sc.nextLine();
     }
 
@@ -164,12 +183,13 @@ public class RoomEventPresenter extends Presenter{
      * @return User input
      */
     public int printRoomCapacity(){
-        System.out.println("What is the capacity of the room?");
-        try{
-            return Integer.parseInt(sc.nextLine());
-        }
-        catch (NumberFormatException numberFormatException){
-            return 0;
+        while (true){
+            System.out.println("What is the capacity of the room?");
+            Integer choice = tryParse(sc.nextLine());
+            if (choice != null){
+                return choice;
+            }
+            printInvalidOption();
         }
     }
 
@@ -224,8 +244,15 @@ public class RoomEventPresenter extends Presenter{
      * @return User input
      */
     public int printEventCapacity(){
-        System.out.println("What is the capacity of the event?");
-        return Integer.parseInt(sc.nextLine());
+        while (true){
+            System.out.println("What is the capacity of the event?");
+            Integer choice = tryParse(sc.nextLine());
+            if (choice != null){
+                return choice;
+            }
+            printInvalidOption();
+        }
+
     }
 
     /**
@@ -259,12 +286,18 @@ public class RoomEventPresenter extends Presenter{
      * @return User input
      */
     public int printTechLevels() {
-        System.out.println("1:Primitive");
-        System.out.println("2:Basic");
-        System.out.println("3:Regular");
-        System.out.println("4:Advanced");
-        System.out.println("5:Futuristic");
-        return Integer.parseInt(sc.nextLine());
+        while (true){
+            System.out.println("1:Primitive");
+            System.out.println("2:Basic");
+            System.out.println("3:Regular");
+            System.out.println("4:Advanced");
+            System.out.println("5:Futuristic");
+            Integer choice = tryParse(sc.nextLine());
+            if (choice != null){
+                return choice;
+            }
+            printInvalidOption();
+        }
     }
 
     /**
@@ -284,8 +317,15 @@ public class RoomEventPresenter extends Presenter{
      * @return User input
      */
     public double printPrice() {
-        System.out.println("Enter the price to attend the event");
-        return Double.parseDouble(sc.nextLine());
+        while (true){
+            System.out.println("Enter the price to attend the event");
+
+            Integer choice = tryParse(sc.nextLine());
+            if (choice != null){
+                return choice;
+            }
+            printInvalidOption();
+        }
     }
 
     public void printEventDoesnotExist(){

@@ -48,6 +48,8 @@ public class AttendeeController extends UserController implements Serializable {
                 }
                 else{
                     getUsermanager().addAttendee(getMyName(), password);
+                    attendeesLoggedIn += 1;
+                    usersLoggedIn += 1;
                     covidQuestions();
                 }
             }
@@ -136,7 +138,7 @@ public class AttendeeController extends UserController implements Serializable {
     public void eventMenu(){
         String input = getMenuPresenter().printAttendeeEvent();
         if (input.equals("1")){ // Sign up for an event
-            if (getMyConference() == null){
+            if (getMyConference() == null){ // The user is not in a conference
                 getPresenter().printNoEvents();
             }
             else{

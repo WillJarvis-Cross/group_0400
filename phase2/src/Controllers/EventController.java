@@ -85,7 +85,7 @@ public class EventController {
             List<String> speaker = presenter.printSpeakerOfEvent();
             int techLevel = presenter.printTechEvent();
             presenter.printRoomsSuitableTech(roomManager.getRoomsByTech(techLevel));
-            String roomNumber = presenter.printRoomNumber();
+            String roomNumber = presenter.printRoomNumber(false);
             int capacity = presenter.printEventCapacity();
             boolean boolVIP = presenter.printVIP();
             int counter = 0;

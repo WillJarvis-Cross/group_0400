@@ -305,7 +305,7 @@ public class UserManager implements Serializable {
             return pass.equals(getAttendee(name).getPassword());
         }
         if (type.equals("organizer") && getOrganizers().containsKey(name)){
-            return pass.equals(getAttendee(name).getPassword());
+            return pass.equals(getOrganizer(name).getPassword());
         }
         if (type.equals("speaker") && getSpeakers().containsKey(name)){
             return pass.equals(getSpeaker(name).getPassword());

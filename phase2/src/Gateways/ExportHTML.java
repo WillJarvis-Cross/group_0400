@@ -38,8 +38,10 @@ public class ExportHTML {
             "</html>";
 
     private String encapsulateTag(String tagName, String content) {
+        System.out.println(tagName + "  - " + content);
         if (tagName.equals("html")) return head + content + footer;
         return "<" + tagName + ">" + content + "</" + tagName + ">";
+
     }
 
 
@@ -51,6 +53,7 @@ public class ExportHTML {
         headerContent = encapsulateTag("thead", encapsulateTag("tr", headerContent));
 
         String tableBodyContent = "";
+        String tableBodyContentFinal = "";
         for (List<String> row : rows) {
             String tableRow = "";
             for (String cell : row) {
@@ -58,8 +61,8 @@ public class ExportHTML {
             }
             tableBodyContent += encapsulateTag("tr", tableRow);
         }
-        tableBodyContent += encapsulateTag("tbody", tableBodyContent);
-        return encapsulateTag("html", (headerContent + tableBodyContent));
+        tableBodyContentFinal += encapsulateTag("tbody", tableBodyContent);
+        return encapsulateTag("html", (headerContent + tableBodyContentFinal));
     }
 
     /**

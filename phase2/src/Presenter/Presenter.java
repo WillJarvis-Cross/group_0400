@@ -1,7 +1,5 @@
 package Presenter;
 
-
-import java.util.List;
 import java.util.Scanner;
 
 /** Represents the Presenter for the UI
@@ -35,7 +33,11 @@ public abstract class Presenter {
         return sc.nextLine();
     }
 
-
+    public Integer tryParse(String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
 }
-
-

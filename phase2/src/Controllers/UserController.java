@@ -221,7 +221,7 @@ public abstract class UserController implements Serializable {
                          getPresenter().printCurrentBalance(usermanager.getUser(this.name).getBalance());
                     }
                }
-               else if (!eventManager.containsEvent(eventName)){
+               else if (!eventManager.containsEvent(eventName) && !eventName.equals("0")){
                     presenter.printInvalidOption();
                     signUp();
                }
@@ -285,7 +285,7 @@ public abstract class UserController implements Serializable {
 
      /**
       *
-      * @return
+      * @return A list of Strings with the names of the headers of each column
       */
 
      private List<String> createColumnHeader() {
