@@ -39,6 +39,11 @@ public class ReadAndWrite {
             }
 
         }
+
+    /**
+     *
+     *
+     */
     public void exportAsHTML(String fileName, String content) {
         try {
             // Create a new file with file name
