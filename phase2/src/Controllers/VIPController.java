@@ -1,11 +1,9 @@
 package Controllers;
 
-
 import Gateways.ExportHTML;
 import UseCases.*;
 
 import java.io.Serializable;
-import java.util.Enumeration;
 
 public class VIPController extends UserController implements Serializable {
 
@@ -29,7 +27,7 @@ public class VIPController extends UserController implements Serializable {
      * @param eventManager The EventManager
      * @param messageManager The MessageManager
      * @param roomManager The RoomManager
-     * @param conferenceManager
+     * @param conferenceManager The conference manager
      */
     public VIPController(String name, UserManager userManager, EventManager eventManager,
                          MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager, ConferenceManager conferenceManager){
@@ -106,22 +104,24 @@ public class VIPController extends UserController implements Serializable {
      * actions based on the input
      */
     public void mainMenu(){
+        label:
         while (true){
             String input = getMenuPresenter().printAttendee();
-            if (input.equals("1")){
-                messageMenu();
-            }
-            else if (input.equals("2")){
-                eventMenu();
-            }
-            else if (input.equals("3")){
-                addToBalance();
-            }
-            else if (input.equals("4")){ // save and log out
-                break;
-            }
-            else{
-                getPresenter().printInvalidOption();
+            switch (input) {
+                case "1":
+                    messageMenu();
+                    break;
+                case "2":
+                    eventMenu();
+                    break;
+                case "3":
+                    addToBalance();
+                    break;
+                case "4":  // save and log out
+                    break label;
+                default:
+                    getPresenter().printInvalidOption();
+                    break;
             }
         }
 
@@ -163,20 +163,22 @@ public class VIPController extends UserController implements Serializable {
 
     public void messageMenu(){
         String input = getMenuPresenter().printAttendeeMessage();
-        if (input.equals("1")){ // Send a message to someone
-            getMessageController().sendMessage(getMyName());
-        }
-        else if (input.equals("2")){ // See list of received messages
-            getMessageController().printMyMessages(getMyName());
-        }
-        else if (input.equals("3")){ // See their archived messages
-            getMessageController().seeArchivedMessages(getMyName());
-        }
-        else if (input.equals("4")){ // Create a group chat
-            getGroupChatController().createGroupChat(getMyName());
-        }
-        else if (input.equals("5")){ // See their group chats
-            getGroupChatController().showGroupChats(getMyName());
+        switch (input) {
+            case "1":  // Send a message to someone
+                getMessageController().sendMessage(getMyName());
+                break;
+            case "2":  // See list of received messages
+                getMessageController().printMyMessages(getMyName());
+                break;
+            case "3":  // See their archived messages
+                getMessageController().seeArchivedMessages(getMyName());
+                break;
+            case "4":  // Create a group chat
+                getGroupChatController().createGroupChat(getMyName());
+                break;
+            case "5":  // See their group chats
+                getGroupChatController().showGroupChats(getMyName());
+                break;
         }
     }
 }

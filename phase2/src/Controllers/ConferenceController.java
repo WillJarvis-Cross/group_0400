@@ -1,29 +1,18 @@
 package Controllers;
-import Entities.Room;
 import Presenter.*;
 import UseCases.*;
 
 import java.lang.String;
-import java.util.Enumeration;
 
 public class ConferenceController {
 
     private final ConferenceManager conferenceManager;
     private final RoomController roomController;
     private final ConferenceRoomPresenter presenter;
-    private final UserController userController;
 
-    public ConferenceController (RoomController roomController, ConferenceManager conferenceManager,UserController userController) {
+    public ConferenceController (RoomController roomController, ConferenceManager conferenceManager) {
         this.conferenceManager = conferenceManager;
         this.roomController = roomController;
-        this.userController = userController;
-        this.presenter = new ConferenceRoomPresenter();
-    }
-
-    public ConferenceController(UserController userController, RoomController roomController, ConferenceManager conferenceManager) {
-        this.conferenceManager = conferenceManager;
-        this.roomController = roomController;
-        this.userController = userController;
         this.presenter = new ConferenceRoomPresenter();
     }
 
@@ -49,13 +38,16 @@ public class ConferenceController {
             }
             makeConferenceRequest();
 
-        }else if(roomNumber.equals("3")){ //remove conference
+        }/*else if(roomNumber.equals("3")){ //remove conference
             String nameOfConference = presenter.printNameOfConference(conferenceManager.getConferences());
             if (!this.conferenceManager.removeConference(nameOfConference)){
                 presenter.printInvalidOption();
             }
+            else{
+                presenter.printConferenceRemoved();
+            }
             makeConferenceRequest();
-        }else{
+        }*/else{
             if (!roomNumber.equals("0")){ // 0 means they are going back to the main menu
                 presenter.printInvalidOption();
                 makeConferenceRequest();

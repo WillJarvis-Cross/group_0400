@@ -1,8 +1,5 @@
 package Controllers;
 
-import Entities.Attendee;
-import Entities.Organizer;
-import Entities.Speaker;
 import Gateways.ExportHTML;
 import UseCases.*;
 
@@ -111,31 +108,30 @@ public class OrganizerController extends UserController implements Serializable 
      * actions based on the input
      */
     public void mainMenu(){
+        label:
         while (true){
             String input = getMenuPresenter().printOrganizer();
-            if (input.equals("1")){ // Go to the message menu
-                messageMenu();
-
-            }
-            else if (input.equals("2")){ // Go to the event menu
-                eventMenu();
-
-            }
-            else if (input.equals("3")){ // Create a room
-                getConferenceController().makeConferenceRequest();
-            }
-            else if (input.equals("4")){ // Create an account
-                createAccount();
-
-            }
-            else if (input.equals("5")) { // Display statistics for a conference
-                displayStats();
-            }
-            else if (input.equals("6")){ // This is when the user wants to save and log out
-                break;
-            }
-            else{
-                getPresenter().printInvalidOption();
+            switch (input) {
+                case "1":  // Go to the message menu
+                    messageMenu();
+                    break;
+                case "2":  // Go to the event menu
+                    eventMenu();
+                    break;
+                case "3":  // Create a room
+                    getConferenceController().makeConferenceRequest();
+                    break;
+                case "4":  // Create an account
+                    createAccount();
+                    break;
+                case "5":  // Display statistics for a conference
+                    displayStats();
+                    break;
+                case "6":  // This is when the user wants to save and log out
+                    break label;
+                default:
+                    getPresenter().printInvalidOption();
+                    break;
             }
         }
 
@@ -147,32 +143,34 @@ public class OrganizerController extends UserController implements Serializable 
      */
     public void messageMenu(){
         String input = getMenuPresenter().printMessageMenu();
-        if (input.equals("1")){ // Send a single message to someone
-            getMessageController().sendMessage(getMyName());
-        }
-        else if (input.equals("2")){ // Print the list of this user's received messages
-            getMessageController().printMyMessages(getMyName());
-        }
-        else if (input.equals("3")){ // Send a message to all speakers
-            getMessageController().messageAllSpeakers(getMyName());
-        }
-        else if (input.equals("4")){ // Send a message to all attendees
-            getMessageController().messageAllAttendees(getMyName());
-        }
-        else if (input.equals("5")){ // See their archived messages
-            getMessageController().seeArchivedMessages(getMyName());
-        }
-        else if (input.equals("6")){ // Create a group chat
-            getGroupChatController().createGroupChat(getMyName());
-        }
-        else if (input.equals("7")){ // See their group chats
-            getGroupChatController().showGroupChats(getMyName());
-        }
-        else{
-            if (!input.equals("0")){
-                getPresenter().printInvalidOption();
-                messageMenu();
-            }
+        switch (input) {
+            case "1":  // Send a single message to someone
+                getMessageController().sendMessage(getMyName());
+                break;
+            case "2":  // Print the list of this user's received messages
+                getMessageController().printMyMessages(getMyName());
+                break;
+            case "3":  // Send a message to all speakers
+                getMessageController().messageAllSpeakers(getMyName());
+                break;
+            case "4":  // Send a message to all attendees
+                getMessageController().messageAllAttendees(getMyName());
+                break;
+            case "5":  // See their archived messages
+                getMessageController().seeArchivedMessages(getMyName());
+                break;
+            case "6":  // Create a group chat
+                getGroupChatController().createGroupChat(getMyName());
+                break;
+            case "7":  // See their group chats
+                getGroupChatController().showGroupChats(getMyName());
+                break;
+            default:
+                if (!input.equals("0")) {
+                    getPresenter().printInvalidOption();
+                    messageMenu();
+                }
+                break;
         }
     }
 
@@ -232,14 +230,6 @@ public class OrganizerController extends UserController implements Serializable 
                 SpeakerController.getSpeakersLoggedIn(), VIPController.getVipsLoggedIn(),
                 OrganizerController.getOrganizersLoggedIn(), UserController.getEventSignups(),
                 getEventController().topFiveAttendedEvents());
-        System.out.println("There are "+UserController.getUsersLoggedIn()+" users that have logged in using the program.");
-        System.out.println("There are "+ AttendeeController.getAttendeesLoggedIn() +" attendees that have logged in using the program.");
-        System.out.println("There are "+ SpeakerController.getSpeakersLoggedIn() +" speakers that have logged in using the program.");
-        System.out.println("There are "+ VIPController.getVipsLoggedIn() +" VIPs that have logged in using the program.");
-        System.out.println("There are "+ OrganizerController.getOrganizersLoggedIn() +" organizers that have logged in using the program.");
-        System.out.println("The total number of events users have signed up for is "+UserController.getEventSignups()+".");
-        System.out.println("The top 5 most popular events are "+getEventController().topFiveAttendedEvents());
-        System.out.println("Press enter to return to the main menu");
         getMenuPresenter().returnMenu();
     }
 

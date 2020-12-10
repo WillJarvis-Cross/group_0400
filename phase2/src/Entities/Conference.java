@@ -1,10 +1,7 @@
 package Entities;
 
-
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 
 /** This is an entity for a Room which contains the name of the room, the room's capacity, and the events that are

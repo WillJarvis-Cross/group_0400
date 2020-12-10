@@ -1,10 +1,9 @@
 package Controllers;
 
-import Entities.User;
 import UseCases.EventManager;
 import UseCases.MessageManager;
 import UseCases.UserManager;
-import Presenter.*;
+import Presenter.MessagePresenter;
 
 import java.util.List;
 
@@ -132,7 +131,7 @@ public class MessageController {
      */
     public void sendMessage(String sender){
         String receiver;
-        Boolean send = true;
+        boolean send = true;
         while (true){
             receiver = presenter.printWhoToSendTo();
             if (userManager.getUsers().containsKey(receiver)){

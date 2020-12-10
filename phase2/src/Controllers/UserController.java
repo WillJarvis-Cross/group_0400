@@ -2,7 +2,6 @@ package Controllers;
 
 import Presenter.*;
 import UseCases.*;
-import Gateways.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -46,7 +45,7 @@ public abstract class UserController implements Serializable {
           eventController = new EventController(eventManager, usermanager, roomManager,conferenceManager);
           messageController = new MessageController(usermanager, messageManager, eventManager);
           roomController = new RoomController(roomManager);
-          conferenceController = new ConferenceController(this, roomController,conferenceManager);
+          conferenceController = new ConferenceController(roomController,conferenceManager);
           this.groupChatController = new GroupChatController(usermanager, groupChatManager,
                   messageManager);
           this.name = name;
@@ -76,7 +75,7 @@ public abstract class UserController implements Serializable {
           this.eventController = new EventController(eventManager, usermanager, roomManager,conferenceManager);
           this.messageController = new MessageController(usermanager, messageManager, eventManager);
           this.roomController = new RoomController(roomManager);
-          this.conferenceController = new ConferenceController(this, roomController, conferenceManager);
+          this.conferenceController = new ConferenceController(roomController, conferenceManager);
           this.groupChatController = new GroupChatController(usermanager, groupChatManager,
                   messageManager);
           this.name = name;

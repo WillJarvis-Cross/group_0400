@@ -1,6 +1,5 @@
 package Entities;
 import java.lang.String;
-import java.util.List;
 
 /** This is an entity for a User who is a speaker at events
  * @author group 0400

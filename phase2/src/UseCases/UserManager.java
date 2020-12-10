@@ -187,21 +187,6 @@ public class UserManager implements Serializable {
      */
     public Hashtable<String, User> getUsers(){ return allUsers;}
 
-    /**
-     * Returns true when the speaker can be added to an event
-     * @param time The time of the event
-     * @param events The list of events the speaker is speaking at
-     * @return true when the speaker can be added to an event
-     */
-    /*public boolean canAddSpeaker(LocalDateTime time, List<Event> events){
-        for (Event event: events){
-            if (event.getTime().equals(time)){
-                return false;
-            }
-        }
-        return true;
-    }*/
-
     // Helper method for signUp()
     // This is used to find what position the event should be added at in the list of the users events
     // They are ordered in chronological order based on time. I am using binary search here
@@ -250,7 +235,6 @@ public class UserManager implements Serializable {
         for (Event e:myEvents){
             LocalDateTime t1 = e.getTime();
             LocalDateTime f1 = t1.plusHours(e.getDuration());
-            //LocalDateTime t2 = event.getTime();
             LocalDateTime f2 = time.plusHours(duration);
             if (((t1.compareTo(f2)<=0)&&(f1.compareTo(time)>0))&&((t1.compareTo(f2)<0)&&(f1.compareTo(time)>=0))){
                 return false;

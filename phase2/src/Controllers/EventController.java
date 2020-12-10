@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.Hashtable;
 import java.util.List;
 
 /** Represents the controller for EventManager
@@ -38,13 +37,9 @@ public class EventController {
         this.conferenceManager = conferenceManager;
     }
 
-    public ArrayList<Event> getListOfEvents() {
-        return (ArrayList<Event>) eManager.getEvents();
-    }
-
     private boolean isSpeakerInUsers(List<String> speakers){
-        for (int i = 0; i < speakers.size(); i++) {
-            if (!userManager.getSpeakers().containsKey(speakers.get(i))){
+        for (String speaker : speakers) {
+            if (userManager.canAddPerson(speaker)) {
                 return false;
             }
         }
@@ -53,9 +48,9 @@ public class EventController {
     }
 
     private boolean canAddSpeaker(List<String> speakers, LocalDateTime time, int duration){
-        for (int i = 0; i < speakers.size(); i++) {
-            if(!userManager.canSignUp(time, duration,
-                    eManager.getEventsByUsername(userManager.getUser(speakers.get(i))))){
+        for (String speaker : speakers) {
+            if (!userManager.canSignUp(time, duration,
+                    eManager.getEventsByUsername(userManager.getUser(speaker)))) {
                 return false;
 
             }
@@ -66,9 +61,9 @@ public class EventController {
     }
 
     private void signUp(List<String> speaker, String eventName){
-        for (int i = 0; i < speaker.size(); i++) {
-            userManager.signUp(speaker.get(i), eManager.getEvent(eventName),
-                    eManager.getEventsExceptOne(userManager.getUser(speaker.get(i)), eManager.getEvent(eventName)),
+        for (String s : speaker) {
+            userManager.signUp(s, eManager.getEvent(eventName),
+                    eManager.getEventsExceptOne(userManager.getUser(s), eManager.getEvent(eventName)),
                     eManager.getEvent(eventName).getPrice());
         }
     }
@@ -78,8 +73,6 @@ public class EventController {
      * create a event when a create event request is made
      * calls eventManager, userManager, and roomManager to check if event can be created with the information
      */
-
-
     public void makeEventRequest(){
         String eventName = presenter.printNameOfEvent();
 
@@ -238,9 +231,9 @@ public class EventController {
      *
      */
     public List<String> topFiveAttendedEvents(){
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
 
-        List<Event> copy = new ArrayList<Event>(eManager.getEvents());
+        List<Event> copy = new ArrayList<>(eManager.getEvents());
         Collections.sort(copy);
         Collections.reverse(copy);
         int i = 0;
@@ -253,7 +246,7 @@ public class EventController {
     public List<String> getEventByConference(String conference) {
 
         List<String> roomNames = this.conferenceManager.getConference(conference).getRoom();
-        List<String> eventNames = new ArrayList<String>();
+        List<String> eventNames = new ArrayList<>();
         for (String temp: roomNames){
             eventNames.addAll(this.roomManager.getEventByRooms(temp));
         }

@@ -1,10 +1,5 @@
 package Presenter;
 
-
-import Entities.Event;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,15 +26,10 @@ public class ConferenceRoomPresenter extends Presenter{
         return sc.nextLine();
     }
 
-    public String printRoomAdded(){
-        System.out.println("Enter the room name to add to the conference:");
-        return sc.nextLine();
-    }
-
     public String conferenceMain(){
         System.out.println("1. make conference");
         System.out.println("2. add room for conference");
-        System.out.println("3. remove conference");
+        //System.out.println("3. remove conference");
         System.out.println("0. go back");
         return sc.nextLine();
     }

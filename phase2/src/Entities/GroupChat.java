@@ -11,7 +11,7 @@ import java.util.List;
 public class GroupChat {
     private List<String> members; // The members of the group chat
     private List<Integer> allMessages; // The messages in the group chat
-    private String groupName; // The name of the group chat
+    private final String groupName; // The name of the group chat
 
     /**
      * Constructs a group chat with the given parameters

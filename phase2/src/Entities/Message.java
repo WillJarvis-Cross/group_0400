@@ -1,7 +1,6 @@
 package Entities;
 import java.io.Serializable;
 import java.lang.String;
-import java.util.List;
 
 /** This is an entity for a Message which contains the content of the message, the name of the user who
  * sent the message, and the id of the message
@@ -51,7 +50,7 @@ public class Message implements Serializable {
 
     /**
      * Returns true when the message has been marked as unread and false otherwise
-     * @returntrue when the message has been marked as unread and false otherwise
+     * @return true when the message has been marked as unread and false otherwise
      */
     public boolean getUnread(){ return unread; }
 

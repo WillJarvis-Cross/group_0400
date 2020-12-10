@@ -1,6 +1,5 @@
 package Gateways;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExportHTML {
