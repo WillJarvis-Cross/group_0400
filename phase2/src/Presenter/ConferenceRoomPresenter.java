@@ -22,8 +22,12 @@ public class ConferenceRoomPresenter extends Presenter{
             for (String conference: conferences){
                 System.out.println(conference);
             }
+            System.out.println("Enter the name of the conference you are joining");
         }
-        System.out.println("Enter the name of the conference or enter 0 to go back to the main menu");
+        else{
+            System.out.println("Enter the name of the conference or enter 0 to go back to the main menu");
+        }
+
         return sc.nextLine();
     }
 
@@ -49,5 +53,7 @@ public class ConferenceRoomPresenter extends Presenter{
         System.out.println("Conference remove successfully");
     }
 
-
+    public void printNoConferences(){
+        System.out.println("There are no conferences currently so you won't be able to sign up for any events");
+    }
 }

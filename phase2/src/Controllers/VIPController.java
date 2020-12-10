@@ -47,7 +47,6 @@ public class VIPController extends UserController implements Serializable {
                 else{
                     getUsermanager().addVIP(getMyName(), password);
                     covidQuestions();
-                    mainMenu();
                 }
             }
             else{
@@ -88,7 +87,6 @@ public class VIPController extends UserController implements Serializable {
         if (!zero)
         {
             covidQuestions();
-            mainMenu();
         }
 
     }
@@ -114,9 +112,12 @@ public class VIPController extends UserController implements Serializable {
                 messageMenu();
             }
             else if (input.equals("2")){
-                conferenceMenu();
+                eventMenu();
             }
-            else if (input.equals("3")){ // save and log out
+            else if (input.equals("3")){
+                addToBalance();
+            }
+            else if (input.equals("4")){ // save and log out
                 break;
             }
             else{
@@ -126,7 +127,7 @@ public class VIPController extends UserController implements Serializable {
 
     }
 
-    public void conferenceMenu(){
+    /*public void conferenceMenu(){
         Enumeration enu = this.getConferenceManager().allConferenece.keys();
         while(enu.hasMoreElements()){
             System.out.println(enu.nextElement());
@@ -147,41 +148,17 @@ public class VIPController extends UserController implements Serializable {
             }
         }
 
-    }
-
-    public void eventMenu(String conference){
-        String input = getPresenter().printAttendeeEvent();
-        if (input.equals("1")){ // Sign up for an event
-            signUp(conference);
-        }
-        else if (input.equals("2")){ // Cancel spot in event
-            removeMyEvent();
-        }
-        else if (input.equals("3")){ // Show attendee's list of events
-            getPresenter().printAttendeeEvents(getMyEvents());
-            if (getMyEvents().size() > 0){
-                getEventController().specificInfo();
-            }
-        } else if (input.equals("4")) { //export to HTML
-            String decision = getPresenter().exportEventsToHTML();
-
-            if (decision.equals("1")){ //export
-                ExportHTML schedule = new ExportHTML();
-                //schedule.setEvents(getEventController().getListOfEvents());
-                System.out.println("Export Complete");
-            } else if (decision.equals("2")) { //go back
-                eventMenu();
-            } else {
-                System.out.println("invalid selection, going back");
-                eventMenu();
-            }
-        }
-    }
+    }*/
 
     public void eventMenu(){
         String input = getPresenter().printAttendeeEvent();
         if (input.equals("1")){ // Sign up for an event
-            signUp();
+            if (getMyConference() == null){
+                getPresenter().printNoEvents();
+            }
+            else{
+                signUp();
+            }
         }
         else if (input.equals("2")){ // Cancel spot in event
             removeMyEvent();

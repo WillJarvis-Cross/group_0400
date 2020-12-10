@@ -4,6 +4,7 @@ import Presenter.*;
 import UseCases.*;
 
 import java.lang.String;
+import java.util.Enumeration;
 
 public class ConferenceController {
 
@@ -61,6 +62,25 @@ public class ConferenceController {
             }
 
         }
+    }
+
+    public String conferenceMenu(){
+        if (conferenceManager.getConferences().size() == 0){
+            presenter.printNoConferences();
+            return null;
+        }
+        else{
+            String thisConference;
+            while (true){
+                thisConference = presenter.printNameOfConference(conferenceManager.getConferences());
+                if (conferenceManager.checkConferenceExist(thisConference)){
+                    break;
+                }
+                presenter.printInvalidOption();
+            }
+            return thisConference;
+        }
+
     }
 
 }

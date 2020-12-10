@@ -100,17 +100,6 @@ public class UserPresenter extends Presenter{
         return sc.nextLine();
     }
 
-    /*public String printVIP() {
-        System.out.println("Select an option by entering the corresponding numbers");
-        System.out.println("1: Send a message");
-        System.out.println("2: See list of received messages");
-        System.out.println("3: See your archived messages");
-        System.out.println("4: Create a group chat");
-        System.out.println("5: See your Group Chats");
-        System.out.println("6: Save and exit");
-        return sc.nextLine();
-    }*/
-
     /**
      * Prints options that Organizers can select
      *
@@ -363,5 +352,9 @@ public class UserPresenter extends Presenter{
      */
     public void returnMenu(){
         sc.nextLine();
+    }
+
+    public void printNoEvents(){
+        System.out.println("There are no available events");
     }
 }

@@ -50,7 +50,6 @@ public class AttendeeController extends UserController implements Serializable {
                 else{
                     getUsermanager().addAttendee(getMyName(), password);
                     covidQuestions();
-                    mainMenu();
                 }
             }
             else{
@@ -94,7 +93,6 @@ public class AttendeeController extends UserController implements Serializable {
         if (!zero)
         {
             covidQuestions();
-            mainMenu();
         }
 
     }
@@ -118,7 +116,7 @@ public class AttendeeController extends UserController implements Serializable {
                 messageMenu();
             }
             else if (input.equals("2")){
-                conferenceMenu();
+                eventMenu();
             }
             else if (input.equals("3")){
                 addToBalance();
@@ -133,33 +131,16 @@ public class AttendeeController extends UserController implements Serializable {
 
     }
 
-    public void conferenceMenu(){
-        Enumeration enu = this.getConferenceManager().allConferenece.keys();
-        while(enu.hasMoreElements()){
-            System.out.println(enu.nextElement());
-        }
-        String input = getPresenter().printConference();
-        if(this.getConferenceManager().CheckConferenceExist(input)){
-            eventMenu(input);
-        }else{
-            String response = getPresenter().printNoConferenceExist();
-            if (response.equals("1")){
-                conferenceMenu();
-            }
-            else if(response.equals("2")){
-                eventMenu();
-            }
-            else{
-                mainMenu();
-            }
-        }
 
-    }
-
-    public void eventMenu(String conference){
+    public void eventMenu(){
         String input = getPresenter().printAttendeeEvent();
         if (input.equals("1")){ // Sign up for an event
-            signUp(conference);
+            if (getMyConference() == null){
+                getPresenter().printNoEvents();
+            }
+            else{
+                signUp();
+            }
         }
         else if (input.equals("2")){ // Cancel spot in event
             removeMyEvent();
@@ -170,36 +151,6 @@ public class AttendeeController extends UserController implements Serializable {
                 getEventController().specificInfo();
             }
         } else if (input.equals("4")) { //export to HTML
-            String decision = getPresenter().exportEventsToHTML();
-
-            if (decision.equals("1")){ //export
-                ExportHTML schedule = new ExportHTML();
-                //schedule.setEvents(getEventController().getListOfEvents());
-                System.out.println("Export Complete");
-            } else if (decision.equals("2")) { //go back
-                eventMenu();
-            } else {
-                System.out.println("invalid selection, going back");
-                eventMenu();
-            }
-        }
-    }
-
-    public void eventMenu(){
-        String input = getPresenter().printAttendeeEvent();
-        if (input.equals("1")){ // Sign up for an event
-            signUp();
-        }
-        else if (input.equals("2")){ // Cancel spot in event
-            removeMyEvent();
-        }
-        else if (input.equals("3")){ // Show attendee's list of events
-            getPresenter().printAttendeeEvents(getMyEvents());
-            if (getMyEvents().size() > 0){
-                getEventController().specificInfo();
-            }
-        }
-        else if (input.equals("4")) { //export to HTML
             String decision = getPresenter().exportEventsToHTML();
 
             if (decision.equals("1")){ //export

@@ -25,6 +25,7 @@ public abstract class UserController implements Serializable {
      private String name;
      public static int usersLoggedIn = 0;
      public static int eventSignups = 0;
+     public String myConference;
 
      /**
       * Creates an instance of UserController with the given name
@@ -48,6 +49,8 @@ public abstract class UserController implements Serializable {
                   messageManager);
           this.name = name;
           makeNewAccount();
+          myConference = conferenceController.conferenceMenu();
+          mainMenu();
      }
 
      /**
@@ -75,7 +78,11 @@ public abstract class UserController implements Serializable {
                   messageManager);
           this.name = name;
           makeNewAccount();
+          myConference = conferenceController.conferenceMenu();
+          mainMenu();
      }
+
+     public String getMyConference(){return myConference;}
 
      public ConferenceManager getConferenceManager() {
           return conferenceManager;
@@ -181,7 +188,7 @@ public abstract class UserController implements Serializable {
                presenter.printYouHaveCovid();
           }
           else{
-               String eventName = getPresenter().getEventName(eventManager.getAllEventsString());
+               String eventName = getPresenter().getEventName(this.eventController.getEventByConference(myConference));
 
                if (!eventName.equals("0") && eventManager.containsEvent(eventName)){
                     if (usermanager.canAfford(name, eventManager.getEvent(eventName).getPrice()))
@@ -209,40 +216,6 @@ public abstract class UserController implements Serializable {
 
      }
 
-     public void signUp(String conferenceName){
-          if (usermanager.getUser(this.name).getHasCovid()){
-               presenter.printYouHaveCovid();
-          }
-          else{
-
-
-               String eventName = getPresenter().getEventName(this.eventController.getEventByConference(conferenceName));
-
-               if (!eventName.equals("0") && eventManager.containsEvent(eventName)){
-                    if (usermanager.canAfford(name, eventManager.getEvent(eventName).getPrice()))
-                    {
-                         if (getEventController().addAttendee(eventName, getMyName())){
-                              getPresenter().printSignedUp(eventName);
-                              getPresenter().printCurrentBalance(usermanager.getUser(this.name).getBalance());
-                              eventSignups += 1;
-                         }
-                         else{
-                              getPresenter().printNotSignedUp(eventName);
-                              signUp();
-                         }
-                    }
-                    else{
-                         getPresenter().printCantAfford();
-                         getPresenter().printCurrentBalance(usermanager.getUser(this.name).getBalance());
-                    }
-               }
-               else if (!eventManager.containsEvent(eventName)){
-                    presenter.printInvalidOption();
-                    signUp();
-               }
-          }
-
-     }
      /**
       * Returns a list of events the user is signed up for
       * @return List<String> of the users events they are signed up for

@@ -52,7 +52,6 @@ public class OrganizerController extends UserController implements Serializable 
                 else{
                     getUsermanager().addOrganizer(getMyName(), password);
                     covidQuestions();
-                    mainMenu();
                 }
             }
             else{
@@ -95,7 +94,6 @@ public class OrganizerController extends UserController implements Serializable 
         if (!zero)
         {
             covidQuestions();
-            mainMenu();
         }
 
     }

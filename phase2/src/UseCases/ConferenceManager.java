@@ -48,7 +48,7 @@ public class ConferenceManager implements Serializable {
 
     }
 
-    public boolean CheckConferenceExist(String conferenceNumber){
+    public boolean checkConferenceExist(String conferenceNumber){
         if(allConferenece.containsKey(conferenceNumber)){
             return true;
         }else{

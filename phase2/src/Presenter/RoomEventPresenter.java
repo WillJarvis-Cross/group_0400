@@ -287,5 +287,4 @@ public class RoomEventPresenter extends Presenter{
         System.out.println("Enter the price to attend the event");
         return Double.parseDouble(sc.nextLine());
     }
-
 }
