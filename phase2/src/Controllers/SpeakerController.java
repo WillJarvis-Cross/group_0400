@@ -39,10 +39,10 @@ public class SpeakerController extends UserController implements Serializable {
      * Makes a new Speaker given their name and password
      */
     public void makeNewAccount(){
-        String input = getPresenter().printLogin();
+        String input = getMenuPresenter().printLogin();
         if (input.equals("2")){
             if (getUsermanager().canAddPerson(getMyName())){
-                String password = getPresenter().printPassword();
+                String password = getMenuPresenter().printPassword();
                 if (password.equals("0")){
                     makeNewAccount();
                 }
@@ -52,7 +52,7 @@ public class SpeakerController extends UserController implements Serializable {
                 }
             }
             else{
-                setMyName(getPresenter().printInvalidUsername());
+                setMyName(getMenuPresenter().printInvalidUsername());
                 makeNewAccount();
             }
         }
@@ -71,7 +71,7 @@ public class SpeakerController extends UserController implements Serializable {
     public void loginExistingAccount(){
         boolean zero = false;
         while (true){
-            String password = getPresenter().printPassword();
+            String password = getMenuPresenter().printPassword();
             if (password.equals("0")){
                 makeNewAccount();
                 zero = true;
@@ -84,7 +84,7 @@ public class SpeakerController extends UserController implements Serializable {
                     break;
                 }
                 else{
-                    getPresenter().printInvalidInput();
+                    getPresenter().printInvalidOption();
                 }
             }
         }
@@ -109,7 +109,7 @@ public class SpeakerController extends UserController implements Serializable {
      */
     public void mainMenu(){
         while (true){
-            String input = getPresenter().printSpeaker();
+            String input = getMenuPresenter().printSpeaker();
             if (input.equals("1")){ // Send a message to someone
                 getMessageController().sendMessage(getMyName());
             }
@@ -147,7 +147,7 @@ public class SpeakerController extends UserController implements Serializable {
                     System.out.println("invalid selection, going back");
                 }
             } else{
-                getPresenter().printInvalidInput();
+                getPresenter().printInvalidOption();
             }
         }
     }

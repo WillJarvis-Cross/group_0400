@@ -11,6 +11,7 @@ public abstract class UserController implements Serializable {
 
      private final UserManager usermanager;
      private transient final UserPresenter presenter;
+     private transient final MenuPresenter menuPresenter;
      private transient final EventController eventController;
      private transient final MessageController messageController;
      private transient final ConferenceController conferenceController;
@@ -35,6 +36,7 @@ public abstract class UserController implements Serializable {
       */
      public UserController(String name){
           presenter = new UserPresenter();
+          menuPresenter = new MenuPresenter();
           usermanager = new UserManager();
           eventManager = new EventManager();
           roomManager = new RoomManager();
@@ -69,6 +71,7 @@ public abstract class UserController implements Serializable {
           this.roomManager = roomManager;
           this.conferenceManager = conferenceManager;
           presenter = new UserPresenter();
+          menuPresenter = new MenuPresenter();
           this.groupChatManager = groupChatManager;
           this.eventController = new EventController(eventManager, usermanager, roomManager,conferenceManager);
           this.messageController = new MessageController(usermanager, messageManager, eventManager);
@@ -106,6 +109,14 @@ public abstract class UserController implements Serializable {
       */
      public UserPresenter getPresenter() {
           return presenter;
+     }
+
+     /**
+      * Gets the menu presenter
+      * @return menuPresenter
+      */
+     public MenuPresenter getMenuPresenter() {
+          return menuPresenter;
      }
 
      /**
@@ -185,7 +196,7 @@ public abstract class UserController implements Serializable {
       */
      public void signUp(){
           if (usermanager.getUser(this.name).getHasCovid()){
-               presenter.printYouHaveCovid();
+               menuPresenter.printYouHaveCovid();
           }
           else{
                String eventName = getPresenter().getEventName(this.eventController.getEventByConference(myConference));
@@ -294,7 +305,7 @@ public abstract class UserController implements Serializable {
 //     }
 
      public void covidQuestions(){
-          boolean positive = presenter.printCovidQuestions();
+          boolean positive = menuPresenter.printCovidQuestions();
           if (positive && !usermanager.getUser(this.name).getHasCovid()){
                usermanager.changeCovid(this.name, true);
                messageManager.messagePeople(usermanager.getAttendeeObjects(), "COVID ALERT", this.name+" has COVID-19. watch out!");

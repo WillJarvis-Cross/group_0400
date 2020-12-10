@@ -42,10 +42,10 @@ public class OrganizerController extends UserController implements Serializable 
      * Makes a new Organizer using the user's name and the inputted password
      */
     public void makeNewAccount(){
-        String input = getPresenter().printLogin();
+        String input = getMenuPresenter().printLogin();
         if (input.equals("2")){
             if (getUsermanager().canAddPerson(getMyName())){
-                String password = getPresenter().printPassword();
+                String password = getMenuPresenter().printPassword();
                 if (password.equals("0")){
                     makeNewAccount();
                 }
@@ -55,7 +55,7 @@ public class OrganizerController extends UserController implements Serializable 
                 }
             }
             else{
-                setMyName(getPresenter().printInvalidUsername());
+                setMyName(getMenuPresenter().printInvalidUsername());
                 makeNewAccount();
             }
         }
@@ -74,7 +74,7 @@ public class OrganizerController extends UserController implements Serializable 
     public void loginExistingAccount(){
         boolean zero = false;
         while (true){
-            String password = getPresenter().printPassword();
+            String password = getMenuPresenter().printPassword();
             if (password.equals("0")){
                 makeNewAccount();
                 zero = true;
@@ -87,7 +87,7 @@ public class OrganizerController extends UserController implements Serializable 
                     break;
                 }
                 else{
-                    getPresenter().printInvalidInput();
+                    getPresenter().printInvalidOption();
                 }
             }
         }
@@ -112,7 +112,7 @@ public class OrganizerController extends UserController implements Serializable 
      */
     public void mainMenu(){
         while (true){
-            String input = getPresenter().printOrganizer();
+            String input = getMenuPresenter().printOrganizer();
             if (input.equals("1")){ // Go to the message menu
                 messageMenu();
 
@@ -135,7 +135,7 @@ public class OrganizerController extends UserController implements Serializable 
                 break;
             }
             else{
-                getPresenter().printInvalidInput();
+                getPresenter().printInvalidOption();
             }
         }
 
@@ -146,7 +146,7 @@ public class OrganizerController extends UserController implements Serializable 
      * actions based on the input
      */
     public void messageMenu(){
-        String input = getPresenter().printMessageMenu();
+        String input = getMenuPresenter().printMessageMenu();
         if (input.equals("1")){ // Send a single message to someone
             getMessageController().sendMessage(getMyName());
         }
@@ -181,7 +181,7 @@ public class OrganizerController extends UserController implements Serializable 
      * actions based on the input
      */
     public void eventMenu(){
-        String input = getPresenter().printEventMenu();
+        String input = getMenuPresenter().printEventMenu();
         if (input.equals("1")){ // Create an event
             getEventController().makeEventRequest();
         }
@@ -228,6 +228,10 @@ public class OrganizerController extends UserController implements Serializable 
      * Displays some statistics about the conference,then returns to the menu after user input.
      */
     public void displayStats(){
+        getPresenter().printStatistics(UserController.getUsersLoggedIn(), AttendeeController.getAttendeesLoggedIn(),
+                SpeakerController.getSpeakersLoggedIn(), VIPController.getVipsLoggedIn(),
+                OrganizerController.getOrganizersLoggedIn(), UserController.getEventSignups(),
+                getEventController().topFiveAttendedEvents());
         System.out.println("There are "+UserController.getUsersLoggedIn()+" users that have logged in using the program.");
         System.out.println("There are "+ AttendeeController.getAttendeesLoggedIn() +" attendees that have logged in using the program.");
         System.out.println("There are "+ SpeakerController.getSpeakersLoggedIn() +" speakers that have logged in using the program.");
@@ -236,8 +240,7 @@ public class OrganizerController extends UserController implements Serializable 
         System.out.println("The total number of events users have signed up for is "+UserController.getEventSignups()+".");
         System.out.println("The top 5 most popular events are "+getEventController().topFiveAttendedEvents());
         System.out.println("Press enter to return to the main menu");
-        getPresenter().returnMenu();
-        mainMenu();
+        getMenuPresenter().returnMenu();
     }
 
     /**
@@ -246,10 +249,10 @@ public class OrganizerController extends UserController implements Serializable 
      */
     public void createAccount(){
         String input = getPresenter().getAccountType();
-        String name = getPresenter().printNameAccount();
-        String pass = getPresenter().getPassAccount();
+        String name = getMenuPresenter().printNameAccount();
+        String pass = getMenuPresenter().getPassAccount();
         while (!getUsermanager().canAddPerson(name)) {
-            name = getPresenter().printInvalidUsername();
+            name = getMenuPresenter().printInvalidUsername();
         }
         if (input.equals("1")) {
             getUsermanager().addOrganizer(name, pass);
@@ -264,7 +267,7 @@ public class OrganizerController extends UserController implements Serializable 
             getUsermanager().addVIP(name, pass);
         }
         else {
-            getPresenter().printInvalidInput();
+            getPresenter().printInvalidOption();
         }
 
     }

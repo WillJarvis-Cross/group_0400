@@ -40,10 +40,10 @@ public class AttendeeController extends UserController implements Serializable {
      * After, it redirects the user to the main menu
      */
     public void makeNewAccount(){
-        String input = getPresenter().printLogin();
+        String input = getMenuPresenter().printLogin();
         if (input.equals("2")){
             if (getUsermanager().canAddPerson(getMyName())){
-                String password = getPresenter().printPassword();
+                String password = getMenuPresenter().printPassword();
                 if (password.equals("0")){
                     makeNewAccount();
                 }
@@ -53,7 +53,7 @@ public class AttendeeController extends UserController implements Serializable {
                 }
             }
             else{
-                setMyName(getPresenter().printInvalidUsername());
+                setMyName(getMenuPresenter().printInvalidUsername());
                 makeNewAccount();
             }
         }
@@ -73,7 +73,7 @@ public class AttendeeController extends UserController implements Serializable {
         boolean zero = false;
 
         while (true){
-            String password = getPresenter().printPassword();
+            String password = getMenuPresenter().printPassword();
             if (password.equals("0")){
                 makeNewAccount();
                 zero = true;
@@ -86,7 +86,7 @@ public class AttendeeController extends UserController implements Serializable {
                     break;
                 }
                 else{
-                    getPresenter().printInvalidInput();
+                    getPresenter().printInvalidOption();
                 }
             }
         }
@@ -111,7 +111,7 @@ public class AttendeeController extends UserController implements Serializable {
      */
     public void mainMenu(){
         while (true){
-            String input = getPresenter().printAttendee();
+            String input = getMenuPresenter().printAttendee();
             if (input.equals("1")){
                 messageMenu();
             }
@@ -125,7 +125,7 @@ public class AttendeeController extends UserController implements Serializable {
                 break;
             }
             else{
-                getPresenter().printInvalidInput();
+                getPresenter().printInvalidOption();
             }
         }
 
@@ -133,7 +133,7 @@ public class AttendeeController extends UserController implements Serializable {
 
 
     public void eventMenu(){
-        String input = getPresenter().printAttendeeEvent();
+        String input = getMenuPresenter().printAttendeeEvent();
         if (input.equals("1")){ // Sign up for an event
             if (getMyConference() == null){
                 getPresenter().printNoEvents();
@@ -167,7 +167,7 @@ public class AttendeeController extends UserController implements Serializable {
     }
 
     public void messageMenu(){
-        String input = getPresenter().printAttendeeMessage();
+        String input = getMenuPresenter().printAttendeeMessage();
         if (input.equals("1")){ // Send a message to someone
             getMessageController().sendMessage(getMyName());
         }

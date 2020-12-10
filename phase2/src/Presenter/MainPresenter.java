@@ -14,7 +14,7 @@ public class MainPresenter {
      * @return what type of user this user is
      */
     public String printAttendeeOrOrganizer() {
-        System.out.println("Are you an attendee, organizer, or a speaker?");
+        System.out.println("Are you an attendee, organizer, VIP, or a speaker?");
         System.out.println("1: Attendee");
         System.out.println("2: Organizer");
         System.out.println("3: Speaker");
