@@ -237,6 +237,8 @@ public abstract class UserController implements Serializable {
           return usermanager.getUser(getMyName()).getEvents();
      }
 
+     public List<String> getMyLikedEvents () { return usermanager.getUser(getMyName()).getLikedEvents(); }
+
      /**
       * Removes an event of the user's choosing from their list of attending events.
       */
@@ -259,19 +261,23 @@ public abstract class UserController implements Serializable {
       * @param likeEvent If true adds the event name in the list of names of liked events, otherwise removes the event
       *                  from the list of liked events if exists
       */
-     public void likeUnlikeEvent(boolean likeEvent){
+     /**
+      * Adds the inputted event to the list of the user's event
+      */
+     public void likeUnlikeEvent(){
 
           if (usermanager.getUser(this.name).getHasCovid()){
                presenter.printYouHaveCovid();
           }
           else{
-               String eventName = getPresenter().getEventName(usermanager.getUser(this.name).getEvents());
-               List<String> myLikedEvents = usermanager.getUser(this.name).getLikedEvents();
+               String eventName = getPresenter().printAttendeeLikeOption(getMyEvents(), getMyLikedEvents());;
+               List<String> myLikedEvents = getMyLikedEvents();
+
                if (!eventName.equals("0")) {
                     int eventIndexInLiked = myLikedEvents.indexOf(eventName);
 
-                    if (likeEvent && eventIndexInLiked < 0) myLikedEvents.add(eventName);
-                    else if (!likeEvent && eventIndexInLiked >= 0) myLikedEvents.remove(eventIndexInLiked);
+                    if (eventIndexInLiked < 0) myLikedEvents.add(eventName);
+                    else if (eventIndexInLiked >= 0) myLikedEvents.remove(eventIndexInLiked);
                }
           }
           mainMenu();
