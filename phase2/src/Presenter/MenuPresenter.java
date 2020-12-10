@@ -2,7 +2,7 @@ package Presenter;
 
 import java.util.Scanner;
 
-public class MenuPresenter {
+public class MenuPresenter extends Presenter{
     private Scanner sc = new Scanner(System.in);
 
     /**
@@ -162,12 +162,36 @@ public class MenuPresenter {
 
     public boolean printCovidQuestions(){
         System.out.println("Answer 'yes' or 'no' to the following questions:");
-        System.out.println("Have you come into contact with the virus or someone who has tested positive for the virus in the past 14 days?");
-        if (sc.nextLine().equals("yes")){return true;}
-        System.out.println("Have you been outside Ontario in the past month?");
-        if (sc.nextLine().equals("yes")){return true;}
-        System.out.println("Do you have any flu-like symptoms?");
-        if (sc.nextLine().equals("yes")){return true;}
+        while (true){
+            System.out.println("Have you come into contact with the virus or someone who has tested positive for the virus in the past 14 days?");
+            String input = sc.nextLine();
+            if (input.equals("yes")){return true;}
+            else if (input.equals("no")){
+                    break;
+            }
+            printInvalidOption();
+        }
+
+        while (true){
+            System.out.println("Have you been outside Ontario in the past month?");
+            String input = sc.nextLine();
+            if (input.equals("yes")){return true;}
+            else if (input.equals("no")){
+                break;
+            }
+            printInvalidOption();
+        }
+
+        while (true){
+            System.out.println("Do you have any flu-like symptoms?");
+            String input = sc.nextLine();
+            if (input.equals("yes")){return true;}
+            else if (input.equals("no")){
+                break;
+            }
+            printInvalidOption();
+        }
+
         return false;
     }
 
