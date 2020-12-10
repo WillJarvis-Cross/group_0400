@@ -28,7 +28,7 @@ public class AttendeeController extends UserController implements Serializable {
      * @param eventManager The EventManager
      * @param messageManager The MessageManager
      * @param roomManager The RoomManager
-     * @param conferenceManager The conference manager
+     * @param conferenceManager The Conference manager
      */
     public AttendeeController(String name, UserManager userManager, EventManager eventManager,
                               MessageManager messageManager, RoomManager roomManager, GroupChatManager groupChatManager, ConferenceManager conferenceManager){
@@ -134,36 +134,33 @@ public class AttendeeController extends UserController implements Serializable {
 
 
     public void eventMenu(){
-        String input = getMenuPresenter().printAttendeeEvent();
+        String input = getPresenter().printAttendeeEvent();
         if (input.equals("1")){ // Sign up for an event
-            if (getMyConference() == null){
-                getPresenter().printNoEvents();
-            }
-            else{
-                signUp();
-            }
+            signUp();
         }
         else if (input.equals("2")){ // Cancel spot in event
             removeMyEvent();
         }
         else if (input.equals("3")){ // Show attendee's list of events
-            getPresenter().printAttendeeEvents(getMyEvents());
+            getPresenter().printAttendeeEvents(getMyEvents(), getMyLikedEvents());
             if (getMyEvents().size() > 0){
                 getEventController().specificInfo();
             }
-        } else if (input.equals("4")) { //export to HTML
+        }
+        else if (input.equals("4")) { //export to HTML
             String decision = getPresenter().exportEventsToHTML();
 
-            if (decision.equals("1")){ //export
-                ExportHTML schedule = new ExportHTML();
-                //schedule.setEvents(getEventController().getListOfEvents());
-                System.out.println("Export Complete");
-            } else if (decision.equals("2")) { //go back
+            if (decision.equals("0")) { //go back
                 eventMenu();
+            } else if (decision.equals("1")){ //export
+                getPresenter().printExportStatus(exportMyEvents());
             } else {
                 System.out.println("invalid selection, going back");
                 eventMenu();
             }
+        }
+        else if (input.equals("5")) {
+            likeUnlikeEvent();
         }
     }
 
