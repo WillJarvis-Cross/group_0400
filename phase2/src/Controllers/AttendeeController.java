@@ -134,9 +134,14 @@ public class AttendeeController extends UserController implements Serializable {
 
 
     public void eventMenu(){
-        String input = getPresenter().printAttendeeEvent();
+        String input = getMenuPresenter().printAttendeeEvent();
         if (input.equals("1")){ // Sign up for an event
-            signUp();
+            if (getMyConference() == null){
+                getPresenter().printNoEvents();
+            }
+            else{
+                signUp();
+            }
         }
         else if (input.equals("2")){ // Cancel spot in event
             removeMyEvent();

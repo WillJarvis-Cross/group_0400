@@ -1,5 +1,6 @@
 package Entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * the name og the group
  * @author group_0400
  */
-public class GroupChat {
+public class GroupChat implements Serializable {
     private List<String> members; // The members of the group chat
     private List<Integer> allMessages; // The messages in the group chat
     private final String groupName; // The name of the group chat

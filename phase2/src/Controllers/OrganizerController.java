@@ -192,7 +192,12 @@ public class OrganizerController extends UserController implements Serializable 
             getEventController().changeEventCapacity();
         }
         else if (input.equals("4")){ // Sign up for an event
-            signUp();
+            if (getMyConference() == null){
+                getPresenter().printNoEvents();
+            }
+            else{
+                signUp();
+            }
         }
         else if (input.equals("5")){ // Cancel spot in event
             removeMyEvent();

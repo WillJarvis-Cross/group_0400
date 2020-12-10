@@ -267,7 +267,7 @@ public abstract class UserController implements Serializable {
      public void likeUnlikeEvent(){
 
           if (usermanager.getUser(this.name).getHasCovid()){
-               presenter.printYouHaveCovid();
+               menuPresenter.printYouHaveCovid();
           }
           else{
                String eventName = getPresenter().printAttendeeLikeOption(getMyEvents(), getMyLikedEvents());;
@@ -331,6 +331,7 @@ public abstract class UserController implements Serializable {
           if (positive && !usermanager.getUser(this.name).getHasCovid()){
                usermanager.changeCovid(this.name, true);
                messageManager.messagePeople(usermanager.getAttendeeObjects(), "COVID ALERT", this.name+" has COVID-19. watch out!");
+               menuPresenter.printYouHaveCovid();
           }
           else if (!positive && usermanager.getUser(this.name).getHasCovid()){
                usermanager.changeCovid(this.name, false);

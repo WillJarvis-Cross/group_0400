@@ -152,8 +152,8 @@ public class Event implements Serializable, Comparable<Event> {
             speakers = "None";
         }
         else{
-            for  (int i = 0; i < speaker.size(); i++){
-                speakers += speaker;
+            for (String s: speaker){
+                speakers += s;
             }
         }
         return "Event: "+ eventName+ "\nSpeaker: "+ speakers+ "\nDate: "+
