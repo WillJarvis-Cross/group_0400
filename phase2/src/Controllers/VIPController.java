@@ -150,7 +150,7 @@ public class VIPController extends UserController implements Serializable {
 
             if (decision.equals("1")){ //export
                 ExportHTML schedule = new ExportHTML();
-                //schedule.setEvents(getEventController().getListOfEvents());
+                getPresenter().printExportStatus(exportMyEvents());
                 System.out.println("Export Complete");
             } else if (decision.equals("2")) { //go back
                 eventMenu();
