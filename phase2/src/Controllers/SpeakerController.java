@@ -139,8 +139,7 @@ public class SpeakerController extends UserController implements Serializable {
                 String decision = getPresenter().exportEventsToHTML();
 
                 if (decision.equals("1")){ //export
-                    ExportHTML schedule = new ExportHTML();
-                    //schedule.setEvents(getEventController().getListOfEvents());
+                    getPresenter().printExportStatus(exportMyEvents());
                     System.out.println("Export Complete");
                 } else if (!decision.equals("2")) { //go back
                     System.out.println("invalid selection, going back");
