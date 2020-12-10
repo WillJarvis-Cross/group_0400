@@ -32,4 +32,12 @@ public abstract class Presenter {
         System.out.println("Enter the message you want to send");
         return sc.nextLine();
     }
+
+    public Integer tryParse(String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
 }

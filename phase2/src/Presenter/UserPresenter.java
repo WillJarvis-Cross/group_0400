@@ -204,8 +204,19 @@ public class UserPresenter extends Presenter{
      *
      */
     public double printAddToBalance(){
-        System.out.println("Enter the amount you want to add to the balance");
-        return Double.parseDouble(sc.nextLine());
+        while (true){
+            System.out.println("Enter the amount you want to add to the balance");
+            Double choice;
+            try {
+                choice = Double.parseDouble(sc.nextLine());
+            } catch (NumberFormatException e) {
+                choice = null;
+            }
+            if (choice != null){
+                return choice;
+            }
+            printInvalidOption();
+        }
     }
 
     public void printStatistics(int numUsers, int numAttend, int numSpeakers, int numVIPs, int numOrganizers,

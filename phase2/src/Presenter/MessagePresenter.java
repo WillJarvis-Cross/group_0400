@@ -51,10 +51,16 @@ public class MessagePresenter extends Presenter{
      * @return User input
      */
     public int printReceivedMessages(StringBuilder messages) {
-        System.out.println(messages);
-        System.out.println("Enter the number of the message you want to see more info about or enter 0" +
-                " to go back to the main menu");
-        return Integer.parseInt(sc.nextLine());
+        while (true){
+            System.out.println(messages);
+            System.out.println("Enter the number of the message you want to see more info about or enter 0" +
+                    " to go back to the main menu");
+            Integer choice = tryParse(sc.nextLine());
+            if (choice != null){
+                return choice;
+            }
+            printInvalidOption();
+        }
     }
 
     public void printNoMessages(){
@@ -93,9 +99,9 @@ public class MessagePresenter extends Presenter{
             }
             System.out.println("2: delete");
             System.out.println("3: Archive");
-            int input = Integer.parseInt(sc.nextLine());
-            if (input >= 0 && input <=3){
-                return input;
+            Integer choice = tryParse(sc.nextLine());
+            if (choice != null && choice >= 0 && choice <=3){
+                return choice;
             }
             printInvalidOption();
         }

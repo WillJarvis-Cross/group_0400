@@ -29,7 +29,6 @@ public class ConferenceRoomPresenter extends Presenter{
     public String conferenceMain(){
         System.out.println("1. Make conference");
         System.out.println("2. Add room for conference");
-        //System.out.println("3. remove conference");
         System.out.println("0. Go back");
         return sc.nextLine();
     }
