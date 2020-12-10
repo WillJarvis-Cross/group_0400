@@ -287,4 +287,26 @@ public class RoomEventPresenter extends Presenter{
         System.out.println("Enter the price to attend the event");
         return Double.parseDouble(sc.nextLine());
     }
+
+    public void printEventDoesnotExist(){
+        System.out.println("Sorry the event you typed doesnot exist,please try adding again");
+    }
+
+    public void speakerNotFree(){
+        System.out.println("The speaker is not free at this time, please choose another option");
+
+    }
+
+    public void speakerAdded(){
+        System.out.println("Speaker was added succesfully!");
+    }
+
+    public void notASpeaker(){
+        System.out.println("This user is not a speaker at this event!");
+    }
+
+    public void speakerRemoved(){
+        System.out.println("This speaker was removed from the event");
+    }
+
 }

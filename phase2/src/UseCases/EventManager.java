@@ -220,6 +220,11 @@ public class EventManager implements Serializable {
         events.get(eventName).addSpeaker(speakerName);
     }
 
+    public void removeSpeaker(String eventname, String speakerName){
+        events.get(eventname).removeSpeaker(speakerName);
+    }
+
+
     /**
      * Returns true if the event occurs between 9am and 5pm. Returns false otherwise.
      * @param e The event in which this method is checking the time of
@@ -241,6 +246,15 @@ public class EventManager implements Serializable {
         }
         return "";
     }
+
+    public LocalDateTime getEventtime(String eventName){
+        return getEvent(eventName).getTime();
+    }
+
+   public int getEventDuration(String eventName){
+        return getEvent(eventName).getDuration();
+
+   }
 
 
 }

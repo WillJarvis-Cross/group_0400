@@ -5,6 +5,7 @@ import java.lang.String;
 /** This is an entity for a User who attends events
  * @author group 0400
  */
+
 public class Attendee extends User {
 
     /**
@@ -16,6 +17,7 @@ public class Attendee extends User {
     public Attendee(String passwordInput, String nameInput){
         super(passwordInput, nameInput);
     }
+
 
     /**
      * Returns whether or not the Attendee is an organizer or not

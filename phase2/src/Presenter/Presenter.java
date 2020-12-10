@@ -34,4 +34,8 @@ public abstract class Presenter {
         System.out.println("Enter the message you want to send");
         return sc.nextLine();
     }
+
+
 }
+
+

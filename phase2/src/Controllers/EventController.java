@@ -37,6 +37,8 @@ public class EventController {
         this.conferenceManager = conferenceManager;
     }
 
+
+
     private boolean isSpeakerInUsers(List<String> speakers){
         for (String speaker : speakers) {
             if (userManager.canAddPerson(speaker)) {
@@ -46,6 +48,7 @@ public class EventController {
         return true;
 
     }
+
 
     private boolean canAddSpeaker(List<String> speakers, LocalDateTime time, int duration){
         for (String speaker : speakers) {
@@ -252,6 +255,10 @@ public class EventController {
         }
         return eventNames;
 
+    }
+
+    public RoomEventPresenter getEventPresenter(){
+        return presenter;
     }
 
 }

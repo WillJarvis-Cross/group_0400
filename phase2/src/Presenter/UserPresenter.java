@@ -223,4 +223,8 @@ public class UserPresenter extends Presenter{
     public void printNoEvents(){
         System.out.println("There are no available events");
     }
+
+    public void  userDoesNotExist(){
+        System.out.println("Sorry this speaker doesnot exist, please try again");
+    }
 }

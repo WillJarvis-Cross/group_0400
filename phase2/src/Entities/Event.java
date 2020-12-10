@@ -179,4 +179,8 @@ public class Event implements Serializable, Comparable<Event> {
         }
         return 0;
     }
+
+    public void removeSpeaker(String speakerName){
+        speaker.remove(speakerName);
+    }
 }

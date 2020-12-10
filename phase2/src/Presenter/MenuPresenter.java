@@ -109,6 +109,18 @@ public class MenuPresenter {
         System.out.println("5: Cancel my spot in an event");
         System.out.println("6: Show the events I am signed up for");
         System.out.println("7: Export Events to HTML");
+        System.out.println("8: Add a speaker to an event");
+        System.out.println(("9: Remove a speaker from an event"));
+        return sc.nextLine();
+    }
+
+    public String addSpeakerToEvent(){
+        System.out.println("Please write what event you would like to add the speaker to?");
+        return sc.nextLine();
+    }
+
+    public String nameOfSpeaker(){
+        System.out.println("What speaker would you like to add to the event?");
         return sc.nextLine();
     }
 
@@ -180,5 +192,15 @@ public class MenuPresenter {
      */
     public void returnMenu(){
         sc.nextLine();
+    }
+
+    public String speakerToBeRemoved(){
+        System.out.println("Which speaker would you like to remove?");
+        return sc.nextLine();
+    }
+
+    public String eventToBeRemoved(){
+        System.out.println("What event do you want the speaker removed from?");
+        return sc.nextLine();
     }
 }

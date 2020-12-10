@@ -20,6 +20,8 @@ public class Event implements Serializable {
     private String roomNumber; // The room the event is in
 
 
+
+
     /**
      * Constructs an event with the given parameters.
      * @param time The time the event occurs at

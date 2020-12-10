@@ -63,6 +63,11 @@ public class UserManager implements Serializable {
         allUsers.put(name, newVIP);
     }
 
+    public boolean canAddSpeaker(String speaker){
+
+        return allUsers.containsKey(speaker);
+    }
+
     /**
      * Returns a Hashtable of all Attendees
      * @return allAttendees
