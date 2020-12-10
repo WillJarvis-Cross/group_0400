@@ -1,5 +1,7 @@
 package Gateways;
 
+import Controllers.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExportHTML {
@@ -60,6 +62,14 @@ public class ExportHTML {
         return encapsulateTag("html", (headerContent + tableBodyContent));
     }
 
+    /**
+     * Creates an html file with the passed filename that represents the users events as a HTML Table element
+     * which can be opened using any browser
+     * @param fileName the name of the html file to be exported / generated
+     * @param columns the columns / headers of the table to generate
+     * @param rows the list of list of columns for each event
+     * @return true iff the file was exported successfully, otherwise false.
+     */
     public boolean exportHTML(String fileName, List<String> columns, List<List<String>> rows) {
         try {
             ReadAndWrite writeHTMl = new ReadAndWrite();
