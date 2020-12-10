@@ -110,11 +110,16 @@ public class RoomEventPresenter extends Presenter{
 
     /**
      * Prompts the user to enter the name of the room
-     *
+     * @param newRoom if you are intending to create a new room then this is true
      * @return User input
      */
-    public String printRoomNumber(){
-        System.out.println("What will the room be called or enter 0 to go back");
+    public String printRoomNumber(boolean newRoom){
+        if (newRoom){
+            System.out.println("What will the room be called or enter 0 to go back");
+        }
+        else {
+            System.out.println("Which room do you want to use");
+        }
         return sc.nextLine();
     }
 

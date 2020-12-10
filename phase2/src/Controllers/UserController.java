@@ -221,7 +221,7 @@ public abstract class UserController implements Serializable {
                          getPresenter().printCurrentBalance(usermanager.getUser(this.name).getBalance());
                     }
                }
-               else if (!eventManager.containsEvent(eventName)){
+               else if (!eventManager.containsEvent(eventName) && !eventName.equals("0")){
                     presenter.printInvalidOption();
                     signUp();
                }
