@@ -327,23 +327,43 @@ public class RoomEventPresenter extends Presenter{
             printInvalidOption();
         }
     }
+    /**
+     * Informs user that the event they're trying to remove speaker from doesnt exist
+     *
+     */
 
     public void printEventDoesnotExist(){
         System.out.println("Sorry the event you typed doesnot exist,please try adding again");
     }
+
+    /**
+     * Informs user that the speaker they are trying to add to conference is not availible at said time
+     */
 
     public void speakerNotFree(){
         System.out.println("The speaker is not free at this time, please choose another option");
 
     }
 
+    /**
+     * Confirmation message that the speaker has been added to the conference
+     */
+
     public void speakerAdded(){
         System.out.println("Speaker was added succesfully!");
     }
 
+    /**
+     * Informs user that the speaker they are trying to remove is not part of event
+     */
+
     public void notASpeaker(){
         System.out.println("This user is not a speaker at this event!");
     }
+
+    /**
+     * Confirmation message that the speaker was removed
+     */
 
     public void speakerRemoved(){
         System.out.println("This speaker was removed from the event");

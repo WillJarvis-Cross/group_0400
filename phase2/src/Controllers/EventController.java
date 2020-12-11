@@ -256,6 +256,11 @@ public class EventController {
         return eventNames;
 
     }
+    /**
+     * Return Returns the Room Event Presenter
+
+     * @return RoomEventPResenter
+     */
 
     public RoomEventPresenter getEventPresenter(){
         return presenter;

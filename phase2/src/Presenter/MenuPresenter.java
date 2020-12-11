@@ -114,11 +114,20 @@ public class MenuPresenter extends Presenter{
         return sc.nextLine();
     }
 
+    /**
+     * Prompts user to enter which event they want to add speaker into
+     * @return user's input
+     */
+
     public String addSpeakerToEvent(){
         System.out.println("Please write what event you would like to add the speaker to?");
         return sc.nextLine();
     }
 
+    /**
+     * Prompts user to enter which user they want to add to specific event
+     * @return user's input
+     */
     public String nameOfSpeaker(){
         System.out.println("What speaker would you like to add to the event?");
         return sc.nextLine();
@@ -172,6 +181,9 @@ public class MenuPresenter extends Presenter{
         return sc.nextLine();
     }
 
+
+
+
     public boolean printCovidQuestions(){
         System.out.println("Answer 'yes' or 'no' to the following questions:");
         while (true){
@@ -207,6 +219,13 @@ public class MenuPresenter extends Presenter{
         return false;
     }
 
+
+    /**
+     * Informs user they cannot sign up for events because of covid
+
+     */
+
+
     public void printYouHaveCovid(){
         System.out.println("You can't sign up for any events because you are a risk for COVID-19");
     }
@@ -218,10 +237,20 @@ public class MenuPresenter extends Presenter{
         sc.nextLine();
     }
 
+
+    /**
+     * Prompts user to enter which user they want removed from a specific event
+     * @return user's input
+     */
     public String speakerToBeRemoved(){
         System.out.println("Which speaker would you like to remove?");
         return sc.nextLine();
     }
+
+    /**
+     * Prompts user to enter which event they want speaker removed from
+     * @return user's input
+     */
 
     public String eventToBeRemoved(){
         System.out.println("What event do you want the speaker removed from?");

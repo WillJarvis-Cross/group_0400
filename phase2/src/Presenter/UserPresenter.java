@@ -219,6 +219,18 @@ public class UserPresenter extends Presenter{
         }
     }
 
+    /**
+     * Prints statistics for the program
+     * @param numUsers number of users in the program
+     * @param numAttend number pf attendees logged into program
+     * @param  numSpeakers number of speakers that have logged into the program
+     * @param numVIPs number of VIP's that have logged into the program
+     * @param numOrganizers mumber of organizers that have logged into the program
+     * @param numSignUps  numbers of events that users have signed up for
+     * @param popEvents the top 5 most popular events in the program
+
+     */
+
     public void printStatistics(int numUsers, int numAttend, int numSpeakers, int numVIPs, int numOrganizers,
                                 int numSignUps, List<String> popEvents){
         System.out.println("There are "+ numUsers+" users that have logged in using the program.");
@@ -231,9 +243,19 @@ public class UserPresenter extends Presenter{
         System.out.println("Press enter to return to the main menu");
     }
 
+    /**
+     * Informs user that there are currently no availible events.
+
+     */
+
     public void printNoEvents(){
         System.out.println("There are no available events");
     }
+
+    /**
+     * Informs user that the speaker that they are trying to add doesnot exist.
+
+     */
 
     public void  userDoesNotExist(){
         System.out.println("Sorry this speaker doesnot exist, please try again");
