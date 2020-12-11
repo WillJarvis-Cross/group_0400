@@ -96,6 +96,11 @@ public class RoomManager implements Serializable {
         return roomList;
     }
 
+    /**
+     * Returns a list of the events in the given room
+     * @param RoomN The room we are looking at
+     * @return The list of events in the given room
+     */
     public List<String> getEventByRooms(String RoomN){
         return allRooms.get(RoomN).getAllEvents();
     }

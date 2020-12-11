@@ -34,14 +34,6 @@ public class EventManager implements Serializable {
     }
 
     /**
-     * Returns an arraylist with the name of every event
-     * @return an arraylist with the name of every event
-     */
-    public List<String> getAllEventsString(){
-        return new ArrayList<>(events.keySet());
-    }
-
-    /**
      * Checks if the event with the given name is at capacity
      * @param eventName The name of the event
      * @return true if the event with the give eventName is at capacity, and false otherwise
@@ -180,8 +172,8 @@ public class EventManager implements Serializable {
      * @param capacity The capacity of the event
      * @param price The price of the event
      */
-    public void scheduleEvent(LocalDateTime time, int duration, List<String> speaker, String eName, String room, int capacity,boolean VIPcheck, int techLevel, double price){
-        Event e = new Event(time.toString(), duration, speaker, eName, room, capacity,VIPcheck, techLevel, price);
+    public void scheduleEvent(LocalDateTime time, int duration, List<String> speaker, String eName, String room, int capacity,boolean VIPcheck, double price){
+        Event e = new Event(time.toString(), duration, speaker, eName, room, capacity,VIPcheck, price);
         this.events.put(eName, e);
     }
 
@@ -198,8 +190,8 @@ public class EventManager implements Serializable {
      * @return True or false
      */
     public boolean canScheduleEvent(LocalDateTime time, int duration, List<String> speaker, String eName, String room,
-                                    int capacity,boolean VIPcheck, int techLevel, double price){
-        Event e = new Event(time.toString(), duration, speaker, eName, room, capacity,VIPcheck, techLevel, price);
+                                    int capacity,boolean VIPcheck, double price){
+        Event e = new Event(time.toString(), duration, speaker, eName, room, capacity,VIPcheck, price);
         return (!doesOverlap(e)) && (withinHours(e) && !containsEvent(eName));
     }
 
@@ -220,6 +212,12 @@ public class EventManager implements Serializable {
         return events.get(eventName).addSpeaker(speakerName);
     }
 
+    /**
+     * Removes the given speaker from the given event if possible
+     * @param eventname The event
+     * @param speakerName The speaker
+     * @return True if the speaker was deleted
+     */
     public boolean removeSpeaker(String eventname, String speakerName){
         return events.get(eventname).removeSpeaker(speakerName);
     }
@@ -246,17 +244,4 @@ public class EventManager implements Serializable {
         }
         return "";
     }
-
-    public LocalDateTime getEventtime(String eventName){
-        return getEvent(eventName).getTime();
-    }
-
-   public int getEventDuration(String eventName){
-        return getEvent(eventName).getDuration();
-
-   }
-
-
 }
-
-

@@ -369,6 +369,11 @@ public abstract class UserController implements Serializable {
           getPresenter().printCurrentBalance(usermanager.getUser(getMyName()).getBalance());
      }
 
+     public void changePass(){
+          usermanager.changePassword(name, menuPresenter.newPass());
+          menuPresenter.printPassChanged();
+     }
+
      /**
       * Returns the total number of times users have logged in
       * @return the total number of times users have logged in

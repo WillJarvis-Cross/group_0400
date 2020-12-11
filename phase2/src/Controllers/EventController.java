@@ -112,7 +112,7 @@ public class EventController {
                 if (roomManager.isRoomTaken(roomNumber, time)) {
                     counter++;
                 }
-                if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber, capacity, boolVIP, techLevel, price) || duration == 0) {
+                if (!eManager.canScheduleEvent(time, duration, speaker, eventName, roomNumber, capacity, boolVIP, price) || duration == 0) {
                     counter++;
                 }
                 if (capacity > roomManager.getRoom(roomNumber).getCapacity()) {
@@ -129,7 +129,7 @@ public class EventController {
                 counter++;
             }
             if (counter == 0){
-                eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP, techLevel, price);
+                eManager.scheduleEvent(time, duration, speaker, eventName, roomNumber, capacity,boolVIP, price);
                 signUp(speaker,eventName);
                 roomManager.addEvent(roomNumber, eventName, time);
                 presenter.printEventCreated();

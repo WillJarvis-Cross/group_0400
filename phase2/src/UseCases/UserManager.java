@@ -39,18 +39,6 @@ public class UserManager implements Serializable {
         allUsers = new Hashtable<>();
         allVIP = new Hashtable<>();
     }
-    /**
-     * Returns a Hashtable of all Attendees
-     * @return allAttendees
-     */
-    public Hashtable<String, VIP> getAllVIPs(){ return allVIP;}
-
-    /**
-     * Returns an Attendee with the given username
-     * @param name The name of the attendee
-     * @return Attendee object corresponding to name
-     */
-    public VIP getVIP(String name){ return allVIP.get(name);}
 
     /**
      * Creates a new Attendee with the given username and password
@@ -63,24 +51,6 @@ public class UserManager implements Serializable {
         allUsers.put(name, newVIP);
     }
 
-    public boolean canAddSpeaker(String speaker){
-
-        return allUsers.containsKey(speaker);
-    }
-
-    /**
-     * Returns a Hashtable of all Attendees
-     * @return allAttendees
-     */
-    public Hashtable<String, Attendee> getAttendees(){ return allAttendees;}
-
-    /**
-     * Returns an Attendee with the given username
-     * @param name The name of the attendee
-     * @return Attendee object corresponding to name
-     */
-    public Attendee getAttendee(String name){ return allAttendees.get(name);}
-
     /**
      * Creates a new Attendee with the given username and password
      * @param name The name of the new Attendee
@@ -91,19 +61,6 @@ public class UserManager implements Serializable {
         allAttendees.put(name, newAttendee);
         allUsers.put(name, newAttendee);
     }
-
-    /**
-     * Returns a Hashtable of all Organizers
-     * @return allOrganizers
-     */
-    public Hashtable<String, Organizer> getOrganizers(){ return allOrganizers;}
-
-    /**
-     * Returns an Organizer with the given username
-     * @param name The name of the organizer
-     * @return Organizer corresponding to name
-     */
-    public Organizer getOrganizer(String name){ return allOrganizers.get(name);}
 
     /**
      * Creates a new Organizer with the given username and password
@@ -122,6 +79,10 @@ public class UserManager implements Serializable {
      */
     public Hashtable<String, Speaker> getSpeakers(){ return allSpeakers;}
 
+    /**
+     * returns a list of speaker objects
+     * @return a list of speaker objects
+     */
     public List<User> getSpeakerObjects(){
         List<User> speakers = new ArrayList<>();
         Set<String> keys = allSpeakers.keySet();
@@ -131,6 +92,10 @@ public class UserManager implements Serializable {
         return speakers;
     }
 
+    /**
+     * Returns a list of Attendee objects
+     * @return a list of Attendee objects
+     */
     public List<User> getAttendeeObjects(){
         List<User> attendees = new ArrayList<>();
         Set<String> keys = allAttendees.keySet();
@@ -139,13 +104,6 @@ public class UserManager implements Serializable {
         }
         return attendees;
     }
-
-    /**
-     * Returns a Speaker with the given name
-     * @param name The name of the speaker
-     * @return Speaker corresponding to name
-     */
-    public Speaker getSpeaker(String name){ return allSpeakers.get(name);}
 
     /**
      * Creates a new Speaker with the given usename and password
@@ -167,6 +125,11 @@ public class UserManager implements Serializable {
         return !allUsers.containsKey(name);
     }
 
+    /**
+     * Checks if group chat can be made with the given people
+     * @param names The names of the users in the group chat
+     * @return True if they can make a group chat and false otherwise
+     */
     public boolean canMakeGroupChat(String[] names){
         if (names.length == 0){
             return false;
@@ -192,9 +155,16 @@ public class UserManager implements Serializable {
      */
     public Hashtable<String, User> getUsers(){ return allUsers;}
 
-    // Helper method for signUp()
-    // This is used to find what position the event should be added at in the list of the users events
-    // They are ordered in chronological order based on time. I am using binary search here
+    /**
+     * Helper method for signUp()
+     * This is used to find what position the event should be added at in the list of the users events
+     * They are ordered in chronological order based on time. I am using binary search here
+     * @param start The starting index of the event we are looking at
+     * @param end The ending index of the event we are looking at
+     * @param eventTime The time of the event
+     * @param userEvents The list of this user's events
+     * @return The index where the event should be added to the user's list of events
+     */
     private int findPosOfEvent(int start, int end, LocalDateTime eventTime, List<Event> userEvents){
         if (start == end){
             return start;
@@ -248,13 +218,15 @@ public class UserManager implements Serializable {
         return true;
     }
 
-
+    /**
+     * Checks if user can sign up for an event
+     * @param event The event being signed up for
+     * @param user The user
+     * @return true if the user can sign up and false otherwise
+     */
     public boolean checkVIPSignUp(Event event,User user){
         if(event.isVIPOnly()) {
-            if (user.isVIP()) {
-                return true;
-            }
-            return false;
+            return user.isVIP();
         }
         return true;
     }
@@ -274,8 +246,6 @@ public class UserManager implements Serializable {
         return false;
     }
 
-
-
     /**
      * If the given event was cancelled successfully, it will remove all attendees and the
      * speaker from their respective lists of events
@@ -284,7 +254,6 @@ public class UserManager implements Serializable {
      * @param speaker The names of the speaker of the event
      */
     public void cancelWholeEvent(List<String> attending, String canceledEvent, List<String> speaker, double price){
-
         for (String name : attending) {
             cancelMyEvent(name, canceledEvent, price);
         }
@@ -297,23 +266,10 @@ public class UserManager implements Serializable {
      * enter the correct password for their account
      * @param name The username
      * @param pass The password
-     * @param type The type of user they are
      * @return true if the password was correct, false otherwise
      */
-    public boolean login(String name, String pass, String type){
-        if (type.equals("attendee") && getAttendees().containsKey(name)){
-            return pass.equals(getAttendee(name).getPassword());
-        }
-        if (type.equals("organizer") && getOrganizers().containsKey(name)){
-            return pass.equals(getOrganizer(name).getPassword());
-        }
-        if (type.equals("speaker") && getSpeakers().containsKey(name)){
-            return pass.equals(getSpeaker(name).getPassword());
-        }
-        if (type.equals("VIP") && getAllVIPs().containsKey(name)){
-            return pass.equals(getVIP(name).getPassword());
-        }
-        return false;
+    public boolean login(String name, String pass){
+        return getUser(name).getPassword().equals(pass);
     }
 
     /**
@@ -325,6 +281,11 @@ public class UserManager implements Serializable {
         allUsers.get(person).setPassword(pass);
     }
 
+    /**
+     * Returns a list of users that match the names given
+     * @param names The names of the users
+     * @return The list of user objects
+     */
     public List<User> getListOfUsers(List<String> names){
         List<User> users = new ArrayList<>();
         for (String name: names){
@@ -333,6 +294,11 @@ public class UserManager implements Serializable {
         return users;
     }
 
+    /**
+     * Setting the covid value of this user
+     * @param name The name of the user
+     * @param positive True when they are a risk for covid
+     */
     public void changeCovid(String name, boolean positive){
         getUser(name).setHasCovid(positive);
     }

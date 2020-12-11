@@ -102,8 +102,7 @@ public class GenerateFakeData {
 
     double price = getDoubleRandNumber(10.0);
 
-    user.getEventManager().scheduleEvent(time, duration, speakers, eventName, roomName, capacity, false,
-        techLevel, price);
+    user.getEventManager().scheduleEvent(time, duration, speakers, eventName, roomName, capacity, false, price);
   }
 
   private void log(String content) {

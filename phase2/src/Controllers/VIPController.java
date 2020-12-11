@@ -81,7 +81,7 @@ public class VIPController extends UserController implements Serializable {
                 break;
             }
             else{
-                if (getUsermanager().login(getMyName(), password, "VIP")){
+                if (getUsermanager().login(getMyName(), password)){
                     vipsLoggedIn += 1;
                     usersLoggedIn += 1;
                     break;
@@ -126,7 +126,10 @@ public class VIPController extends UserController implements Serializable {
                 case "3":
                     addToBalance();
                     break;
-                case "4":  // save and log out
+                case "4":
+                    changePass();
+                    break;
+                case "5":  // save and log out
                     break label;
                 default:
                     getPresenter().printInvalidOption();

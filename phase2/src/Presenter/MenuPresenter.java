@@ -37,7 +37,8 @@ public class MenuPresenter extends Presenter{
         System.out.println("1: Enter the message menu");
         System.out.println("2: Enter the event menu");
         System.out.println("3: Add to your balance");
-        System.out.println("4: Save and exit");
+        System.out.println("4: Change password");
+        System.out.println("5: Save and exit");
         return sc.nextLine();
     }
 
@@ -74,7 +75,8 @@ public class MenuPresenter extends Presenter{
         System.out.println("3: Access to conference");
         System.out.println("4: Create a new account");
         System.out.println("5: View Conference Statistics");
-        System.out.println("6: Save and exit");
+        System.out.println("6: Change password");
+        System.out.println("7: Save and exit");
         return sc.nextLine();
     }
 
@@ -149,6 +151,7 @@ public class MenuPresenter extends Presenter{
         System.out.println("7: See your Group Chats");
         System.out.println("8: Save and exit");
         System.out.println("9: Export Events to HTML");
+        System.out.println("10: Change password");
         return sc.nextLine();
     }
 
@@ -255,5 +258,14 @@ public class MenuPresenter extends Presenter{
     public String eventToBeRemoved(){
         System.out.println("What event do you want the speaker removed from?");
         return sc.nextLine();
+    }
+
+    public String newPass(){
+        System.out.println("Enter your new password");
+        return sc.nextLine();
+    }
+
+    public void printPassChanged(){
+        System.out.println("Successfully changed your password");
     }
 }

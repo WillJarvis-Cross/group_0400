@@ -84,7 +84,7 @@ public class OrganizerController extends UserController implements Serializable 
                 break;
             }
             else{
-                if (getUsermanager().login(getMyName(), password, "organizer")){
+                if (getUsermanager().login(getMyName(), password)){
                     organizersLoggedIn += 1;
                     usersLoggedIn += 1;
                     break;
@@ -133,7 +133,10 @@ public class OrganizerController extends UserController implements Serializable 
                 case "5":  // Display statistics for a conference
                     displayStats();
                     break;
-                case "6":  // This is when the user wants to save and log out
+                case "6":
+                    changePass();
+                    break;
+                case "7":  // This is when the user wants to save and log out
                     break label;
                 default:
                     getPresenter().printInvalidOption();

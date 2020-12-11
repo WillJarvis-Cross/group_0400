@@ -80,7 +80,7 @@ public class SpeakerController extends UserController implements Serializable {
                 break;
             }
             else{
-                if (getUsermanager().login(getMyName(), password, "speaker")){
+                if (getUsermanager().login(getMyName(), password)){
                     speakersLoggedIn += 1;
                     usersLoggedIn += 1;
                     break;
@@ -146,7 +146,10 @@ public class SpeakerController extends UserController implements Serializable {
                 } else if (!decision.equals("2")) { //go back
                     System.out.println("invalid selection, going back");
                 }
-            } else{
+            }else if (input.equals("10")){
+                changePass();
+            }
+            else{
                 getPresenter().printInvalidOption();
             }
         }

@@ -81,7 +81,7 @@ public class AttendeeController extends UserController implements Serializable {
                 break;
             }
             else{
-                if (getUsermanager().login(getMyName(), password, "attendee")){
+                if (getUsermanager().login(getMyName(), password)){
                     attendeesLoggedIn += 1;
                     usersLoggedIn += 1;
                     break;
@@ -124,7 +124,10 @@ public class AttendeeController extends UserController implements Serializable {
                 case "3": // add money to wallet
                     addToBalance();
                     break;
-                case "4":  // save and log out
+                case "4": // change password
+                    changePass();
+                    break;
+                case "5":  // save and log out
                     break label;
                 default: // invalid input
                     getPresenter().printInvalidOption();

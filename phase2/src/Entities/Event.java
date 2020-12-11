@@ -14,14 +14,13 @@ import java.time.format.DateTimeFormatter;
 public class Event implements Serializable, Comparable<Event> {
     // Time is the time the event is scheduled for in the form yyyy-mm-ddThh:mm
     private String time;
-    private int duration; // The duration of the event (in hours)
+    private final int duration; // The duration of the event (in hours)
     private List<String> speaker; // The speaker at the event
     private List<String> attending; // List of people attending the event
     private final String eventName; // The name of the event
     private final String roomNumber; // The room the event is in
     private int capacity; // The maximum capacity of the event
     private final boolean VIPOnly; // True when the event is a VIP event
-    private final int techLevel; // The level of tech needed that the event requires from its room (1-5 where 5 is the most advanced)
     private final double price; //  The cost of admission for the event
 
     /**
@@ -34,7 +33,7 @@ public class Event implements Serializable, Comparable<Event> {
      * @param capacity The capacity of the event
      * @param price The price of the event
      */
-    public Event(String time, int duration, List<String> speaker, String eventName, String roomNumber, int capacity,boolean VIP, int techLevel, double price) {
+    public Event(String time, int duration, List<String> speaker, String eventName, String roomNumber, int capacity,boolean VIP, double price) {
         this.time = time;
         this.duration = duration;
         this.speaker = speaker;
@@ -43,7 +42,6 @@ public class Event implements Serializable, Comparable<Event> {
         this.roomNumber = roomNumber;
         this.capacity = capacity;
         this.VIPOnly = VIP;
-        this.techLevel = techLevel;
         this.price = price;
     }
 
@@ -184,6 +182,11 @@ public class Event implements Serializable, Comparable<Event> {
         return 0;
     }
 
+    /**
+     * Removes speaker from the list of speakers at this event if possible
+     * @param speakerName The name of the speaker being removed
+     * @return True if the speaker was removed and false otherwise
+     */
     public boolean removeSpeaker(String speakerName){
         if (speaker.contains(speakerName)){
             speaker.remove(speakerName);
