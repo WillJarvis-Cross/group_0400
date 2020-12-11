@@ -287,14 +287,29 @@ public abstract class UserController implements Serializable {
       *
       * @return A list of Strings with the names of the headers of each column
       */
-
      private List<String> createColumnHeader() {
           List<String> columns = new ArrayList<>();
-          columns.add("Day");
-          columns.add("Duration");
+          columns.add("Day (YYYY/MM/DD - HH:MM)");
+          columns.add("Duration (hours)");
+          columns.add("Speaker(s)");
           columns.add("Event Name");
           columns.add("Liked");
           return columns;
+     }
+
+     /**
+      * Returns a string of all the speakers in a single line
+      * @param event the event the speakers are speaking in
+      * @return List of all the speaker separated my a comma and space
+      */
+     private String printSpeakerInSingleLine(Event event) {
+          String speakers = "";
+          int count = 0;
+          for (String speakerName : event.getSpeaker()) {
+               if (count == 0) speakers = speakerName;
+               else speakers += (", " + speakerName);
+          }
+          return speakers;
      }
 
      /** Returns true if the users event schedule has been exported successfully, otherwise returns false
@@ -315,10 +330,12 @@ public abstract class UserController implements Serializable {
                Event event = eventManager.getEvent(eventName);
 
                List<String> line = new ArrayList<>();
-               line.add(event.getTime().toString());
-               line.add(Integer.toString(event.getDuration()));
-               line.add(eventName);
-               line.add(Boolean.toString(likedEvents.contains(eventName)));
+               line.add(event.getTime().toString().replace("T", " - ")); // time
+               line.add(Integer.toString(event.getDuration())); // duration
+               line.add(printSpeakerInSingleLine(event)); // speakers
+               line.add(eventName); // event name
+               if (likedEvents.contains(eventName)) line.add("✓"); // if liked
+               else line.add("");
 
                rows.add(line);
           }

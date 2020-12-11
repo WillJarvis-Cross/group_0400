@@ -50,24 +50,17 @@ public class ReadAndWrite {
             File htmlFile = new File(fileName + ".html");
             htmlFile.createNewFile();
 
-            //Saving of object in a file
-            FileOutputStream file = new FileOutputStream(fileName + ".html");
-            ObjectOutputStream out = new ObjectOutputStream(file);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(htmlFile));
 
-            // Method for serialization of object
-            out.writeObject(content);
+            bw.write(content);
 
-            out.close();
-            file.close();
-
+            bw.close();
         } catch(IOException ex) {
             System.out.println("IOException is caught");
             ex.printStackTrace();
         }
 
     }
-
-
 
     /**
      * load information from file by deserialize information
