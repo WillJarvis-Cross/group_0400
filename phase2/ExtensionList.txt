@@ -1,0 +1,21 @@
+Group 0400 Extensions
+
+Mandatory Extensions:
+-Events can now have multiple speakers, added at creation
+-Events can last for any time, measured in hours, determined at event creation
+-Events can be canceled by organizers
+-VIPs have been added, who can also attend VIP only events
+-Organizers can create accounts of other users, which can then be logged in
+-Events have their own separate capacity, where the upper limit is the capacity of the room its held in
+
+Optional Extensions
+-Conferences, where each event and room created belongs to one specific conference
+-Messages can be marked as unread, deleted, or archived
+-A user can download a copy of events they are signed up for (a schedule) as an HTML file
+-Events and rooms have "levels of technology" tied to them, and each event happen in a room with the same level of technology or higher
+-Organizers can see stats about logins onto the app, amount of event signups, and most popular events
+
+Own Features
+-Added a group chat feature where users can add other users and chat, that can be found under the message menu
+-Events now cost money to attend, and attendees have wallets where they must add funds and pay to attend
+-COVID-19 survey before every login that will ban a user from attending and alert all other users to stay away from them if they are at risk
