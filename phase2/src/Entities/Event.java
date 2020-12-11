@@ -134,10 +134,14 @@ public class Event implements Serializable, Comparable<Event> {
     /**
      * Adds a new speaker to the list of speakers of this event
      * @param newSpeaker The new speaker being added to this event
+     * @return True when the speaker was added and false otherwise
      */
-    public void addSpeaker(String newSpeaker){
-        this.speaker.add(newSpeaker);
-
+    public boolean addSpeaker(String newSpeaker){
+        if (!speaker.contains(newSpeaker)){
+            this.speaker.add(newSpeaker);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -180,7 +184,11 @@ public class Event implements Serializable, Comparable<Event> {
         return 0;
     }
 
-    public void removeSpeaker(String speakerName){
-        speaker.remove(speakerName);
+    public boolean removeSpeaker(String speakerName){
+        if (speaker.contains(speakerName)){
+            speaker.remove(speakerName);
+            return true;
+        }
+        return false;
     }
 }

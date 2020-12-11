@@ -32,22 +32,20 @@ public class ConferenceController {
         }
         else if(roomNumber.equals("2")){ //add room
             String nameOfConference = presenter.printNameOfConference(conferenceManager.getConferences());
-            String roomNum = roomController.makeRoomRequest();
+            String roomNum;
+            if (!conferenceManager.checkConferenceExist(nameOfConference)){
+                roomNum = null;
+            }
+            else{
+                roomNum = roomController.makeRoomRequest();
+            }
+
             if (roomNum == null || !this.conferenceManager.addRoomToConference(nameOfConference, roomNum)){
                 presenter.printInvalidOption();
             }
             makeConferenceRequest();
 
-        }/*else if(roomNumber.equals("3")){ //remove conference
-            String nameOfConference = presenter.printNameOfConference(conferenceManager.getConferences());
-            if (!this.conferenceManager.removeConference(nameOfConference)){
-                presenter.printInvalidOption();
-            }
-            else{
-                presenter.printConferenceRemoved();
-            }
-            makeConferenceRequest();
-        }*/else{
+        }else{
             if (!roomNumber.equals("0")){ // 0 means they are going back to the main menu
                 presenter.printInvalidOption();
                 makeConferenceRequest();

@@ -225,67 +225,53 @@ public class OrganizerController extends UserController implements Serializable 
                 System.out.println("invalid selection, going back");
                 eventMenu();
             }
-        }  else if (input.equals("8")){
-            String speakerName = getMenuPresenter().nameOfSpeaker();
-            String eventName = getMenuPresenter().addSpeakerToEvent();
 
-            if(!getUsermanager().canAddSpeaker(speakerName)){
-                getPresenter().userDoesNotExist();
-                eventMenu();
-            }
-            if (!getEventManager().containsEvent(eventName)){
-                getEventController().getEventPresenter().printEventDoesnotExist();
-                eventMenu();
+        }
+        else if (input.equals("8")){ // add speaker to event
+            addSpeaker();
+        }
 
-            }
-            LocalDateTime time = getEventManager().getEventtime(eventName);
-            int duration = getEventManager().getEventDuration(eventName);
-
-            if (!getUsermanager().canSignUp(time,duration,
-                    getEventManager().getEventsByUsername(getUsermanager().getUser(speakerName)))){
-                getEventController().getEventPresenter().speakerNotFree();
-                eventMenu();
-            }
-            else{
-                getEventManager().setSpeaker(eventName,speakerName);
-                getEventController().getEventPresenter().speakerAdded();
-            }
-
-
-            }
-
-            else if (input.equals("9")){
-                  String speaker = getMenuPresenter().speakerToBeRemoved();
-                  String event = getMenuPresenter().eventToBeRemoved();
-                  if (!getEventManager().containsEvent(event)){
-                getEventController().getEventPresenter().printEventDoesnotExist();
-                eventMenu();
-                if(!getUsermanager().canAddSpeaker(speaker)){
-                          getPresenter().userDoesNotExist();
-                          eventMenu();
-                      }
-                List speakerofEvent = getEventManager().getEventsByUsername(getUsermanager().getUser(speaker));
-                if(!speakerofEvent.contains(getEventManager().getEvent(event))){
-                    getEventController().getEventPresenter().notASpeaker();
-                    eventMenu();
-
-                }
-                else{
-                    getEventManager().removeSpeaker(event,speaker);
-                    getEventController().getEventPresenter().speakerRemoved();
-
-                }
-
-
-            }
-
-            }
+        else if (input.equals("9")){ // remove speaker from event
+            removeSpeaker();
+        }
 
         else {
             if (!input.equals("0")){
                 getPresenter().printInvalidOption();
                 eventMenu();
             }
+        }
+    }
+
+    private void removeSpeaker(){
+        String speaker = getMenuPresenter().speakerToBeRemoved();
+        String event = getMenuPresenter().eventToBeRemoved();
+        if (getEventManager().containsEvent(event) && !getUsermanager().canAddPerson(speaker)){
+            if (getEventManager().removeSpeaker(event, speaker)){
+                getEventController().getEventPresenter().speakerRemoved();
+            }
+            else{
+                getPresenter().printInvalidOption();
+            }
+        }
+        else{
+            getPresenter().printInvalidOption();
+        }
+    }
+
+    private void addSpeaker(){
+        String speakerName = getMenuPresenter().nameOfSpeaker();
+        String eventName = getMenuPresenter().addSpeakerToEvent();
+        if (getEventManager().containsEvent(eventName) && !getUsermanager().canAddPerson(speakerName)){
+            if (getEventManager().setSpeaker(eventName, speakerName)){
+                getEventController().getEventPresenter().speakerAdded();
+            }
+            else{
+                getPresenter().printInvalidOption();
+            }
+        }
+        else{
+            getPresenter().printInvalidOption();
         }
     }
 

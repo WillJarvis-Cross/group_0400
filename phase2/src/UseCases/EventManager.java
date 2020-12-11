@@ -216,12 +216,12 @@ public class EventManager implements Serializable {
      * @param eventName The name of the event
      * @param speakerName The name of the new speaker at this event
      */
-    public void setSpeaker(String eventName, String speakerName){
-        events.get(eventName).addSpeaker(speakerName);
+    public boolean setSpeaker(String eventName, String speakerName){
+        return events.get(eventName).addSpeaker(speakerName);
     }
 
-    public void removeSpeaker(String eventname, String speakerName){
-        events.get(eventname).removeSpeaker(speakerName);
+    public boolean removeSpeaker(String eventname, String speakerName){
+        return events.get(eventname).removeSpeaker(speakerName);
     }
 
 

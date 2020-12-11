@@ -34,7 +34,7 @@ public class ConferenceManager implements Serializable {
         if (allConferenece.containsKey(conferenceNumber)){
             return false;
         }
-        allConferenece.put(conferenceNumber, new Conference(conferenceNumber));
+        allConferenece.put(conferenceNumber, new Conference());
         return true;
     }
 
@@ -55,24 +55,5 @@ public class ConferenceManager implements Serializable {
             return false;
         }
 
-    }
-
-    public boolean removeRoomFromConference(String conferenceNumber, String roomNumber){
-        if(allConferenece.containsKey(conferenceNumber)){
-            return allConferenece.get(roomNumber).removeRoom(roomNumber);
-        }
-        return false;
-
-    }
-
-    public boolean removeConference(String conferenceNumber){
-        if(allConferenece.contains(conferenceNumber)){
-            allConferenece.remove(conferenceNumber);
-            return true;
-        }
-        return false;
-    }
-    public List<String> getRoomsByConference(String conferenceN){
-        return allConferenece.get(conferenceN).getRoom();
     }
 }
