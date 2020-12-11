@@ -1,0 +1,22 @@
+Strategy
+Program uses Strategy to determine how the log in menu behaves for each different user.
+Logging in to existing account, displaying the menu, and making new accounts use different code.
+Classes: UserController and all its subclasses
+
+Dependency injection
+All modifications to our entities are done through managers as use cases.
+The creation of the entities are done in the manager, and the parameters are passed down through layers of clean architecture
+Classes: Controller package depends on UseCases package, UseCases package depends on Entities package.
+
+Factory
+The constructors for all the controllers and managers that are necessary to run the program are all called in UserController.
+The user never has to call all the constructors or create objects, the class does this for them.
+In the event of loading from a save file, the ReadAndWrite class will deserialize the controller objects,
+so that the necessary controllers are always there, but never need to be constructed.
+Classes: UserController, ReadAndWrite, UseCases package, Controller package
+
+Builder
+The constructors for many of our controllers are very long, because they require many use cases as parameters.
+The UserController class first instansiates every manager from UseCases, then these manager objects are passed
+in as parameters for the construction of the controllers.
+Classes: UseCases package, UserController, Controller package
