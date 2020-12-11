@@ -75,10 +75,9 @@ public class GroupChatManager implements Serializable {
      * Deletes the given member from the given group chat
      * @param person The person being removed
      * @param group The group in question
-     * @return True if they were deleted successfully
      */
-    public boolean deleteMember(User person, String group){
+    public void deleteMember(User person, String group){
         person.removeGroupChat(group);
-        return getGroupChat(group).delMember(person.getUsername());
+        getGroupChat(group).delMember(person.getUsername());
     }
 }

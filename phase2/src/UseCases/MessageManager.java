@@ -107,14 +107,11 @@ public class MessageManager implements Serializable {
      * Changes a message from archived to the message inbox
      * @param person The person who's message we are altering
      * @param id The id of the message in question
-     * @return True if the message was unarchived and false otherwise
      */
-    public boolean unArchiveMessage(User person, int id){
+    public void unArchiveMessage(User person, int id){
         if (person.delArchivedMessage(id)){
             person.addMessage(id);
-            return true;
         }
-        return false;
     }
 
     /**

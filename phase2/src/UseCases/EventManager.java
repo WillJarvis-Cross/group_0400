@@ -34,14 +34,6 @@ public class EventManager implements Serializable {
     }
 
     /**
-     * Returns an arraylist with the name of every event
-     * @return an arraylist with the name of every event
-     */
-    public List<String> getAllEventsString(){
-        return new ArrayList<>(events.keySet());
-    }
-
-    /**
      * Checks if the event with the given name is at capacity
      * @param eventName The name of the event
      * @return true if the event with the give eventName is at capacity, and false otherwise
@@ -220,6 +212,12 @@ public class EventManager implements Serializable {
         return events.get(eventName).addSpeaker(speakerName);
     }
 
+    /**
+     * Removes the given speaker from the given event if possible
+     * @param eventname The event
+     * @param speakerName The speaker
+     * @return True if the speaker was deleted
+     */
     public boolean removeSpeaker(String eventname, String speakerName){
         return events.get(eventname).removeSpeaker(speakerName);
     }
@@ -246,17 +244,4 @@ public class EventManager implements Serializable {
         }
         return "";
     }
-
-    public LocalDateTime getEventtime(String eventName){
-        return getEvent(eventName).getTime();
-    }
-
-   public int getEventDuration(String eventName){
-        return getEvent(eventName).getDuration();
-
-   }
-
-
 }
-
-
