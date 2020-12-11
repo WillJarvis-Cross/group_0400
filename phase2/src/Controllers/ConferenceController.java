@@ -10,12 +10,21 @@ public class ConferenceController {
     private final RoomController roomController;
     private final ConferenceRoomPresenter presenter;
 
+    /**
+     * Initializes a conferenceController with the given roomController and conferenceManager
+     * @param roomController the roomController to be stored
+     * @param conferenceManager The conferenceManager to be stored
+     */
     public ConferenceController (RoomController roomController, ConferenceManager conferenceManager) {
         this.conferenceManager = conferenceManager;
         this.roomController = roomController;
         this.presenter = new ConferenceRoomPresenter();
     }
 
+    /**
+    Makes a request to create a conference, using the presenter to display options and get inputs. If the request
+     was valid, a new conference is created.
+     */
     public void makeConferenceRequest(){
         String roomNumber = presenter.conferenceMain();
 
@@ -54,6 +63,10 @@ public class ConferenceController {
         }
     }
 
+    /**
+     * Prints the available conferences and asks the user which one they want to attend using the presenter.
+     * @return String
+     */
     public String conferenceMenu(){
         if (conferenceManager.getConferences().size() == 0){
             presenter.printNoConferences();

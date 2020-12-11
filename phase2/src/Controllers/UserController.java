@@ -343,6 +343,10 @@ public abstract class UserController implements Serializable {
           return export.exportHTML(this.name + "_schedule_" + currentTime, columns, rows);
      }
 
+     /**
+      * uses the menuPresenter to display and get answers for the covid questionnaire and updates the user's covid
+      * status and sends messages as necessary.
+      */
      public void covidQuestions(){
           boolean positive = menuPresenter.printCovidQuestions();
           if (positive && !usermanager.getUser(this.name).getHasCovid()){

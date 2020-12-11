@@ -38,7 +38,11 @@ public class EventController {
     }
 
 
-
+    /**
+     * Returns true if the accounts for the given speakers exist, and false otherwise
+     * @param speakers The list of speakers to check for
+     * @return true or false
+     */
     private boolean isSpeakerInUsers(List<String> speakers){
         for (String speaker : speakers) {
             if (userManager.canAddPerson(speaker)) {
@@ -49,7 +53,13 @@ public class EventController {
 
     }
 
-
+    /**
+     * Returns true if the speaker(s) can be added to an event with the given time and duration, and false otherwise.
+     * @param speakers The speakers to add for the event
+     * @param time The starting time of the event
+     * @param duration The duration of the event, in hours
+     * @return true or false
+     */
     private boolean canAddSpeaker(List<String> speakers, LocalDateTime time, int duration){
         for (String speaker : speakers) {
             if (!userManager.canSignUp(time, duration,
@@ -63,6 +73,11 @@ public class EventController {
 
     }
 
+    /**
+     * Signs up the speakers for the event of the given name
+     * @param speaker the speakers who will be signed up for an event
+     * @param eventName the event the speaker will sign up for
+     */
     private void signUp(List<String> speaker, String eventName){
         for (String s : speaker) {
             userManager.signUp(s, eManager.getEvent(eventName),
@@ -246,6 +261,12 @@ public class EventController {
         }
         return list;
     }
+
+    /**
+     * Returns a list of events taking place at the given conference
+     * @param conference the name of the conference to get the list of events from
+     * @return List of event names
+     */
     public List<String> getEventByConference(String conference) {
 
         List<String> roomNames = this.conferenceManager.getConference(conference).getRoom();

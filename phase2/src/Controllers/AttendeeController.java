@@ -135,6 +135,9 @@ public class AttendeeController extends UserController implements Serializable {
     }
 
 
+    /**
+     * Uses getPresenter to show the menu for event options, and perform actions based on the input
+     */
     public void eventMenu(){
         String input = getMenuPresenter().printAttendeeEvent();
         if (input.equals("1")){ // Sign up for an event
@@ -171,6 +174,9 @@ public class AttendeeController extends UserController implements Serializable {
         }
     }
 
+    /**
+     * Uses getPresenter to show the menu for messaging options, and perform certain actions based on the input
+     */
     public void messageMenu(){
         String input = getMenuPresenter().printAttendeeMessage();
         switch (input) {

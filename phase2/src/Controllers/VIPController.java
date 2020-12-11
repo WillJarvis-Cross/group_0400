@@ -34,6 +34,10 @@ public class VIPController extends UserController implements Serializable {
         super(name, userManager, eventManager, messageManager, roomManager, groupChatManager, conferenceManager);
     }
 
+    /**
+     * Creates a new VIP account or logs in to an existing VIP account. Displays options and gets input through a
+     * menuPresenter.
+     */
     public void makeNewAccount(){
         String input = getMenuPresenter().printLogin();
         if (input.equals("2")){ // making new account
@@ -64,6 +68,9 @@ public class VIPController extends UserController implements Serializable {
     }
 
 
+    /**
+     * Logs into an existing VIP account. The display of options and getting input are done by a menuPresenter.
+     */
     public void loginExistingAccount(){
         boolean zero = false;
         while (true){
@@ -129,6 +136,9 @@ public class VIPController extends UserController implements Serializable {
 
     }
 
+    /**
+     * Uses getPresenter to show the menu for event options, and perform actions based on the input
+     */
     public void eventMenu(){
         String input = getMenuPresenter().printAttendeeEvent();
         if (input.equals("1")){ // Sign up for an event
@@ -163,6 +173,9 @@ public class VIPController extends UserController implements Serializable {
         }
     }
 
+    /**
+     * Uses getMenuPresenter to show the menu for messaging options, and perform certain actions based on the input
+     */
     public void messageMenu(){
         String input = getMenuPresenter().printAttendeeMessage();
         switch (input) {
