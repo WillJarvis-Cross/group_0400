@@ -214,20 +214,14 @@ public class EventManager implements Serializable {
     /**
      * Changes the speaker of an event with the given name
      * @param eventName The name of the event
-     * @param speakerName The name of the new speaker to be added to the evnt
+     * @param speakerName The name of the new speaker at this event
      */
-    public void setSpeaker(String eventName, String speakerName){
-        events.get(eventName).addSpeaker(speakerName);
+    public boolean setSpeaker(String eventName, String speakerName){
+        return events.get(eventName).addSpeaker(speakerName);
     }
 
-    /**
-     * Prompts user to enter which user they want removed from a specific event
-     * @param eventName The name of the evnt
-     * @param speakerName the name of speaker to be added to event
-     */
-
-    public void removeSpeaker(String eventName, String speakerName){
-        events.get(eventName).removeSpeaker(speakerName);
+    public boolean removeSpeaker(String eventname, String speakerName){
+        return events.get(eventname).removeSpeaker(speakerName);
     }
 
 
@@ -253,21 +247,10 @@ public class EventManager implements Serializable {
         return "";
     }
 
-    /**
-     * Return the times of given event
-     * @param eventName - event whose time we want
-     * @return LocalDateTime
-     */
-
     public LocalDateTime getEventtime(String eventName){
         return getEvent(eventName).getTime();
     }
 
-    /**
-     * Return the duration of given event
-     * @param eventName - event whose time we want
-     * @return int
-     */
    public int getEventDuration(String eventName){
         return getEvent(eventName).getDuration();
 

@@ -8,7 +8,7 @@ Mandatory Extensions:
 -Organizers can create accounts of other users, which can then be logged in
 -Events have their own separate capacity, where the upper limit is the capacity of the room its held in
 
-Optional Extensions
+Optional Extensions (we have 5 optional extensions so one of them can count as an extra feature)
 -Conferences, where each event and room created belongs to one specific conference
 -Messages can be marked as unread, deleted, or archived
 -A user can download a copy of events they are signed up for (a schedule) as an HTML file
@@ -16,6 +16,7 @@ Optional Extensions
 -Organizers can see stats about logins onto the app, amount of event signups, and most popular events
 
 Own Features
--Added a group chat feature where users can add other users and chat, that can be found under the message menu
+-Added a group chat feature where users can add other users and chat, that can be found under the message menu.
+    They can message in the group chat or choose to leave it
 -Events now cost money to attend, and attendees have wallets where they must add funds and pay to attend
--COVID-19 survey before every login that will ban a user from attending and alert all other users to stay away from them if they are at risk
+-COVID-19 survey before every login that will ban a user from signing up for events and alert all other users to stay away from them if they are at risk

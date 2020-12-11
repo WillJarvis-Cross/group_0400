@@ -15,7 +15,7 @@ public class Event implements Serializable, Comparable<Event> {
     // Time is the time the event is scheduled for in the form yyyy-mm-ddThh:mm
     private String time;
     private int duration; // The duration of the event (in hours)
-    private List<String> speaker; // The speakers at the event
+    private List<String> speaker; // The speaker at the event
     private List<String> attending; // List of people attending the event
     private final String eventName; // The name of the event
     private final String roomNumber; // The room the event is in
@@ -28,7 +28,7 @@ public class Event implements Serializable, Comparable<Event> {
      * Constructs an event with the given parameters.
      * @param time The time the event occurs at
      * @param duration How long the event is in hours
-     * @param speaker The speakers speaking at the event
+     * @param speaker The speaker speaking at the event
      * @param eventName The name of the event
      * @param roomNumber The room the event is in
      * @param capacity The capacity of the event
@@ -134,10 +134,14 @@ public class Event implements Serializable, Comparable<Event> {
     /**
      * Adds a new speaker to the list of speakers of this event
      * @param newSpeaker The new speaker being added to this event
+     * @return True when the speaker was added and false otherwise
      */
-    public void addSpeaker(String newSpeaker){
-        this.speaker.add(newSpeaker);
-
+    public boolean addSpeaker(String newSpeaker){
+        if (!speaker.contains(newSpeaker)){
+            this.speaker.add(newSpeaker);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -180,12 +184,11 @@ public class Event implements Serializable, Comparable<Event> {
         return 0;
     }
 
-    /**
-     * Removes given speaker from a certain event
-     * @param speakerName who is being removed from the event!
-     */
-
-    public void removeSpeaker(String speakerName){
-        speaker.remove(speakerName);
+    public boolean removeSpeaker(String speakerName){
+        if (speaker.contains(speakerName)){
+            speaker.remove(speakerName);
+            return true;
+        }
+        return false;
     }
 }

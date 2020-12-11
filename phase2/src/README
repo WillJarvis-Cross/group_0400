@@ -1,4 +1,4 @@
-Phase 1, Group 0400
+Phase 2, Group 0400
 
 The main method for this program is in the Main class
 
@@ -7,12 +7,13 @@ ReadAndWrite:
     correctly again
 
 Creating events:
-    -You have to create a room and a speaker first in order to create an event. If you don't, then the program will tell
+    -You have to create a conference and a room first in order to create an event with no speakers. If you want speakers
+        in the event then you have to create them before hand If you don't, then the program will tell
         you that you can't create an event with that information and will redirect you back to try again.
     -When you request to see all the events you have signed up for, you have a further option to look at the details of that event
         -Also the events appear in the order of when the events are. So the the first event that shows up is your next event
-    -The program will ask for the duration of an event in hours, but the overlapping protection will not work
-    unless the input is 1 (all events last for an hour in phase 1)
+    -The program will ask for the duration of an event in hours, must be an integer greater than 0. If it is not a
+        correct input it will tell you so and you get to re-enter the duration
 
 Controllers:
     -UserController: general controller for all users
