@@ -13,8 +13,8 @@ public class ReadAndWrite {
     private static final String fileName = "saveFile";
 
     /**
-     * establish connection to output file and serialize controller
-     * store information to file and try to catch error
+     * Establish connection to output file and serialize controller.
+     * Stores information to file and try to catch error
      * @param controller the object that is being serialized to file
      */
     public void objectSerialize(Object controller){
@@ -41,8 +41,9 @@ public class ReadAndWrite {
         }
 
     /**
-     *
-     *
+     * Creates, formats and writes the passed content to the passed fileName.
+     * @param fileName is the name of the HTML file.
+     * @param content is the content of the HTML file.
      */
     public void exportAsHTML(String fileName, String content) {
         try {

@@ -2,6 +2,12 @@ package Gateways;
 
 import java.util.List;
 
+
+/** This is an entity for a Conference, and it will export a timetable in HTML format of the events that the user is
+ * attending. Information includes; the date, time, duration, speaker, event name and like status.
+ * @author group 0400
+ */
+
 public class ExportHTML {
     private static final String head = "<!DOCTYPE html>" +
             "<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width," +
@@ -33,12 +39,23 @@ public class ExportHTML {
             "</body>" +
             "</html>";
 
+    /**
+     * Encapsulates the passed content with the passed tag name.
+     * @param tagName the tag name of an HTML element.
+     * @param content the content of the tag.
+     * @return a String representation of the tag with the content.
+     */
     private String encapsulateTag(String tagName, String content) {
         if (tagName.equals("html")) return head + content + footer;
         return "<" + tagName + ">" + content + "</" + tagName + ">";
     }
 
-
+    /**
+     * Creates the table structure of the passed columns as headers and rows as the body.
+     * @param columns list of columns for the table. Also represents the number of cells per row.
+     * @param rows list of rows for the table.
+     * @return a String representation of a table.
+     */
     private String createTableBody(List<String> columns, List<List<String>> rows) {
         String headerContent = "";
         for (String column : columns) {
