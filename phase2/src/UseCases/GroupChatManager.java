@@ -38,7 +38,7 @@ public class GroupChatManager implements Serializable {
             member.addGroupChat(groupName);
             memberNames.add(member.getUsername());
         }
-        groupChats.put(groupName, new GroupChat(memberNames, groupName));
+        groupChats.put(groupName, new GroupChat(memberNames));
     }
 
     /**

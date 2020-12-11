@@ -180,8 +180,8 @@ public class EventManager implements Serializable {
      * @param capacity The capacity of the event
      * @param price The price of the event
      */
-    public void scheduleEvent(LocalDateTime time, int duration, List<String> speaker, String eName, String room, int capacity,boolean VIPcheck, int techLevel, double price){
-        Event e = new Event(time.toString(), duration, speaker, eName, room, capacity,VIPcheck, techLevel, price);
+    public void scheduleEvent(LocalDateTime time, int duration, List<String> speaker, String eName, String room, int capacity,boolean VIPcheck, double price){
+        Event e = new Event(time.toString(), duration, speaker, eName, room, capacity,VIPcheck, price);
         this.events.put(eName, e);
     }
 
@@ -198,8 +198,8 @@ public class EventManager implements Serializable {
      * @return True or false
      */
     public boolean canScheduleEvent(LocalDateTime time, int duration, List<String> speaker, String eName, String room,
-                                    int capacity,boolean VIPcheck, int techLevel, double price){
-        Event e = new Event(time.toString(), duration, speaker, eName, room, capacity,VIPcheck, techLevel, price);
+                                    int capacity,boolean VIPcheck, double price){
+        Event e = new Event(time.toString(), duration, speaker, eName, room, capacity,VIPcheck, price);
         return (!doesOverlap(e)) && (withinHours(e) && !containsEvent(eName));
     }
 

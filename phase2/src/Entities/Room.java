@@ -59,6 +59,10 @@ public class Room implements Serializable {
         return timeTaken;
     }
 
+    /**
+     * Returns a list of all events in this room
+     * @return a list of all the events in this room
+     */
     public List<String> getAllEvents(){
         List<String> eventList = new ArrayList<String>();
         Enumeration emu = this.events.keys();

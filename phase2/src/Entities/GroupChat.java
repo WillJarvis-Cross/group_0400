@@ -12,17 +12,14 @@ import java.util.List;
 public class GroupChat implements Serializable {
     private List<String> members; // The members of the group chat
     private List<Integer> allMessages; // The messages in the group chat
-    private final String groupName; // The name of the group chat
 
     /**
      * Constructs a group chat with the given parameters
      * @param members The members of the group chat
-     * @param groupName The name og the group chat
      */
-    public GroupChat(List<String> members, String groupName){
+    public GroupChat(List<String> members){
         this.members = members;
         this.allMessages = new ArrayList<>();
-        this.groupName = groupName;
     }
 
     /**

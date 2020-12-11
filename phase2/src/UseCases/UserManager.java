@@ -297,23 +297,10 @@ public class UserManager implements Serializable {
      * enter the correct password for their account
      * @param name The username
      * @param pass The password
-     * @param type The type of user they are
      * @return true if the password was correct, false otherwise
      */
-    public boolean login(String name, String pass, String type){
-        if (type.equals("attendee") && getAttendees().containsKey(name)){
-            return pass.equals(getAttendee(name).getPassword());
-        }
-        if (type.equals("organizer") && getOrganizers().containsKey(name)){
-            return pass.equals(getOrganizer(name).getPassword());
-        }
-        if (type.equals("speaker") && getSpeakers().containsKey(name)){
-            return pass.equals(getSpeaker(name).getPassword());
-        }
-        if (type.equals("VIP") && getAllVIPs().containsKey(name)){
-            return pass.equals(getVIP(name).getPassword());
-        }
-        return false;
+    public boolean login(String name, String pass){
+        return getUser(name).getPassword().equals(pass);
     }
 
     /**

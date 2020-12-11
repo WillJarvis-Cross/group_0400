@@ -16,8 +16,8 @@ public abstract class User implements Serializable {
     private List<String> groupChats; // List of the names of the group chats this user is in
     private List<String> eventLiked; // List of event names liked by the user
     private String password, username;  // The user's username and password which is used to log in
-    private boolean hasCovid = false;
-    private double balance;
+    private boolean hasCovid = false; // If this is true then they are a risk for covid
+    private double balance; // The money they have
 
     /**
      * Constructs a User of types Attendee, Organizer, and Speaker. It instantiates the User's username and password,
@@ -36,8 +36,16 @@ public abstract class User implements Serializable {
         this.balance = 0.0;
     }
 
+    /**
+     * Returns a list of the group chats this user is in
+     * @return a list of the group chats this user is in
+     */
     public List<String> getGroupChats(){ return groupChats;}
 
+    /**
+     * Returns a list of the events this user has liked
+     * @return a list of the events this user has liked
+     */
     public List<String> getLikedEvents() { return eventLiked; }
 
     /**
