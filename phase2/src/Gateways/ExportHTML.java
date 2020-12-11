@@ -1,12 +1,8 @@
 package Gateways;
 
-import Controllers.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExportHTML {
-    private String pathPrefix = "";
-
     private static final String head = "<!DOCTYPE html>" +
             "<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width," +
             "initial-scale=1.0\"><title>Document</title></head><body><section><table border=\"1\">";
@@ -38,10 +34,8 @@ public class ExportHTML {
             "</html>";
 
     private String encapsulateTag(String tagName, String content) {
-        System.out.println(tagName + "  - " + content);
         if (tagName.equals("html")) return head + content + footer;
         return "<" + tagName + ">" + content + "</" + tagName + ">";
-
     }
 
 
@@ -77,7 +71,6 @@ public class ExportHTML {
         try {
             ReadAndWrite writeHTMl = new ReadAndWrite();
             String content = createTableBody(columns, rows);
-            System.out.println(content);
             writeHTMl.exportAsHTML(fileName, content);
         } catch (Exception e) {
             System.out.println("There was some error: " + e.toString());
