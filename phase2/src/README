@@ -20,19 +20,27 @@ Controllers:
     -AttendeeController: extends UserController and is used just for attendees
     -OrganizerController: extends UserController and is used just for organizers
     -SpeakerController: extends UserController and is used just for speakers
+    -VIPController: extends UserController and is used just for VIPs
     -MessageController: handles all message things
     -EventController: handles all event things
     -RoomController: handles all room things which is basically just creating rooms
+    -GroupChatController: handles group chat requests
+    -ConferenceController: handles conference requests
 Use Cases:
     -EventManager: Does everything related to events
     -MessageManager: Does everything to do with messages
     -RoomManager: Does everything to do with rooms
     -UserManager: Does everything to do with the users
+    -GroupChatManager: Does everything to do with group chats
+    -ConferenceManager: Does everything to do ith conferences
 Entities:
-    -User: Parent class of attendee, organizer, and speaker
+    -User: Parent class of attendee, organizer, VIP, and speaker
     -Attendee
     -Organizer
     -Speaker
+    -VIP
     -Event
     -Room
     -Message
+    -GroupChat
+    -Conference

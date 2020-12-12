@@ -20,3 +20,4 @@ Own Features
     They can message in the group chat or choose to leave it
 -Events now cost money to attend, and attendees have wallets where they must add funds and pay to attend
 -COVID-19 survey before every login that will ban a user from signing up for events and alert all other users to stay away from them if they are at risk
+-Users can change their password

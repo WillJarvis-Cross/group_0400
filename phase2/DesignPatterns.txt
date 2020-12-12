@@ -20,3 +20,14 @@ The constructors for many of our controllers are very long, because they require
 The UserController class first instansiates every manager from UseCases, then these manager objects are passed
 in as parameters for the construction of the controllers.
 Classes: UseCases package, UserController, Controller package
+
+Facade
+To create an event, you first need to create a conference, room, and speakers. This is separated into different
+classes so the creation of the conference, room, and speakers are separated
+classes: eventController, RoomController, ConferenceController, OrganizerController
+
+Observer
+This happens for all the controllers. The controller observes something then calls the use cases to change some element
+of the entities. Example, the user controller observes when a user wants to change their password. Then it calls the
+user manager to change the password.
+classes: All controllers to use cases
