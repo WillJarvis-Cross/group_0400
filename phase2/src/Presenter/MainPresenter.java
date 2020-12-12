@@ -84,4 +84,11 @@ public class MainPresenter {
         System.out.println("Please enter your username");
         return sc.nextLine();
     }
+    /**
+     * prints that the user's input was invalid
+     *
+     */
+    public void printInvalid() {
+        System.out.println("That input was invalid");
+    }
 }

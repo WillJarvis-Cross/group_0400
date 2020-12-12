@@ -18,7 +18,13 @@ public class Main{
         MainPresenter presenter = new MainPresenter();
         ReadAndWrite readWriter = new ReadAndWrite();
         do{
-            String userType = presenter.printAttendeeOrOrganizer();
+            String userType = "";
+            while (!userType.equals("1") && !userType.equals("2") && !userType.equals("1") && !userType.equals("3") && !userType.equals("4")) {
+                userType = presenter.printAttendeeOrOrganizer();
+                if (!userType.equals("1") && !userType.equals("2") && !userType.equals("1") && !userType.equals("3") && !userType.equals("4")) {
+                    presenter.printInvalid();
+                }
+            }
             String name = presenter.printUsername();
 
             if (presenter.loadFromSave()) { // when the user wants to load saved files
