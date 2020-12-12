@@ -1,6 +1,5 @@
 package Controllers;
 
-import Gateways.ExportHTML;
 import UseCases.*;
 
 import java.io.Serializable;
@@ -10,7 +9,7 @@ import java.io.Serializable;
  */
 public class AttendeeController extends UserController implements Serializable {
 
-    private static int attendeesLoggedIn = 0;
+    private static int attendeesLoggedIn = 0; // records the number of logins for attendees
 
     /**
      * Creates and initialize an Attendee controller object
@@ -172,7 +171,7 @@ public class AttendeeController extends UserController implements Serializable {
                 eventMenu();
             }
         }
-        else if (input.equals("5")) {
+        else if (input.equals("5")) { // like an event
             likeUnlikeEvent();
         }
     }

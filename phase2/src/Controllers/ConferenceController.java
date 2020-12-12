@@ -4,11 +4,14 @@ import UseCases.*;
 
 import java.lang.String;
 
+/** Represents the controller for Conference object
+ * @author group 400
+ */
 public class ConferenceController {
 
-    private final ConferenceManager conferenceManager;
-    private final RoomController roomController;
-    private final ConferenceRoomPresenter presenter;
+    private final ConferenceManager conferenceManager; // the conference manager
+    private final RoomController roomController; // the room controller
+    private final ConferenceRoomPresenter presenter; // the presenter for conference controller
 
     /**
      * Initializes a conferenceController with the given roomController and conferenceManager

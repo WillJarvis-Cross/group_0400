@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class VIPController extends UserController implements Serializable {
 
-    private static int vipsLoggedIn = 0;
+    private static int vipsLoggedIn = 0; // the number of VIPs which have logged in
 
     /**
      * Creates and initialize an organizer controller object
@@ -67,7 +67,6 @@ public class VIPController extends UserController implements Serializable {
         }
     }
 
-
     /**
      * Logs into an existing VIP account. The display of options and getting input are done by a menuPresenter.
      */
@@ -97,8 +96,6 @@ public class VIPController extends UserController implements Serializable {
         }
 
     }
-
-
 
     /**
      * Returns the total number of times VIPs have logged in

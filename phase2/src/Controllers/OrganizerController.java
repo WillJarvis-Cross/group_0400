@@ -1,18 +1,15 @@
 package Controllers;
 
-import Gateways.ExportHTML;
 import UseCases.*;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.List;
 
 /** Represents the controller for organiser manager object
  * @author group 400
  */
 public class OrganizerController extends UserController implements Serializable {
 
-    private static int organizersLoggedIn = 0;
+    private static int organizersLoggedIn = 0; // the number of users which have logged in
 
     /**
      * Creates and initialize an organizer controller object
@@ -98,7 +95,6 @@ public class OrganizerController extends UserController implements Serializable 
         {
             covidQuestions();
         }
-
     }
 
     /**
@@ -246,6 +242,9 @@ public class OrganizerController extends UserController implements Serializable 
         }
     }
 
+    /**
+     * Removes a speaker from an event if possible
+     */
     private void removeSpeaker(){
         String speaker = getMenuPresenter().speakerToBeRemoved();
         String event = getMenuPresenter().eventToBeRemoved();
@@ -262,6 +261,9 @@ public class OrganizerController extends UserController implements Serializable 
         }
     }
 
+    /**
+     * Adds a speaker to an event if possible
+     */
     private void addSpeaker(){
         String speakerName = getMenuPresenter().nameOfSpeaker();
         String eventName = getMenuPresenter().addSpeakerToEvent();

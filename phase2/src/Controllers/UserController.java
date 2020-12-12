@@ -25,10 +25,10 @@ public abstract class UserController implements Serializable {
      private final GroupChatManager groupChatManager;
      private transient final RoomController roomController;
      private transient final GroupChatController groupChatController;
-     private String name;
-     public static int usersLoggedIn = 0;
-     public static int eventSignups = 0;
-     public String myConference;
+     private String name; // the name of this user
+     public static int usersLoggedIn = 0; // the number of users which have logged in
+     public static int eventSignups = 0; // the number of users who have signed up for events
+     public String myConference; // The conference this user is in
 
      /**
       * Creates an instance of UserController with the given name
@@ -87,12 +87,24 @@ public abstract class UserController implements Serializable {
           mainMenu();
      }
 
+     /**
+      *Returns the conference this user is at
+      * @return the conference this user is at
+      */
      public String getMyConference(){return myConference;}
 
+     /**
+      * Returns the conference manager
+      * @return the conference manager
+      */
      public ConferenceManager getConferenceManager() {
           return conferenceManager;
      }
 
+     /**
+      * Returns the conference controller
+      * @return the conference controller
+      */
      public ConferenceController getConferenceController() {
           return conferenceController;
      }
@@ -153,6 +165,10 @@ public abstract class UserController implements Serializable {
           return eventManager;
      }
 
+     /**
+      * Returns the group chat manager
+      * @return the group chat manager
+      */
      public GroupChatManager getGroupChatManager(){ return groupChatManager;}
 
      /**
@@ -169,14 +185,6 @@ public abstract class UserController implements Serializable {
       */
      public MessageManager getMessageManager() {
           return messageManager;
-     }
-
-     /**
-      * Gets the roomController
-      * @return RoomController
-      */
-     public RoomController getRoomController() {
-          return roomController;
      }
 
      /**
@@ -237,6 +245,10 @@ public abstract class UserController implements Serializable {
           return usermanager.getUser(getMyName()).getEvents();
      }
 
+     /**
+      * Returns a list of this user's liked events
+      * @return a list of this user's liked events
+      */
      public List<String> getMyLikedEvents () { return usermanager.getUser(getMyName()).getLikedEvents(); }
 
      /**
@@ -256,11 +268,6 @@ public abstract class UserController implements Serializable {
           }
      }
 
-     /**
-      * Adds the inputted event to the list of the user's event
-      * @param likeEvent If true adds the event name in the list of names of liked events, otherwise removes the event
-      *                  from the list of liked events if exists
-      */
      /**
       * Adds the inputted event to the list of the user's event
       */
@@ -300,14 +307,19 @@ public abstract class UserController implements Serializable {
      /**
       * Returns a string of all the speakers in a single line
       * @param event the event the speakers are speaking in
-      * @return List of all the speaker separated my a comma and space
+      * @return List of all the speaker separated by a comma and space
       */
      private String printSpeakerInSingleLine(Event event) {
           String speakers = "";
           int count = 0;
           for (String speakerName : event.getSpeaker()) {
-               if (count == 0) speakers = speakerName;
-               else speakers += (", " + speakerName);
+               if (count==0){
+                    speakers = speakerName;
+                    count = 1;
+               }
+               else{
+                    speakers += speakerName;
+               }
           }
           return speakers;
      }
@@ -405,8 +417,4 @@ public abstract class UserController implements Serializable {
       * Logs user into their account
       */
      abstract void loginExistingAccount();
-
-
-
-
 }

@@ -12,8 +12,8 @@ import java.lang.String;
 
 public class RoomController {
 
-    private final RoomManager roomManager;
-    private final RoomEventPresenter presenter;
+    private final RoomManager roomManager; // the room manager
+    private final RoomEventPresenter presenter; // the presenter
 
     /**
      * Creates a new RoomController given the already created managers

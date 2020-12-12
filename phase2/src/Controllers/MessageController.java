@@ -11,10 +11,10 @@ import java.util.List;
  * @author group 400
  */
 public class MessageController {
-    private final MessageManager messageManager;
-    private final UserManager userManager;
-    private final MessagePresenter presenter;
-    private final EventManager eventManager;
+    private final MessageManager messageManager; // the message manager
+    private final UserManager userManager; // the user manager
+    private final MessagePresenter presenter; // the presenter
+    private final EventManager eventManager; // the event manager
 
     /**
      * Creates a new MessageController with the already created managers

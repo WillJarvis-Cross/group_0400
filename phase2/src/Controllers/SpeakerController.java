@@ -1,6 +1,5 @@
 package Controllers;
 
-import Gateways.ExportHTML;
 import UseCases.*;
 
 import java.io.Serializable;
@@ -10,7 +9,7 @@ import java.io.Serializable;
  */
 public class SpeakerController extends UserController implements Serializable {
 
-    private static int speakersLoggedIn = 0;
+    private static int speakersLoggedIn = 0; // the number of speakers which have logged in
 
     /**
      * Creates and initialize an organizer controller object

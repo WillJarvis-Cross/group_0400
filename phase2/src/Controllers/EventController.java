@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class EventController {
 
-    private final EventManager eManager;
-    private final UserManager userManager;
-    private final RoomManager roomManager;
-    private final RoomEventPresenter presenter;
-    private final ConferenceManager conferenceManager;
+    private final EventManager eManager; // the event manager
+    private final UserManager userManager; // the user manager
+    private final RoomManager roomManager; // the room manager
+    private final RoomEventPresenter presenter; // the presenter for event
+    private final ConferenceManager conferenceManager; // the conference manager
     /**
      * initialize a clean EventController with given
      * EventManager, UserManager, Presenter, and RoomManager
@@ -65,12 +65,9 @@ public class EventController {
             if (!userManager.canSignUp(time, duration,
                     eManager.getEventsByUsername(userManager.getUser(speaker)))) {
                 return false;
-
             }
-
         }
         return true;
-
     }
 
     /**
@@ -176,8 +173,6 @@ public class EventController {
         return true;
     }
 
-
-
     /**
      * remove a whole Event from event list and makes sure no users are still signed up for the event and it removes
      * the event from its room
@@ -279,12 +274,9 @@ public class EventController {
     }
     /**
      * Return Returns the Room Event Presenter
-
-     * @return RoomEventPResenter
+     * @return RoomEventPresenter
      */
-
     public RoomEventPresenter getEventPresenter(){
         return presenter;
     }
-
 }
