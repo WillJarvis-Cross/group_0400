@@ -80,7 +80,7 @@ public class VIPController extends UserController implements Serializable {
                 break;
             }
             else{
-                if (getUsermanager().login(getMyName(), password)){
+                if (getUsermanager().login(getMyName(), password, "VIP")){
                     vipsLoggedIn += 1;
                     usersLoggedIn += 1;
                     break;

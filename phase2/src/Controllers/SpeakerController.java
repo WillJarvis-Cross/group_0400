@@ -79,7 +79,7 @@ public class SpeakerController extends UserController implements Serializable {
                 break;
             }
             else{
-                if (getUsermanager().login(getMyName(), password)){
+                if (getUsermanager().login(getMyName(), password, "speaker")){
                     speakersLoggedIn += 1;
                     usersLoggedIn += 1;
                     break;

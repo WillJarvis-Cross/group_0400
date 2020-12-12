@@ -80,7 +80,7 @@ public class AttendeeController extends UserController implements Serializable {
                 break;
             }
             else{
-                if (getUsermanager().login(getMyName(), password)){
+                if (getUsermanager().login(getMyName(), password, "attendee")){
                     attendeesLoggedIn += 1;
                     usersLoggedIn += 1;
                     break;

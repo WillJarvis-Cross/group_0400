@@ -81,7 +81,7 @@ public class OrganizerController extends UserController implements Serializable 
                 break;
             }
             else{
-                if (getUsermanager().login(getMyName(), password)){
+                if (getUsermanager().login(getMyName(), password, "organizer")){
                     organizersLoggedIn += 1;
                     usersLoggedIn += 1;
                     break;
