@@ -33,6 +33,11 @@ public abstract class Presenter {
         return sc.nextLine();
     }
 
+    /**
+     * try and catch for using Integer.parse
+     * @param text The text we are parsing
+     * @return the integer if Integer.parse was successful and false otherwise
+     */
     public Integer tryParse(String text) {
         try {
             return Integer.parseInt(text);

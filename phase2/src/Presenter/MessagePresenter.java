@@ -63,10 +63,17 @@ public class MessagePresenter extends Presenter{
         }
     }
 
+    /**
+     * tells user they have no messages
+     */
     public void printNoMessages(){
         System.out.println("You have no messages");
     }
 
+    /**
+     * asks user if they want to unarchive a message
+     * @return their choice
+     */
     public boolean printUnarchive(){
         while (true){
             System.out.println("Do you want to unarchive this message? Enter yes or no.");
@@ -107,6 +114,10 @@ public class MessagePresenter extends Presenter{
         }
     }
 
+    /**
+     * tells user if the message was deleted or not
+     * @param del true when the message was deleted
+     */
     public void printDeleted(boolean del){
         if (del){
             System.out.println("Message successfully deleted");
@@ -116,6 +127,10 @@ public class MessagePresenter extends Presenter{
         }
     }
 
+    /**
+     * tells the user if their message has been archived
+     * @param archived true when the message was archived
+     */
     public void printArchived(boolean archived){
         if (archived){
             System.out.println("Message successfully archived");
@@ -125,8 +140,10 @@ public class MessagePresenter extends Presenter{
         }
     }
 
-
-
+    /**
+     * prints the attendees events
+     * @param events
+     */
     public void printAttendeeEvents(List<String> events) {
         if (events.isEmpty()) {
             System.out.println("You are not signed up for any events");

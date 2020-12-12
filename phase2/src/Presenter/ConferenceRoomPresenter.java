@@ -26,6 +26,10 @@ public class ConferenceRoomPresenter extends Presenter{
         return sc.nextLine();
     }
 
+    /**
+     * Prints the menu options for conference
+     * @return the users pick
+     */
     public String conferenceMain(){
         System.out.println("1. Make conference");
         System.out.println("2. Add room for conference");
@@ -33,15 +37,23 @@ public class ConferenceRoomPresenter extends Presenter{
         return sc.nextLine();
     }
 
-
-
+    /**
+     * prints conference added
+     */
     public void printConferenceAdded(){
         System.out.println("Conference added successfully");
     }
+
+    /**
+     * print conference removed
+     */
     public void printConferenceRemoved(){
         System.out.println("Conference remove successfully");
     }
 
+    /**
+     * print there arent any conferences
+     */
     public void printNoConferences(){
         System.out.println("There are no conferences currently so you won't be able to sign up for any events");
     }

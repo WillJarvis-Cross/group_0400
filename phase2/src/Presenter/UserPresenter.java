@@ -1,7 +1,5 @@
 package Presenter;
 
-import Controllers.*;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -180,8 +178,6 @@ public class UserPresenter extends Presenter{
         System.out.println("Could not remove you from the event");
     }
 
-
-
     /**
      * Prints that the user could not afford to attend the event
      *
@@ -250,14 +246,5 @@ public class UserPresenter extends Presenter{
 
     public void printNoEvents(){
         System.out.println("There are no available events");
-    }
-
-    /**
-     * Informs user that the speaker that they are trying to add doesnot exist.
-
-     */
-
-    public void  userDoesNotExist(){
-        System.out.println("Sorry this speaker doesnot exist, please try again");
     }
 }

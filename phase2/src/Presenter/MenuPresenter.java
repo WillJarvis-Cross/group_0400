@@ -42,6 +42,10 @@ public class MenuPresenter extends Presenter{
         return sc.nextLine();
     }
 
+    /**
+     * Prints the menu options for the attendee events menu
+     * @return
+     */
     public String printAttendeeEvent(){
         System.out.println("Select an option by entering the corresponding numbers");
         System.out.println("0: Go back to the main menu");
@@ -52,6 +56,10 @@ public class MenuPresenter extends Presenter{
         return sc.nextLine();
     }
 
+    /**
+     * prints the menu options for the attendee message menu
+     * @return
+     */
     public String printAttendeeMessage(){
         System.out.println("Select an option by entering the corresponding numbers");
         System.out.println("0: Go back to the main menu");
@@ -120,7 +128,6 @@ public class MenuPresenter extends Presenter{
      * Prompts user to enter which event they want to add speaker into
      * @return user's input
      */
-
     public String addSpeakerToEvent(){
         System.out.println("Please write what event you would like to add the speaker to?");
         return sc.nextLine();
@@ -185,8 +192,10 @@ public class MenuPresenter extends Presenter{
     }
 
 
-
-
+    /**
+     * prints the covid questions
+     * @return true when the pass the questions and false otherwise
+     */
     public boolean printCovidQuestions(){
         System.out.println("Answer 'yes' or 'no' to the following questions:");
         while (true){
@@ -227,8 +236,6 @@ public class MenuPresenter extends Presenter{
      * Informs user they cannot sign up for events because of covid
 
      */
-
-
     public void printYouHaveCovid(){
         System.out.println("You can't sign up for any events because you are a risk for COVID-19");
     }
@@ -260,11 +267,18 @@ public class MenuPresenter extends Presenter{
         return sc.nextLine();
     }
 
+    /**
+     * Asks for a new password
+     * @return their new password
+     */
     public String newPass(){
         System.out.println("Enter your new password");
         return sc.nextLine();
     }
 
+    /**
+     * tell user their password has been changed
+     */
     public void printPassChanged(){
         System.out.println("Successfully changed your password");
     }

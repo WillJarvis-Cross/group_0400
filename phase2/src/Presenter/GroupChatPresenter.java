@@ -6,16 +6,29 @@ import java.util.Scanner;
 public class GroupChatPresenter extends Presenter {
     private Scanner sc = new Scanner(System.in);
 
+    /**
+     * Asks for the names of the people in the group chat
+     * @return an Array of the people in the group chat
+     */
     public String[] printGroupChatNames(){
         System.out.println("Enter the names of the people you are inviting to the group chat separated with a comma");
         return sc.nextLine().split(",");
     }
 
+    /**
+     * Asks for the name of the group chat
+     * @return the name of the group chat
+     */
     public String printGroupName(){
         System.out.println("Enter the name of the group chat");
         return sc.nextLine();
     }
 
+    /**
+     * Prints a list of group chats and asks the user what they want to do next
+     * @param groups The list of group chats they are in
+     * @return Their option
+     */
     public String printMyGroupChats(List<String> groups){
         while (true){
             if (groups.size() > 0){
@@ -37,6 +50,11 @@ public class GroupChatPresenter extends Presenter {
 
     }
 
+    /**
+     * Prints the messages in the group chat
+     * @param messages The messages
+     * @return Their option for sending a message or leaving the group chat
+     */
     public boolean printGroupChatMessages(List<String> messages){
         while (true){
             if (messages.size() == 0) {
